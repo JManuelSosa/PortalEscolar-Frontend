@@ -1,13 +1,15 @@
 import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Router, Routes, Route } from 'react-router-dom'
+import HomeView from './Views/HomeView'
 
 function App() {
 
 
   return (
     <>
-        <h1 className='display-1'>El titulo de mi página</h1>
-        <p className='lead text-center'>Hola mundo</p>
+        <Routes>
+          <Route path='/' element={<HomeView/>}/>
+        </Routes>
     </>
   )
 }
