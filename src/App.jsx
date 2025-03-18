@@ -1,5 +1,4 @@
-import './App.css'
-import { Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import HomeView from './Views/HomeView'
 
 function App() {
