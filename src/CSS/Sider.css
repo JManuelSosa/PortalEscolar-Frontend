@@ -1,0 +1,9 @@
+.Sider-Layout{
+    height: 100dvh;
+    flex: unset !important;
+    min-width: unset !important; 
+}
+
+.Menu-Cerrado{
+    width: 5rem !important;
+}

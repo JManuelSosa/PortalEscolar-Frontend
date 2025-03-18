@@ -19,7 +19,15 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400; /* Puede ser cualquier número entre 100 y 900 */
+  font-family: 'Inter';
+  font-weight: 100; /* Puede ser cualquier número entre 100 y 900 */
   min-height: 100dvh;
+  background-color: rgb(245, 245, 255);
+  margin: 0;
 }
+
+.HomeTittle{
+  font-size: 48px;
+  font-weight: 200;
+}
+
