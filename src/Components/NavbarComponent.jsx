@@ -47,21 +47,21 @@ export default function NavbarComponent(){
         {
             key: '1',
             icon: <IconSchool strokeWidth={1.5} strokeColor="rgb(255, 255, 255)"/>,
-            label: 'Option 1',
+            label: 'Estudiantes',
         },
         {
             key: '2',
             icon: <IconBriefCase strokeWidth={1.5} strokeColor="rgb(255,255,255)"/>,
-            label: 'Option 2',
+            label: 'Profesores',
         },
         {
             key: '3',
             icon: <IconCash strokeWidth={1.5} strokeColor="rgb(255,255,255)"/>,
-            label: 'Option 3',
+            label: 'Finanzas',
         },
         {
             key: 'sub1',
-            label: 'Navigation One',
+            label: 'Comunicación',
             icon: <IconMail strokeWidth={1.5} strokeColor="rgb(255, 255, 255)"/>,
             children: [
                 {
@@ -84,7 +84,7 @@ export default function NavbarComponent(){
         },
         {
             key: 'sub2',
-            label: 'Navigation Two',
+            label: 'Documentos',
             icon: <IconCertificate strokeWidth={1.5} strokeColor="rgb(255, 255, 255)"/>,
             children: [
                 {
@@ -120,8 +120,6 @@ export default function NavbarComponent(){
             <nav>
                 <Menu
                     className="main-menu"
-                    defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1']}
                     mode="inline"
                     theme="dark"
                     items={items}
