@@ -6,32 +6,29 @@ import HomeView from './Views/HomeView';
 
 //Components
 import SiderNav from './Layout/SiderNav';
+import HeaderLayout from './Layout/HeaderLayout';
 
 //AntDesign
 import { Layout } from 'antd';
-const { Header, Content, Footer } = Layout;
+const {Content, Footer } = Layout;
 
 //Css 
 import '../src/CSS/App.css';
 
 const headerStyle = {
-  textAlign: 'center',
-  color: '#fff',
-  height: 64,
-  paddingInline: 48,
-  lineHeight: '64px',
-  backgroundColor: '#4096ff',
+
 };
 
 const footerStyle = {
   textAlign: 'center',
   color: '#fff',
   backgroundColor: '#4096ff',
+  height:12,
 };
 
 function App() {
 
-
+  const escuela = "UTM"
   return (
     <>
       <Layout>
@@ -39,9 +36,7 @@ function App() {
           <SiderNav/>
         </CollapsedProvider>
         <Layout>
-          <Header style={headerStyle}>
-            Hola Header
-          </Header>  
+          <HeaderLayout></HeaderLayout>
           <Content className='Content'>
               <Routes>
                 <Route path='/' element={<HomeView/>}/>

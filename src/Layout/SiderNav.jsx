@@ -29,7 +29,6 @@ export default function SiderNav(){
             }}
             width={250}
         >
-            <div className="demo-logo-vertical" style={{backgroundColor: "blue", height:"50px", margin:"10px"}}/>
             <NavbarComponent/>
         </Sider>
     )
