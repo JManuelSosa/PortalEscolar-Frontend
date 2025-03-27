@@ -27,7 +27,7 @@ export default function SiderNav(){
             onCollapse={(collapsed, type) => {
                 console.log(collapsed, type);
             }}
-            width={300}
+            width={250}
         >
             <div className="demo-logo-vertical" style={{backgroundColor: "blue", height:"50px", margin:"10px"}}/>
             <NavbarComponent/>

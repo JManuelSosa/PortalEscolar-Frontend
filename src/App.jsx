@@ -9,7 +9,25 @@ import SiderNav from './Layout/SiderNav';
 
 //AntDesign
 import { Layout } from 'antd';
+const { Header, Content, Footer } = Layout;
 
+//Css 
+import '../src/CSS/App.css';
+
+const headerStyle = {
+  textAlign: 'center',
+  color: '#fff',
+  height: 64,
+  paddingInline: 48,
+  lineHeight: '64px',
+  backgroundColor: '#4096ff',
+};
+
+const footerStyle = {
+  textAlign: 'center',
+  color: '#fff',
+  backgroundColor: '#4096ff',
+};
 
 function App() {
 
@@ -20,9 +38,19 @@ function App() {
         <CollapsedProvider>
           <SiderNav/>
         </CollapsedProvider>
-            <Routes>
-              <Route path='/' element={<HomeView/>}/>
-            </Routes> 
+        <Layout>
+          <Header style={headerStyle}>
+            Hola Header
+          </Header>  
+          <Content className='Content'>
+              <Routes>
+                <Route path='/' element={<HomeView/>}/>
+              </Routes>
+          </Content>
+          <Footer style={footerStyle}>
+            Hola Footer
+          </Footer>
+        </Layout>
       </Layout>
     </>
   )
