@@ -1,0 +1,7 @@
+.header-home{
+    display: flex;
+    text-align: center;
+    color: #fff;
+    align-items: center;
+    height: 4rem;
+}
