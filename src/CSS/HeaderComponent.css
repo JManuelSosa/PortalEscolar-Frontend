@@ -1,7 +1,8 @@
 .header-home{
     display: flex;
     text-align: center;
-    color: #fff;
+    color: rgb(0,0,0);
     align-items: center;
     height: 4rem;
+    background-color: rgb(var(--conifer-300));
 }

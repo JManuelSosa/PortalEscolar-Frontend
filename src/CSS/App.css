@@ -1,9 +1,7 @@
+
 .Content{
     padding-inline: 1rem;
+    background-color: rgb(var(--conifer-50));
 }
 
-.HomeTittle{
-    font-size: 48px;
-    font-weight: 200;
-}
 

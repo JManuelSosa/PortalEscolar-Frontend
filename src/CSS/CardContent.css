@@ -1,0 +1,11 @@
+.CardMenu{
+    height: 22rem;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(var(--conifer-100));
+}
+
+.ant-card-body{
+    flex:1;
+}
+

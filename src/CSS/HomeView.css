@@ -1,5 +1,31 @@
 .MainOpcion{
-
-    height:60%;
-    background-color: bisque;
+    margin-bottom: 3rem;
 }
+
+.HomeTittle{
+    font-size: 48px;
+    font-weight: 200;
+}
+
+
+.HeaderCard{
+    height: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.BodyCard{   
+    height: 20%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Sandbox */
+.TittleHomeOptions{
+    font-weight: 300;
+    font-size: 2.5rem;
+    margin: 0;
+}
+

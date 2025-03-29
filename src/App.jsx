@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import { CollapsedProvider } from './Context/CollapseContext';
 //Views
 import HomeView from './Views/HomeView';
+import Prueba from './Components/Prueba';
+import DivisionView from './Views/DivisionView';
 
 //Components
 import SiderNav from './Layout/SiderNav';
@@ -31,22 +33,22 @@ function App() {
   const escuela = "UTM"
   return (
     <>
-      <Layout>
-        <CollapsedProvider>
-          <SiderNav/>
-        </CollapsedProvider>
         <Layout>
-          <HeaderLayout></HeaderLayout>
-          <Content className='Content'>
-              <Routes>
-                <Route path='/' element={<HomeView/>}/>
-              </Routes>
-          </Content>
-          <Footer style={footerStyle}>
-            Hola Footer
-          </Footer>
+          <CollapsedProvider>
+            <SiderNav/>
+          </CollapsedProvider>
+          <Layout>
+            <HeaderLayout></HeaderLayout>
+            <Content className='Content'>
+                <Routes>
+                  <Route path='/' element={<DivisionView/>}/>
+                </Routes>
+            </Content>
+            <Footer style={footerStyle}>
+              Hola Footer
+            </Footer>
+          </Layout>
         </Layout>
-      </Layout>
     </>
   )
 }
