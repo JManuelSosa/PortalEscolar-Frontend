@@ -18,12 +18,29 @@
   padding: 0px;
 }
 
-body {
-  font-family: 'Inter' !important;
-  font-weight: 100; /* Puede ser cualquier número entre 100 y 900 */
-  min-height: 100dvh;
-  background-color: rgb(245, 245, 255);
+:root{
+
+  --conifer-50: 243, 254, 231;
+  --conifer-100: 228, 252, 203;
+  --conifer-200: 202, 248, 158;
+  --conifer-300: 166, 241, 101;
+  --conifer-400: 134, 229, 56; /* Color primario */
+  --conifer-500: 101, 203, 23;
+  --conifer-600: 76, 162, 14;
+  --conifer-700: 59, 123, 16;
+  --conifer-800: 50, 97, 19;
+  --conifer-900: 43, 83, 20;
+  --conifer-950: 19, 46, 5;
+
+  --color-primary: rgb(var(--conifer-400));
+
   margin: 0;
 }
 
-
+body{
+  margin:0;
+  font-weight: 100; /* Puede ser cualquier número entre 100 y 900 */
+  min-height: 100dvh;
+  background-color: rgb(245, 245, 255);
+  font-family: 'Inter' !important;
+}

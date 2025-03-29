@@ -1,21 +1,17 @@
+
+//Ant
 import { Card } from 'antd';
-const { Meta } = Card;
+
+//CSS
+import '../CSS/CardContent.css';
 
 
-//Icons
-import { IconCertificate } from "../Js/Icons";
-import { IconSchool } from "../Js/Icons";
-import { IconBriefCase } from "../Js/Icons";
-
-export default function CardContent(){
+export default function CardContent({ children, className }){
 
     return(
 
-        <Card
-            hoverable
-            cover={<IconCertificate></IconCertificate>}
-        >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
+        <Card className={ className } hoverable>
+            { children }
         </Card>
     );
 };
