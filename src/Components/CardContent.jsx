@@ -6,12 +6,12 @@ import { Card } from 'antd';
 import '../CSS/CardContent.css';
 
 
-export default function CardContent({ children, className }){
+export default function CardContent({ children, className }) {
 
-    return(
+    return (
 
-        <Card className={ className } hoverable>
-            { children }
+        <Card className={className} hoverable>
+            {children}
         </Card>
     );
 };
