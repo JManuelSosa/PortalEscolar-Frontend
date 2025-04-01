@@ -1,7 +1,7 @@
 import Layout from "antd/es/layout/layout";
 const { Header } = Layout;
 
-import '../CSS/HeaderComponent.css';
+import '../../CSS/Layout/HeaderComponent.css';
 
 export default function HeaderLayout(){
 

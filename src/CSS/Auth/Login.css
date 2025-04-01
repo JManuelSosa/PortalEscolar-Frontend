@@ -1,19 +1,19 @@
-body {
+#LoginBody {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: beige;
+    /* background: beige; */
     font-family: Arial, sans-serif
 }
 
-h3 {
+/* h3 {
     color: green;
     font-size: 50px;
     margin: -30px;
     padding: -10px;
 
-}
+} */
 
 /*esto nos sirve para aajuntar y centrar el contenido que hay dentor de la caja */
 .login-container {
@@ -95,7 +95,7 @@ h3 {
     text-decoration: none;
 }
 
-button {
+.LoginButton {
     background: navy;
     color: white;
     border: none;

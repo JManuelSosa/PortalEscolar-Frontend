@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import CardContent from "../Components/CardContent";
+import CardContent from "../Components/General/CardContent";
 
 //Icons
 import { IconSchool } from "../Js/Icons";
@@ -7,7 +7,7 @@ import { IconCertificate } from '../Js/Icons';
 import { IconMail } from "../Js/Icons";
 
 //Css
-import '../CSS/HomeView.css';
+import '../CSS/Views/HomeView.css';
 
 
 export default function HomeView(){

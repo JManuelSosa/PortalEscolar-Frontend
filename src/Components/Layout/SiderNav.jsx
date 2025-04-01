@@ -1,15 +1,15 @@
 //React
-import { useCollapsed } from '../Context/CollapseContext';
+import { useCollapsed } from '../../Context/CollapseContext';
 
 //AntDesign
 import { Layout } from "antd";
 const { Sider } = Layout;
 
 //Componentes
-import NavbarComponent from "../Components/NavbarComponent";
+import NavbarComponent from "./NavbarComponent";
 
 //CSS
-import '../CSS/Sider.css';
+import '../../CSS/Layout/Sider.css';
 
 
 export default function SiderNav(){
