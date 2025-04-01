@@ -1,17 +1,17 @@
 import { Button, Menu } from "antd";
 import { useState, useEffect } from "react";
-import { useCollapsed } from '../Context/CollapseContext';
+import { useCollapsed } from '../../Context/CollapseContext';
 
 // Iconos
-import { IconCertificate } from "../Js/Icons";
-import { IconSchool } from "../Js/Icons";
-import { IconBriefCase } from "../Js/Icons";
-import { IconCash } from "../Js/Icons";
-import { IconMenu2 } from "../Js/Icons";
-import { IconMail } from "../Js/Icons";
+import { IconCertificate } from "../../Js/Icons";
+import { IconSchool } from "../../Js/Icons";
+import { IconBriefCase } from "../../Js/Icons";
+import { IconCash } from "../../Js/Icons";
+import { IconMenu2 } from "../../Js/Icons";
+import { IconMail } from "../../Js/Icons";
 
 //Css
-import '../CSS/NavbarComponent.css';
+import '../../CSS/Layout/NavbarComponent.css';
 
 
 export default function NavbarComponent(){

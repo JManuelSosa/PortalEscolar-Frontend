@@ -1,5 +1,5 @@
 
-import CardContent from "../Components/CardContent";
+import CardContent from "../Components/General/CardContent";
 import { IconSchool } from "../Js/Icons";
 
 //AntDesign
@@ -7,9 +7,17 @@ import { Col, Row, Divider } from "antd";
 import { Button } from "antd";
 
 //Css
-import '../CSS/Divisiones.css';
+import '../CSS/Views/DivisionView.css';
 
 export default function DivisionView(){
+
+    function calcularSizeLetra(titulo){
+
+        let sizeTitle = titulo.length;
+
+        console.log(sizeTitle);
+
+    }
 
     return(
         <>
@@ -67,7 +75,7 @@ export default function DivisionView(){
                         </Row>
                         <Row className="BodyCard">
                             <h2 className="TittleHomeOptions">
-                                Innovacion y Desarrollo Estrátegico 
+                                Esternocleidomastoideo
                             </h2>
                         </Row>
                     </CardContent>
