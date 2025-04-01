@@ -3,13 +3,13 @@ const { Header } = Layout;
 
 import '../CSS/HeaderComponent.css';
 
-export default function HeaderLayout() {
+export default function HeaderLayout(){
 
     const escuela = 'Utm'
 
-    return (
+    return(
         <Header className='header-home'>
-            <span>Bienvenido {escuela}</span>
-        </Header>
+            <span>Bienvenido { escuela }</span>
+        </Header>  
     )
 }
