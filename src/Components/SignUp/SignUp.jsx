@@ -4,6 +4,7 @@ import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import { crearUsuario, obtenerUsuarioPorEmail } from "../../api"; // Asegúrate de que la ruta sea correcta
 import { useNavigate } from "react-router-dom"; // Importar useNavigate
 import { useAuth } from "../../Context/AuthContext";
+import InputPassword from "../InputComponent";
 
 const { Title } = Typography;
 
@@ -75,6 +76,7 @@ export default function SignUp() {
                 <Input
                   {...field}
                   placeholder="Nombre Completo"
+                  
                   prefix={<UserOutlined />}
                 />
               )}
@@ -97,49 +99,9 @@ export default function SignUp() {
             />
             {errors.email && <span>{errors.email.message}</span>}
 
-            {/* Contraseña */}
-            <Controller
-              name="password"
-              control={control}
-              rules={{
-                required: "La contraseña es obligatoria",
-                minLength: {
-                  value: 6,
-                  message: "Debe tener al menos 6 caracteres",
-                },
-              }}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  type="password"
-                  placeholder="Contraseña"
-                  prefix={<LockOutlined />}
-                />
-              )}
-            />
-            {errors.password && <span>{errors.password.message}</span>}
+            <InputPassword control={control} name="password" placeholder="Contraseña" errors={errors} />
+            <InputPassword control={control} name="confirmPassword" placeholder="Confirmar contraseña" errors={errors} />
 
-            {/* Confirmar Contraseña */}
-            <Controller
-              name="confirmPassword"
-              control={control}
-              rules={{
-                required: "Debes confirmar la contraseña",
-                validate: (value) =>
-                  value === watch("password") || "Las contraseñas no coinciden",
-              }}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  type="password"
-                  placeholder="Confirmar Contraseña"
-                  prefix={<LockOutlined />}
-                />
-              )}
-            />
-            {errors.confirmPassword && (
-              <span>{errors.confirmPassword.message}</span>
-            )}
 
             {/* Términos y condiciones */}
             <Controller
@@ -153,7 +115,6 @@ export default function SignUp() {
               )}
             />
             {errors.terms && <span>{errors.terms.message}</span>}
-
             <Button type="primary" htmlType="submit">
               Registrarse
             </Button>

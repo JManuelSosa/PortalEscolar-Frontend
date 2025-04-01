@@ -22,6 +22,7 @@ import '../src/CSS/App.css';
 import { AuthProvider } from "./Context/AuthContext";
 import Login from './Components/Login/Login';
 import SignUp from './Components/SignUp/SignUp';
+import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
 
 
 
@@ -46,16 +47,19 @@ function App() {
           <SiderNav />
         </CollapsedProvider>
         <Layout>
+        <AuthProvider>
           <HeaderLayout></HeaderLayout>
           <Content className='Content'>
-            <AuthProvider>
+            
               <Routes>
                 <Route path='/' element={<HomeView />} />
                 <Route path='/login' element={<Login />} />
-                <Route path="/sing-up" element={<SignUp />} />
+                <Route path="/sing-up" element={<SignUp/>} />
+                <Route path="/forgot-password" element={<ForgotPassword/>} />
               </Routes>
-            </AuthProvider>
+           
           </Content>
+          </AuthProvider>
           <Footer style={footerStyle}>
             Hola Footer
           </Footer>

@@ -10,7 +10,7 @@ export default function CardContent({ children, className }) {
 
     return (
 
-        <Card className={className} hoverable>
+        <Card className={className} hoverable >
             {children}
         </Card>
     );

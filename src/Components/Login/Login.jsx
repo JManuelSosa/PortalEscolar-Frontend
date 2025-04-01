@@ -4,8 +4,11 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { obtenerUsuarioPorEmail } from "../../api";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useAuth } from "../../Context/AuthContext";
+import InputPassword from "../InputComponent";
 
 export default function Login() {
+  const { dispatch } = useAuth();
   const { Title, Link } = Typography;
   const navigate = useNavigate();
   const {
@@ -40,7 +43,9 @@ export default function Login() {
       }
 
       console.log("Inicio de sesión exitoso:", usuario);
+      await dispatch({ type: "LOGIN", payload: usuario });
       navigate("/");
+
       // Aquí puedes manejar la navegación o el estado del usuario
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
@@ -49,10 +54,10 @@ export default function Login() {
 
   return (
     <Flex align="center" justify="center" style={{ height: "100vh" }}>
-      <Card>
+      <Card align="center" justify="center" style={{ height: "55vh", width: "80vh" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Space direction="vertical" size="middle">
-            <Title>Login</Title>
+          <Space direction="vertical" size="customize" style={{ gap: 30}}>
+            <Title>iniciar sesión</Title>
             {/* Email */}
             <Controller
               name="email"
@@ -73,26 +78,11 @@ export default function Login() {
                 />
               )}
             />
-            {/* Contraseña */}
-            <Controller
-              name="password"
-              control={control}
-              rules={{ required: "La contraseña es obligatoria" }}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  type="password"
-                  placeholder="Contraseña"
-                  prefix={<LockOutlined />}
-                />
-              )}
-            />
-            {errors.credentials && (
-              <span style={{ color: "red" }}>{errors.credentials.message}</span>
-            )}{" "}
+            <InputPassword control={control} name="password" placeholder="Contraseña" errors={errors} />
+
             {/* Mostrar mensaje único */}
             {/* Recordar sesión y enlace de recuperación */}
-            <Flex justify="space-between">
+            {/*<Flex justify="space-between">
               <Controller
                 name="rememberPassword"
                 control={control}
@@ -102,10 +92,10 @@ export default function Login() {
                   </Checkbox>
                 )}
               />
-              <Link href="/sing-up" target="_blank">
+             {/* <Link href="/sing-up" target="_blank">
                 ¿Olvidaste tu contraseña?
               </Link>
-            </Flex>
+            </Flex>*/}
             <Flex justify="center">
               <Button type="primary" htmlType="submit">
                 Iniciar Sesión
