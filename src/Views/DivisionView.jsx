@@ -1,21 +1,46 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import FakeAPI from "../Js/FakeApi";
+
 
 import CardContent from "../Components/General/CardContent";
-import { IconSchool } from "../Js/Icons";
+import { VsCodeIcon } from "../Js/Icons";
+import { IndustrialIcon } from "../Js/Icons";
+import { AdministracionIcon } from "../Js/Icons";
 
 //AntDesign
 import { Col, Row, Divider } from "antd";
-import { Button } from "antd";
 
 //Css
 import '../CSS/Views/DivisionView.css';
 
 export default function DivisionView(){
 
-    function calcularSizeLetra(titulo){
+    const [divisiones, setDivisiones] = useState([]);
+    const navigate = useNavigate();
 
-        let sizeTitle = titulo.length;
+    useEffect(() => {
+        // Simula la llamada a la API
+        const api = new FakeAPI();
+        setDivisiones(api.getAllDivisiones());
+    }, []);
 
-        console.log(sizeTitle);
+    function verCarreras(idDivision, nameDivision){
+        navigate("/Carreras", { state: { divisionID: idDivision, name: nameDivision } });
+    }
+
+    function obtenerIcono(divisionID){
+
+        switch(divisionID){
+            case 1: 
+            return <VsCodeIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
+
+            case 2: 
+            return <IndustrialIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
+
+            case 3: 
+            return <AdministracionIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
+        }
 
     }
 
@@ -28,58 +53,23 @@ export default function DivisionView(){
             </Divider>
 
             <Row gutter={[16, 16]} className="RowContenido">
-                <Col xs={24} md={12} lg={8}>
-                    <CardContent>
-                        <Row className="HeaderCard">
-                            <IconSchool strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={200}></IconSchool>
-                        </Row>
-                        <Row className="BodyCard">
-                            <h2 className="TittleHomeOptions">
-                                Industrial
-                            </h2>
-                        </Row>
-                    </CardContent>
-                </Col>
+                
+                {divisiones.map((division) => (
+                    <Col key={division.id} xs={24} md={12} lg={8} onClick={() => { verCarreras(division.id, division.name) }}>
+                        <CardContent className={"CardDivisiones"}>
+                            <Row className="HeaderCard">
+                                { obtenerIcono(division.id) }
+                            </Row>
+                            <Row className="BodyCard">
+                                <h2 className="TittleHomeOptions">
+                                    {division.name} {/* Renderiza el nombre de la división */}
+                                </h2>
+                            </Row>
+                        </CardContent>
+                    </Col>
+                ))}
 
-                <Col xs={24} md={12} lg={8}>
-                    <CardContent>
-                        <Row className="HeaderCard">
-                            <IconSchool strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={200}></IconSchool>
-                        </Row>
-                        <Row className="BodyCard">
-                            <h2 className="TittleHomeOptions">
-                                Informacion
-                            </h2>
-                        </Row>
-                    </CardContent>
-                </Col>
 
-                <Col xs={24} md={12} lg={8}>
-                    <CardContent>
-                        <Row className="HeaderCard">
-                            <IconSchool strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={200}></IconSchool>
-                        </Row>
-                        <Row className="BodyCard">
-                            <h2 className="TittleHomeOptions">
-                                Administración
-                            </h2>
-                        </Row>
-                    </CardContent>
-                </Col>
-
-                <Col xs={24} md={12} lg={8}>
-                    
-                    <CardContent>
-                        <Row className="HeaderCard">
-                            <IconSchool strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={200}></IconSchool>
-                        </Row>
-                        <Row className="BodyCard">
-                            <h2 className="TittleHomeOptions">
-                                Esternocleidomastoideo
-                            </h2>
-                        </Row>
-                    </CardContent>
-                </Col>
             </Row>
         </section>
         </>

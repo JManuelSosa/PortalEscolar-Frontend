@@ -7,5 +7,18 @@
 
 .ant-card-body{
     flex:1;
+    padding: 20px !important;
 }
 
+/* Apartado divisiones */
+.CardDivisiones{
+    height: 22rem;
+    overflow: hidden;
+    background-color: rgb(var(--conifer-100));
+}
+
+/* Apartado grupos */
+.CardGrupos{
+    overflow: hidden;
+    background-color: rgb(var(--conifer-100));
+}

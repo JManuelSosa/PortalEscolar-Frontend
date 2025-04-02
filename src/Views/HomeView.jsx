@@ -9,22 +9,25 @@ import { IconMail } from "../Js/Icons";
 //Css
 import '../CSS/Views/HomeView.css';
 
+import { useNavigate } from "react-router-dom";
+
 
 export default function HomeView(){
 
-    const Usuario = 'Usuario';
+    const Usuario = 'Universidad Iberoamericana';
+    const navigate = useNavigate();
     return(
         <>
             <h1 className="HomeTittle">Bienvenido {Usuario} </h1>
             <Row className="MainOpcion" gutter={[16, 16]}>
                 <Col xs={24} sm={12} lg={8}>
                     <CardContent className={'CardMenu'}>
-                        <Row className="HeaderCard">
+                        <Row className="HeaderCard" onClick={() => { navigate('/Divisiones')}}>
                             <IconSchool strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={200}></IconSchool>
                         </Row>
                         <Row className="BodyCard">
                             <h2 className="TittleHomeOptions">
-                                Alumnos
+                                Divisiones
                             </h2>
                         </Row>
                     </CardContent>
