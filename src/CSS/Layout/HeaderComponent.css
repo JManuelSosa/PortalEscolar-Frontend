@@ -3,6 +3,63 @@
     text-align: center;
     color: rgb(0,0,0);
     align-items: center;
-    height: 4rem;
+    height: 4.2rem;
     background-color: rgb(var(--conifer-300));
+}
+
+.headerMainRow{
+    width: 100%;
+}
+
+.headerCol{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headerBtnUser{
+    background-color: rgb(var(--conifer-800));
+    color: rgb(255,255,255);
+    height: 4rem;
+    width: 4rem;
+}
+
+.headerColButtonUser{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.headerColBackArrow{
+    display: flex;
+    align-items: center;
+}
+
+.headerIconContainer{
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.headerUserOptions{
+    list-style: none;
+    margin: 0;
+    width: 100%;
+}
+
+.headerUserOptions > li {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.headerMenuUser{
+    width: 12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerButtonOptions{
+    background-color: rgb(var(--conifer-600));
+    color: rgb(255, 255, 255);
+    font-size: large;
 }

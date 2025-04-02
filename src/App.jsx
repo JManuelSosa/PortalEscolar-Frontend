@@ -6,9 +6,11 @@ import AdminLayout from './Layout/AdminLayout';
 
 //Views
 import HomeView from './Views/HomeView';
-import Prueba from './Components/Prueba';
 import DivisionView from './Views/DivisionView';
 import Login from './Components/Auth/Login';
+import CarrerasView from './Views/CarrerasView';
+import GruposView from './Views/GruposView';
+import DetalleGruposView from './Views/DetalleGruposView';
 
 //Css 
 import '../src/CSS/App.css';
@@ -28,7 +30,9 @@ function App() {
         
         <Route path='/' element={<AdminLayout> <HomeView/> </AdminLayout>}/>
         <Route path='/Divisiones' element={<AdminLayout> <DivisionView/> </AdminLayout>}/>
-        
+        <Route path='/Carreras' element={<AdminLayout> <CarrerasView/> </AdminLayout>}></Route>
+        <Route path='/Grupos' element={<AdminLayout> <GruposView/> </AdminLayout>}></Route>
+        <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView/> </AdminLayout>}></Route>
       </Routes>
     </>
   )
