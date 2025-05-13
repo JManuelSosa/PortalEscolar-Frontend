@@ -13,7 +13,7 @@ import GruposView from './Views/GruposView';
 import DetalleGruposView from './Views/DetalleGruposView';
 
 //Css 
-import '../src/CSS/App.css';
+import '@css/App.css';
 
 
 

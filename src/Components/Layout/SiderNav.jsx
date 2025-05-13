@@ -10,7 +10,7 @@ const { Sider } = Layout;
 import NavbarComponent from "./NavbarComponent";
 
 //CSS
-import '../../CSS/Layout/Sider.css';
+import '@css/Layout/Sider.css';
 
 
 export default function SiderNav(){

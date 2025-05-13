@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FakeAPI from "../Js/FakeApi";
 
@@ -12,7 +12,7 @@ import { AdministracionIcon } from "../Js/Icons";
 import { Col, Row, Divider } from "antd";
 
 //Css
-import '../CSS/Views/DivisionView.css';
+import '@css/Views/DivisionView.css';
 
 export default function DivisionView(){
 

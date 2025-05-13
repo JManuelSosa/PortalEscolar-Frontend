@@ -13,7 +13,8 @@ import { IconMainLogo } from "../../Js/Icons";
 import { IconUserFill } from "../../Js/Icons";
 import { IconBackArrow } from "../../Js/Icons";
 
-import '../../CSS/Layout/HeaderComponent.css';
+// import '../../CSS/Layout/HeaderComponent.css';
+import '@css/Layout/HeaderComponent.css';
 
 export default function HeaderLayout(){
 

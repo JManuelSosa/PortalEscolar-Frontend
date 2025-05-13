@@ -10,7 +10,7 @@ import { Layout } from 'antd';
 const { Content, Footer } = Layout;
 
 //Css
-import '../CSS/Layout/AdminLayout.css';
+import '@css/Layout/AdminLayout.css';
 
 export default function AdminLayout({children}){
 
