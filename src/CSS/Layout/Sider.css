@@ -1,6 +1,7 @@
 .Sider-Layout{
     flex: unset !important;
     min-width: unset !important; 
+    height: 100vh;
 }
 
 .Menu-Cerrado{

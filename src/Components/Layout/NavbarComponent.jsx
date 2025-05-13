@@ -3,66 +3,70 @@ import { useState, useEffect } from "react";
 import { useCollapsed } from '../../Context/CollapseContext';
 
 // Iconos
+import { IconUsers } from "../../Js/Icons";
 import { IconCertificate } from "../../Js/Icons";
 import { IconSchool } from "../../Js/Icons";
-import { IconBriefCase } from "../../Js/Icons";
 import { IconCash } from "../../Js/Icons";
-import { IconMenu2 } from "../../Js/Icons";
 import { IconMail } from "../../Js/Icons";
+import { IconMedium } from "../../Js/Icons";
+import { IconIndent } from "../../Js/Icons";
+
+
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
+
+import Icon from '@ant-design/icons';
 
 //Css
 import '../../CSS/Layout/NavbarComponent.css';
 
 
+
 export default function NavbarComponent(){
 
-    // const [collapsed, setCollapsed] = useState(true);
     const [labelText, setLabelText] = useState('Abrir Menu');
     const { collapsed, toggleCollapsed } = useCollapsed();
+    const [openKeys, setOpenKeys] = useState([]);
 
-    useEffect(() => {
-        if (collapsed) {
-            const timeout = setTimeout(() => {
-                setLabelText('Abrir Menu');
-            }, 300);
-        
-            return () => clearTimeout(timeout);
-        } else {
-            setLabelText('Cerrar Menu');
-        }
-    }, [collapsed]);
-
+    const getLevelKeys = (items) => {
+        const key = {};
+        const traverse = (list, level = 1) => {
+            list.forEach((item) => {
+            key[item.key] = level;
+            if (item.children) {
+                traverse(item.children, level + 1);
+            }
+            });
+        };
+        traverse(items);
+        return key;
+    };
 
     const items = [
         {
-            key: 'toggle',
-            icon: (
-                <Button type="ghost" onClick={toggleCollapsed} icon={<IconMenu2 strokeWidth={1.5} strokeColor="rgb(255, 255, 255)"/> }></Button>
-            ),
-            label: <span onClick={toggleCollapsed}>{labelText}</span>
-        },
-        {
-            type: 'divider',
-        },
-        {
             key: '1',
-            icon: <IconSchool strokeWidth={1.5} strokeColor="rgb(255, 255, 255)"/>,
+            icon: <IconSchool  className={`Menu-Icon ${(collapsed) ? "" : "Menu-IconOpen"}`} size="40" strokeWidth="1.25" strokeColor="rgb(220, 220, 220)"/>,
             label: 'Estudiantes',
         },
         {
             key: '2',
-            icon: <IconBriefCase strokeWidth={1.5} strokeColor="rgb(255,255,255)"/>,
+            icon: <IconUsers className={`Menu-Icon ${(collapsed) ? "" : "Menu-IconOpen"}`} size="40" strokeWidth="1.25" strokeColor="rgb(220,220,220)"/>,
             label: 'Profesores',
         },
         {
             key: '3',
-            icon: <IconCash strokeWidth={1.5} strokeColor="rgb(255,255,255)"/>,
+            icon: <IconCash className={`Menu-Icon ${(collapsed) ? "" : "Menu-IconOpen"}`} strokeWidth="1.25" size="40" strokeColor="rgb(220,220,220)"/>,
             label: 'Finanzas',
         },
         {
             key: 'sub1',
             label: 'Comunicación',
-            icon: <IconMail strokeWidth={1.5} strokeColor="rgb(255, 255, 255)"/>,
+            icon: <IconMail className={`Menu-Icon ${(collapsed) ? "" : "Menu-IconOpen"}`} strokeWidth="1.25" size="40" strokeColor="rgb(255, 255, 255)"/>,
             children: [
                 {
                 key: '5',
@@ -85,7 +89,7 @@ export default function NavbarComponent(){
         {
             key: 'sub2',
             label: 'Documentos',
-            icon: <IconCertificate strokeWidth={1.5} strokeColor="rgb(255, 255, 255)"/>,
+            icon: <IconCertificate className={`Menu-Icon ${(collapsed) ? "" : "Menu-IconOpen"}`} size="40" strokeWidth="1.25" strokeColor="rgb(255, 255, 255)"/>,
             children: [
                 {
                 key: '9',
@@ -113,18 +117,46 @@ export default function NavbarComponent(){
         },
         ];
 
+    const levelKeys = getLevelKeys(items);
+
+    const onOpenChange = (keys) => {
+        const latestKey = keys.find((key) => openKeys.indexOf(key) === -1);
+        if (latestKey) {
+            const sameLevelKeyIndex = keys
+            .filter((key) => key !== latestKey)
+            .findIndex((key) => levelKeys[key] === levelKeys[latestKey]);
+
+            setOpenKeys(
+            keys
+                .filter((_, index) => index !== sameLevelKeyIndex)
+                .filter((key) => levelKeys[key] <= levelKeys[latestKey])
+            );
+        } else {
+            setOpenKeys(keys); // se está cerrando
+        }
+    };
+
+
 
     return(
 
         <>
-            <nav>
+            <nav className="Navbar">
                 <Menu
                     className="main-menu"
                     mode="inline"
                     theme="dark"
                     items={items}
                     inlineCollapsed={collapsed}
+                    openKeys={openKeys}
+                    onOpenChange={onOpenChange}
                 />
+                <div className="Sandbox2" onClick={toggleCollapsed}>
+                    {
+                        (collapsed) ? <IconIndent className="Sandbox" strokeColor="rgb(255,255,255)" size="40" strokeWidth="1.25"/> : <IconMedium className="Sandbox" strokeColor="rgb(255,255,255)" size="40" strokeWidth="1.25"/>
+                    }
+                    <span className={`Span-Sandbox ${(collapsed) ? "Close" : ""}`}>Cerrar Menú</span>
+                </div>
             </nav>
         </>
 
