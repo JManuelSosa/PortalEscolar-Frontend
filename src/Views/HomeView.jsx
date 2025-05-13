@@ -7,7 +7,7 @@ import { IconCertificate } from '../Js/Icons';
 import { IconMail } from "../Js/Icons";
 
 //Css
-import '../CSS/Views/HomeView.css';
+import '@css/Views/HomeView.css';
 
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,7 @@ export default function HomeView(){
             <h1 className="HomeTittle">Bienvenido {Usuario} </h1>
             <Row className="MainOpcion" gutter={[16, 16]}>
                 <Col xs={24} sm={12} lg={8}>
-                    <CardContent className={'CardMenu'}>
+                    <CardContent className={'CardMenu'} hoverable>
                         <Row className="HeaderCard" onClick={() => { navigate('/Divisiones')}}>
                             <IconSchool strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={200}></IconSchool>
                         </Row>
@@ -34,7 +34,7 @@ export default function HomeView(){
                 </Col>
 
                 <Col xs={24} sm={12} lg={8}>
-                    <CardContent className={'CardMenu'}>
+                    <CardContent className={'CardMenu'} hoverable>
                         <Row className="HeaderCard">
                             <IconMail strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={200}></IconMail>
                         </Row>
@@ -47,7 +47,7 @@ export default function HomeView(){
                 </Col>
 
                 <Col xs={24} sm={12} lg={8}>
-                    <CardContent className={'CardMenu'}>
+                    <CardContent className={'CardMenu'} hoverable>
                         
                             <Row className="HeaderCard">
                                 <IconCertificate strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={200}></IconCertificate>

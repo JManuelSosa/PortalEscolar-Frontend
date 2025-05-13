@@ -12,7 +12,7 @@ import { IconBaselineDensityMedium } from '@tabler/icons-react';
 import { IconIndentIncrease } from '@tabler/icons-react';
 
 //Css
-import '../../CSS/Layout/NavbarComponent.css';
+import '@css/Layout/NavbarComponent.css';
 
 
 

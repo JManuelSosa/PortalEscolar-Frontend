@@ -12,7 +12,8 @@ import FakeAPI from "../Js/FakeApi";
 import CardContent from "../Components/General/CardContent";
 
 //Css
-import '../CSS/Views/GruposView.css';
+
+import '@css/Views/GruposView.css';
 
 
 export default function DetalleGruposView(){
