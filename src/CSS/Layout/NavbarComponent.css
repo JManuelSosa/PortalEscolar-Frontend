@@ -1,22 +1,64 @@
 .main-menu{
-    font-size: 16px;
+    font-size: 1rem;
     text-align: center;
     font-family: 'Inter';
     font-weight: 500;
     color:rgb(255,255,255);
 }
 
-.main-menu .ant-menu-item .ant-menu-submenu{
-    margin-top: 8px;
-    margin-bottom: 8px;
-    margin-left: 0px;
-    margin-right: 0px;
+.main-menu {
     text-align: center;
-    padding: auto auto auto auto !important;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 }
 
-.main-menu .ant-menu-item-divider{  
-    background-color: rgb(255, 255, 255) !important; /* Cambia el color del divider */
-    height: 1px; 
+/** Cada <li> de la lista de items del NavbarComponent */
+.ant-menu-item, .ant-menu-submenu-title{
+    height:2.8rem !important;
+    padding-left: 1rem !important;
+}
+
+/* .Menu-Icon{
+    position: relative;
+    top: 0.18rem;
+    right: 0.7rem;
+}
+
+.Menu-IconOpen{
+    top: 0.05rem;
+} */
+
+.Btn-Close{
+    width: 100%;
+    position: sticky;
+}
+
+.Navbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.Sandbox2{
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+}
+
+.Span-Sandbox{
+    display: inline-block;
+    color: rgb(220, 220, 220);
+    font-family: 'Inter';
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.Close{
+    display: none;
 }
 

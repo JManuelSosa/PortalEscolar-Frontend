@@ -26,7 +26,7 @@ export default function DivisionView(){
     }, []);
 
     function verCarreras(idDivision, nameDivision){
-        navigate("/Carreras", { state: { divisionID: idDivision, name: nameDivision } });
+        navigate("/Carreras", { state: { divisionID: idDivision, divisionName: nameDivision } });
     }
 
     function obtenerIcono(divisionID){

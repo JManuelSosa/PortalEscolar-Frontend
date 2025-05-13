@@ -18,18 +18,24 @@ import '../../CSS/Layout/HeaderComponent.css';
 export default function HeaderLayout(){
 
     const currentLocation = useLocation(); 
+    //Para el funcionamiento del boton 'back'
+    const { divisionID, divisionName } = currentLocation.state || {};
+    const { carreraID, carreraName } = currentLocation.state || {};
+
     const navigate = useNavigate(); 
 
     const getBackRoute = () => {
         const backRoutes = {
-            "/Divisiones": "/", // Si estás en /Divisiones, regresa al Home
-            "/Carreras": "/Divisiones", // Si estás en /profile, regresa a /dashboard
-            "/Grupos": "/Divisiones", // Si estás en /settings, regresa a /profile
-            "/DetalleGrupo": "/Divisiones"
+            "/Divisiones": { path: "/", state: null }, // Si estás en /Divisiones, regresa al Home
+            "/Carreras": { path: "/Divisiones", state:null }, // Si estás en /Carreras regresa a /Divisiones
+            "/Grupos": { path:"/Carreras", state: { divisionID, divisionName }}, // Si estás en /DetalleGrupo, regresa a /Grupos
+            "/DetalleGrupo": { path:"/Grupos", state: { carreraID, carreraName, divisionID, divisionName } }
         };
 
         return backRoutes[currentLocation.pathname] || "/"; // Valor por defecto
     };
+
+    let { path, state } = getBackRoute();
 
     function renderArrowBack(){
         if(currentLocation.pathname === '/'){
@@ -37,8 +43,8 @@ export default function HeaderLayout(){
         }
 
         return(
-            <div className="headerIconContainer" onClick={() => {navigate(getBackRoute())}}>
-                <IconBackArrow size={50} strokeColor={"rgb(var(--conifer-800))"} ></IconBackArrow>
+            <div className="headerIconContainer" onClick={() => {navigate(path, { state })}}>
+                <IconBackArrow size={45} strokeColor={"rgb(var(--conifer-800))"} ></IconBackArrow>
             </div>
         );
     }

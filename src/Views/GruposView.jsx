@@ -23,6 +23,7 @@ export default function GruposView(){
         const currentLocation = useLocation();
     
         const { carreraID, carreraName } = currentLocation.state || {};
+        const { divisionID, divisionName } = currentLocation.state || {}
     
         const [grupos, setGrupos] = useState([]);
     
@@ -46,7 +47,7 @@ export default function GruposView(){
         }
 
         function verDetalleGrupos(idGrupo, nameGrupo){
-            navigate("/DetalleGrupo", { state: { grupoID: idGrupo, grupoName: nameGrupo } });
+            navigate("/DetalleGrupo", { state: { grupoID: idGrupo, grupoName: nameGrupo, carreraID, carreraName, divisionID, divisionName} });
         }
 
         return(

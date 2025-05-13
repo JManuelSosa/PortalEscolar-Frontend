@@ -5,6 +5,7 @@ import { useCollapsed } from '../../Context/CollapseContext';
 import { Layout } from "antd";
 const { Sider } = Layout;
 
+
 //Componentes
 import NavbarComponent from "./NavbarComponent";
 
@@ -15,6 +16,14 @@ import '../../CSS/Layout/Sider.css';
 export default function SiderNav(){
 
     const { collapsed } = useCollapsed();
+    const siderStyle = {
+        position: 'sticky',
+        insetInlineStart: 0,
+        top: 0,
+        bottom: 0,
+        scrollbarWidth: 'thin',
+        scrollbarGutter: 'stable',
+    };
 
     return(
         <Sider
@@ -28,6 +37,7 @@ export default function SiderNav(){
                 console.log(collapsed, type);
             }}
             width={250}
+            style={siderStyle}
         >
             <NavbarComponent/>
         </Sider>

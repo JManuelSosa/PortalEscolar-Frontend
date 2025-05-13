@@ -23,7 +23,7 @@ export default function CarrerasView(){
     const navigate = useNavigate();
     const currentLocation = useLocation();
 
-    const { divisionID, name } = currentLocation.state || {};
+    const { divisionID, divisionName } = currentLocation.state || {};
 
     const [carreras, setCarreras] = useState([]);
 
@@ -47,7 +47,7 @@ export default function CarrerasView(){
     }
 
     function verGrupos(idCarrera, nameCarrera){
-        navigate("/Grupos", { state: { carreraID: idCarrera, carreraName: nameCarrera } });
+        navigate("/Grupos", { state: { carreraID: idCarrera, carreraName: nameCarrera, divisionID: divisionID, divisionName: divisionName } });
     }
 
     function obtenerIcono(divisionID){
