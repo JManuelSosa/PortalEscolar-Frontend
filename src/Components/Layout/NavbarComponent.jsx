@@ -1,26 +1,15 @@
-import { Button, Menu } from "antd";
-import { useState, useEffect } from "react";
+import { Menu } from "antd";
+import { useState } from "react";
 import { useCollapsed } from '../../Context/CollapseContext';
 
-// Iconos
-import { IconUsers } from "../../Js/Icons";
-import { IconCertificate } from "../../Js/Icons";
-import { IconSchool } from "../../Js/Icons";
-import { IconCash } from "../../Js/Icons";
-import { IconMail } from "../../Js/Icons";
-import { IconMedium } from "../../Js/Icons";
-import { IconIndent } from "../../Js/Icons";
-
-
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from '@ant-design/icons';
-
-import Icon from '@ant-design/icons';
+// Tabler Icons
+import { IconSchool } from '@tabler/icons-react';
+import { IconUsers } from '@tabler/icons-react';
+import { IconCash } from '@tabler/icons-react';
+import { IconMail } from "@tabler/icons-react";
+import { IconFileDescription } from '@tabler/icons-react';
+import { IconBaselineDensityMedium } from '@tabler/icons-react';
+import { IconIndentIncrease } from '@tabler/icons-react';
 
 //Css
 import '../../CSS/Layout/NavbarComponent.css';
@@ -28,10 +17,16 @@ import '../../CSS/Layout/NavbarComponent.css';
 
 
 export default function NavbarComponent(){
-
-    const [labelText, setLabelText] = useState('Abrir Menu');
     const { collapsed, toggleCollapsed } = useCollapsed();
     const [openKeys, setOpenKeys] = useState([]);
+    const [selectedKeys, setSelectedKeys] = useState([]);
+
+    const IconProps = {
+        size: 38,
+        stroke: 1.25,
+        color: 'rgb(220,220,220)',
+        className: "Menu-Icon",
+    }
 
     const getLevelKeys = (items) => {
         const key = {};
@@ -50,23 +45,23 @@ export default function NavbarComponent(){
     const items = [
         {
             key: '1',
-            icon: <IconSchool  className={`Menu-Icon ${(collapsed) ? "" : "Menu-IconOpen"}`} size="40" strokeWidth="1.25" strokeColor="rgb(220, 220, 220)"/>,
+            icon: <IconSchool  {...IconProps}/>,
             label: 'Estudiantes',
         },
         {
             key: '2',
-            icon: <IconUsers className={`Menu-Icon ${(collapsed) ? "" : "Menu-IconOpen"}`} size="40" strokeWidth="1.25" strokeColor="rgb(220,220,220)"/>,
+            icon: <IconUsers {...IconProps}/>,
             label: 'Profesores',
         },
         {
             key: '3',
-            icon: <IconCash className={`Menu-Icon ${(collapsed) ? "" : "Menu-IconOpen"}`} strokeWidth="1.25" size="40" strokeColor="rgb(220,220,220)"/>,
+            icon: <IconCash {...IconProps}/>,
             label: 'Finanzas',
         },
         {
             key: 'sub1',
             label: 'Comunicación',
-            icon: <IconMail className={`Menu-Icon ${(collapsed) ? "" : "Menu-IconOpen"}`} strokeWidth="1.25" size="40" strokeColor="rgb(255, 255, 255)"/>,
+            icon: <IconMail {...IconProps}/>,
             children: [
                 {
                 key: '5',
@@ -89,7 +84,7 @@ export default function NavbarComponent(){
         {
             key: 'sub2',
             label: 'Documentos',
-            icon: <IconCertificate className={`Menu-Icon ${(collapsed) ? "" : "Menu-IconOpen"}`} size="40" strokeWidth="1.25" strokeColor="rgb(255, 255, 255)"/>,
+            icon: <IconFileDescription {...IconProps}/>,
             children: [
                 {
                 key: '9',
@@ -98,7 +93,7 @@ export default function NavbarComponent(){
                 {
                 key: '10',
                 label: 'Option 10',
-                },
+                }, 
                 {
                 key: 'sub3',
                 label: 'Submenu',
@@ -136,6 +131,14 @@ export default function NavbarComponent(){
         }
     };
 
+    function isSelected({ key }){
+        
+        if(selectedKeys.includes(key)){
+            setSelectedKeys([]);
+        }else{
+            setSelectedKeys([key]);
+        }
+    }
 
 
     return(
@@ -150,12 +153,14 @@ export default function NavbarComponent(){
                     inlineCollapsed={collapsed}
                     openKeys={openKeys}
                     onOpenChange={onOpenChange}
+                    selectedKeys={selectedKeys}
+                    onClick={isSelected}
                 />
-                <div className="Sandbox2" onClick={toggleCollapsed}>
+                <div className="Btn-Menu" onClick={toggleCollapsed}>
                     {
-                        (collapsed) ? <IconIndent className="Sandbox" strokeColor="rgb(255,255,255)" size="40" strokeWidth="1.25"/> : <IconMedium className="Sandbox" strokeColor="rgb(255,255,255)" size="40" strokeWidth="1.25"/>
+                        (collapsed) ? <IconIndentIncrease {...IconProps}/> : <IconBaselineDensityMedium {...IconProps}/>
                     }
-                    <span className={`Span-Sandbox ${(collapsed) ? "Close" : ""}`}>Cerrar Menú</span>
+                    <span className={`BtnMenu-Text ${(collapsed) ? "Close" : ""}`}>Cerrar Menú</span>
                 </div>
             </nav>
         </>
