@@ -13,8 +13,8 @@ import { IconMainLogo } from "../../Js/Icons";
 import { IconUserFill } from "../../Js/Icons";
 import { IconBackArrow } from "../../Js/Icons";
 
-// import '../../CSS/Layout/HeaderComponent.css';
-import '@css/Layout/HeaderComponent.css';
+
+import HeaderStyle from '@css/Layout/HeaderComponent.module.css';
 
 export default function HeaderLayout(){
 
@@ -44,7 +44,7 @@ export default function HeaderLayout(){
         }
 
         return(
-            <div className="headerIconContainer" onClick={() => {navigate(path, { state })}}>
+            <div className={ HeaderStyle.headerIconContainer } onClick={() => {navigate(path, { state })}}>
                 <IconBackArrow size={45} strokeColor={"rgb(var(--conifer-800))"} ></IconBackArrow>
             </div>
         );
@@ -52,14 +52,14 @@ export default function HeaderLayout(){
 
     //Popover
     const contentPopover = (
-        <div class="headerMenuUser">
+        <div class={ HeaderStyle.headerMenuUser }>
             <Divider>Cuenta</Divider>
-            <ul className="headerUserOptions">
+            <ul className={ HeaderStyle.headerUserOptions }>
                 <li>
-                    <Button type="ghost" block className="headerButtonOptions">Mi perfil</Button>
+                    <Button type="ghost" block className={ HeaderStyle.headerButtonOptions }>Mi perfil</Button>
                 </li>
                 <li>
-                    <Button type="ghost" block className="headerButtonOptions">Cerrar sesión</Button>
+                    <Button type="ghost" block className={ HeaderStyle.headerButtonOptions }>Cerrar sesión</Button>
                 </li>
             </ul>
         </div>
@@ -67,17 +67,17 @@ export default function HeaderLayout(){
 
 
     return(
-        <Header className='header-home'>
-            <Row className="headerMainRow">
-                <Col span={11} className="headerColBackArrow">
+        <Header className={ HeaderStyle.headerHome }>
+            <Row className={ HeaderStyle.headerMainRow }>
+                <Col span={11} className={ HeaderStyle.headerColBackArrow }>
                     { renderArrowBack() }
                 </Col>
-                <Col span={2} className="headerCol" onClick={()=>{navigate('/')}}>
-                    <IconMainLogo size={60}/>
+                <Col span={2} className={ HeaderStyle.headerCol } onClick={()=>{navigate('/')}}>
+                    <IconMainLogo className={ HeaderStyle.iconMain } size={60}/>
                 </Col>
-                <Col span={11} className="headerColButtonUser">
+                <Col span={11} className={ HeaderStyle.headerColButtonUser }>
                     <Popover content={ contentPopover } trigger={"click"}>
-                        <Button className="headerBtnUser" type="text" shape="circle">
+                        <Button className={ HeaderStyle.headerBtnUser } type="text" shape="circle">
                             <IconUserFill size={40}/>
                         </Button>
                     </Popover>

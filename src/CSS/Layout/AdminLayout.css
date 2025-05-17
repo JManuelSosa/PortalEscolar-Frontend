@@ -1,8 +1,0 @@
-.AdminLayoutAnt{
-    min-height: 100dvh;
-}
-
-.AdminLayoutContent{
-    padding-inline: 1rem;
-    background-color: rgb(var(--conifer-50));
-}

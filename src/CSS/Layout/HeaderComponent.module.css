@@ -1,4 +1,4 @@
-.header-home{
+.headerHome{
     display: flex;
     text-align: center;
     color: rgb(0,0,0);
@@ -62,4 +62,8 @@
     background-color: rgb(var(--conifer-600));
     color: rgb(255, 255, 255);
     font-size: large;
+}
+
+.iconMain{
+    cursor:pointer;
 }

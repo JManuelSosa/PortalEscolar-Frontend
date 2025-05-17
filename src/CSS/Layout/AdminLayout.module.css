@@ -1,0 +1,15 @@
+.adminLayoutAnt{
+    min-height: 100dvh;
+}
+
+.adminLayoutContent{
+    padding-inline: 1rem;
+    background-color: rgb(var(--conifer-50));
+}
+
+.footer{
+    text-align: center;
+    color: #ffffff;
+    background-color: #4096ff;
+    height: 1rem;
+}

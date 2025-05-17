@@ -12,7 +12,7 @@ import { AdministracionIcon } from "../Js/Icons";
 import { Col, Row, Divider } from "antd";
 
 //Css
-import '@css/Views/DivisionView.css';
+import StyleDivision from '@css/Views/DivisionView.module.css';
 
 export default function DivisionView(){
 
@@ -52,16 +52,16 @@ export default function DivisionView(){
                 <h1>Divisiones de la escuela</h1>
             </Divider>
 
-            <Row gutter={[16, 16]} className="RowContenido">
+            <Row gutter={[16, 16]} className={StyleDivision.RowContenido}>
                 
                 {divisiones.map((division) => (
                     <Col key={division.id} xs={24} md={12} lg={8} onClick={() => { verCarreras(division.id, division.name) }}>
-                        <CardContent className={"CardDivisiones"}>
-                            <Row className="HeaderCard">
+                        <CardContent className={StyleDivision.CardDivisiones} hoverable>
+                            <Row className={StyleDivision.HeaderCard}>
                                 { obtenerIcono(division.id) }
                             </Row>
-                            <Row className="BodyCard">
-                                <h2 className="TittleHomeOptions">
+                            <Row className={StyleDivision.BodyCard}>
+                                <h2 className={StyleDivision.TitleHomeOptions}>
                                     {division.name} {/* Renderiza el nombre de la división */}
                                 </h2>
                             </Row>

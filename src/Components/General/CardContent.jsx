@@ -1,11 +1,10 @@
 //Ant
 import { Card } from 'antd';
 
-//CSS
-import '@css/General/CardContent.css';
-
+import CardCss from '@css/General/CardContent.module.css';
 
 export default function CardContent({ children, ...rest } = {}){
+
 
     return(
         <Card {...rest}>

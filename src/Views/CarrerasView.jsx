@@ -16,6 +16,9 @@ import { VsCodeIcon } from "../Js/Icons";
 import { IndustrialIcon } from "../Js/Icons";
 import { AdministracionIcon } from "../Js/Icons";
 
+//Css
+import StyleCarreras from '@css/Views/CarrerasView.module.css';
+
 export default function CarrerasView(){
 
     const fakeAPI = new FakeAPI();
@@ -74,16 +77,16 @@ export default function CarrerasView(){
                         <h1>Carreras en { name }</h1>
                     </Divider>
         
-                    <Row gutter={[16, 16]} className="RowContenido">
+                    <Row gutter={[16, 16]} className={StyleCarreras.RowContenido}>
                         
                         {carreras.map((carrera) => (
                             <Col key={carrera.id} xs={24} md={12} lg={8} onClick={() => { verGrupos(carrera.id, carrera.name )}}>
-                                <CardContent className={"CardDivisiones"}>
-                                    <Row className="HeaderCard">
+                                <CardContent className={StyleCarreras.CardGrupos} hoverable>
+                                    <Row className={StyleCarreras.HeaderCard}>
                                         { obtenerIcono(divisionID) }
                                     </Row>
-                                    <Row className="BodyCard">
-                                        <h2 className="TittleHomeOptions">
+                                    <Row className={StyleCarreras.BodyCard}>
+                                        <h2 className={StyleCarreras.TitleHomeOptions}>
                                             {carrera.name} {/* Renderiza el nombre de la división */}
                                         </h2>
                                     </Row>

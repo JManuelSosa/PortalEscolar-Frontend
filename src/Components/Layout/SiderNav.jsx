@@ -10,7 +10,7 @@ const { Sider } = Layout;
 import NavbarComponent from "./NavbarComponent";
 
 //CSS
-import '@css/Layout/Sider.css';
+import SiderStyle from '@css/Layout/Sider.module.css';
 
 
 export default function SiderNav(){
@@ -27,7 +27,7 @@ export default function SiderNav(){
 
     return(
         <Sider
-            className={`Sider-Layout ${ (collapsed) ? "Menu-Cerrado" : ""}`}
+            className={`${ SiderStyle.siderLayout } ${ (collapsed) ? SiderStyle.menuCerrado : ""}`}
             breakpoint="md"
             collapsedWidth="0"
             onBreakpoint={(broken) => {

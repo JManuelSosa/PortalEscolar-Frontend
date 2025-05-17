@@ -10,30 +10,23 @@ import { Layout } from 'antd';
 const { Content, Footer } = Layout;
 
 //Css
-import '@css/Layout/AdminLayout.css';
+import AdminLayoutStyle from '@css/Layout/AdminLayout.module.css';
 
 export default function AdminLayout({children}){
 
-    const footerStyle = {
-        textAlign: 'center',
-        color: '#fff',
-        backgroundColor: '#4096ff',
-        height:12,
-    };
-
     return(
         <>
-            <Layout className="AdminLayoutAnt">
+            <Layout className={ AdminLayoutStyle.adminLayoutAnt }>
                 <CollapsedProvider>
                     <SiderNav/>
                 </CollapsedProvider>
 
                 <Layout>
                     <HeaderLayout></HeaderLayout>
-                    <Content className='AdminLayoutContent'>
+                    <Content className={ AdminLayoutStyle.adminLayoutContent }>
                         {children}
                     </Content>
-                    <Footer style={footerStyle}>
+                    <Footer className={ AdminLayoutStyle.footer }>
                         Hola Footer
                     </Footer>
                 </Layout>

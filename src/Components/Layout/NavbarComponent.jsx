@@ -12,7 +12,7 @@ import { IconBaselineDensityMedium } from '@tabler/icons-react';
 import { IconIndentIncrease } from '@tabler/icons-react';
 
 //Css
-import '@css/Layout/NavbarComponent.css';
+import NavbarStyle from '@css/Layout/NavbarComponent.module.css';
 
 
 
@@ -25,7 +25,7 @@ export default function NavbarComponent(){
         size: 38,
         stroke: 1.25,
         color: 'rgb(220,220,220)',
-        className: "Menu-Icon",
+        className: NavbarStyle.menuIcon,
     }
 
     const getLevelKeys = (items) => {
@@ -132,7 +132,6 @@ export default function NavbarComponent(){
     };
 
     function isSelected({ key }){
-        
         if(selectedKeys.includes(key)){
             setSelectedKeys([]);
         }else{
@@ -144,9 +143,9 @@ export default function NavbarComponent(){
     return(
 
         <>
-            <nav className="Navbar">
+            <nav className={ NavbarStyle.navbar }>
                 <Menu
-                    className="main-menu"
+                    className={ NavbarStyle.mainMenu }
                     mode="inline"
                     theme="dark"
                     items={items}
@@ -156,11 +155,11 @@ export default function NavbarComponent(){
                     selectedKeys={selectedKeys}
                     onClick={isSelected}
                 />
-                <div className="Btn-Menu" onClick={toggleCollapsed}>
+                <div className={ NavbarStyle.btnMenu } onClick={toggleCollapsed}>
                     {
                         (collapsed) ? <IconIndentIncrease {...IconProps}/> : <IconBaselineDensityMedium {...IconProps}/>
                     }
-                    <span className={`BtnMenu-Text ${(collapsed) ? "Close" : ""}`}>Cerrar Menú</span>
+                    <span className={`${NavbarStyle.btnMenuText} ${(collapsed) ? NavbarStyle.btnClose : ""}`}>Cerrar Menú</span>
                 </div>
             </nav>
         </>

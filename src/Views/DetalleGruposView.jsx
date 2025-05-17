@@ -13,8 +13,6 @@ import CardContent from "../Components/General/CardContent";
 
 //Css
 
-import '@css/Views/GruposView.css';
-
 
 export default function DetalleGruposView(){
 
@@ -76,11 +74,6 @@ export default function DetalleGruposView(){
         ];
 
         const data = detalle.alumnos;
-
-
-
-
-
 
         return(
         

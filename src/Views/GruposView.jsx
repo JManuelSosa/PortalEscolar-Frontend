@@ -12,7 +12,7 @@ import FakeAPI from "../Js/FakeApi";
 import CardContent from "../Components/General/CardContent";
 
 //Css
-import '@css/Views/GruposView.css';
+import StyleGrupos from '@css/Views/GruposView.module.css';
 
 export default function GruposView(){
 
@@ -52,19 +52,19 @@ export default function GruposView(){
         return(
         
                         <>
-                        <section className="Divisiones">
+                        <section className={StyleGrupos.Divisiones}>
                 
                             <Divider>
                                 <h1>Grupos en { carreraName }</h1>
                             </Divider>
                 
-                            <Row gutter={[16, 16]} className="RowContenido">
+                            <Row gutter={[16, 16]} className={StyleGrupos.RowContenido}>
                                 
                                 {grupos.map((grupo) => (
                                     <Col key={grupo.id} xs={24} md={12} lg={8} onClick={() => { verDetalleGrupos(grupo.id, grupo.name) }}>
-                                        <CardContent className={"CardGrupos"}>
-                                            <Row className="GruposBodyCard">
-                                                <h2 className="GruposName">
+                                        <CardContent className={StyleGrupos.CardGrupos} hoverable>
+                                            <Row className={StyleGrupos.GruposBodyCard}>
+                                                <h2 className={StyleGrupos.GruposName}>
                                                     {grupo.name} {/* Renderiza el nombre de la división */}
                                                 </h2>
                                             </Row>
