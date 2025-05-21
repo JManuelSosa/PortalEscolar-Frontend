@@ -1,4 +1,4 @@
-export default function AlumnoNavbarComponent(){
+export default function Alumno(){
 
 
     return(

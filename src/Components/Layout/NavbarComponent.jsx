@@ -1,6 +1,8 @@
 import { Menu } from "antd";
 import { useState } from "react";
+import { useEffect } from "react";
 import { useCollapsed } from '../../Context/CollapseContext';
+import { CssHelper } from "../../Js/Helpers/CssHelper";
 
 // Tabler Icons
 import { IconSchool } from '@tabler/icons-react';
@@ -12,7 +14,8 @@ import { IconBaselineDensityMedium } from '@tabler/icons-react';
 import { IconIndentIncrease } from '@tabler/icons-react';
 
 //Css
-import NavbarStyle from '@css/Layout/NavbarComponent.module.css';
+// import NavbarStyle from '@css/Layout/NavbarComponent.module.css';
+import MiCss from '@css/Layout/NavbarComponent.module.css';
 
 
 
@@ -25,7 +28,7 @@ export default function NavbarComponent(){
         size: 38,
         stroke: 1.25,
         color: 'rgb(220,220,220)',
-        className: NavbarStyle.menuIcon,
+        className: MiCss.menuIcon,
     }
 
     const getLevelKeys = (items) => {
@@ -143,9 +146,9 @@ export default function NavbarComponent(){
     return(
 
         <>
-            <nav className={ NavbarStyle.navbar }>
+            <nav className={ MiCss.navbar }>
                 <Menu
-                    className={ NavbarStyle.mainMenu }
+                    className={ MiCss.mainMenu }
                     mode="inline"
                     theme="dark"
                     items={items}
@@ -155,11 +158,11 @@ export default function NavbarComponent(){
                     selectedKeys={selectedKeys}
                     onClick={isSelected}
                 />
-                <div className={ NavbarStyle.btnMenu } onClick={toggleCollapsed}>
+                <div className={ MiCss.btnMenu } onClick={toggleCollapsed}>
                     {
                         (collapsed) ? <IconIndentIncrease {...IconProps}/> : <IconBaselineDensityMedium {...IconProps}/>
                     }
-                    <span className={`${NavbarStyle.btnMenuText} ${(collapsed) ? NavbarStyle.btnClose : ""}`}>Cerrar Menú</span>
+                    <span className={`${MiCss.btnMenuText} ${(collapsed) ? MiCss.btnClose : ""}`}>Cerrar Menú</span>
                 </div>
             </nav>
         </>

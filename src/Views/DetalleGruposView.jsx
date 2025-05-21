@@ -10,7 +10,7 @@ import FakeAPI from "../Js/FakeApi";
 
 //Components
 import CardContent from "../Components/General/CardContent";
-
+import AlumnoResumen from "../Components/Layout/Alumno/AlumnoResumen";
 //Css
 
 
@@ -83,8 +83,11 @@ export default function DetalleGruposView(){
                             <Divider>
                                 <h1>Detalle de { grupoName }</h1>
                             </Divider>
-                
+                            <div>
+                                <AlumnoResumen/>
+                            </div>
                             <Table columns={columns} dataSource={data} />;
+                            
                             
                         </section>
                         </>
