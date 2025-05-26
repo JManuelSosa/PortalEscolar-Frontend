@@ -9,9 +9,9 @@ import { Button } from "antd";
 import { Popover } from "antd";
 
 //Iconos
-import { IconMainLogo } from "../../Js/Icons";
-import { IconUserFill } from "../../Js/Icons";
-import { IconBackArrow } from "../../Js/Icons";
+import { IconMainLogo } from "../../../Js/Icons";
+import { IconUserFill } from "../../../Js/Icons";
+import { IconBackArrow } from "../../../Js/Icons";
 
 
 import HeaderStyle from '@css/Layout/HeaderComponent.module.css';
