@@ -49,19 +49,43 @@
     --color-warning: rgb(238, 255, 86);
     --color-error: rgb(255, 65, 65);
 
-    --base-50: rgb(var(--conifer-50));
-    --base-100: rgb(var(--conifer-100));
-    --base-200: rgb(var(--conifer-200));
-    --base-300: rgb(var(--conifer-300));
-    --base-400: rgb(var(--conifer-400));
-    --base-500: rgb(var(--conifer-500));
-    --base-600: rgb(var(--conifer-600));
-    --base-700: rgb(var(--conifer-700));
-    --base-800: rgb(var(--conifer-800));
-    --base-900: rgb(var(--conifer-900));
-    --base-950: rgb(var(--conifer-950));
+    --base-50: var(--conifer-50);
+    --base-100: var(--conifer-100);
+    --base-200: var(--conifer-200);
+    --base-300: var(--conifer-300);
+    --base-400: var(--conifer-400);
+    --base-500: var(--conifer-500);
+    --base-600: var(--conifer-600);
+    --base-700: var(--conifer-700);
+    --base-800: var(--conifer-800);
+    --base-900: var(--conifer-900);
+    --base-950: var(--conifer-950);
     
     --white-light: rgb(220,220,220);
+}
+
+/* Estilos generales para el scrollbar */
+::-webkit-scrollbar {
+  width: 0.8rem; /* Ancho del scrollbar vertical */
+  height: 0.8rem; /* Altura del scrollbar horizontal */
+}
+
+/* Fondo del scrollbar */
+::-webkit-scrollbar-track {
+  background: rgb(var(--base-50));
+  border-radius: 1rem;
+}
+
+/* Barra del scrollbar (la parte que se mueve) */
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--base-400));
+  border-radius: 1rem;
+  border: 3px solid rgb(var(--base-200)); /* Borde que combina con el track */
+}
+
+/* Efecto hover para la barra */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 body{

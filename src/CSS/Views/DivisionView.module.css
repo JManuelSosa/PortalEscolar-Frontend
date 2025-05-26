@@ -24,5 +24,5 @@
 .CardDivisiones{
     height: 22rem;
     overflow: hidden;
-    background-color: rgb(var(--conifer-100));
+    background-color: rgb(var(--base-100));
 }
