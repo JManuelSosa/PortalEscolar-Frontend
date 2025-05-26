@@ -2,8 +2,8 @@
 import { CollapsedProvider } from "../Context/CollapseContext";
 
 //Components
-import SiderNav from '../Components/Layout/SiderNav';
-import HeaderLayout from '../Components/Layout/HeaderLayout';
+import SiderNav from '../Components/Layout/App/SiderNav';
+import HeaderLayout from '../Components/Layout/App/HeaderLayout';
 
 //AntDesign
 import { Layout } from 'antd';
@@ -21,7 +21,7 @@ export default function AdminLayout({children}){
                     <SiderNav/>
                 </CollapsedProvider>
 
-                <Layout>
+                <Layout className={AdminLayoutStyle.appLayout}>
                     <HeaderLayout></HeaderLayout>
                     <Content className={ AdminLayoutStyle.adminLayoutContent }>
                         {children}

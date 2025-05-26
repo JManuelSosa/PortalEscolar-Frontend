@@ -11,17 +11,34 @@ import Login from './Components/Auth/Login';
 import CarrerasView from './Views/CarrerasView';
 import GruposView from './Views/GruposView';
 import DetalleGruposView from './Views/DetalleGruposView';
-
-//Css 
-import '@css/App.css';
-
-
-
+import { ConfigProvider } from 'antd';
 
 function App() {
 
+  const configProvider = {
+      token: {
+        fontFamily: "inherit",
+      },
+      components: { 
+        Input: {
+          activeBorderColor: 'rgb(var(--base-300))',
+          hoverBorderColor: 'rgba(var(--base-300), 0.8)',
+        },
+        Select: {
+          activeBorderColor: 'rgb(var(--base-300))',
+          hoverBorderColor: 'rgba(var(--base-300), 0.8)',
+          optionSelectedFontWeight: 400,
+          placeHolderFontWeight: 400
+        }
+      }
+  }
+
   return (
     <>
+    <ConfigProvider
+      theme={configProvider}
+    >
+
       <Routes>
         {/* Rutas sin inicio de sesión */}
         <Route path='/Login' element={ <Login/> }/>
@@ -34,6 +51,7 @@ function App() {
         <Route path='/Grupos' element={<AdminLayout> <GruposView/> </AdminLayout>}></Route>
         <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView/> </AdminLayout>}></Route>
       </Routes>
+      </ConfigProvider>
     </>
   )
 }

@@ -18,8 +18,8 @@
 }
 
 :global(.ant-menu-title-content){
-    font-weight: 300;
-    color: var(--white-light);
+    font-weight: 300 !important;
+    color: var(--white-light) !important;
 }
 
 .menuIcon{
