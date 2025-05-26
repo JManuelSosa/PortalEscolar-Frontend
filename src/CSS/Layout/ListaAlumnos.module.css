@@ -1,0 +1,97 @@
+.rowBuscador{
+    background-color: rgb(255,255,255);
+    width: 95%;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: rgba(var(--base-950), 0.12) 0px 1px 3px, rgba(var(--base-950), 0.24) 0px 1px 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.colSearch{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:0.4rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.colSearch > label {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgb(var(--base-950));
+}
+
+.buscador{
+    font-weight: 300;
+    color: var(--color-text);
+}
+
+.buscador::placeholder{
+    font-weight: 300;
+    color: rgba(var(--base-950), 0.25);
+}
+
+.inputSearch{
+    width: 80%;
+}
+
+.inputSearch > span > span > button{
+    background-color: rgb(var(--base-500));
+}
+
+.inputSearch > span > span > button:hover:hover:hover{
+    background-color: rgb(var(--base-400));
+}
+
+.inputSelect.inputSelect{
+    width: 80%;
+}
+
+.selectPlaceholder{
+    font-weight: 300;
+}
+
+.optionSelect{
+    font-weight: 300;
+}
+
+.contenedorAlumnos{
+    margin: 1rem 0 1rem 0;
+    max-width: 95%;
+    background-color: white;
+    padding: 1.6rem 1.6rem 1.6rem 1.6rem;
+    border-radius: 2rem;
+    max-height: 100dvh;
+    overflow-y: scroll;
+}
+
+.contenedorVacio{
+    overflow-y: unset;
+    max-height: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+}
+
+.empty{
+    height: 14rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.emptyImage.emptyImage{
+    height: 10rem;
+}
+
+.emptyDescription{
+    font-size: 2rem;
+    font-weight: 300;
+}
