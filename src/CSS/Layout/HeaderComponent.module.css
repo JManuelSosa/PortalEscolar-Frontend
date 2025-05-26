@@ -4,7 +4,7 @@
     color: rgb(0,0,0);
     align-items: center;
     height: 4.2rem;
-    background-color: rgb(var(--conifer-300));
+    background-color: rgb(var(--base-300));
 }
 
 .headerMainRow{
@@ -18,7 +18,7 @@
 }
 
 .headerBtnUser{
-    background-color: rgb(var(--conifer-800));
+    background-color: rgb(var(--base-800));
     color: rgb(255,255,255);
     height: 4rem;
     width: 4rem;
@@ -59,7 +59,7 @@
 }
 
 .headerButtonOptions{
-    background-color: rgb(var(--conifer-600));
+    background-color: rgb(var(--base-600));
     color: rgb(255, 255, 255);
     font-size: large;
 }

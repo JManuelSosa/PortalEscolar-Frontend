@@ -1,8 +1,8 @@
 import { Menu } from "antd";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useCollapsed } from '../../Context/CollapseContext';
-import { CssHelper } from "../../Js/Helpers/CssHelper";
+import { useCollapsed } from '../../../Context/CollapseContext';
+import { CssHelper } from "../../../Js/Helpers/CssHelper";
 
 // Tabler Icons
 import { IconSchool } from '@tabler/icons-react';
@@ -142,7 +142,6 @@ export default function NavbarComponent(){
         }
     }
 
-
     return(
 
         <>
@@ -150,13 +149,13 @@ export default function NavbarComponent(){
                 <Menu
                     className={ MiCss.mainMenu }
                     mode="inline"
-                    theme="dark"
                     items={items}
                     inlineCollapsed={collapsed}
                     openKeys={openKeys}
                     onOpenChange={onOpenChange}
                     selectedKeys={selectedKeys}
                     onClick={isSelected}
+                    theme="dark"
                 />
                 <div className={ MiCss.btnMenu } onClick={toggleCollapsed}>
                     {
@@ -165,6 +164,7 @@ export default function NavbarComponent(){
                     <span className={`${MiCss.btnMenuText} ${(collapsed) ? MiCss.btnClose : ""}`}>Cerrar Menú</span>
                 </div>
             </nav>
+        
         </>
 
     );

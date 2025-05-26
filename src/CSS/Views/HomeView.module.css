@@ -11,7 +11,7 @@
     height: 22rem;
     display: flex;
     flex-direction: column;
-    background-color: rgb(var(--conifer-100));
+    background-color: rgb(var(--base-100));
 }
 
 .headerCard{
