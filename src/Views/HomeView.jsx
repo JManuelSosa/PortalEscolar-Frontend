@@ -1,5 +1,4 @@
-import { Col, Row } from "antd";
-import CardContent from "../Components/General/CardContent";
+import { Col, Row, Card } from "antd";
 
 //Icons
 import { IconSchool } from "../Js/Icons";
@@ -21,7 +20,7 @@ export default function HomeView(){
             <h1 className={ HomeCss.homeTittle }>Bienvenido {Usuario} </h1>
             <Row className={ HomeCss.mainOpcion } gutter={[16, 16]}>
                 <Col xs={24} sm={12} lg={8}>
-                    <CardContent className={ HomeCss.cardMenu } hoverable>
+                    <Card className={ HomeCss.cardMenu } hoverable>
                         <Row className={ HomeCss.headerCard } onClick={() => { navigate('/Divisiones')}}>
                             <IconSchool strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={200}></IconSchool>
                         </Row>
@@ -30,11 +29,11 @@ export default function HomeView(){
                                 Divisiones
                             </h2>
                         </Row>
-                    </CardContent>
+                    </Card>
                 </Col>
 
                 <Col xs={24} sm={12} lg={8}>
-                    <CardContent className={ HomeCss.cardMenu } hoverable>
+                    <Card className={ HomeCss.cardMenu } hoverable>
                         <Row className={ HomeCss.headerCard }>
                             <IconMail strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={200}></IconMail>
                         </Row>
@@ -43,11 +42,11 @@ export default function HomeView(){
                                 Avisos
                             </h2>
                         </Row>
-                    </CardContent>
+                    </Card>
                 </Col>
 
                 <Col xs={24} sm={12} lg={8}>
-                    <CardContent className={ HomeCss.cardMenu } hoverable>
+                    <Card className={ HomeCss.cardMenu } hoverable>
                         
                             <Row className={ HomeCss.headerCard }>
                                 <IconCertificate strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={200}></IconCertificate>
@@ -58,7 +57,7 @@ export default function HomeView(){
                                 </h2>
                             </Row>
                         
-                    </CardContent>
+                    </Card>
                 </Col>
             </Row>
         </>
