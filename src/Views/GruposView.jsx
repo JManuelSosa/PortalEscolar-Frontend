@@ -3,13 +3,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 //Ant
-import { Result, Button, Divider, Row, Col } from "antd";
+import { Result, Button, Divider, Row, Col, Card} from "antd";
 
 //Faker Api
 import FakeAPI from "../Js/FakeApi";
-
-//Components
-import CardContent from "../Components/General/CardContent";
 
 //Css
 import StyleGrupos from '@css/Views/GruposView.module.css';
@@ -62,13 +59,13 @@ export default function GruposView(){
                                 
                                 {grupos.map((grupo) => (
                                     <Col key={grupo.id} xs={24} md={12} lg={8} onClick={() => { verDetalleGrupos(grupo.id, grupo.name) }}>
-                                        <CardContent className={StyleGrupos.CardGrupos} hoverable>
+                                        <Card className={StyleGrupos.CardGrupos} hoverable>
                                             <Row className={StyleGrupos.GruposBodyCard}>
                                                 <h2 className={StyleGrupos.GruposName}>
                                                     {grupo.name} {/* Renderiza el nombre de la división */}
                                                 </h2>
                                             </Row>
-                                        </CardContent>
+                                        </Card>
                                     </Col>
                                 ))}
                 

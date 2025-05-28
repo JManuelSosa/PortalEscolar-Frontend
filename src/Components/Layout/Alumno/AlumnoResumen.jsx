@@ -1,8 +1,5 @@
 // Ant Design
-import { Avatar } from "antd"
-import { Row } from "antd"
-import { Card } from "antd";
-import { Tag } from "antd";
+import { Avatar, Row, Card, Tag } from "antd"
 
 //Tabler Icons
 import { IconMailPlus } from '@tabler/icons-react';

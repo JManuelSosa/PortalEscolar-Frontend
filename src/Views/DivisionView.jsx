@@ -9,7 +9,7 @@ import { IndustrialIcon } from "../Js/Icons";
 import { AdministracionIcon } from "../Js/Icons";
 
 //AntDesign
-import { Col, Row, Divider } from "antd";
+import { Col, Row, Divider, Card } from "antd";
 
 //Css
 import StyleDivision from '@css/Views/DivisionView.module.css';
@@ -56,7 +56,7 @@ export default function DivisionView(){
                 
                 {divisiones.map((division) => (
                     <Col key={division.id} xs={24} md={12} lg={8} onClick={() => { verCarreras(division.id, division.name) }}>
-                        <CardContent className={StyleDivision.CardDivisiones} hoverable>
+                        <Card className={StyleDivision.CardDivisiones} hoverable>
                             <Row className={StyleDivision.HeaderCard}>
                                 { obtenerIcono(division.id) }
                             </Row>
@@ -65,7 +65,7 @@ export default function DivisionView(){
                                     {division.name} {/* Renderiza el nombre de la división */}
                                 </h2>
                             </Row>
-                        </CardContent>
+                        </Card>
                     </Col>
                 ))}
 

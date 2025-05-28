@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 //Ant
-import { Result, Button, Divider, Flex } from "antd";
+import { Result, Button, Divider } from "antd";
 
 //Faker Api
 import FakeAPI from "../Js/FakeApi";
