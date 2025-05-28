@@ -3,13 +3,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 //Ant
-import { Result, Button, Divider, Row, Col } from "antd";
+import { Result, Button, Divider, Row, Col, Card } from "antd";
 
 //Faker Api
 import FakeAPI from "../Js/FakeApi";
 
-//Components
-import CardContent from "../Components/General/CardContent";
 
 //Icons
 import { VsCodeIcon } from "../Js/Icons";
@@ -81,7 +79,7 @@ export default function CarrerasView(){
                         
                         {carreras.map((carrera) => (
                             <Col key={carrera.id} xs={24} md={12} lg={8} onClick={() => { verGrupos(carrera.id, carrera.name )}}>
-                                <CardContent className={StyleCarreras.CardGrupos} hoverable>
+                                <Card className={StyleCarreras.CardGrupos} hoverable>
                                     <Row className={StyleCarreras.HeaderCard}>
                                         { obtenerIcono(divisionID) }
                                     </Row>
@@ -90,7 +88,7 @@ export default function CarrerasView(){
                                             {carrera.name} {/* Renderiza el nombre de la división */}
                                         </h2>
                                     </Row>
-                                </CardContent>
+                                </Card>
                             </Col>
                         ))}
         
