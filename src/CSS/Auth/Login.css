@@ -1,0 +1,116 @@
+#LoginBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* background: beige; */
+    font-family: Arial, sans-serif
+}
+
+/* h3 {
+    color: green;
+    font-size: 50px;
+    margin: -30px;
+    padding: -10px;
+
+} */
+
+/*esto nos sirve para aajuntar y centrar el contenido que hay dentor de la caja */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* para ajustar la caja blanca */
+.login-box {
+    background: white;
+    padding: 5rem;
+    border-radius: 15px;
+    box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
+    height: 300px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin: 30px 10px;
+    padding: 15px;
+}
+
+.input-group2 {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin: 30px 10px;
+    padding: 15px;
+}
+
+/* para correr las letras dentro del input*/
+.input-group i {
+    margin-right: 10px;
+    color: #888;
+}
+
+.input-group2 i {
+    margin-right: 10px;
+    color: #888;
+}
+
+.input-group2 span {
+    margin-right: 10px;
+    color: #888;
+}
+
+/* cambiarle diseño que lleva dentro  input */
+.input-group input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.input-group2 input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+}
+
+.options a {
+    color: blaclk;
+    text-decoration: none;
+}
+
+.LoginButton {
+    background: navy;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 50%;
+    margin-top: 50px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.registro {
+    color: blue;
+    text-decoration: underline;
+    display: block;
+    margin-top: 25px;
+    cursor: pointer;
+    text-align: center;
+}

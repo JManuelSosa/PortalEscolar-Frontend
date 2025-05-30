@@ -1,0 +1,19 @@
+.RowContenido{
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.CardGrupos{
+    overflow: hidden;
+    background-color: rgb(var(--base-100));
+}
+
+.GruposBodyCard{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.GruposName{
+    font-size: 2rem;
+}

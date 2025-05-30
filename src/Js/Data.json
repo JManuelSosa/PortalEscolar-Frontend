@@ -1,0 +1,930 @@
+return {
+    divisiones: [
+    {
+        id: 1,
+        name: "División de tecnologías de la información y comunicación",
+        carreras: [
+        {
+            id: 1,
+            name: "Infraestructura en redes digitales",
+            grupos: [
+            {
+                id: 1,
+                name: "IRD1",
+                maestros: [
+                { id: 1, name: "Profesor Juan Pérez", email: "juan.perez@escuela.edu", telefono: "123-456-789" }
+                ],
+                alumnos: [
+                {
+                    id: 1,
+                    name: "Carlos Gómez",
+                    age: 21,
+                    email: "carlos.gomez@escuela.edu",
+                    notifications: [
+                    {
+                        id: 1,
+                        message: "Examen de Psicología el 15 de mayo",
+                        date: "2025-04-15"
+                    }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "María López",
+                    age: 22,
+                    email: "maria.lopez@escuela.edu",
+                    notifications: [
+                    {
+                        id: 2,
+                        message: "Entrega de proyecto final el 10 de junio",
+                        date: "2025-05-10"
+                    }
+                    ]
+                }
+                ]
+            },
+            {
+                id: 2,
+                name: "IRD2",
+                maestros: [
+                { id: 2, name: "Profesor María López", email: "maria.lopez@escuela.edu", telefono: "987-654-321" }
+                ],
+                alumnos: [
+                {
+                    id: 1,
+                    name: "Carlos Gómez",
+                    age: 21,
+                    email: "carlos.gomez@escuela.edu",
+                    notifications: [
+                    {
+                        id: 1,
+                        message: "Examen de Psicología el 15 de mayo",
+                        date: "2025-04-15"
+                    }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "María López",
+                    age: 22,
+                    email: "maria.lopez@escuela.edu",
+                    notifications: [
+                    {
+                        id: 2,
+                        message: "Entrega de proyecto final el 10 de junio",
+                        date: "2025-05-10"
+                    }
+                    ]
+                }
+                ]
+            },
+            {
+                id: 3,
+                name: "IRD3",
+                maestros: [
+                { id: 3, name: "Profesor Carlos Hernández", email: "carlos.hernandez@escuela.edu", telefono: "456-789-123" }
+                ],
+                alumnos: [
+                {
+                    id: 1,
+                    name: "Carlos Gómez",
+                    age: 21,
+                    email: "carlos.gomez@escuela.edu",
+                    notifications: [
+                    {
+                        id: 1,
+                        message: "Examen de Psicología el 15 de mayo",
+                        date: "2025-04-15"
+                    }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "María López",
+                    age: 22,
+                    email: "maria.lopez@escuela.edu",
+                    notifications: [
+                    {
+                        id: 2,
+                        message: "Entrega de proyecto final el 10 de junio",
+                        date: "2025-05-10"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            id: 2,
+            name: "Desarrollo de software multiplataforma",
+            grupos: [
+                {
+                    id: 4,
+                    name: "DSM1",
+                    maestros: [
+                    { id: 4, name: "Profesor Ana Martínez", email: "ana.martinez@escuela.edu", telefono: "321-654-987" }
+                    ],
+                    alumnos: [
+                    {
+                        id: 1,
+                        name: "Carlos Gómez",
+                        age: 21,
+                        email: "carlos.gomez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 1,
+                            message: "Examen de Psicología el 15 de mayo",
+                            date: "2025-04-15"
+                        }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "María López",
+                        age: 22,
+                        email: "maria.lopez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 2,
+                            message: "Entrega de proyecto final el 10 de junio",
+                            date: "2025-05-10"
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    id: 5,
+                    name: "DSM2",
+                    maestros: [
+                    { id: 5, name: "Profesor Luis Ramírez", email: "luis.ramirez@escuela.edu", telefono: "159-753-486" }
+                    ],
+                    alumnos: [
+                    {
+                        id: 1,
+                        name: "Carlos Gómez",
+                        age: 21,
+                        email: "carlos.gomez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 1,
+                            message: "Examen de Psicología el 15 de mayo",
+                            date: "2025-04-15"
+                        }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "María López",
+                        age: 22,
+                        email: "maria.lopez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 2,
+                            message: "Entrega de proyecto final el 10 de junio",
+                            date: "2025-05-10"
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    id: 6,
+                    name: "DSM3",
+                    maestros: [
+                    { id: 6, name: "Profesor Sofía Torres", email: "sofia.torres@escuela.edu", telefono: "753-951-357" }
+                    ],
+                    alumnos: [
+                    {
+                        id: 1,
+                        name: "Carlos Gómez",
+                        age: 21,
+                        email: "carlos.gomez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 1,
+                            message: "Examen de Psicología el 15 de mayo",
+                            date: "2025-04-15"
+                        }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "María López",
+                        age: 22,
+                        email: "maria.lopez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 2,
+                            message: "Entrega de proyecto final el 10 de junio",
+                            date: "2025-05-10"
+                        }
+                        ]
+                    }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 3,
+            name: "Entornos virtuales y negocios digitales",
+            grupos: [
+                {
+                    id: 7,
+                    name: "EVND1",
+                    maestros: [
+                    { id: 7, name: "Profesor Pedro Gómez", email: "pedro.gomez@escuela.edu", telefono: "951-357-852" }
+                    ],
+                    alumnos: [
+                    {
+                        id: 1,
+                        name: "Carlos Gómez",
+                        age: 21,
+                        email: "carlos.gomez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 1,
+                            message: "Examen de Psicología el 15 de mayo",
+                            date: "2025-04-15"
+                        }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "María López",
+                        age: 22,
+                        email: "maria.lopez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 2,
+                            message: "Entrega de proyecto final el 10 de junio",
+                            date: "2025-05-10"
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    id: 8,
+                    name: "EVND2",
+                    maestros: [
+                    { id: 8, name: "Profesor Elena Castro", email: "elena.castro@escuela.edu", telefono: "357-852-159" }
+                    ],
+                    alumnos: [
+                    {
+                        id: 1,
+                        name: "Carlos Gómez",
+                        age: 21,
+                        email: "carlos.gomez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 1,
+                            message: "Examen de Psicología el 15 de mayo",
+                            date: "2025-04-15"
+                        }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "María López",
+                        age: 22,
+                        email: "maria.lopez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 2,
+                            message: "Entrega de proyecto final el 10 de junio",
+                            date: "2025-05-10"
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    id: 9,
+                    name: "EVND3",
+                    maestros: [
+                    { id: 9, name: "Profesor Andrés Jiménez", email: "andres.jimenez@escuela.edu", telefono: "852-159-753" }
+                    ],
+                    alumnos: [
+                    {
+                        id: 1,
+                        name: "Carlos Gómez",
+                        age: 21,
+                        email: "carlos.gomez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 1,
+                            message: "Examen de Psicología el 15 de mayo",
+                            date: "2025-04-15"
+                        }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "María López",
+                        age: 22,
+                        email: "maria.lopez@escuela.edu",
+                        notifications: [
+                        {
+                            id: 2,
+                            message: "Entrega de proyecto final el 10 de junio",
+                            date: "2025-05-10"
+                        }
+                        ]
+                    }
+                    ]
+                }
+            ]
+        }
+        ]
+    },
+    {
+        id:2,
+        name: "División de Industrial",
+        carreras: [
+            {
+                id: 4,
+                name: "Manufactura aeronáutica",
+                grupos: [
+                    {
+                        id: 10,
+                        name: "MNA1",
+                        maestros: [
+                        { id: 10, name: "Profesor Lucía Vargas", email: "lucia.vargas@escuela.edu", telefono: "159-753-357" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    },
+                    {
+                        id: 11,
+                        name: "MNA2",
+                        maestros: [
+                        { id: 11, name: "Profesor Jorge Rojas", email: "jorge.rojas@escuela.edu", telefono: "753-357-159" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    },
+                    {
+                        id: 12,
+                        name: "MNA3",
+                        maestros: [
+                        { id: 12, name: "Profesor Daniela Chávez", email: "daniela.chavez@escuela.edu", telefono: "357-159-951" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 5,
+                name: "Diseño y moda",
+                grupos: [
+                    {
+                        id: 13,
+                        name: "DYM1",
+                        maestros: [
+                        { id: 13, name: "Profesor Ricardo Peña", email: "ricardo.pena@escuela.edu", telefono: "159-951-357" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    },
+                    {
+                        id: 14,
+                        name: "DYM2",
+                        maestros: [
+                        { id: 14, name: "Profesor Gabriela Navarro", email: "gabriela.navarro@escuela.edu", telefono: "951-357-123" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    },
+                    {
+                        id: 15,
+                        name: "DYM3",
+                        maestros: [
+                        { id: 15, name: "Profesor Miguel Ortega", email: "miguel.ortega@escuela.edu", telefono: "357-123-456" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 6,
+                name: "Energía sostenible",
+                grupos: [
+                    {
+                        id: 16,
+                        name: "ENS1",
+                        maestros: [
+                        {id: 16, name: "Profesor Patricia Mendoza", email: "patricia.mendoza@escuela.edu", telefono: "123-456-789" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    },
+                    {
+                        id: 17,
+                        name: "ENS2",
+                        maestros: [
+                        { id: 17, name: "Profesor Raúl Salazar", email: "raul.salazar@escuela.edu", telefono: "654-987-321" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    },
+                    {
+                        id: 18,
+                        name: "ENS3",
+                        maestros: [
+                        { id: 18, name: "Profesor Carmen Flores", email: "carmen.flores@escuela.edu", telefono: "987-321-654" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    }
+                ]
+            },
+        ]
+
+    },
+    {
+        id:3,
+        name: "División de administración",
+        carreras:[
+            {
+                id: 7,
+                name: "Mercadotecnia",
+                grupos: [
+                    {
+                        id: 19,
+                        name: "MEC1",
+                        maestros: [
+                        { id: 19, name: "Profesor Fernando Álvarez", email: "fernando.alvarez@escuela.edu", telefono: "321-654-159" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    },
+                    {
+                        id: 20,
+                        name: "MEC2",
+                        maestros: [
+                        { id: 20, name: "Profesor Silvia Romero", email: "silvia.romero@escuela.edu", telefono: "654-159-753" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    },
+                    {
+                        id: 21,
+                        name: "MEC3",
+                        maestros: [
+                        { id: 21, name: "Profesor Manuel Domínguez", email: "manuel.dominguez@escuela.edu", telefono: "159-753-951" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 8,
+                name: "Logistica",
+                grupos: [
+                    {
+                        id: 22,
+                        name: "LOG1",
+                        maestros: [
+                        { id: 22, name: "Profesor Valeria Cortés", email: "valeria.cortes@escuela.edu", telefono: "753-951-357" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    },
+                    {
+                        id: 23,
+                        name: "LOG2",
+                        maestros: [
+                        { id: 23, name: "Profesor Alejandro Fuentes", email: "alejandro.fuentes@escuela.edu", telefono: "951-357-654" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    },
+                    {
+                        id: 24,
+                        name: "LOG3",
+                        maestros: [
+                        { id: 24, name: "Profesor Laura Estrada", email: "laura.estrada@escuela.edu", telefono: "357-654-789" }
+                        ],
+                        alumnos: [
+                        {
+                            id: 1,
+                            name: "Carlos Gómez",
+                            age: 21,
+                            email: "carlos.gomez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 1,
+                                message: "Examen de Psicología el 15 de mayo",
+                                date: "2025-04-15"
+                            }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            name: "María López",
+                            age: 22,
+                            email: "maria.lopez@escuela.edu",
+                            notifications: [
+                            {
+                                id: 2,
+                                message: "Entrega de proyecto final el 10 de junio",
+                                date: "2025-05-10"
+                            }
+                            ]
+                        }
+                        ]
+                    }
+                ]
+            },
+        ]
+
+    }
+    ],
+    documentos: [
+    {
+        id: 1,
+        name: "Constancia de Estudios",
+        price: 60,
+        description: "Constancia de estudios válida para trámites oficiales.",
+        availableForPurchase: true
+    }
+    ],
+    pagos: [
+        {
+            id: 1,
+            name: "Pago de colegiatura cuatrimestral",
+            price: 1720,
+            description: "Colegiatura cuatrimestral del periodo Septiembre-Diciembre 2025",
+            availableForPurchase: false
+        }
+    ]
+};

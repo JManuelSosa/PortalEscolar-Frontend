@@ -1,0 +1,56 @@
+.mainMenu{
+    font-size: 1rem;
+    text-align: center;
+    font-family: 'Inter';
+    color:rgb(255,255,255);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+/** Cada <li> de la lista de items del NavbarComponent */
+:global(.ant-menu-item), :global(.ant-menu-submenu-title){
+    height:2.8rem !important;
+    padding-left: 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+:global(.ant-menu-title-content){
+    font-weight: 300 !important;
+    color: var(--white-light) !important;
+}
+
+.menuIcon{
+    flex-shrink: 0;
+}
+
+.navbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.btnMenu{
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+}
+
+.btnMenuText{
+    display: inline-block;
+    color: rgb(220, 220, 220);
+    font-family: 'Inter';
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.btnClose{
+    display: none;
+}
+

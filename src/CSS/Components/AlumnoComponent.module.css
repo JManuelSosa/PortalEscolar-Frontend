@@ -1,0 +1,130 @@
+div .mainCard.mainCard{
+    border-radius: 1.3rem 1.3rem 1.3rem 1.3rem;
+    background-color: rgb(var(--base-200));
+    width: 15.5rem;
+    position: relative;
+    box-shadow: rgba(var(--base-400), 0.6) 0px 3px 6px 0px, rgba(var(--base-500), 0.3) 0px 3px 9px 3px;
+    outline: 2px solid white;
+}
+
+.mainCard:hover{
+    transform: scale(1.05);
+}
+
+.mainCard .cardBody{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 0 0 0 0;
+    padding: 20px 20px 5px 20px;
+}
+
+.mainCard ul.cardActions{
+    border-top: 1px solid rgb(var(--base-700));
+    border-radius: 0 0 1.3rem 1.3rem;
+    background-color: rgb(var(--base-200));
+}
+
+.mainCard ul.cardActions li span{
+    color: rgba(var(--base-800), 0.9);
+    font-weight: 500;
+}
+
+.mainCard ul.cardActions li span:hover{
+    color: rgb(var(--base-950));
+}
+
+.mainCard ul.cardActions li:not(:first-child){
+    border-left: 1px solid var(--color-border);
+}
+
+.numberList{
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgb(var(--base-700)); 
+    padding: 2px 6px;
+    border-radius: 4px;
+    z-index: 1;
+    transform: rotate(-10deg);
+}
+
+.mainCard .tagAntStudent{
+    font-size: 1.1rem;
+    position:absolute;
+    top: 18px;
+    right: 6px;
+    height: calc(1.1rem * 1.5);
+    display:flex;
+    align-items: center;
+    z-index: 2;
+    font-weight: 300;
+    border: none;
+}
+
+.activeStudent{
+    background-color: rgb(var(--base-600));
+    color:rgb(var(--base-50));
+}
+
+.waitPayStudent{
+    background-color: rgb(255, 255, 45);
+    color:rgb(102, 102, 102);
+}
+
+.disenrollmentStudent{
+    background-color: rgb(207, 0, 0);
+    color: rgb(255,255,255);
+}
+
+.spanActions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.itemCard{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.itemCard {
+    margin-top: 1rem;
+}
+
+.nameStudent{
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.5rem;
+}
+
+.contenidoCard{
+    width: 100%;
+}
+
+.dataStudent{
+    font-size: 1.2rem;
+    color: var(--color-text);
+}
+
+.enrollmentStudent{
+    font-size: 1.20rem;
+    font-weight: 400;
+}
+
+.careerStudent{
+    font-weight: 300;
+}
+
+.ageStudent{
+    font-weight: 200;
+}

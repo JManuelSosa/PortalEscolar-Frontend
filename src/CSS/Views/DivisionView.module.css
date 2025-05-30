@@ -1,0 +1,28 @@
+.RowContenido{
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.HeaderCard{
+    height: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.BodyCard{   
+    height: 20%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.TitleHomeOptions{
+    font-size: 1.72rem;
+    font-weight: 500;
+}
+
+.CardDivisiones{
+    height: 22rem;
+    overflow: hidden;
+    background-color: rgb(var(--base-100));
+}

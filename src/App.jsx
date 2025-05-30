@@ -1,70 +1,57 @@
 //React
 import { Routes, Route } from 'react-router-dom';
-import { CollapsedProvider } from './Context/CollapseContext';
+
+//Layout
+import AdminLayout from './Layout/AdminLayout';
+
 //Views
 import HomeView from './Views/HomeView';
-
-import Prueba from './Components/Prueba';
 import DivisionView from './Views/DivisionView';
-
-//Components
-import SiderNav from './Layout/SiderNav';
-import HeaderLayout from './Layout/HeaderLayout';
-
-//AntDesign
-import { Layout } from 'antd';
-const { Content, Footer } = Layout;
-
-//Css 
-import '../src/CSS/App.css';
-
-
-import { AuthProvider } from "./Context/AuthContext";
-import Login from './Components/Login/Login';
-import SignUp from './Components/SignUp/SignUp';
-import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
-
-
-
-const headerStyle = {
-
-};
-
-const footerStyle = {
-  textAlign: 'center',
-  color: '#fff',
-  backgroundColor: '#4096ff',
-  height: 12,
-};
+import Login from './Components/Auth/Login';
+import CarrerasView from './Views/CarrerasView';
+import GruposView from './Views/GruposView';
+import DetalleGruposView from './Views/DetalleGruposView';
+import { ConfigProvider } from 'antd';
 
 function App() {
 
-  const escuela = "UTM"
+  const configProvider = {
+      token: {
+        fontFamily: "inherit",
+      },
+      components: { 
+        Input: {
+          activeBorderColor: 'rgb(var(--base-300))',
+          hoverBorderColor: 'rgba(var(--base-300), 0.8)',
+        },
+        Select: {
+          activeBorderColor: 'rgb(var(--base-300))',
+          hoverBorderColor: 'rgba(var(--base-300), 0.8)',
+          optionSelectedFontWeight: 400,
+          placeHolderFontWeight: 400
+        }
+      }
+  }
+
   return (
     <>
-      <Layout>
-        <CollapsedProvider>
-          <SiderNav />
-        </CollapsedProvider>
-        <Layout>
-        <AuthProvider>
-          <HeaderLayout></HeaderLayout>
-          <Content className='Content'>
-            
-              <Routes>
-                <Route path='/' element={<HomeView />} />
-                <Route path='/login' element={<Login />} />
-                <Route path="/sing-up" element={<SignUp/>} />
-                <Route path="/forgot-password" element={<ForgotPassword/>} />
-              </Routes>
-           
-          </Content>
-          </AuthProvider>
-          <Footer style={footerStyle}>
-            Hola Footer
-          </Footer>
-        </Layout>
-      </Layout>
+    <ConfigProvider
+      theme={configProvider}
+    >
+
+      <Routes>
+        {/* Rutas sin inicio de sesión */}
+        <Route path='/Login' element={ <Login/> }/>
+
+        {/* Rutas con inicio de sesión */}
+        
+        <Route path='/' element={<AdminLayout> <HomeView/> </AdminLayout>}/>
+        <Route path='/Divisiones' element={<AdminLayout> <DivisionView/> </AdminLayout>}/>
+        <Route path='/Carreras' element={<AdminLayout> <CarrerasView/> </AdminLayout>}></Route>
+        <Route path='/Grupos' element={<AdminLayout> <GruposView/> </AdminLayout>}></Route>
+        <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView/> </AdminLayout>}></Route>
+      </Routes>
+      </ConfigProvider>
     </>
   )
 }

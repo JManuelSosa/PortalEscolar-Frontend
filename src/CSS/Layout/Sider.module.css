@@ -1,8 +1,10 @@
-.Sider-Layout{
+.siderLayout{
     flex: unset !important;
     min-width: unset !important; 
+    height: 100vh;
+    z-index: 2;
 }
 
-.Menu-Cerrado{
+.menuCerrado{
     width: 5rem !important;
 }
