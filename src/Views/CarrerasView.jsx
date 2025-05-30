@@ -10,9 +10,7 @@ import FakeAPI from "../Js/FakeApi";
 
 
 //Icons
-import { VsCodeIcon } from "../Js/Icons";
-import { IndustrialIcon } from "../Js/Icons";
-import { AdministracionIcon } from "../Js/Icons";
+import { IconBrandVscode, IconAutomation, IconTruckLoading } from '@tabler/icons-react';
 
 //Css
 import StyleCarreras from '@css/Views/CarrerasView.module.css';
@@ -55,13 +53,13 @@ export default function CarrerasView(){
     
             switch(divisionID){
                 case 1: 
-                return <VsCodeIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
+                return <IconBrandVscode color={"rgb(var(--conifer-700))"} stroke={1.5} size={180}/>
     
                 case 2: 
-                return <IndustrialIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
+                return <IconAutomation color={"rgb(var(--conifer-700))"} strokeWidth={1.8} size={180}/>
     
                 case 3: 
-                return <AdministracionIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
+                return <IconTruckLoading color={"rgb(var(--conifer-700))"} strokeWidth={1.8} size={180}/>
             }
     
     }

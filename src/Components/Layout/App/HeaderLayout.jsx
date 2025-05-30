@@ -2,17 +2,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
 // Ant Design
-import Layout from "antd/es/layout/layout";
+import { Col, Row, Divider, Button, Popover, Layout} from "antd";
 const { Header } = Layout;
-import { Col, Row, Divider} from "antd";
-import { Button } from "antd";
-import { Popover } from "antd";
 
 //Iconos
 import { IconMainLogo } from "../../../Js/Icons";
-import { IconUserFill } from "../../../Js/Icons";
-import { IconBackArrow } from "../../../Js/Icons";
-
+import { IconUserFilled, IconArrowBack } from '@tabler/icons-react';
 
 import HeaderStyle from '@css/Layout/HeaderComponent.module.css';
 
@@ -45,7 +40,7 @@ export default function HeaderLayout(){
 
         return(
             <div className={ HeaderStyle.headerIconContainer } onClick={() => {navigate(path, { state })}}>
-                <IconBackArrow size={45} strokeColor={"rgb(var(--conifer-800))"} ></IconBackArrow>
+                <IconArrowBack size={45} color={"rgb(var(--conifer-800))"} stroke={1.5} ></IconArrowBack>
             </div>
         );
     }
@@ -78,7 +73,7 @@ export default function HeaderLayout(){
                 <Col span={11} className={ HeaderStyle.headerColButtonUser }>
                     <Popover content={ contentPopover } trigger={"click"}>
                         <Button className={ HeaderStyle.headerBtnUser } type="text" shape="circle">
-                            <IconUserFill size={40}/>
+                            <IconUserFilled size={40}/>
                         </Button>
                     </Popover>
                 </Col>
