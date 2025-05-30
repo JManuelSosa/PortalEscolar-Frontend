@@ -85,7 +85,7 @@
 
 /* Efecto hover para la barra */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgb(var(--base-700));
 }
 
 body{

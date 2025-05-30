@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FakeAPI from "../Js/FakeApi";
 
-
-import CardContent from "../Components/General/CardContent";
 import { VsCodeIcon } from "../Js/Icons";
 import { IndustrialIcon } from "../Js/Icons";
 import { AdministracionIcon } from "../Js/Icons";

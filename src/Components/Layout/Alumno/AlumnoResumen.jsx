@@ -2,8 +2,7 @@
 import { Avatar, Row, Card, Tag } from "antd"
 
 //Tabler Icons
-import { IconMailPlus } from '@tabler/icons-react';
-import { IconUserSquareRounded } from '@tabler/icons-react';
+import { IconMailPlus, IconUserSquareRounded  } from '@tabler/icons-react';
 
 import AlumnoCss from '@css/Components/AlumnoComponent.module.css';
 
