@@ -3,18 +3,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 //Ant
-import { Result, Button, Divider, Row, Col } from "antd";
+import { Result, Button, Divider, Row, Col, Card } from "antd";
 
 //Faker Api
 import FakeAPI from "../Js/FakeApi";
 
-//Components
-import CardContent from "../Components/General/CardContent";
 
 //Icons
-import { VsCodeIcon } from "../Js/Icons";
-import { IndustrialIcon } from "../Js/Icons";
-import { AdministracionIcon } from "../Js/Icons";
+import { IconBrandVscode, IconAutomation, IconTruckLoading } from '@tabler/icons-react';
 
 //Css
 import StyleCarreras from '@css/Views/CarrerasView.module.css';
@@ -57,13 +53,13 @@ export default function CarrerasView(){
     
             switch(divisionID){
                 case 1: 
-                return <VsCodeIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
+                return <IconBrandVscode color={"rgb(var(--conifer-700))"} stroke={1.5} size={180}/>
     
                 case 2: 
-                return <IndustrialIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
+                return <IconAutomation color={"rgb(var(--conifer-700))"} strokeWidth={1.8} size={180}/>
     
                 case 3: 
-                return <AdministracionIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
+                return <IconTruckLoading color={"rgb(var(--conifer-700))"} strokeWidth={1.8} size={180}/>
             }
     
     }
@@ -81,7 +77,7 @@ export default function CarrerasView(){
                         
                         {carreras.map((carrera) => (
                             <Col key={carrera.id} xs={24} md={12} lg={8} onClick={() => { verGrupos(carrera.id, carrera.name )}}>
-                                <CardContent className={StyleCarreras.CardGrupos} hoverable>
+                                <Card className={StyleCarreras.CardGrupos} hoverable>
                                     <Row className={StyleCarreras.HeaderCard}>
                                         { obtenerIcono(divisionID) }
                                     </Row>
@@ -90,7 +86,7 @@ export default function CarrerasView(){
                                             {carrera.name} {/* Renderiza el nombre de la división */}
                                         </h2>
                                     </Row>
-                                </CardContent>
+                                </Card>
                             </Col>
                         ))}
         
