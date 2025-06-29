@@ -12,5 +12,10 @@ export default defineConfig({
       '@js': path.resolve(__dirname, 'src/Js'),
     },
   },
+  server: {
+    host: true,// escucha en 0.0.0.0
+    port: 5173,
+    strictPort: true
+  }
 
 })
