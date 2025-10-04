@@ -12,45 +12,52 @@ import CarrerasView from './Views/CarrerasView';
 import GruposView from './Views/GruposView';
 import DetalleGruposView from './Views/DetalleGruposView';
 import { ConfigProvider } from 'antd';
+import BibliotecaView from './Views/BibliotecaAlumno';
+import BibliotecaAdminView from './Views/BibliotecaAdministracion';
 
 function App() {
 
   const configProvider = {
-      token: {
-        fontFamily: "inherit",
+    token: {
+      fontFamily: "inherit",
+    },
+    components: {
+      Input: {
+        activeBorderColor: 'rgb(var(--base-300))',
+        hoverBorderColor: 'rgba(var(--base-300), 0.8)',
       },
-      components: { 
-        Input: {
-          activeBorderColor: 'rgb(var(--base-300))',
-          hoverBorderColor: 'rgba(var(--base-300), 0.8)',
-        },
-        Select: {
-          activeBorderColor: 'rgb(var(--base-300))',
-          hoverBorderColor: 'rgba(var(--base-300), 0.8)',
-          optionSelectedFontWeight: 400,
-          placeHolderFontWeight: 400
-        }
+      Select: {
+        activeBorderColor: 'rgb(var(--base-300))',
+        hoverBorderColor: 'rgba(var(--base-300), 0.8)',
+        optionSelectedFontWeight: 400,
+        placeHolderFontWeight: 400
       }
+    }
   }
 
   return (
     <>
-    <ConfigProvider
-      theme={configProvider}
-    >
+      <ConfigProvider
+        theme={configProvider}
+      >
 
-      <Routes>
-        {/* Rutas sin inicio de sesión */}
-        <Route path='/Login' element={ <Login/> }/>
+        <Routes>
+          {/* Rutas sin inicio de sesión */}
+          <Route path='/Login' element={<Login />} />
 
-        {/* Rutas con inicio de sesión */}
-        
-        <Route path='/' element={<AdminLayout> <HomeView/> </AdminLayout>}/>
-        <Route path='/Divisiones' element={<AdminLayout> <DivisionView/> </AdminLayout>}/>
-        <Route path='/Carreras' element={<AdminLayout> <CarrerasView/> </AdminLayout>}></Route>
-        <Route path='/Grupos' element={<AdminLayout> <GruposView/> </AdminLayout>}></Route>
-        <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView/> </AdminLayout>}></Route>
-      </Routes>
+          {/* Rutas con inicio de sesión */}
+
+          <Route path='/' element={<AdminLayout> <HomeView /> </AdminLayout>} />
+          <Route path='/Divisiones' element={<AdminLayout> <DivisionView /> </AdminLayout>} />
+          <Route path='/Carreras' element={<AdminLayout> <CarrerasView /> </AdminLayout>}></Route>
+          <Route path='/Grupos' element={<AdminLayout> <GruposView /> </AdminLayout>}></Route>
+          <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView /> </AdminLayout>}></Route>
+          <Route path='/BibliotecaAlumno' element={<BibliotecaView />}></Route >
+          <Route path='/BibliotecaAdministracion' element={<BibliotecaAdminView><AdminLayout /> <HomeView /></BibliotecaAdminView>}></Route>
+
+
+
+        </Routes>
       </ConfigProvider>
     </>
   )
