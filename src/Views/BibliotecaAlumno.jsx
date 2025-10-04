@@ -43,6 +43,8 @@ const BibliotecaView = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [libroSeleccionado, setLibroSeleccionado] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('todas');
+    const [estadoSeleccionado, setEstadoSeleccionado] = useState('todos'); // ← NUEVO ESTADO
     const [form] = Form.useForm();
     const screens = useBreakpoint();
 
@@ -125,6 +127,12 @@ const BibliotecaView = () => {
         { value: 'tecnologia', label: 'Tecnología', count: 1 }
     ];
 
+    const estados = [
+        { value: 'todos', label: '📋 Todos los estados', count: 6 },
+        { value: 'disponible', label: '✅ Disponibles', count: 4 },
+        { value: 'prestado', label: '📖 Prestados', count: 2 }
+    ];
+
     const carreras = [
         'Ingeniería en Sistemas',
         'Administración de Empresas',
@@ -138,11 +146,11 @@ const BibliotecaView = () => {
 
     ];
 
+
     const grupos = ['A', 'B', 'C', 'D', 'E', 'F'];
     const grados = ['1°', '2°', '3°', '4°', '5°', '6°'];
 
     useEffect(() => {
-        // Simular carga de datos
         setLoading(true);
         setTimeout(() => {
             setLibros(librosEjemplo);
@@ -151,28 +159,70 @@ const BibliotecaView = () => {
         }, 1000);
     }, []);
 
-    const handleSearch = (value) => {
-        if (!value.trim()) {
-            setLibrosFiltrados(libros);
-            return;
-        }
+    // Agrega este useEffect para actualizar contadores
+    useEffect(() => {
+        // Actualizar contadores de estados
+        const disponiblesCount = libros.filter(l => l.estado === 'disponible').length;
+        const prestadosCount = libros.filter(l => l.estado === 'prestado').length;
 
-        const filtered = libros.filter(libro =>
-            libro.titulo.toLowerCase().includes(value.toLowerCase()) ||
-            libro.autor.toLowerCase().includes(value.toLowerCase()) ||
-            libro.isbn.includes(value) ||
-            libro.categoria.toLowerCase().includes(value.toLowerCase())
-        );
-        setLibrosFiltrados(filtered);
+        estados[0].count = libros.length;
+        estados[1].count = disponiblesCount;
+        estados[2].count = prestadosCount;
+    }, [libros]);
+
+    // Agrega este useEffect para actualizar contadores de categorías también
+    useEffect(() => {
+        // Actualizar contadores de categorías
+        categorias.forEach(cat => {
+            if (cat.value === 'todas') {
+                cat.count = libros.length;
+            } else {
+                cat.count = libros.filter(l => l.categoria === cat.value).length;
+            }
+        });
+    }, [libros]);
+    // Reemplaza las funciones handleSearch y handleCategoriaChange con estas:
+
+    const handleSearch = (value) => {
+        aplicarFiltros(value, categoriaSeleccionada, estadoSeleccionado);
     };
 
     const handleCategoriaChange = (categoria) => {
-        if (categoria === 'todas') {
-            setLibrosFiltrados(libros);
-        } else {
-            const filtered = libros.filter(libro => libro.categoria === categoria);
-            setLibrosFiltrados(filtered);
+        setCategoriaSeleccionada(categoria);
+        aplicarFiltros('', categoria, estadoSeleccionado);
+    };
+
+    // NUEVA FUNCIÓN para manejar cambio de estado
+    const handleEstadoChange = (estado) => {
+        setEstadoSeleccionado(estado);
+        aplicarFiltros('', categoriaSeleccionada, estado);
+    };
+
+    // NUEVA FUNCIÓN que combina todos los filtros
+    const aplicarFiltros = (searchValue, categoria, estado) => {
+        let filtered = libros;
+
+        // Filtro de búsqueda
+        if (searchValue.trim()) {
+            filtered = filtered.filter(libro =>
+                libro.titulo.toLowerCase().includes(searchValue.toLowerCase()) ||
+                libro.autor.toLowerCase().includes(searchValue.toLowerCase()) ||
+                libro.isbn.includes(searchValue) ||
+                libro.categoria.toLowerCase().includes(searchValue.toLowerCase())
+            );
         }
+
+        // Filtro de categoría
+        if (categoria !== 'todas') {
+            filtered = filtered.filter(libro => libro.categoria === categoria);
+        }
+
+        // Filtro de estado
+        if (estado !== 'todos') {
+            filtered = filtered.filter(libro => libro.estado === estado);
+        }
+
+        setLibrosFiltrados(filtered);
     };
 
     const handlePrestarLibro = (libro) => {
@@ -282,8 +332,9 @@ const BibliotecaView = () => {
             <Divider />
 
             {/* Buscador y Filtros */}
+            {/* Buscador y Filtros - MODIFICAR ESTA SECCIÓN */}
             <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
-                <Col xs={24} lg={12}>
+                <Col xs={24} lg={10}>
                     <Search
                         placeholder="Buscar por título, autor, ISBN o categoría..."
                         allowClear
@@ -294,13 +345,13 @@ const BibliotecaView = () => {
                         }
                         size="large"
                         onSearch={handleSearch}
-                        onChange={(e) => !e.target.value && setLibrosFiltrados(libros)}
+                        onChange={(e) => !e.target.value && aplicarFiltros('', categoriaSeleccionada, estadoSeleccionado)}
                         style={{ width: '100%' }}
                     />
                 </Col>
-                <Col xs={24} lg={8}>
+                <Col xs={24} lg={6}>
                     <Select
-                        defaultValue="todas"
+                        value={categoriaSeleccionada}
                         onChange={handleCategoriaChange}
                         style={{ width: '100%' }}
                         size="large"
@@ -317,7 +368,27 @@ const BibliotecaView = () => {
                         ))}
                     </Select>
                 </Col>
-                <Col xs={24} lg={4}>
+                <Col xs={24} lg={6}>
+                    {/* NUEVO FILTRO DE ESTADO */}
+                    <Select
+                        value={estadoSeleccionado}
+                        onChange={handleEstadoChange}
+                        style={{ width: '100%' }}
+                        size="large"
+                        optionLabelProp="label"
+                    >
+                        {estados.map(estado => (
+                            <Option key={estado.value} value={estado.value} label={estado.label}>
+                                <Space>
+                                    <span>{estado.label.split(' ')[0]}</span>
+                                    <span>{estado.label}</span>
+                                    <Tag>{estado.count}</Tag>
+                                </Space>
+                            </Option>
+                        ))}
+                    </Select>
+                </Col>
+                <Col xs={24} lg={2}>
                     <Tag color="blue" style={{ fontSize: '14px', padding: '8px 16px', width: '100%', textAlign: 'center' }}>
                         {librosFiltrados.length} libro(s)
                     </Tag>
@@ -363,7 +434,7 @@ const BibliotecaView = () => {
                                             height: '30px'
                                         }}
                                     >
-                                        {libro.estado === 'disponible' ? 'Prestar Libro' : 'No Disponible'}
+                                        {libro.estado === 'disponible' ? 'Solicitar Libro' : 'No Disponible'}
                                     </Button>
                                 ]}
                             >
@@ -588,6 +659,30 @@ const BibliotecaView = () => {
                                     format="YYYY-MM-DD"
                                     placeholder="Elige fecha de devolución"
                                 />
+                            </Form.Item>
+                            {/* QUITA ESTE Form.Item DE AQUÍ Y PONLO FUERA DEL Row */}
+                            <Form.Item>
+                                <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
+                                    <Button
+                                        onClick={() => {
+                                            setIsModalVisible(false);
+                                            form.resetFields();
+                                        }}
+                                        size="large"
+                                        disabled={loading}
+                                    >
+                                        Cancelar Préstamo
+                                    </Button>
+                                    <Button
+                                        type="primary"
+                                        htmlType="submit"
+                                        size="large"
+                                        loading={loading}
+                                        icon={<CheckCircleOutlined />}
+                                    >
+                                        Prestar Libro
+                                    </Button>
+                                </Space>
                             </Form.Item>
                         </Col>
                     </Row>

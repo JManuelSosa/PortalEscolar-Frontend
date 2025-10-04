@@ -53,7 +53,7 @@ function App() {
           <Route path='/Grupos' element={<AdminLayout> <GruposView /> </AdminLayout>}></Route>
           <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView /> </AdminLayout>}></Route>
           <Route path='/BibliotecaAlumno' element={<BibliotecaView />}></Route >
-          <Route path='/BibliotecaAdministracion' element={<BibliotecaAdminView><AdminLayout /> <HomeView /></BibliotecaAdminView>}></Route>
+
 
 
 
