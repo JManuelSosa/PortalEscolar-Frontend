@@ -35,23 +35,20 @@ function App() {
 
   return (
     <>
-    <ConfigProvider
-      theme={configProvider}
-    >
+      <ConfigProvider theme={configProvider}>
+          <Routes>
+              {/* Rutas sin inicio de sesión */}
+              <Route path='/Login' element={ <Login/> }/>
 
-      <Routes>
-        {/* Rutas sin inicio de sesión */}
-        <Route path='/Login' element={ <Login/> }/>
-
-        {/* Rutas con inicio de sesión */}
-        
-        <Route path='/' element={<AdminLayout> <HomeView/> </AdminLayout>}/>
-        <Route path='/Divisiones' element={<AdminLayout> <DivisionView/> </AdminLayout>}/>
-        <Route path='/Carreras' element={<AdminLayout> <CarrerasView/> </AdminLayout>}></Route>
-        <Route path='/Grupos' element={<AdminLayout> <GruposView/> </AdminLayout>}></Route>
-        <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView/> </AdminLayout>}></Route>
-      </Routes>
-      </ConfigProvider>
+              {/* Rutas con inicio de sesión */}
+              
+              <Route path='/' element={<AdminLayout> <HomeView/> </AdminLayout>}/>
+              <Route path='/Divisiones' element={<AdminLayout> <DivisionView/> </AdminLayout>}/>
+              <Route path='/Carreras' element={<AdminLayout> <CarrerasView/> </AdminLayout>}></Route>
+              <Route path='/Grupos' element={<AdminLayout> <GruposView/> </AdminLayout>}></Route>
+              <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView/> </AdminLayout>}></Route>
+          </Routes>
+        </ConfigProvider>
     </>
   )
 }
