@@ -32,9 +32,21 @@
     --conifer-900: 43, 83, 20;
     --conifer-950: 19, 46, 5;
 
-    --color-primary: rgb(var(--conifer-400));
-    --color-primary-hover: rgb(var(--conifer-500));
-    --color-primary-active: rgb(var(--conifer-600));
+
+    --cyan-50: 230, 255, 251;
+    --cyan-100: 181, 245, 236;
+    --cyan-200: 135, 232, 222;
+    --cyan-300: 92, 219, 211;
+    --cyan-400: 54, 207, 201;
+    --cyan-500: 19, 194, 194;
+    --cyan-600: 8, 151, 156;
+    --cyan-700: 0, 109, 117;
+    --cyan-800: 0, 71, 79;
+    --cyan-900: 0, 35, 41;
+    
+    --color-primary: rgb(var(--base-400));
+    --color-primary-hover: rgb(var(--base-500));
+    --color-primary-active: rgb(var(--base-600));
     --color-secondary: rgb(219, 255, 60); /* Ejemplo: un amarillo para contraste */
 
     --color-background: rgb(250, 250, 250);
@@ -49,17 +61,16 @@
     --color-warning: rgb(238, 255, 86);
     --color-error: rgb(255, 65, 65);
 
-    --base-50: var(--conifer-50);
-    --base-100: var(--conifer-100);
-    --base-200: var(--conifer-200);
-    --base-300: var(--conifer-300);
-    --base-400: var(--conifer-400);
-    --base-500: var(--conifer-500);
-    --base-600: var(--conifer-600);
-    --base-700: var(--conifer-700);
-    --base-800: var(--conifer-800);
-    --base-900: var(--conifer-900);
-    --base-950: var(--conifer-950);
+    --base-50:  var(--cyan-50);
+    --base-100: var(--cyan-100);
+    --base-200: var(--cyan-200);
+    --base-300: var(--cyan-300);
+    --base-400: var(--cyan-400);
+    --base-500: var(--cyan-500);
+    --base-600: var(--cyan-600);
+    --base-700: var(--cyan-700);
+    --base-800: var(--cyan-800);
+    --base-900: var(--cyan-900);
     
     --white-light: rgb(220,220,220);
 }
@@ -91,7 +102,7 @@
 body{
   margin:0;
   min-height: 100dvh;
-  background-color: rgb(245, 245, 255);
+  background-color: rgb(248, 248, 248);
   font-family: 'Inter' !important;
 }
 
