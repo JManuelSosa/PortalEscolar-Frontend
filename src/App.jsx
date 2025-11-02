@@ -12,8 +12,18 @@ import CarrerasView from './Views/CarrerasView';
 import GruposView from './Views/GruposView';
 import DetalleGruposView from './Views/DetalleGruposView';
 import { ConfigProvider } from 'antd';
-import BibliotecaView from './Views/BibliotecaAlumno';
+import { BibliotecaView } from './Views/BibliotecaAlumno';
+//import { BibliotecaAdminView } from './Views/BibliotecaAdministracion';
 import BibliotecaAdminView from './Views/BibliotecaAdministracion';
+import PlanEscolar from './Views/PlanEscolar';
+import PanelMaestro from './Views/PanelMaestro';
+// Nuevas vistas para el Panel de Maestros
+{/*import PanelMaestro from './Views/PanelMaestro';
+import AsistenciaMaestro from './Views/AsistenciaMaestro';
+import ActividadesMaestro from './Views/ActividadesMaestro';
+import JustificacionesMaestro from './Views/JustificacionesMaestro'*/}
+import GruposMaestro from './Views/GruposMaestro';
+
 
 function App() {
 
@@ -52,11 +62,20 @@ function App() {
           <Route path='/Carreras' element={<AdminLayout> <CarrerasView /> </AdminLayout>}></Route>
           <Route path='/Grupos' element={<AdminLayout> <GruposView /> </AdminLayout>}></Route>
           <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView /> </AdminLayout>}></Route>
-          <Route path='/BibliotecaAlumno' element={<BibliotecaView />}></Route >
 
+          {/* Nuevas Rutas para el Panel de Maestros 
+          <Route path='/maestros' element={<AdminLayout> <PanelMaestro /> </AdminLayout>} />
+          <Route path='/maestros/asistencia' element={<AdminLayout> <AsistenciaMaestro /> </AdminLayout>} />
+          <Route path='/maestros/actividades' element={<AdminLayout> <ActividadesMaestro /> </AdminLayout>} />
+          <Route path='/maestros/justificaciones' element={<AdminLayout> <JustificacionesMaestro /> </AdminLayout>} />
+          <Route path='/maestros/grupos' element={<AdminLayout> <GruposMaestro /> </AdminLayout>} />*/}
 
-
-
+          <Route path='/Biblioteca' element={<BibliotecaView />}></Route>
+          <Route path='/BibliotecaAdmin' element={<BibliotecaAdminView />}></Route>
+          <Route path='/PlanEscolar' element={<PlanEscolar />}></Route>
+          <Route path='/PanelMaestro' element={<PanelMaestro />}></Route>
+          <Route path='/GruposMaestro' element={<GruposMaestro />}></Route>
+          <Route path='/JustificacionesMaestro' element=''></Route>
         </Routes>
       </ConfigProvider>
     </>

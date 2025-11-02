@@ -15,7 +15,6 @@ import {
     Statistic,
     Grid,
     Avatar,
-    List,
     Descriptions,
     DatePicker,
     message
@@ -32,23 +31,25 @@ import {
     CloseCircleOutlined
 } from '@ant-design/icons';
 
+import biblioteca from '../CSS/Components/BibliotecaAlumno.module.css';
+
 const { Search } = Input;
 const { Option } = Select;
 const { Meta } = Card;
 const { useBreakpoint } = Grid;
 
-const BibliotecaView = () => {
+export function BibliotecaView() {
     const [libros, setLibros] = useState([]);
     const [librosFiltrados, setLibrosFiltrados] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [libroSeleccionado, setLibroSeleccionado] = useState(null);
     const [loading, setLoading] = useState(false);
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('todas');
-    const [estadoSeleccionado, setEstadoSeleccionado] = useState('todos'); // ← NUEVO ESTADO
+    const [estadoSeleccionado, setEstadoSeleccionado] = useState('todos');
     const [form] = Form.useForm();
     const screens = useBreakpoint();
 
-    // Datos de ejemplo mejorados
+    // Datos de ejemplo (igual que antes)
     const librosEjemplo = [
         {
             id: 1,
@@ -128,9 +129,9 @@ const BibliotecaView = () => {
     ];
 
     const estados = [
-        { value: 'todos', label: '📋 Todos los estados', count: 6 },
-        { value: 'disponible', label: '✅ Disponibles', count: 4 },
-        { value: 'prestado', label: '📖 Prestados', count: 2 }
+        { value: 'todos', label: 'Todos los estados', count: 6 },
+        { value: 'disponible', label: 'Disponibles', count: 4 },
+        { value: 'prestado', label: 'Prestados', count: 2 }
     ];
 
     const carreras = [
@@ -143,9 +144,7 @@ const BibliotecaView = () => {
         'Entornos Virtuales Y Negocios Digitales',
         'Administración',
         'Desarrollo En Software'
-
     ];
-
 
     const grupos = ['A', 'B', 'C', 'D', 'E', 'F'];
     const grados = ['1°', '2°', '3°', '4°', '5°', '6°'];
@@ -159,9 +158,7 @@ const BibliotecaView = () => {
         }, 1000);
     }, []);
 
-    // Agrega este useEffect para actualizar contadores
     useEffect(() => {
-        // Actualizar contadores de estados
         const disponiblesCount = libros.filter(l => l.estado === 'disponible').length;
         const prestadosCount = libros.filter(l => l.estado === 'prestado').length;
 
@@ -170,9 +167,7 @@ const BibliotecaView = () => {
         estados[2].count = prestadosCount;
     }, [libros]);
 
-    // Agrega este useEffect para actualizar contadores de categorías también
     useEffect(() => {
-        // Actualizar contadores de categorías
         categorias.forEach(cat => {
             if (cat.value === 'todas') {
                 cat.count = libros.length;
@@ -181,7 +176,6 @@ const BibliotecaView = () => {
             }
         });
     }, [libros]);
-    // Reemplaza las funciones handleSearch y handleCategoriaChange con estas:
 
     const handleSearch = (value) => {
         aplicarFiltros(value, categoriaSeleccionada, estadoSeleccionado);
@@ -192,17 +186,14 @@ const BibliotecaView = () => {
         aplicarFiltros('', categoria, estadoSeleccionado);
     };
 
-    // NUEVA FUNCIÓN para manejar cambio de estado
     const handleEstadoChange = (estado) => {
         setEstadoSeleccionado(estado);
         aplicarFiltros('', categoriaSeleccionada, estado);
     };
 
-    // NUEVA FUNCIÓN que combina todos los filtros
     const aplicarFiltros = (searchValue, categoria, estado) => {
         let filtered = libros;
 
-        // Filtro de búsqueda
         if (searchValue.trim()) {
             filtered = filtered.filter(libro =>
                 libro.titulo.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -212,12 +203,10 @@ const BibliotecaView = () => {
             );
         }
 
-        // Filtro de categoría
         if (categoria !== 'todas') {
             filtered = filtered.filter(libro => libro.categoria === categoria);
         }
 
-        // Filtro de estado
         if (estado !== 'todos') {
             filtered = filtered.filter(libro => libro.estado === estado);
         }
@@ -237,8 +226,6 @@ const BibliotecaView = () => {
     const handleSubmitPrestamo = async (values) => {
         try {
             setLoading(true);
-
-            // Simular procesamiento
             await new Promise(resolve => setTimeout(resolve, 1500));
 
             const datosPrestamo = {
@@ -251,7 +238,6 @@ const BibliotecaView = () => {
 
             console.log('Datos del préstamo:', datosPrestamo);
 
-            // Actualizar estado del libro
             const librosActualizados = libros.map(lib =>
                 lib.id === libroSeleccionado.id ? { ...lib, estado: 'prestado' } : lib
             );
@@ -284,19 +270,13 @@ const BibliotecaView = () => {
             : { color: 'red', text: 'Prestado', icon: <CloseCircleOutlined /> };
     };
 
-    const calcularDiasPrestamo = (fechaPrestamo, fechaDevolucion) => {
-        if (!fechaPrestamo || !fechaDevolucion) return 0;
-        const diffTime = Math.abs(fechaDevolucion - fechaPrestamo);
-        return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    };
-
     const librosDisponibles = libros.filter(l => l.estado === 'disponible').length;
     const librosPrestados = libros.filter(l => l.estado === 'prestado').length;
 
     return (
-        <div style={{ padding: '20px', maxWidth: '1400px', margin: '0 auto' }}>
+        <div className={biblioteca["biblioteca-container"]}>
             {/* Header con Estadísticas */}
-            <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+            <Row gutter={[16, 16]} className={biblioteca["biblioteca-header"]}>
                 <Col xs={24} md={8}>
                     <Card>
                         <Statistic
@@ -332,8 +312,7 @@ const BibliotecaView = () => {
             <Divider />
 
             {/* Buscador y Filtros */}
-            {/* Buscador y Filtros - MODIFICAR ESTA SECCIÓN */}
-            <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
+            <Row gutter={[16, 16]} className={biblioteca["biblioteca-filtros"]}>
                 <Col xs={24} lg={10}>
                     <Search
                         placeholder="Buscar por título, autor, ISBN o categoría..."
@@ -345,22 +324,25 @@ const BibliotecaView = () => {
                         }
                         size="large"
                         onSearch={handleSearch}
-                        onChange={(e) => !e.target.value && aplicarFiltros('', categoriaSeleccionada, estadoSeleccionado)}
-                        style={{ width: '100%' }}
+                        onChange={(e) =>
+                            !e.target.value &&
+                            aplicarFiltros('', categoriaSeleccionada, estadoSeleccionado)
+                        }
+                        className={biblioteca["buscador-input"]}
                     />
                 </Col>
+
                 <Col xs={24} lg={6}>
                     <Select
                         value={categoriaSeleccionada}
                         onChange={handleCategoriaChange}
-                        style={{ width: '100%' }}
+                        className={biblioteca["filtro-select"]}
                         size="large"
                         optionLabelProp="label"
                     >
-                        {categorias.map(cat => (
+                        {categorias.map((cat) => (
                             <Option key={cat.value} value={cat.value} label={cat.label}>
                                 <Space>
-                                    <span>{cat.label.split(' ')[0]}</span>
                                     <span>{cat.label}</span>
                                     <Tag>{cat.count}</Tag>
                                 </Space>
@@ -368,19 +350,18 @@ const BibliotecaView = () => {
                         ))}
                     </Select>
                 </Col>
+
                 <Col xs={24} lg={6}>
-                    {/* NUEVO FILTRO DE ESTADO */}
                     <Select
                         value={estadoSeleccionado}
                         onChange={handleEstadoChange}
-                        style={{ width: '100%' }}
+                        className={biblioteca["filtro-select"]}
                         size="large"
                         optionLabelProp="label"
                     >
-                        {estados.map(estado => (
+                        {estados.map((estado) => (
                             <Option key={estado.value} value={estado.value} label={estado.label}>
                                 <Space>
-                                    <span>{estado.label.split(' ')[0]}</span>
                                     <span>{estado.label}</span>
                                     <Tag>{estado.count}</Tag>
                                 </Space>
@@ -388,8 +369,9 @@ const BibliotecaView = () => {
                         ))}
                     </Select>
                 </Col>
+
                 <Col xs={24} lg={2}>
-                    <Tag color="blue" style={{ fontSize: '14px', padding: '8px 16px', width: '100%', textAlign: 'center' }}>
+                    <Tag color="blue" className={biblioteca["contador-libros"]}>
                         {librosFiltrados.length} libro(s)
                     </Tag>
                 </Col>
@@ -397,7 +379,7 @@ const BibliotecaView = () => {
 
             {/* Grid de Libros */}
             <Row gutter={[16, 16]}>
-                {librosFiltrados.map(libro => {
+                {librosFiltrados.map((libro) => {
                     const estadoConfig = getEstadoConfig(libro.estado);
                     return (
                         <Col key={libro.id} xs={24} sm={12} md={8} lg={6}>
@@ -405,17 +387,15 @@ const BibliotecaView = () => {
                                 hoverable
                                 loading={loading}
                                 cover={
-                                    <div style={{ height: '200px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <div className={biblioteca["libro-imagen-container"]}>
                                         <img
                                             alt={libro.titulo}
                                             src={libro.imagen}
-                                            style={{
-                                                width: '100%',
-                                                height: '100%',
-                                                objectFit: 'cover'
-                                            }}
+                                            className={biblioteca["libro-imagen"]}
                                             onError={(e) => {
-                                                e.target.src = `https://via.placeholder.com/200x250/cccccc/969696?text=${encodeURIComponent(libro.titulo)}`;
+                                                e.target.src = `https://via.placeholder.com/200x250/cccccc/969696?text=${encodeURIComponent(
+                                                    libro.titulo
+                                                )}`;
                                             }}
                                         />
                                     </div>
@@ -426,32 +406,24 @@ const BibliotecaView = () => {
                                         disabled={libro.estado !== 'disponible'}
                                         onClick={() => handlePrestarLibro(libro)}
                                         icon={<UserOutlined />}
-
                                         size="small"
-                                        style={{
-                                            fontSize: '15px',
-                                            padding: '6px 12px',
-                                            height: '30px'
-                                        }}
+                                        className={biblioteca["boton-prestar"]}
                                     >
-                                        {libro.estado === 'disponible' ? 'Solicitar Libro' : 'No Disponible'}
-                                    </Button>
+                                        {libro.estado === 'disponible'
+                                            ? 'Solicitar Libro'
+                                            : 'No Disponible'}
+                                    </Button>,
                                 ]}
                             >
                                 <Meta
                                     avatar={<Avatar icon={<BookOutlined />} />}
                                     title={
                                         <div>
-                                            <div style={{ marginBottom: 8, fontWeight: 'bold' }}>{libro.titulo}</div>
+                                            <div className={biblioteca["libro-titulo"]}>{libro.titulo}</div>
                                             <Tag
                                                 color={estadoConfig.color}
                                                 icon={estadoConfig.icon}
-                                                style={{
-                                                    margin: 0,
-                                                    fontSize: '12px',
-                                                    padding: '2px 8px',
-                                                    lineHeight: '1.5'
-                                                }}
+                                                className={biblioteca["libro-tag"]}
                                             >
                                                 {estadoConfig.text}
                                             </Tag>
@@ -660,36 +632,34 @@ const BibliotecaView = () => {
                                     placeholder="Elige fecha de devolución"
                                 />
                             </Form.Item>
-                            {/* QUITA ESTE Form.Item DE AQUÍ Y PONLO FUERA DEL Row */}
-                            <Form.Item>
-                                <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
-                                    <Button
-                                        onClick={() => {
-                                            setIsModalVisible(false);
-                                            form.resetFields();
-                                        }}
-                                        size="large"
-                                        disabled={loading}
-                                    >
-                                        Cancelar Préstamo
-                                    </Button>
-                                    <Button
-                                        type="primary"
-                                        htmlType="submit"
-                                        size="large"
-                                        loading={loading}
-                                        icon={<CheckCircleOutlined />}
-                                    >
-                                        Prestar Libro
-                                    </Button>
-                                </Space>
-                            </Form.Item>
                         </Col>
                     </Row>
+
+                    <Form.Item>
+                        <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
+                            <Button
+                                onClick={() => {
+                                    setIsModalVisible(false);
+                                    form.resetFields();
+                                }}
+                                size="large"
+                                disabled={loading}
+                            >
+                                Cancelar Préstamo
+                            </Button>
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                size="large"
+                                loading={loading}
+                                icon={<CheckCircleOutlined />}
+                            >
+                                Prestar Libro
+                            </Button>
+                        </Space>
+                    </Form.Item>
                 </Form>
             </Modal>
         </div>
     );
-};
-
-export default BibliotecaView;
+}
