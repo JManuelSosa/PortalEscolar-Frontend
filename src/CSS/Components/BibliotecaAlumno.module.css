@@ -1,0 +1,60 @@
+.biblioteca-container {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.biblioteca-header {
+    margin-bottom: 24px;
+}
+
+.biblioteca-filtros {
+    margin-bottom: 32px;
+}
+
+.buscador-input {
+    width: 100%;
+}
+
+.filtro-select {
+    width: 100%;
+}
+
+.contador-libros {
+    font-size: 14px;
+    padding: 8px 16px;
+    width: 100%;
+    text-align: center;
+}
+
+.libro-imagen-container {
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.libro-imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.boton-prestar {
+    font-size: 15px;
+    padding: 6px 12px;
+    height: 30px;
+}
+
+.libro-titulo {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.libro-tag {
+    margin: 0;
+    font-size: 12px;
+    padding: 2px 8px;
+    line-height: 1.5;
+}

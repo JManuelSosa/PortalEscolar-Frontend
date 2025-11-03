@@ -1,0 +1,250 @@
+.plan-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #3670c1ff 0%, #c3cfe2 100%);
+    padding: 60px 30px;
+    position: relative;
+}
+
+/* Fondos decorativos */
+.decor-ball {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    filter: blur(10px);
+}
+
+.decor-ball.blue {
+    top: 10%;
+    left: 5%;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #002B80 0%, #1890ff 100%);
+}
+
+.decor-ball.green {
+    bottom: 10%;
+    right: 5%;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #389e0d 0%, #52c41a 100%);
+    filter: blur(15px);
+}
+
+/* Encabezado */
+.plan-header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.plan-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #002B80 0%, #1890ff 100%);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 43, 128, 0.3);
+}
+
+.badge-icon {
+    margin-right: 8px;
+}
+
+.plan-title {
+    color: #002B80;
+    margin-bottom: 16px;
+    font-size: 3.5rem !important;
+    font-weight: 700;
+    background: linear-gradient(135deg, #002B80 0%, #1890ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 8px rgba(0, 43, 128, 0.1);
+}
+
+.plan-line {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #002B80 0%, #1890ff 100%);
+    margin: 0 auto 24px auto;
+    border-radius: 2px;
+}
+
+.plan-subtitle {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px 40px;
+    border-radius: 16px;
+    display: inline-block;
+    box-shadow: 0 8px 32px rgba(0, 43, 128, 0.1);
+    border: 1px solid rgba(0, 43, 128, 0.1);
+    backdrop-filter: blur(10px);
+    max-width: 600px;
+}
+
+.plan-subtitle-text {
+    color: #002B80;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.star-icon {
+    color: #ffc107;
+    font-size: 16px;
+    margin: 0 8px;
+}
+
+/* Columnas tabla */
+.col-periodo {
+    color: #002B80 !important;
+}
+
+.col-precio {
+    color: #1890ff !important;
+    font-size: 16px !important;
+}
+
+/* Tarjetas */
+.card {
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-superior {
+    background: linear-gradient(145deg, #ffffff 0%, #f0f5ff 100%);
+    border: 2px solid #e6f0ff;
+}
+
+.card-basico {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fff8 100%);
+    border: 2px solid #e8f5e8;
+}
+
+.card-header {
+    margin: -24px -24px 20px -24px;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-header-superior {
+    background: linear-gradient(135deg, #002B80 0%, #1890ff 100%);
+}
+
+.card-header-basico {
+    background: linear-gradient(135deg, #389e0d 0%, #52c41a 100%);
+}
+
+.card-title {
+    color: #fff !important;
+    margin-bottom: 5px !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card-subtitle {
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-size: 14px;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.card-divider-superior {
+    border-color: #e6f0ff !important;
+}
+
+.card-divider-basico {
+    border-color: #e8f5e8 !important;
+}
+
+/* Beneficios */
+.benefits {
+    margin-bottom: 20px;
+}
+
+.benefits-title {
+    margin-bottom: 16px !important;
+}
+
+.benefits-title.superior {
+    color: #002B80 !important;
+}
+
+.benefits-title.basico {
+    color: #389e0d !important;
+}
+
+.benefit-item {
+    padding: 8px 12px;
+    background: #f8fbff;
+    border-radius: 8px;
+    border: 1px solid #e6f0ff;
+    margin-bottom: 8px;
+}
+
+.benefit-item.basico {
+    background: #f9fff9;
+    border: 1px solid #e8f5e8;
+}
+
+.benefit-item text {
+    color: #002B80 !important;
+}
+
+.check-icon {
+    color: #52c41a;
+    margin-right: 8px;
+}
+
+/* FAQ */
+.faq-section {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.faq-title {
+    color: #002B80 !important;
+    margin-bottom: 30px !important;
+}
+
+.faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.faq-question {
+    color: #002B80 !important;
+    margin-top: 16px !important;
+}
+
+.faq-answer {
+    color: #000;
+    display: block;
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .plan-container {
+        padding: 30px 15px;
+    }
+
+    .plan-title {
+        font-size: 2.5rem !important;
+    }
+
+    .plan-subtitle {
+        padding: 15px 20px;
+    }
+
+    .plan-subtitle-text {
+        font-size: 16px;
+    }
+}

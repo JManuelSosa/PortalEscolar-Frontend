@@ -1,0 +1,66 @@
+.biblioteca-admin {
+  padding: 20px;
+}
+
+.stats-row {
+  margin-bottom: 24px;
+}
+
+.stats-card .ant-statistic-title {
+  font-weight: bold;
+}
+
+.stats-libros {
+  color: #1890ff;
+}
+
+.stats-disponibles {
+  color: #52c41a;
+}
+
+.stats-activos {
+  color: #faad14;
+}
+
+.stats-completados {
+  color: #52c41a;
+}
+
+.section-divider {
+  margin: 24px 0;
+}
+
+.tab-actions {
+  margin-bottom: 16px;
+  text-align: right;
+}
+
+.alumno-subinfo {
+  font-size: 12px;
+  color: #000000;
+}
+
+.libro-subinfo {
+  font-size: 12px;
+  color: #000000;
+}
+
+.table-small {
+  font-size: 13px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.modal-wide {
+  width: 700px !important;
+}
+
+.modal-medium {
+  width: 600px !important;
+}
+
+.modal-large {
+  width: 800px !important;
+}
