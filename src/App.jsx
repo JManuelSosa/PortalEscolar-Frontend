@@ -24,7 +24,7 @@ import { UserHomeRoute } from './Js/Utilities/Routes';
 //Test
 import AuthView from './Views/public/AuthView';
 import Registro from './Components/Auth/Registro';
-import LandingPageEscolar from './Views/public/Pruebas';
+import LandingPageEscolar from './Views/public/LandingPageEscolar';
 
 import { BibliotecaView } from './Views/BibliotecaAlumno';
 import BibliotecaAdminView from './Views/BibliotecaAdministracion';
