@@ -1,0 +1,61 @@
+/* Animación A: El "contenedor" se desliza HACIA ARRIBA */
+@keyframes slide-in-up {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0%);
+    }
+}
+
+/* Animación B: La "imagen" interior se desliza HACIA ABAJO */
+@keyframes slide-in-down {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0%);
+    }
+}
+
+/* El contenedor principal */
+.logoContainer {
+    position: relative;
+    /* IMPORTANTE: El overflow:hidden ahora va en el wrapper */
+    line-height: 0;
+}
+
+/* Estilo base para AMBAS imágenes */
+.logoImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* El "Contenedor de Relleno" (Wrapper) */
+.colorWrapper {
+    /* Coincide con el contenedor principal */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Esta es nuestra nueva "máscara" */
+    overflow: hidden; 
+
+    /* Estado inicial y animación A */
+    transform: translateY(100%);
+    animation: slide-in-up 3s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+/* La imagen de color que va DENTRO del wrapper */
+.logoImageColor {
+    /* Estado inicial y animación B (la opuesta) */
+    transform: translateY(-100%);
+    animation: slide-in-down 3s ease-in-out infinite alternate;
+    will-change: transform;
+}

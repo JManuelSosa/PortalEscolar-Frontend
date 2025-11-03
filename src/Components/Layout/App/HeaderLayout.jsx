@@ -40,7 +40,7 @@ export default function HeaderLayout(){
 
         return(
             <div className={ HeaderStyle.headerIconContainer } onClick={() => {navigate(path, { state })}}>
-                <IconArrowBack size={45} color={"rgb(var(--conifer-800))"} stroke={1.5} ></IconArrowBack>
+                <IconArrowBack size={45} stroke={1.5}></IconArrowBack>
             </div>
         );
     }

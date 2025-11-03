@@ -1,42 +1,50 @@
-import '@css/Auth/Login.css';
+//* React
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+//* Ant
+import { Form, Input, Flex, Button, Spin } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
-export default function Login() {
+//* Utilidades
+import { loginFormRules } from '../../Js/Utilities/FormRules';
+
+//* Css
+import css from '@css/Auth/Login.module.css';
+
+export default function Login({ onFinish = null, isPending = true }) {
+
+    const onFinishForm = (values) => {
+        console.log(values);
+    }
+
+    const formFinish = onFinish ?? onFinishForm;
+
     return (
-        
         <>
-            <div id="LoginBody">
-                <div className="login-container">
-                    <div className="login-box">
-                        <h3></h3>
+            <Form name="login" size="large" onFinish={formFinish} autoComplete="off">                    
+                <div className={css["inputs-login"]}>
+                    <Form.Item name="email" rules={loginFormRules.email} labelAlign="left">
+                        <Input prefix={<UserOutlined />} placeholder="Correo" id="inputEmailLogin"/>
+                    </Form.Item>
 
-                        <form>
-
-                            <div className="input-group">
-                                <i className="fa-solid fa-user"></i>
-                                <input type="text" placeholder="Enter username" />
-                            </div>
-
-
-
-                            <div className="input-group2">
-                                <i className="fas fa-lock"></i> {/*esto el icono de candado*/}
-                                <input type="password" placeholder="Enter password" />
-                                <i className="fa-solid fa-eye"></i> {/*este icono es para el ojo abi */}
-                            </div>
-                            <div className="options">
-                                <label><input type="checkbox"/>Recuérdame</label>
-                                <a href="#">Forgot Password?</a>
-
-                            </div>
-                            <button type="submit" className='LoginButton'>Iniciar Sesión </button>
-                        </form>
-                        <label className="registro">Registrate</label>
-
-                    </div>
-
+                    <Form.Item name="password" rules={loginFormRules.password}>
+                        <Input prefix={<LockOutlined />} type="password" placeholder="Contraseña" />
+                    </Form.Item>
                 </div>
-            </div>
+
+                <Form.Item>
+                    <Flex justify="center" align="center">
+                        <a href="">¿Olvidaste tu contraseña?</a>
+                    </Flex>
+                </Form.Item>
+
+                <Form.Item>
+                    <Button block htmlType="submit" className={css["btn-formLogin"]} loading={ isPending } disabled={ isPending }>
+                        Iniciar sesión
+                    </Button>
+                </Form.Item>
+            </Form>
         </>
 
     )

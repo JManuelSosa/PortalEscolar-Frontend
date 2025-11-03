@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Result, Button, Divider, Row, Col, Card } from "antd";
 
 //Faker Api
-import FakeAPI from "../Js/FakeApi";
+import FakeAPI from "../../Js/FakeApi";
 
 
 //Icons

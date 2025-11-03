@@ -26,9 +26,6 @@ export default function AdminLayout({children}){
                     <Content className={ AdminLayoutStyle.adminLayoutContent }>
                         {children}
                     </Content>
-                    <Footer className={ AdminLayoutStyle.footer }>
-                        Hola Footer
-                    </Footer>
                 </Layout>
             </Layout>
         </>

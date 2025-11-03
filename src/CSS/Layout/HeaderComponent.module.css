@@ -66,4 +66,6 @@
 
 .iconMain{
     cursor:pointer;
+    color: rgb(var(--base-800));
+    fill: currentColor;
 }

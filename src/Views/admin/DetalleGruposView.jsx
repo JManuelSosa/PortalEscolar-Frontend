@@ -6,10 +6,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Result, Button, Divider } from "antd";
 
 //Faker Api
-import FakeAPI from "../Js/FakeApi";
+import FakeAPI from "../../Js/FakeApi";
 
 //Components
-import ListaAlumnos from "../Components/Layout/Alumno/ListaAlumnos";
+import ListaAlumnos from "../../Components/Layout/Alumno/ListaAlumnos";
 
 //Css
 import DetalleCss from '@css/Views/DetalleGrupos.module.css';

@@ -1,0 +1,49 @@
+
+.component-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.title-resume {
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.container-input-resume{
+    display: flex;
+    width: 100%;
+    gap: 0.6rem;
+    font-weight: 300;
+}
+
+.label {
+    display: block;
+    width: 50%;
+    text-align:start;
+    font-weight: 300;
+}  
+
+.submit-button:global(.ant-btn){
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 80%;
+    background-color: var(--accent);
+}
+
+.submit-button:global(.ant-btn):hover:hover{
+    background-color: var(--accent-hover);
+}
+
+
+
+.submit-button:global(.ant-btn) span {
+    font-weight: 500;
+    font-size: 1rem;
+}

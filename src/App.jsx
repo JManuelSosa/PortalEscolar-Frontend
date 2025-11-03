@@ -1,53 +1,81 @@
 //React
 import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 
 //Layout
 import AdminLayout from './Layout/AdminLayout';
 
 //Views
-import HomeView from './Views/HomeView';
-import DivisionView from './Views/DivisionView';
+import UserHomeView from './Views/user/UserHomeView';
+import HomeView from './Views/admin/HomeView';
+import DivisionView from './Views/admin/DivisionView';
 import Login from './Components/Auth/Login';
-import CarrerasView from './Views/CarrerasView';
-import GruposView from './Views/GruposView';
-import DetalleGruposView from './Views/DetalleGruposView';
-import { ConfigProvider } from 'antd';
+import CarrerasView from './Views/admin/CarrerasView';
+import GruposView from './Views/admin/GruposView';
+import DetalleGruposView from './Views/admin/DetalleGruposView';
+
+//Utilidades
+import { ConfigProvider, notification, App as AntApp } from 'antd';
+import esES from 'antd/locale/es_ES';
+import { useNotificationStore } from './stores/notificationStore';
+import { UserHomeRoute } from './Js/Utilities/Routes';
+
+//Test
+import AuthView from './Views/public/AuthView';
+import Registro from './Components/Auth/Registro';
 
 function App() {
+
+  const setNotificationApi = useNotificationStore( (state) => state.setNotificationApi );
+  const [ notificationApi, contextHolder ] = notification.useNotification();
+
+  useEffect(() => {
+    setNotificationApi(notificationApi);
+  }, [notificationApi, setNotificationApi]);
 
   const configProvider = {
       token: {
         fontFamily: "inherit",
+        fontWeightStrong: 700,
+        colorText: 'var(--text)'
       },
       components: { 
+        Form: {
+          labelFontSize: 14,
+          itemLabelFontWeight: 400,
+        },
         Input: {
-          activeBorderColor: 'rgb(var(--base-300))',
-          hoverBorderColor: 'rgba(var(--base-300), 0.8)',
+          activeBorderColor: 'var(--primary-active)',
+          hoverBorderColor: 'var(--accent-hover)',
+          colorTextPlaceholder: 'var(--text-placeholder)',
         },
         Select: {
-          activeBorderColor: 'rgb(var(--base-300))',
-          hoverBorderColor: 'rgba(var(--base-300), 0.8)',
-          optionSelectedFontWeight: 400,
-          placeHolderFontWeight: 400
+          activeBorderColor: 'var(--primary-active)',
+          hoverBorderColor: 'var(--accent-hover)',
         }
       }
   }
 
   return (
     <>
-      <ConfigProvider theme={configProvider}>
-          <Routes>
-              {/* Rutas sin inicio de sesión */}
-              <Route path='/Login' element={ <Login/> }/>
+      <ConfigProvider theme={configProvider} locale={esES}>
+          {contextHolder}
+          <AntApp>
+            <Routes>
+                {/* Rutas sin inicio de sesión */}
+                <Route path='/Login' element={ <Login/> }/>
+                <Route path='/test' element={<AuthView/>}></Route>
+                <Route path='/registro-test' element={<Registro/>} />
 
-              {/* Rutas con inicio de sesión */}
-              
-              <Route path='/' element={<AdminLayout> <HomeView/> </AdminLayout>}/>
-              <Route path='/Divisiones' element={<AdminLayout> <DivisionView/> </AdminLayout>}/>
-              <Route path='/Carreras' element={<AdminLayout> <CarrerasView/> </AdminLayout>}></Route>
-              <Route path='/Grupos' element={<AdminLayout> <GruposView/> </AdminLayout>}></Route>
-              <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView/> </AdminLayout>}></Route>
-          </Routes>
+                {/* Rutas con inicio de sesión */}
+                <Route path={ UserHomeRoute } element={<UserHomeView/>}/>
+                <Route path='/' element={<AdminLayout> <HomeView/> </AdminLayout>}/>
+                <Route path='/Divisiones' element={<AdminLayout> <DivisionView/> </AdminLayout>}/>
+                <Route path='/Carreras' element={<AdminLayout> <CarrerasView/> </AdminLayout>}></Route>
+                <Route path='/Grupos' element={<AdminLayout> <GruposView/> </AdminLayout>}></Route>
+                <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView/> </AdminLayout>}></Route>
+            </Routes>
+          </AntApp>
         </ConfigProvider>
     </>
   )

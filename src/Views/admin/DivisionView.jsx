@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import FakeAPI from "../Js/FakeApi";
+import FakeAPI from "../../Js/FakeApi";
 
-import { VsCodeIcon } from "../Js/Icons";
-import { IndustrialIcon } from "../Js/Icons";
-import { AdministracionIcon } from "../Js/Icons";
+import { VsCodeIcon } from "../../Js/Icons";
+import { IndustrialIcon } from "../../Js/Icons";
+import { AdministracionIcon } from "../../Js/Icons";
 
 //AntDesign
 import { Col, Row, Divider, Card } from "antd";

@@ -1,0 +1,15 @@
+.register-form-container{
+    display: flex;
+    flex-direction: column; 
+    flex-grow: 1;
+    min-height: 0; 
+    width: 100%;
+    text-align: center;
+
+    & :global(.form-container) {
+        flex-grow: 1;      /* Para que esta sección "crezca" y ocupe el espacio sobrante */
+        overflow-y: auto;  /* Para añadir scroll SÓLO a esta sección si el contenido se desborda */
+        min-height: 0;
+        width: 100%;
+    }
+}

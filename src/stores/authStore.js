@@ -8,7 +8,7 @@ export const useAuthStore = create(
             token: null,
             expiration: null,
             schools: [],
-            login: (userData) => {
+            loginStore: (userData) => {
                 set({
                     user: userData.user,
                     token: userData.token,
@@ -16,7 +16,7 @@ export const useAuthStore = create(
                     schools: userData.schools
                 })
             },
-            logout: () => set({
+            logoutStore: () => set({
                 user: null,
                 token: null,
                 expiration: null,

@@ -8,7 +8,7 @@ import { useSchoolStore } from "../../stores/schoolStore";
 import { message } from "antd";
 
 const api = axios.create({
-    baseURL: "http://127.0.0.1/api",
+    baseURL: "http://127.0.0.1:8000/api",
     headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
@@ -48,26 +48,16 @@ api.interceptors.response.use(
         const data = error.response?.data;
         const store = useAuthStore.getState();
 
+        // Manejar errores de conexión
+        if (!error.response) {
+            message.error("Error de conexión. Verifica tu internet o si el servidor está activo.");
+            return Promise.reject(error);
+        }
+
         //~ Si el token expira o no es válido
-        if (status === 401) {
+        if (status === 401 && !requestUrl.endsWith('/login')) {
             message.error("Tu sesión ha expirado. Por favor inicia sesión nuevamente.");
             store.logout();
-        }
-
-        //~ Errores de validación o negocio
-        else if (status === 422 && data?.errors) {
-            const firstError = Object.values(data.errors)[0][0];
-            message.error(firstError);
-        }
-
-        // Errores de servidor o conexión
-        else if (status >= 500) {
-            message.error("Ocurrió un error en el servidor. Inténtalo más tarde.");
-        }
-
-        // Otros errores (como 404 o 400)
-        else {
-            message.error(data?.message || "Error al procesar la solicitud.");
         }
 
         return Promise.reject(error);

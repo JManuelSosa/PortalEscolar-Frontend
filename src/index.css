@@ -33,33 +33,153 @@
     --conifer-950: 19, 46, 5;
 
 
+    /* Paletas principales */
+
     --cyan-50: 230, 255, 251;
     --cyan-100: 181, 245, 236;
     --cyan-200: 135, 232, 222;
     --cyan-300: 92, 219, 211;
-    --cyan-400: 54, 207, 201;
+    --cyan-400: 54, 207, 201; 
     --cyan-500: 19, 194, 194;
     --cyan-600: 8, 151, 156;
     --cyan-700: 0, 109, 117;
     --cyan-800: 0, 71, 79;
     --cyan-900: 0, 35, 41;
-    
-    --color-primary: rgb(var(--base-400));
-    --color-primary-hover: rgb(var(--base-500));
-    --color-primary-active: rgb(var(--base-600));
-    --color-secondary: rgb(219, 255, 60); /* Ejemplo: un amarillo para contraste */
 
-    --color-background: rgb(250, 250, 250);
-    --color-surface: rgb(255, 255, 255); /* Tarjetas, modales */
+    --blue-50:  230, 244, 255;
+    --blue-100: 186, 224, 255;
+    --blue-200: 145, 202, 255;
+    --blue-300: 105, 177, 255;
+    --blue-400: 64, 150, 255;
+    --blue-500: 22, 119, 255;
+    --blue-600: 9, 88, 217;
+    --blue-700: 0, 62, 179;
+    --blue-800: 0, 44, 140;
+
+    --geekblue-50: 240, 245, 255;
+    --geekblue-100: 214, 228, 255;
+    --geekblue-200: 173, 198, 255;
+    --geekblue-300: 133, 165, 255;
+    --geekblue-400: 89, 126, 247;
+    --geekblue-500: 47, 84, 235;
+    --geekblue-600: 29, 57, 196;
+    --geekblue-700: 16, 35, 158;
+    --geekblue-800: 6, 17, 120;
+
+
+    /* --- Otros Colores --- */
+    --color-white: 248, 248, 248;
+    --color-black: 0, 0, 0;
+    --color-info-base: var(--blue-500); 
+    
+  /* --- 1. Primario (Acciones) --- */
+    --color-primary-base: var(--geekblue-600);
+    --color-primary-hover: var(--geekblue-500);
+    --color-primary-active: var(--geekblue-700);
+    --color-primary-text-on: var(--color-white); /* Texto sobre un botón primario */
+
+    /* --- 2. Acento (Marca) --- */
+    --color-accent-base: var(--cyan-500);
+    --color-accent-hover: var(--cyan-400);
+    --color-accent-active: var(--cyan-600);
+    --color-accent-text-on: var(--cyan-900); /* Texto sobre un botón de acento */
+
+    /* --- 3. Neutral (Texto) -> Usando Geekblue --- */
+    --color-text-base: var(--geekblue-800);    /* Texto principal */
+    --color-text-secondary: var(--geekblue-700); /* Texto más suave */
+    --color-text-placeholder: var(--geekblue-400); /* Placeholders */
+    --color-text-disabled: var(--geekblue-300);    /* Texto deshabilitado */
+    --color-text-link: var(--blue-500);  /* Los enlaces usan el color primario */
+
+    /* --- 4. Neutral (Fondos) -> Usando Geekblue --- */
+    --color-bg-body: var(--color-white);           /* Fondo de la app */
+    --color-bg-surface: var(--geekblue-50);        /* Fondo de Cards, Inputs, Modales */
+    --color-bg-surface-hover: var(--geekblue-100); /* Hover de items en listas */
+    --color-bg-disabled: var(--geekblue-100);      /* Fondo de inputs deshabilitados */
+
+    /* --- 5. Neutral (Bordes) -> Usando Geekblue --- */
+    --color-border-strong: var(--geekblue-300); /* Borde de input enfocado */
+    --color-border-default: var(--geekblue-200);/* Borde de input/card normal */
+    --color-border-divider: var(--geekblue-100);/* Separadores */
+    
+    /* --- 6. Sombra -> Usando Geekblue --- */
+    --color-shadow-base: var(--geekblue-800); /* Usamos el color de texto más oscuro para la sombra */
+    
+    /* --- 7. Estados Funcionales (Error) --- */
+    --color-error-base: 220, 53, 69; 
+    --color-error-text: var(--color-error-base);
+    --color-error-bg: 253, 237, 237; /* Rojo pálido */
+    --color-error-border: 245, 194, 194; /* Rojo medio */
+    
+    /* --- 8. Estados Funcionales (Success) --- */
+    --color-success-base: var(--conifer-600); /* Tu propio verde */
+    --color-success-text: var(--conifer-900);
+    --color-success-bg: var(--conifer-50);
+    --color-success-border: var(--conifer-200);
+    
+    /* --- 9. Estados Funcionales (Warning) --- */
+    --color-warning-base: 255, 193, 7; 
+    --color-warning-text: 133, 100, 4; /* Ámbar oscuro */
+    --color-warning-bg: 255, 248, 225; /* Ámbar pálido */
+    --color-warning-border: 255, 235, 179; /* Ámbar medio */
+
+        
+
+
+    /* == ACCIONES PRINCIPALES == */
+    --primary: rgb(var(--color-primary-base));
+    --primary-hover: rgb(var(--color-primary-hover));
+    --primary-active: rgb(var(--color-primary-active));
+    --text-on-primary: rgb(var(--color-primary-text-on));
+
+    /* == ACCIONES DE ACENTO == */
+    --accent: rgb(var(--color-accent-base));
+    --accent-hover: rgb(var(--color-accent-hover));
+    --accent-active: rgb(var(--color-accent-active));
+    --text-on-accent: rgb(var(--color-accent-text-on));
+
+    /* == TEXTO == */
+    --text: rgb(var(--color-text-base));
+    --text-secondary: rgb(var(--color-text-secondary));
+    --text-link: rgb(var(--color-text-link));
+    --text-placeholder: rgba(var(--color-text-placeholder), 0.8);
+    --text-disabled: rgb(var(--color-text-disabled));
+    
+    /* == FONDOS (BACKGROUNDS) == */
+    --bg-body: rgb(var(--color-bg-body));
+    --bg-surface: rgb(var(--color-bg-surface));
+    --bg-surface-hover: rgb(var(--color-bg-surface-hover));
+    --bg-disabled: rgb(var(--color-bg-disabled));
+
+    /* == BORDES Y SOMBRAS == */
+    --border: rgb(var(--color-border-default));
+    --border-strong: rgb(var(--color-border-strong));
+    --divider: rgb(var(--color-border-divider));
+    --shadow: rgba(var(--color-shadow-base), 0.1); /* Sombra suave */
+    --shadow-strong: rgba(var(--color-shadow-base), 0.2); /* Sombra más dura */
+
+    /* == ESTADOS FUNCIONALES == */
+    --error: rgb(var(--color-error-text));
+    --error-bg: rgb(var(--color-error-bg));
+    --error-border: rgb(var(--color-error-border));
+
+    --success: rgb(var(--color-success-text));
+    --success-bg: rgb(var(--color-success-bg));
+    --success-border: rgb(var(--color-success-border));
+    
+    --warning: rgb(var(--color-warning-text));
+    --warning-bg: rgb(var(--color-warning-bg));
+    --warning-border: rgb(var(--color-warning-border));
+
+    --color-background: rgb(240,244,243);
+    --color-surface: rgb(252, 252, 252); /* Tarjetas, modales */
     --color-text: rgb(var(--conifer-950));
     --color-text-light: rgba(var(--conifer-950), 0.7);
 
     --color-border: rgba(var(--conifer-950), 0.15);
     --color-shadow: rgba(var(--conifer-950), 0.1);
 
-    --color-success: rgb(136, 236, 123);
-    --color-warning: rgb(238, 255, 86);
-    --color-error: rgb(255, 65, 65);
+
 
     --base-50:  var(--cyan-50);
     --base-100: var(--cyan-100);
@@ -99,10 +219,41 @@
   background: rgb(var(--base-700));
 }
 
+/* Sobreescritura global para el font-weight 
+  del texto dentro de los Inputs 
+*/
+.ant-input {
+  font-weight: 300 !important;
+}
+
+.ant-form-item-label label{
+  font-weight: 300 !important;
+}
+
+/* Sobreescritura global para el font-weight 
+  de los placeholders 
+*/
+.ant-input::placeholder {
+  font-weight: 100 !important;
+}
+
+.ant-picker-input > input {
+  font-weight: 300 !important;
+}
+
+.ant-picker-input > input::placeholder {
+  font-weight: 200 !important;
+}
+
+.ant-select-selection-placeholder {
+  font-weight: 200 !important;
+}
+
 body{
   margin:0;
   min-height: 100dvh;
   background-color: rgb(248, 248, 248);
   font-family: 'Inter' !important;
+  color: var(--text);
 }
 
