@@ -23,6 +23,7 @@ import { UserHomeRoute } from './Js/Utilities/Routes';
 //Test
 import AuthView from './Views/public/AuthView';
 import Registro from './Components/Auth/Registro';
+import LandingPageEscolar from './Views/public/Pruebas';
 
 function App() {
 
@@ -66,6 +67,7 @@ function App() {
                 <Route path='/Login' element={ <Login/> }/>
                 <Route path='/test' element={<AuthView/>}></Route>
                 <Route path='/registro-test' element={<Registro/>} />
+                <Route path='/pruebas' element={<LandingPageEscolar/>}/>
 
                 {/* Rutas con inicio de sesión */}
                 <Route path={ UserHomeRoute } element={<UserHomeView/>}/>
