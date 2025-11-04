@@ -1,5 +1,6 @@
 //React
 import { CollapsedProvider } from "../Context/CollapseContext";
+import { Outlet } from "react-router-dom";
 
 //Components
 import SiderNav from '../Components/Layout/App/SiderNav';
@@ -7,12 +8,12 @@ import HeaderLayout from '../Components/Layout/App/HeaderLayout';
 
 //AntDesign
 import { Layout } from 'antd';
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 //Css
 import AdminLayoutStyle from '@css/Layout/AdminLayout.module.css';
 
-export default function AdminLayout({children}){
+export default function AdminLayout(){
 
     return(
         <>
@@ -24,7 +25,7 @@ export default function AdminLayout({children}){
                 <Layout className={AdminLayoutStyle.appLayout}>
                     <HeaderLayout></HeaderLayout>
                     <Content className={ AdminLayoutStyle.adminLayoutContent }>
-                        {children}
+                        <Outlet></Outlet>
                     </Content>
                 </Layout>
             </Layout>

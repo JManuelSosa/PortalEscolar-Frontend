@@ -9,7 +9,6 @@ import AdminLayout from './Layout/AdminLayout';
 import UserHomeView from './Views/user/UserHomeView';
 import HomeView from './Views/admin/HomeView';
 import DivisionView from './Views/admin/DivisionView';
-import Login from './Components/Auth/Login';
 
 import CarrerasView from './Views/admin/CarrerasView';
 import GruposView from './Views/admin/GruposView';
@@ -19,23 +18,26 @@ import DetalleGruposView from './Views/admin/DetalleGruposView';
 import { ConfigProvider, notification, App as AntApp } from 'antd';
 import esES from 'antd/locale/es_ES';
 import { useNotificationStore } from './stores/notificationStore';
-import { UserHomeRoute } from './Js/Utilities/Routes';
+import { routes } from './Js/Utilities/Routes';
 
 //Test
 import AuthView from './Views/public/AuthView';
-import Registro from './Components/Auth/Registro';
 import LandingPageEscolar from './Views/public/LandingPageEscolar';
 
-import { BibliotecaView } from './Views/BibliotecaAlumno';
-import BibliotecaAdminView from './Views/BibliotecaAdministracion';
-import PlanEscolar from './Views/PlanEscolar';
-import PanelMaestro from './Views/PanelMaestro';
+import { BibliotecaView } from './Views/student/BibliotecaAlumno';
+import BibliotecaAdminView from './Views/admin/BibliotecaAdministracion';
+import PlanEscolar from './Views/public/PlanEscolar';
+import PanelMaestro from './Views/teacher/PanelMaestro';
 // Nuevas vistas para el Panel de Maestros
 {/*import PanelMaestro from './Views/PanelMaestro';
 import AsistenciaMaestro from './Views/AsistenciaMaestro';
 import ActividadesMaestro from './Views/ActividadesMaestro';
 import JustificacionesMaestro from './Views/JustificacionesMaestro'*/}
-import GruposMaestro from './Views/GruposMaestro';
+import GruposMaestro from './Views/teacher/GruposMaestro';
+
+import ProtectedRoute from './Router/ProtectedRoute';
+import RoleGuard from './Router/RoleGuard';
+import UnauthorizedView from './Views/utilities/UnauthorizedView';
 
 
 
@@ -78,27 +80,37 @@ function App() {
           {contextHolder}
           <AntApp>
             <Routes>
+
                 {/* Rutas sin inicio de sesión */}
-                <Route path='/Login' element={ <Login/> }/>
-                <Route path='/test' element={<AuthView/>}></Route>
-                <Route path='/registro-test' element={<Registro/>} />
-                <Route path='/pruebas' element={<LandingPageEscolar/>}/>
+                <Route path={ routes.landing } element={<LandingPageEscolar/>}/>
+                <Route path={ routes.login } element={<AuthView/>}></Route>
+                <Route path={ routes.pricing } element={<PlanEscolar/>}/>
+                
 
-                {/* Rutas con inicio de sesión */}
-                <Route path={ UserHomeRoute } element={<UserHomeView/>}/>
-                <Route path='/' element={<AdminLayout> <HomeView/> </AdminLayout>}/>
-                <Route path='/Divisiones' element={<AdminLayout> <DivisionView/> </AdminLayout>}/>
-                <Route path='/Carreras' element={<AdminLayout> <CarrerasView/> </AdminLayout>}></Route>
-                <Route path='/Grupos' element={<AdminLayout> <GruposView/> </AdminLayout>}></Route>
-                <Route path='/DetalleGrupo' element={<AdminLayout> <DetalleGruposView/> </AdminLayout>}></Route>
+                {/* Rutas que requieren inicio de sesión */}
+                <Route element={<ProtectedRoute/>}>
 
+                  <Route path={ routes.userHome } element={<UserHomeView/>}/>
+                  <Route path={ routes.unauthorized } element={ <UnauthorizedView/> }/>
 
-                <Route path='/Biblioteca' element={<BibliotecaView />}></Route>
-                <Route path='/BibliotecaAdmin' element={<BibliotecaAdminView />}></Route>
-                <Route path='/PlanEscolar' element={<PlanEscolar />}></Route>
-                <Route path='/PanelMaestro' element={<PanelMaestro />}></Route>
-                <Route path='/GruposMaestro' element={<GruposMaestro />}></Route>
-                <Route path='/JustificacionesMaestro' element=''></Route>
+                  {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
+                  <Route element={<RoleGuard allowedRoles={['admin']}/>}>
+                    <Route element={<AdminLayout/>}>
+                        <Route path={ routes.adminHome } element={ <HomeView/> }/>
+                        <Route path={ routes.divisiones } element={ <DivisionView/>}/>
+                        <Route path={ routes.carreras.path } element={<CarrerasView/>}></Route>
+                        <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
+                        <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>
+                    </Route>
+                  </Route>                  
+                
+                </Route>
+
+                <Route path='/biblioteca' element={<BibliotecaView />}></Route>
+                <Route path='/bibliotecaAdmin' element={<BibliotecaAdminView />}></Route>
+                <Route path='/panelMaestro' element={<PanelMaestro />}></Route>
+                <Route path='/gruposMaestro' element={<GruposMaestro />}></Route>
+                <Route path='/justificacionesMaestro' element=''></Route>
 
                 {
                   /* Nuevas Rutas para el Panel de Maestros 

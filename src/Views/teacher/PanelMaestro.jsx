@@ -15,7 +15,7 @@ import {
 } from '@ant-design/icons';
 
 //Css - Ruta corregida
-import PanelMaestroStyle from '../CSS/Components/PanelMaestro.module.css';
+import PanelMaestroStyle from '@css/Components/PanelMaestro.module.css';
 
 const { Meta } = Card;
 

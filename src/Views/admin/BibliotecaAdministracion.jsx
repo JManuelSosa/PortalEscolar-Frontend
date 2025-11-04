@@ -1,6 +1,6 @@
 // BibliotecaAdminView.jsx
 import React, { useState, useEffect } from 'react';
-import admincss from '../CSS/Components/BibliotecaAdministracion.module.css';
+import admincss from '@css/Components/BibliotecaAdministracion.module.css';
 
 import {
     Row, Col, Card, Table, Tag, Button, Modal, Form, Input,

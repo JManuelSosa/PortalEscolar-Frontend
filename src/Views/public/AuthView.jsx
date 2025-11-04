@@ -9,7 +9,7 @@ import Login from "../../Components/Auth/Login";
 
 import { IconMainLogo } from "../../Js/Icons";
 import { useAuth } from "../../Hooks/useAuth";
-import { UserHomeRoute } from "../../Js/Utilities/Routes";
+import { routes } from "../../Js/Utilities/Routes";
 import LoadingLogo from "../../Components/Utilities/LoadingLogo";
 import { useFormStore } from "../../stores/formStore";
 
@@ -25,7 +25,7 @@ export default function AuthView(){
 
     useEffect(() => {
         if (isLoginSuccess || isRegisterSuccess) {
-            navigate(UserHomeRoute);
+            navigate(routes.userHome);
         }
         
     }, [isLoginSuccess, navigate, isRegisterSuccess]);

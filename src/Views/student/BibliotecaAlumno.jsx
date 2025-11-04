@@ -1,5 +1,5 @@
 // BibliotecaView.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Row,
     Col,
@@ -31,7 +31,7 @@ import {
     CloseCircleOutlined
 } from '@ant-design/icons';
 
-import biblioteca from '../CSS/Components/BibliotecaAlumno.module.css';
+import biblioteca from '@css/Components/BibliotecaAlumno.module.css';
 
 const { Search } = Input;
 const { Option } = Select;

@@ -13,7 +13,7 @@ import {
   StarFilled,
   TrophyOutlined,
 } from "@ant-design/icons";
-import planes from '../CSS/Components/PlanEscolar.module.css';
+import planes from '@css/Components/PlanEscolar.module.css';
 
 const { Title, Text } = Typography;
 
