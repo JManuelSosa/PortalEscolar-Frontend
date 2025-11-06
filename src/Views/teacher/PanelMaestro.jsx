@@ -1,5 +1,6 @@
 //React
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 //AntDesign
@@ -17,9 +18,19 @@ import {
 //Css - Ruta corregida
 import PanelMaestroStyle from '@css/Components/PanelMaestro.module.css';
 
+import { routes } from '../../Js/Utilities/Routes';
+
 const { Meta } = Card;
 
 export default function PanelMaestro() {
+
+    const navigate = useNavigate();
+
+    const goToAssistances = () => {
+        navigate(routes.asistenciaMaestro);
+    }
+
+
     // Datos de ejemplo
     const [materiasAsignadas] = useState([
         {
@@ -140,12 +151,11 @@ export default function PanelMaestro() {
             <Row gutter={[16, 16]} className={PanelMaestroStyle.cardsRow}>
                 {cardsFunciones.map((card, index) => (
                     <Col xs={24} sm={12} lg={6} key={index}>
-                        <Link to={card.path}>
                             <Card
                                 hoverable
                                 className={PanelMaestroStyle.functionCard}
                                 actions={[
-                                    <Button type="link" style={{ color: card.color }}>
+                                    <Button type="link" onClick={() => { goToAssistances() }}  style={{ color: card.color }}>
                                         Acceder
                                     </Button>
                                 ]}
@@ -156,7 +166,6 @@ export default function PanelMaestro() {
                                     description={card.description}
                                 />
                             </Card>
-                        </Link>
                     </Col>
                 ))}
             </Row>
