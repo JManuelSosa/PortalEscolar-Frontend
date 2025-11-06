@@ -1,0 +1,59 @@
+.title{
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.school-sub-title{
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.card{
+    width: 20rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.card-cover{
+    display: grid;
+    place-items: center; /* Centra en ambos ejes */
+    padding: 1rem;
+    width: 100%;
+}
+
+.img-school{
+    width: 80%;
+    max-width: 120px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
+
+.card-body{
+    height:  auto;
+    display: flex;
+    flex-direction: column;
+    padding: 16px !important;
+    align-items: center;
+    gap:0.25rem;
+
+    & .school-name{
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    & .school-cct{
+        font-weight: 400;
+    }
+
+    & .tags{
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+
+        & span {
+            font-size: 0.8rem;
+        }
+    }
+}

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 //Layout
 import AdminLayout from './Layout/AdminLayout';
+import UserLayout from './Layout/UserLayout';
 
 //Views
 import UserHomeView from './Views/user/UserHomeView';
@@ -69,7 +70,10 @@ function App() {
         Select: {
           activeBorderColor: 'var(--primary-active)',
           hoverBorderColor: 'var(--accent-hover)',
-        }
+        },
+        Drawer: {
+          footerPaddingBlock: 0
+        },
       }
   }
 
@@ -87,14 +91,12 @@ function App() {
                 <Route path={ routes.pricing } element={<PlanEscolar/>}/>
                 
 
-                {/* Rutas que requieren inicio de sesión */}
-                <Route element={<ProtectedRoute/>}>
-
+                {/* Zona para testear rutas */ }
+                <Route element={ <UserLayout/> }>
                   <Route path={ routes.userHome } element={<UserHomeView/>}/>
-                  <Route path={ routes.unauthorized } element={ <UnauthorizedView/> }/>
+                </Route>
+                
 
-                  {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
-                  <Route element={<RoleGuard allowedRoles={['admin']}/>}>
                     <Route element={<AdminLayout/>}>
                         <Route path={ routes.adminHome } element={ <HomeView/> }/>
                         <Route path={ routes.divisiones } element={ <DivisionView/>}/>
@@ -102,6 +104,15 @@ function App() {
                         <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
                         <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>
                     </Route>
+
+
+
+                {/* Rutas que requieren inicio de sesión */}
+                <Route element={<ProtectedRoute/>}>
+                  <Route path={ routes.unauthorized } element={ <UnauthorizedView/> }/>
+
+                  {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
+                  <Route element={<RoleGuard allowedRoles={['admin']}/>}>
                   </Route>                  
                 
                 </Route>

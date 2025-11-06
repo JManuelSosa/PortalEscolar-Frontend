@@ -11,8 +11,10 @@ export const routes = {
     
     // Admin 
     adminHome: '/admin',
-    
-    // División
+
+    empleados: '/empleados',
+
+
     divisiones: '/divisiones',
     carreras: {
         path: '/divisiones/:divisionID/carreras',

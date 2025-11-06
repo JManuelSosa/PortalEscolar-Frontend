@@ -13,14 +13,16 @@ export const useAuthStore = create(
                     user: userData.user,
                     token: userData.token,
                     expiration: userData.expiration,
-                    schools: userData.schools
+                    schools: userData.schools,
+                    userData: userData.personalData
                 })
             },
             logoutStore: () => set({
                 user: null,
                 token: null,
                 expiration: null,
-                schools: []
+                schools: [],
+                userData: null
             }),
 
             checkExpiration: () => {

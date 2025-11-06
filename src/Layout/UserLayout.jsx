@@ -10,18 +10,18 @@ import HeaderLayout from '../Components/Layout/App/HeaderLayout';
 import { Layout } from 'antd';
 const { Content } = Layout;
 
+import { mapMenus } from '../Js/Utilities/menuDefinitions';
+
 //Css
 import AdminLayoutStyle from '@css/Layout/AdminLayout.module.css';
 
-import { mapMenus } from "../Js/Utilities/menuDefinitions";
-
-export default function AdminLayout(){
+export default function UserLayout(){
 
     return(
         <>
             <Layout className={ AdminLayoutStyle.adminLayoutAnt }>
                 <CollapsedProvider>
-                    <SiderNav typeMenu={ mapMenus.admin }/>
+                    <SiderNav typeMenu={ mapMenus.user }/>
                 </CollapsedProvider>
 
                 <Layout className={AdminLayoutStyle.appLayout}>
