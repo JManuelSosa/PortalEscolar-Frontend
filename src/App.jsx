@@ -26,36 +26,41 @@ import AuthView from './Views/public/AuthView';
 import LandingPageEscolar from './Views/public/LandingPageEscolar';
 
 import { BibliotecaView } from './Views/student/BibliotecaAlumno';
+import ActividadesAlumno from './Views/student/ListaTarea';
+
 import BibliotecaAdminView from './Views/admin/BibliotecaAdministracion';
 import PlanEscolar from './Views/public/PlanEscolar';
 import PanelMaestro from './Views/teacher/PanelMaestro';
-// Nuevas vistas para el Panel de Maestros
-{/*import PanelMaestro from './Views/PanelMaestro';
-import AsistenciaMaestro from './Views/AsistenciaMaestro';
-import ActividadesMaestro from './Views/ActividadesMaestro';
-import JustificacionesMaestro from './Views/JustificacionesMaestro'*/}
+import ActividadesMaestro from './Views/teacher/ActividadesMaestro';
 import GruposMaestro from './Views/teacher/GruposMaestro';
+import JustificacionesAlumno from './Views/teacher/JustificacionesMaestro';
 
 import ProtectedRoute from './Router/ProtectedRoute';
 import RoleGuard from './Router/RoleGuard';
 import UnauthorizedView from './Views/utilities/UnauthorizedView';
-
+import AsistenciaMaestro from './Views/teacher/AsistenciaMaestro';
+import PanelAlumno from './Views/student/PanelEstudiante';
 
 
 function App() {
 
-  const setNotificationApi = useNotificationStore( (state) => state.setNotificationApi );
-  const [ notificationApi, contextHolder ] = notification.useNotification();
+  const setNotificationApi = useNotificationStore((state) => state.setNotificationApi);
+  const [notificationApi, contextHolder] = notification.useNotification();
 
   useEffect(() => {
     setNotificationApi(notificationApi);
   }, [notificationApi, setNotificationApi]);
 
   const configProvider = {
-      token: {
-        fontFamily: "inherit",
-        fontWeightStrong: 700,
-        colorText: 'var(--text)'
+    token: {
+      fontFamily: "inherit",
+      fontWeightStrong: 700,
+      colorText: 'var(--text)'
+    },
+    components: {
+      Form: {
+        labelFontSize: 14,
+        itemLabelFontWeight: 400,
       },
       components: { 
         Form: {
@@ -75,65 +80,70 @@ function App() {
           footerPaddingBlock: 0
         },
       }
+    }
   }
 
   return (
     <>
-    
+
       <ConfigProvider theme={configProvider} locale={esES}>
-          {contextHolder}
-          <AntApp>
-            <Routes>
+        {contextHolder}
+        <AntApp>
+          
+          <Routes>
 
-                {/* Rutas sin inicio de sesión */}
-                <Route path={ routes.landing } element={<LandingPageEscolar/>}/>
-                <Route path={ routes.login } element={<AuthView/>}></Route>
-                <Route path={ routes.pricing } element={<PlanEscolar/>}/>
-                
+            {/* Rutas sin inicio de sesión */}
+            <Route path={routes.landing} element={<LandingPageEscolar />} />
+            <Route path={routes.login} element={<AuthView />}></Route>
+            <Route path={routes.pricing} element={<PlanEscolar />} />
 
-                {/* Zona para testear rutas */ }
-                <Route element={ <UserLayout/> }>
-                  <Route path={ routes.userHome } element={<UserHomeView/>}/>
-                </Route>
-                
+            {/* Zona para testear rutas */ }
+            <Route element={ <UserLayout/> }>
+              <Route path={ routes.userHome } element={<UserHomeView/>}/>
+            </Route>
+            
+            <Route element={<AdminLayout/>}>
+                <Route path={ routes.adminHome } element={ <HomeView/> }/>
+                <Route path={ routes.divisiones } element={ <DivisionView/>}/>
+                <Route path={ routes.carreras.path } element={<CarrerasView/>}></Route>
+                <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
+                <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>
+            </Route>
 
-                    <Route element={<AdminLayout/>}>
-                        <Route path={ routes.adminHome } element={ <HomeView/> }/>
-                        <Route path={ routes.divisiones } element={ <DivisionView/>}/>
-                        <Route path={ routes.carreras.path } element={<CarrerasView/>}></Route>
-                        <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
-                        <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>
-                    </Route>
+            {/* Rutas que requieren inicio de sesión */}
+            <Route element={<ProtectedRoute/>}>
+              <Route path={ routes.unauthorized } element={ <UnauthorizedView/> }/>
 
+              {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
+              <Route element={<RoleGuard allowedRoles={['admin']}/>}>
+              </Route>                  
+            </Route>
+              
+            {/* Alumnos*/}
+            <Route path='/biblioteca' element={<BibliotecaView />}></Route>
+            <Route path='/bibliotecaAdmin' element={<BibliotecaAdminView />}></Route>
+            <Route path='/PanelAlumno' element={< PanelAlumno />}></Route>
+            <Route path='/ActividadesAlumno' element={<ActividadesAlumno />}></Route>
 
+            {/* Maestros */}
+            <Route path='/panelMaestro' element={<PanelMaestro />}></Route>
+            <Route path='/gruposMaestro' element={<GruposMaestro />}></Route>
+            <Route path='/JustificacionesAlumno' element={<JustificacionesAlumno />}></Route>
+            <Route path={routes.asistenciaMaestro} element={<AsistenciaMaestro />} />
+            <Route path='/ActividadesMaestro' element={<ActividadesMaestro />}></Route>
 
-                {/* Rutas que requieren inicio de sesión */}
-                <Route element={<ProtectedRoute/>}>
-                  <Route path={ routes.unauthorized } element={ <UnauthorizedView/> }/>
-
-                  {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
-                  <Route element={<RoleGuard allowedRoles={['admin']}/>}>
-                  </Route>                  
-                
-                </Route>
-
-                <Route path='/biblioteca' element={<BibliotecaView />}></Route>
-                <Route path='/bibliotecaAdmin' element={<BibliotecaAdminView />}></Route>
-                <Route path='/panelMaestro' element={<PanelMaestro />}></Route>
-                <Route path='/gruposMaestro' element={<GruposMaestro />}></Route>
-                <Route path='/justificacionesMaestro' element=''></Route>
-
-                {
-                  /* Nuevas Rutas para el Panel de Maestros 
-                  <Route path='/maestros' element={<AdminLayout> <PanelMaestro /> </AdminLayout>} />
-                  <Route path='/maestros/asistencia' element={<AdminLayout> <AsistenciaMaestro /> </AdminLayout>} />
-                  <Route path='/maestros/actividades' element={<AdminLayout> <ActividadesMaestro /> </AdminLayout>} />
-                  <Route path='/maestros/justificaciones' element={<AdminLayout> <JustificacionesMaestro /> </AdminLayout>} />
-                  <Route path='/maestros/grupos' element={<AdminLayout> <GruposMaestro /> </AdminLayout>} />*/
-                }
-            </Routes>
-          </AntApp>
-        </ConfigProvider>
+            {
+              /* Nuevas Rutas para el Panel de Maestros  __eliminar de las  rutas.
+              <Route path='/maestros' element={<AdminLayout> <PanelMaestro /> </AdminLayout>} />
+              <Route path='/maestros/asistencia' element={<AdminLayout> <AsistenciaMaestro /> </AdminLayout>} />
+              <Route path='/maestros/actividades' element={<AdminLayout> <ActividadesMaestro /> </AdminLayout>} />
+              <Route path='/maestros/justificaciones' element={<AdminLayout> <JustificacionesMaestro /> </AdminLayout>} />
+              <Route path='/maestros/grupos' element={<AdminLayout> <GruposMaestro /> </AdminLayout>} />*/
+            }
+            
+          </Routes>
+        </AntApp>
+      </ConfigProvider>
     </>
   )
 }

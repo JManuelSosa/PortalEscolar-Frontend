@@ -1,3 +1,5 @@
+
+
 export const routes = {
 
     // Publicas
@@ -5,16 +7,19 @@ export const routes = {
     login: '/login',
     pricing: '/pricing',
     unauthorized: '/unauthorized',
+    asistenciaMaestro: '/asistencias',
 
     // Con login
     userHome: '/home',
-    
+
     // Admin 
     adminHome: '/admin',
 
+    
     empleados: '/empleados',
 
 
+    // División
     divisiones: '/divisiones',
     carreras: {
         path: '/divisiones/:divisionID/carreras',
