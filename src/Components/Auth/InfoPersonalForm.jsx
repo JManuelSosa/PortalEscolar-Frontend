@@ -254,6 +254,4 @@ export default function InfoPersonalForm({ name = null, parentForm = null, proce
         
         </>
     )
-
-
 }

@@ -8,8 +8,6 @@ import NotificationContentError from "../Components/Utilities/NotificationConten
 //* Componentes
 import ButtonCloseNotification from "../Components/Utilities/ButtonCloseNotification";
 
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
 export function useAuth() {
 
     const { loginStore, logoutStore, token } = useAuthStore();

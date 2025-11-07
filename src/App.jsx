@@ -24,6 +24,7 @@ import { routes } from './Js/Utilities/Routes';
 //Test
 import AuthView from './Views/public/AuthView';
 import LandingPageEscolar from './Views/public/LandingPageEscolar';
+import EmpleadosView from './Views/admin/EmpleadosView';
 
 import { BibliotecaView } from './Views/student/BibliotecaAlumno';
 import ActividadesAlumno from './Views/student/ListaTarea';
@@ -104,7 +105,8 @@ function App() {
             
             <Route element={<AdminLayout/>}>
                 <Route path={ routes.adminHome } element={ <HomeView/> }/>
-                <Route path={ routes.divisiones } element={ <DivisionView/>}/>
+                <Route path={ routes.empleados } element={<EmpleadosView/>}/>
+                <Route path={ routes.divisiones } element={<DivisionView/>}/>
                 <Route path={ routes.carreras.path } element={<CarrerasView/>}></Route>
                 <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
                 <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>

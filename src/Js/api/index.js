@@ -21,7 +21,7 @@ api.interceptors.request.use(
 
         const authStore = useAuthStore.getState();
         const schoolStore = useSchoolStore.getState();
-        authStore.checkExpiration(); //* Verificar si el token todavía le queda tiempo en cada petición.
+        // authStore.checkExpiration(); //* Verificar si el token todavía le queda tiempo en cada petición.
 
         const token = authStore.token; //? Token global guardado en la sesión
         const schoolId = schoolStore.currentSchoolId;
@@ -30,8 +30,10 @@ api.interceptors.request.use(
             config.headers.Authorization = `Bearer ${token}`;
         }
 
-        if(schoolId && !config.url.startsWith(`/${schoolId}`)) {
-            config.url = `${schoolId}${config.url}`;
+        if(schoolId && !config.global) {
+
+            const endpoint = config.url.startsWith('/') ? config.url.substring(1) : config.url;
+            config.url = `${schoolId}/${endpoint}`;
         }
 
         return config;

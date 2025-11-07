@@ -1,7 +1,7 @@
 
 
 export const routes = {
-
+    
     // Publicas
     landing: '/',
     login: '/login',

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {  
     Layout,  
     Button,  
@@ -48,6 +49,7 @@ const LandingPageEscolar = () => {
     const [pricingVisible, setPricingVisible] = useState(false);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const navigate = useNavigate();
 
     // Datos para las características
     const features = [
@@ -274,7 +276,9 @@ const LandingPageEscolar = () => {
                             <Button 
                                 type="primary" 
                                 size="large"
-                                onClick={showLoginModal}
+                                onClick={() => {
+                                    navigate('/login');
+                                }}
                                 style={{
                                     background: 'rgba(255,255,255,0.2)',
                                     border: '1px solid rgba(255,255,255,0.3)',
