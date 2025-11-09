@@ -4,7 +4,6 @@ import { useState, useMemo } from "react";
 import { Form, Input, DatePicker, Select, Spin, Alert, Button } from "antd";
 //* Hooks
 import { useAutoForm } from "../../Hooks/useAutoForm";
-import { useRegisterFormData } from "../../Hooks/Fetching/usePublicData";
 //* Componentes
 import SubmitButton from "../Utilities/SubmitButton";
 import LoadingLogo from "../Utilities/LoadingLogo";
@@ -26,13 +25,13 @@ const searchCity = (optionA, optionB) => (optionA?.label ?? '').toLowerCase().lo
 const loadIndicator = <LoadingLogo size="160px"/>
 
 
-export default function InfoPersonalForm({ name = null, parentForm = null, processForm, btnSubmitContent }){
+export default function InfoPersonalForm({ name = null, parentForm = null, processForm, btnSubmitContent, formData }){
 
     const nameForm = name ?? 'personal-Info-Form';
-    const form = useAutoForm(nameForm, parentForm);
+    const { form } = useAutoForm(nameForm, parentForm, { standalone: false, debounceMs: 700});
     const [current, setCurrent] = useState(0);
 
-    const { statesForSelect, gendersForSelect, statesById, isLoading, isError } = useRegisterFormData();
+    const { statesForSelect = [], gendersForSelect = [], statesById = {}, isLoading, isError } = formData || {};
 
     const selectedStateId = Form.useWatch('state', form);
 
@@ -87,7 +86,6 @@ export default function InfoPersonalForm({ name = null, parentForm = null, proce
     
     const steps = [
         {
-            title: 'First',
             content: (<fieldset className={ css['fieldset'] }>
                         <legend className={css['legend']}>Información Personal</legend>
                         
@@ -141,7 +139,6 @@ export default function InfoPersonalForm({ name = null, parentForm = null, proce
                     </fieldset>),
         },
         {
-            title: 'First',
             content: (<fieldset className={css['fieldset']}>
 
                         <legend className={css['legend']}>Información Contacto</legend>

@@ -17,18 +17,15 @@ export const transformOnBoardEmployeeFormData = (rawApiData) => {
         };
     }
 
-    console.log(rawApiData['estados_y_ciudades']);
 
     //* 1. Transformar Estados
     const statesForSelect = rawApiData['estados_y_ciudades'].map(state => ({
         label: state.name,
         value: state.id
     }));
-    console.log(statesForSelect);
 
     //* 2. Transformar Generos
     const gendersForSelect = apiObjectToSelectOptions(rawApiData['generos']);
-    console.log(gendersForSelect);
 
     //* 3. Obtener estados indexados para su busqueda rápida
     const statesById = rawApiData['estados_y_ciudades'].reduce( (acc, state) => {
@@ -36,15 +33,12 @@ export const transformOnBoardEmployeeFormData = (rawApiData) => {
         return acc;
     }, {});
 
-    console.log(statesById);
 
     //* 4. Transformar roles
     const rolesForSelect = apiObjectToSelectOptions(rawApiData['roles_empleado']);
-    console.log(rolesForSelect);
 
     //* 5 Transformar grados academicos
     const academicDegreesForSelect = apiObjectToSelectOptions(rawApiData['grados_academicos']);
-    console.log(academicDegreesForSelect);
 
     return { statesForSelect, gendersForSelect, statesById, rolesForSelect, academicDegreesForSelect };
 }

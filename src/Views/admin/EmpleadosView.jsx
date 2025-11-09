@@ -1,22 +1,21 @@
+//* React
 import { useState } from "react";
+
+//* Ant
 import { Card, Button } from "antd"
+
+//* Hooks
 import { useGetEmployees } from "../../Hooks/Fetching/useGetData"
+import { useOnBoardEmployeeFormData } from "../../Hooks/Fetching/usePublicData";
+
+//* Componentes
 import ListaEmpleados from "../../Components/Layout/Admin/ListaEmpleados";
-import EmployeeOnboardDrawer from "../../Components/Layout/Admin/EmployeeOnboardDrawer";
+import EmployeeOnboardModal from "../../Components/Layout/Admin/EmployeeOnboardModal";
 
 export default function EmpleadosView(){
 
     const { data: employees = [], isLoading, isError } = useGetEmployees();
-    const [openDrawer, setOpenDrawer] = useState(false);
-    
-    const showDrawer = () => {
-        setOpenDrawer(true);
-    };
-
-    const closeDrawer = () => {
-        setOpenDrawer(false);
-    };
-    console.log(employees);
+    const newEmployeeFormData = useOnBoardEmployeeFormData();
 
     return (
         <>
@@ -29,7 +28,7 @@ export default function EmpleadosView(){
             <Card>
                 <ListaEmpleados employees={employees} isLoading={isLoading} isError={isError}/>
             </Card>
-            <EmployeeOnboardDrawer onClose={closeDrawer} open={openDrawer}/>
+            <EmployeeOnboardModal formData={newEmployeeFormData}/>
             
         </>
     )

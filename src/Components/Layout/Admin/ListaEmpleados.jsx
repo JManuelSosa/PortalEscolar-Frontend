@@ -17,7 +17,7 @@ export default function ListaEmpleados({ employees, isLoading, isError, error })
     if (isLoading) {
         return (
             <div style={{height:"100%", width: "100%", display: 'flex', justifyContent:'center', alignItems:'center', overflow:'hidden'}}>
-                <Spin indicator={<LoadingLogo/>} tip="Cargando empleados"/>
+                <Spin indicator={<LoadingLogo/>}/>
             </div>
         );
     }
