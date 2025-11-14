@@ -1,0 +1,18 @@
+.items{
+    display: flex;
+    padding: 0.5rem;
+    justify-content: space-evenly;
+    flex-direction: column;
+    gap: 1.6rem;
+
+    & .form-item{
+        flex: 1;
+    }
+}
+
+.nav-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}

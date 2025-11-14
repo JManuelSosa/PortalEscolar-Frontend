@@ -59,11 +59,6 @@ function App() {
       colorText: 'var(--text)'
     },
     components: {
-      Form: {
-        labelFontSize: 14,
-        itemLabelFontWeight: 400,
-      },
-      components: { 
         Form: {
           labelFontSize: 14,
           itemLabelFontWeight: 400,
@@ -80,7 +75,14 @@ function App() {
         Drawer: {
           footerPaddingBlock: 0
         },
-      }
+        Button: {
+          // Para botones primarios
+          colorPrimary: 'var(--primary)',
+          colorPrimaryHover: 'var(--primary-hover)',
+          colorPrimaryActive: 'var(--primary-active)',
+          colorPrimaryBorder: 'var(--primary)',
+        }
+      
     }
   }
 
@@ -102,22 +104,22 @@ function App() {
             <Route element={ <UserLayout/> }>
               <Route path={ routes.userHome } element={<UserHomeView/>}/>
             </Route>
-            
-            <Route element={<AdminLayout/>}>
-                <Route path={ routes.adminHome } element={ <HomeView/> }/>
-                <Route path={ routes.empleados } element={<EmpleadosView/>}/>
-                <Route path={ routes.divisiones } element={<DivisionView/>}/>
-                <Route path={ routes.carreras.path } element={<CarrerasView/>}></Route>
-                <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
-                <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>
-            </Route>
+
 
             {/* Rutas que requieren inicio de sesión */}
             <Route element={<ProtectedRoute/>}>
               <Route path={ routes.unauthorized } element={ <UnauthorizedView/> }/>
 
               {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
-              <Route element={<RoleGuard allowedRoles={['admin']}/>}>
+              <Route element={<RoleGuard allowedRoles={['Administrador']}/>}>
+                <Route element={<AdminLayout/>}>
+                  <Route path={ routes.adminHome } element={ <HomeView/> }/>
+                  <Route path={ routes.empleados } element={<EmpleadosView/>}/>
+                  <Route path={ routes.divisiones } element={<DivisionView/>}/>
+                  <Route path={ routes.carreras.path } element={<CarrerasView/>}></Route>
+                  <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
+                  <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>
+                </Route>
               </Route>                  
             </Route>
               

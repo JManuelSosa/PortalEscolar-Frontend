@@ -40,5 +40,8 @@ export const transformOnBoardEmployeeFormData = (rawApiData) => {
     //* 5 Transformar grados academicos
     const academicDegreesForSelect = apiObjectToSelectOptions(rawApiData['grados_academicos']);
 
-    return { statesForSelect, gendersForSelect, statesById, rolesForSelect, academicDegreesForSelect };
+    //* 6 Roles crudos
+    const rawRoles = rawApiData['roles_empleado'];
+
+    return { statesForSelect, gendersForSelect, statesById, rolesForSelect, academicDegreesForSelect, rawRoles };
 }

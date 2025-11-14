@@ -10,6 +10,11 @@ const publicDataService = {
     getOnBoardEmployeeFormData: async () => {
         const response = await api.get('/dataOnBoardEmployee', { global: true });
         return response.data.data;
+    },
+
+    getSystemEmployees: async () => {
+        const response = await api.get('/allemployees', { global: true });
+        return response.data.data;
     }
 
 }

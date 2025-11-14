@@ -2,6 +2,8 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { useSchoolStore } from "./schoolStore";
+import { message } from "antd";
+
 
 export const useAuthStore = create(
     persist(

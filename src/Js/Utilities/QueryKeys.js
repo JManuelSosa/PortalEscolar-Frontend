@@ -1,5 +1,6 @@
 export const queryKeys = { 
     registerFormData: ["registerFormData"],
     onBoardEmployeeFormData: ["onBoardEmployeeFormData"],
-    employees: ["employees"]
+    employees: (schoolId) => ["employees", schoolId],
+    systemEmployees: ["systemEmployees"]
 };

@@ -1,15 +1,21 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNotificationStore } from "../../stores/notificationStore";
 import { api } from  "@js/api";
 import { App as AntApp } from "antd";
 import { queryKeys } from "../../Js/Utilities/QueryKeys";
-
+import { useSchoolStore } from "../../stores/schoolStore";
 //* Componentes
 import ButtonCloseNotification from "../../Components/Utilities/ButtonCloseNotification";
 import NotificationContentError from "../../Components/Utilities/NotificationContentError";
 
-export function useEmployeeMutations() {
+//* Utilidades
+import dayjs from "dayjs";
+import dateKeys from "../../Js/Utilities/dateKeys";
 
+export function useEmployeeMutations() {
+    
+    const queryClient = useQueryClient();
+    const schoolId = useSchoolStore((state) => state.currentSchoolId);
     const apiNotifications = useNotificationStore.getState().notificationApi;
     const { message: messageApi } = AntApp.useApp ? AntApp.useApp() : { message: null };
 
@@ -20,38 +26,41 @@ export function useEmployeeMutations() {
     // Mutacion para registro
     const onBoardMutation = useMutation({
         mutationFn: (formData) => { 
-            
-            const data = {...formData};
-            
-            if (data.birth_date) {
-                data.birth_date = data.birth_date.format('YYYY-MM-DD');
-            }
 
-            if(data.entry_date) {
-                data.entry_date = data.entry_date.format('YYYY-MM-DD');
-            }
+            const data = Object.keys(formData).reduce((acc, key) => {
+                const currentValue = formData[key];
+
+                if(dateKeys.includes(key) && dayjs.isDayjs(currentValue)){
+                    acc[key] = currentValue.format('YYYY-MM-DD');
+                }
+                else{
+                    acc[key] = currentValue;
+                }
+
+                return acc;
+            },{});
             
             const formatData = {
                 person: {
-                    name: data.name,
-                    first_last_name: data.first_last_name,
-                    second_last_name: data.second_last_name,
+                    name: data.nombre,
+                    first_last_name: data.primer_apellido,
+                    second_last_name: data.segundo_apellido,
                     curp: data.curp,
-                    gender: data.gender,
-                    phone_number: data.phone_number,
-                    birth_date: data.birth_date,
-                    address: data.address,
-                    state: data.state,
-                    city_id: data.city
+                    gender: data.genero,
+                    phone_number: data.numero_telefonico,
+                    birth_date: data.fecha_nacimiento,
+                    address: data.direccion,
+                    state: data.estado,
+                    city_id: data.ciudad
                 },
                 employee: {
-                    entry_date: data.entry_date,
-                    comments: data.comments ?? null,
-                    employee_role: data.employee_role
+                    entry_date: data.fecha_entrada,
+                    comments: data.comentarios ?? null,
+                    employee_role: data.rol
                 },
                 teacher: {
-                    academic_degree: data.academic_degree ?? null,
-                    career_name: data.career_name ?? null
+                    academic_degree: data.grado_academico ?? null,
+                    career_name: data.carrera ?? null
                 }
             }
             
@@ -59,7 +68,7 @@ export function useEmployeeMutations() {
         },
         onSuccess: (res) => {
             messageApi.success('Empleado registrado con éxito');
-            queryClient.invalidateQueries({ queryKey: [queryKeys.employees] });
+            queryClient.invalidateQueries({ queryKey: queryKeys.employees(schoolId) });
         },
         onError: (error) => {
             const data = error.response?.data;
