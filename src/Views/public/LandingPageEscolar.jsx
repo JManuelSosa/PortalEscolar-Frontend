@@ -1,435 +1,269 @@
-import { useState } from 'react';
-import {  
-    Layout,  
-    Button,  
-    Card,  
-    Row,  
-    Col,  
-    Typography,  
-    Space,  
-    Divider,  
-    List,  
-    Avatar,  
-    Statistic,  
-    Tag,  
-    Form,  
-    Input,  
+import { useState, useRef, useEffect } from 'react';
+import {
+    Layout,
+    Button,
+    Card,
+    Row,
+    Col,
+    Typography,
+    Space,
+    Divider,
+    List,
+    Avatar,
+    Statistic,
+    Tag,
+    Form,
+    Input,
     Modal,
     FloatButton,
     message,
-    Badge
-} from 'antd';  
-import {   
-    TeamOutlined,  
-    BookOutlined,  
-    TrophyOutlined,  
-    CalendarOutlined,  
-    StarOutlined,  
-    RightOutlined,  
-    UserOutlined,  
-    LockOutlined,  
-    PhoneOutlined,  
-    MailOutlined,  
+    Badge,
+    Spin
+} from 'antd';
+import {
+    TeamOutlined,
+    BookOutlined,
+    TrophyOutlined,
+    CalendarOutlined,
+    StarOutlined,
+    RightOutlined,
+    UserOutlined,
+    LockOutlined,
+    PhoneOutlined,
+    MailOutlined,
     EnvironmentOutlined,
     MessageOutlined,
     DollarOutlined,
+    SendOutlined,
+    CheckOutlined,
+    BankOutlined,
+    LaptopOutlined,
     CloseOutlined,
-    SendOutlined
+    RobotOutlined
 } from '@ant-design/icons';
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph, Text } = Typography;
 const { Meta } = Card;
-const { TextArea } = Input;
 
 const LandingPageEscolar = () => {
+    // --- ESTADOS GLOBALES ---
     const [loginVisible, setLoginVisible] = useState(false);
-    const [chatVisible, setChatVisible] = useState(false);
     const [pricingVisible, setPricingVisible] = useState(false);
-    const [messages, setMessages] = useState([]);
-    const [newMessage, setNewMessage] = useState('');
 
-    // Datos para las características
+    // --- ESTADOS DEL CHATBOT ---
+    const [chatOpen, setChatOpen] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const messagesEndRef = useRef(null);
+
+    // Mensajes iniciales del bot
+    const [chatMessages, setChatMessages] = useState([
+        {
+            id: 1,
+            sender: 'bot',
+            text: '¡Hola! Bienvenido al portal de EduConnect. Soy su asistente virtual institucional. ¿En qué puedo apoyarle hoy?'
+        }
+    ]);
+
+    // Opciones rápidas para el usuario
+    const quickOptions = [
+        "Información de Inscripción",
+        "Problemas de Acceso",
+        "Contactar a Control Escolar"
+    ];
+
+    // --- COLORES CORPORATIVOS (FORMALES) ---
+    const colors = {
+        primary: '#002766', // Azul oscuro académico
+        accent: '#faad14',  // Dorado/Amarillo institucional
+        bgLight: '#f0f2f5',
+        textHeading: '#001529',
+        chatBg: '#f0f2f5'
+    };
+
+    // --- DATOS ESTÁTICOS ---
     const features = [
-        {
-            icon: <TeamOutlined style={{ fontSize: '48px', color: '#1890ff' }} />,
-            title: 'Gestión de Usuarios',
-            description: 'Administra estudiantes, profesores y personal administrativo de manera eficiente.'
-        },
-        {
-            icon: <BookOutlined style={{ fontSize: '48px', color: '#52c41a' }} />,
-            title: 'Plataforma Académica',
-            description: 'Accede a materiales, calificaciones y recursos educativos en un solo lugar.'
-        },
-        {
-            icon: <CalendarOutlined style={{ fontSize: '48px', color: '#faad14' }} />,
-            title: 'Horarios Inteligentes',
-            description: 'Organiza y visualiza horarios de clases y actividades escolares.'
-        },
-        {
-            icon: <TrophyOutlined style={{ fontSize: '48px', color: '#eb2f96' }} />,
-            title: 'Seguimiento Académico',
-            description: 'Monitorea el progreso y rendimiento de los estudiantes en tiempo real.'
-        }
+        { icon: <TeamOutlined style={{ fontSize: '40px', color: colors.primary }} />, title: 'Gestión Administrativa', description: 'Control total de expedientes de alumnos y docentes.' },
+        { icon: <LaptopOutlined style={{ fontSize: '40px', color: colors.primary }} />, title: 'Aula Virtual', description: 'Entorno digital para recursos y tareas.' },
+        { icon: <CalendarOutlined style={{ fontSize: '40px', color: colors.primary }} />, title: 'Planeación Escolar', description: 'Generación de cargas horarias y calendarios.' },
+        { icon: <TrophyOutlined style={{ fontSize: '40px', color: colors.primary }} />, title: 'Kardex Digital', description: 'Seguimiento de trayectoria académica.' }
     ];
 
-    // Datos para estad├¡sticas
     const statistics = [
-        {
-            title: 'Estudiantes Activos',
-            value: 1250,
-            suffix: '+'
-        },
-        {
-            title: 'Profesores',
-            value: 85,
-            suffix: '+'
-        },
-        {
-            title: 'Carreras',
-            value: 12,
-            suffix: ''
-        },
-        {
-            title: 'Años de Experiencia',
-            value: 15,
-            suffix: '+'
-        }
+        { title: 'Alumnos Matriculados', value: 2500, suffix: '+' },
+        { title: 'Cuerpo Docente', value: 120, suffix: '' },
+        { title: 'Programas Educativos', value: 15, suffix: '' },
+        { title: 'Egresados Exitosos', value: 5000, suffix: '+' }
     ];
 
-    // Testimonios
     const testimonials = [
-        {
-            name: 'María González',
-            role: 'Estudiante de Ingeniería',
-            avatar: '­ƒæ®ÔÇì­ƒÄô',
-            content: 'La plataforma ha mejorado mi organización académica significativamente.'
-        },
-        {
-            name: 'Carlos Rodríguez',
-            role: 'Profesor de Matemáticas',
-            avatar: '­ƒæ¿ÔÇì­ƒÅ½',
-            content: 'Herramienta esencial para la gestión de mis clases y seguimiento de estudiantes.'
-        },
-        {
-            name: 'Ana Martínez',
-            role: 'Directora Académica',
-            avatar: '­ƒæ®ÔÇì­ƒÆ╝',
-            content: 'Sistema robusto que ha optimizado todos nuestros procesos administrativos.'
-        }
+        { name: 'Dra. Elena R.', role: 'Rectora Universitaria', avatar: 'https://xsgames.co/randomusers/avatar.php?g=female', content: 'La implementación optimizó nuestros procesos un 40%.' },
+        { name: 'Ing. Marco P.', role: 'Coord. Sistemas', avatar: 'https://xsgames.co/randomusers/avatar.php?g=male', content: 'Plataforma estable y segura, ideal para universidades.' },
+        { name: 'Lic. Sarah J.', role: 'Control Escolar', avatar: 'https://xsgames.co/randomusers/avatar.php?g=female&v=2', content: 'La generación de actas es automática y sin errores.' }
     ];
 
-    // Planes de precios
     const pricingPlans = [
-        {
-            name: 'Básico',
-            price: '$99',
-            period: 'por mes',
-            description: 'Perfecto para instituciones pequeñas',
-            features: [
-                'Hasta 100 usuarios',
-                'Gestión básica de cursos',
-                'Soporte por email',
-                'Reportes básicos'
-            ],
-            recommended: false
-        },
-        {
-            name: 'Profesional',
-            price: '$199',
-            period: 'por mes',
-            description: 'Ideal para instituciones medianas',
-            features: [
-                'Hasta 500 usuarios',
-                'Gestión avanzada de cursos',
-                'Soporte prioritario',
-                'Reportes avanzados',
-                'Integración API'
-            ],
-            recommended: true
-        },
-        {
-            name: 'Empresarial',
-            price: '$399',
-            period: 'por mes',
-            description: 'Para grandes instituciones educativas',
-            features: [
-                'Usuarios ilimitados',
-                'Todas las funcionalidades',
-                'Soporte 24/7',
-                'Personalización',
-                'Capacitación incluida'
-            ],
-            recommended: false
-        }
+        { name: 'Institucional Básico', price: '$2,500', period: 'MXN / mes', features: ['Hasta 300 alumnos', 'Portal básico', 'Soporte 8/5'], recommended: false },
+        { name: 'Campus Pro', price: '$5,000', period: 'MXN / mes', features: ['Hasta 1500 alumnos', 'Módulo finanzas', 'Soporte 24/7', 'App Móvil'], recommended: true },
+        { name: 'Multi-Campus', price: 'A medida', period: '', features: ['Alumnos ilimitados', 'Gestión multi-sede', 'Servidor dedicado'], recommended: false }
     ];
 
-    const showLoginModal = () => {
-        setLoginVisible(true);
+    // --- LÓGICA DEL CHATBOT ---
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    const handleLoginCancel = () => {
-        setLoginVisible(false);
-    };
+    useEffect(() => {
+        scrollToBottom();
+    }, [chatMessages, isTyping]);
 
-    const showChatModal = () => {
-        setChatVisible(true);
-    };
+    const handleBotResponse = (userText) => {
+        setIsTyping(true);
+        let botReply = "";
 
-    const handleChatCancel = () => {
-        setChatVisible(false);
-    };
-
-    const showPricingModal = () => {
-        setPricingVisible(true);
-    };
-
-    const handlePricingCancel = () => {
-        setPricingVisible(false);
-    };
-
-    const onLoginFinish = (values) => {
-        console.log('Login values:', values);
-        message.success('Inicio de sesión exitoso');
-        setLoginVisible(false);
-    };
-
-    const handleSendMessage = () => {
-        if (newMessage.trim()) {
-            const userMessage = {
-                id: Date.now(),
-                text: newMessage,
-                sender: 'user',
-                timestamp: new Date().toLocaleTimeString()
-            };
-            
-            setMessages([...messages, userMessage]);
-            setNewMessage('');
-
-            // Simular respuesta automática del administrador
-            setTimeout(() => {
-                const adminMessage = {
-                    id: Date.now() + 1,
-                    text: 'Gracias por tu mensaje. Un administrador se comunicará contigo pronto.',
-                    sender: 'admin',
-                    timestamp: new Date().toLocaleTimeString()
-                };
-                setMessages(prev => [...prev, adminMessage]);
-            }, 1000);
+        // Lógica simple de respuestas (Simulación de IA)
+        const lowerText = userText.toLowerCase();
+        if (lowerText.includes('inscripci')) {
+            botReply = "El periodo de inscripciones para el ciclo 2025 inicia el 1 de Agosto. Puede consultar los requisitos en el menú 'Aspirantes'.";
+        } else if (lowerText.includes('acceso') || lowerText.includes('contraseña') || lowerText.includes('entrar')) {
+            botReply = "Si tiene problemas para acceder al portal, por favor verifique que su matrícula esté activa o solicite un restablecimiento de contraseña en Control Escolar.";
+        } else if (lowerText.includes('costo') || lowerText.includes('precio') || lowerText.includes('pago')) {
+            botReply = "Manejamos diferentes esquemas de becas y pagos. Le invito a revisar nuestra sección de Planes o contactar a Finanzas.";
+        } else if (lowerText.includes('contacto') || lowerText.includes('ubicacion')) {
+            botReply = "Estamos ubicados en Ciudad Universitaria, Edificio B. Tel: (953) 555-0000. Horario: Lunes a Viernes 8:00 - 16:00.";
+        } else {
+            botReply = "Entiendo. Para brindarle una atención más personalizada, un asesor académico revisará su consulta y le contactará a la brevedad.";
         }
+
+        setTimeout(() => {
+            setChatMessages(prev => [...prev, { id: Date.now(), sender: 'bot', text: botReply }]);
+            setIsTyping(false);
+        }, 1500); // Retraso para simular escritura
     };
 
-    const handlePlanSelect = (planName) => {
-        message.success(`Has seleccionado el plan ${planName}. Te contactaremos pronto.`);
-        setPricingVisible(false);
+    const handleSendMessage = (text = inputValue) => {
+        if (!text.trim()) return;
+
+        // Agregar mensaje del usuario
+        setChatMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: text }]);
+        setInputValue('');
+
+        // Disparar respuesta del bot
+        handleBotResponse(text);
+    };
+
+    // --- OTRAS FUNCIONES ---
+    const showLoginModal = () => setLoginVisible(true);
+    const handleLoginCancel = () => setLoginVisible(false);
+    const showPricingModal = () => setPricingVisible(true);
+    const handlePricingCancel = () => setPricingVisible(false);
+
+    const onLoginFinish = () => {
+        message.loading('Verificando credenciales...', 1).then(() => {
+            message.success('Bienvenido al Portal Institucional');
+            setLoginVisible(false);
+        });
     };
 
     return (
-        <Layout style={{ minHeight: '100vh' }}>
-            {/* Header */}
-            <Header style={{ 
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                padding: '0 50px',
-                position: 'fixed',
-                width: '100%',
-                zIndex: 1000
-            }}>
+        <Layout style={{ minHeight: '100vh', fontFamily: "'Roboto', sans-serif" }}>
+            {/* Header Formal */}
+            <Header style={{ background: '#fff', padding: '0 50px', position: 'fixed', width: '100%', zIndex: 1000, boxShadow: '0 2px 15px rgba(0,0,0,0.08)', borderBottom: `3px solid ${colors.primary}` }}>
                 <Row justify="space-between" align="middle" style={{ height: '64px' }}>
                     <Col>
-                        <Space>
-                            {/* Logo de la plataforma */}
-                            <div style={{
-                                width: '40px',
-                                height: '40px',
-                                background: 'white',
-                                borderRadius: '8px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontWeight: 'bold',
-                                color: '#667eea'
-                            }}>
-                                PE
-                            </div>
-                            <Title level={3} style={{ color: 'white', margin: 0 }}>
-                                EduConnect
+                        <Space align="center">
+                            <BankOutlined style={{ fontSize: '28px', color: colors.primary }} />
+                            <Title level={3} style={{ color: colors.primary, margin: 0, fontWeight: 800, letterSpacing: '-0.5px' }}>
+                                EDU<span style={{ color: colors.accent }}>CONNECT</span>
                             </Title>
                         </Space>
                     </Col>
                     <Col>
-                        <Space size="middle">
-                            <Button 
-                                type="default"
-                                size="large"
-                                onClick={showPricingModal}
-                                icon={<DollarOutlined />}
-                                style={{
-                                    background: 'rgba(255,255,255,0.9)',
-                                    border: 'none',
-                                    fontWeight: '600'
-                                }}
-                            >
-                                Ver Precios
-                            </Button>
-                            <Button 
-                                type="primary" 
-                                size="large"
-                                onClick={showLoginModal}
-                                style={{
-                                    background: 'rgba(255,255,255,0.2)',
-                                    border: '1px solid rgba(255,255,255,0.3)',
-                                    fontWeight: '600'
-                                }}
-                            >
-                                Iniciar Sesión
+                        <Space size="large">
+                            <Button type="text" className="hidden-mobile">Soluciones</Button>
+                            <Button type="text" className="hidden-mobile">Instituciones</Button>
+                            <Button type="primary" onClick={showLoginModal} style={{ background: colors.primary, borderColor: colors.primary, fontWeight: '600', padding: '0 25px' }}>
+                                Portal Académico
                             </Button>
                         </Space>
                     </Col>
                 </Row>
             </Header>
 
-            {/* Hero Section */}
-            <Content style={{ marginTop: '64px' }}>
+            <Content style={{ marginTop: '64px', background: '#fff' }}>
+                {/* Hero Section */}
                 <section style={{
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    color: 'white',
-                    padding: '100px 50px',
-                    textAlign: 'center'
+                    position: 'relative',
+                    background: `linear-gradient(rgba(0, 39, 102, 0.85), rgba(0, 21, 41, 0.8)), url('https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed`,
+                    color: 'white', padding: '160px 20px 120px', textAlign: 'center'
                 }}>
-                    <Title level={1} style={{ color: 'white', fontSize: '3.5rem', marginBottom: '24px' }}>
-                        EduConnect
-                    </Title>
-                    <Paragraph style={{ 
-                        fontSize: '1.5rem', 
-                        marginBottom: '40px',
-                        opacity: 0.9
-                    }}>
-                        La solución integral para la gestión educativa moderna
-                    </Paragraph>
-                    <Space size="large">
-                        <Button 
-                            type="primary" 
-                            size="large"
-                            onClick={showLoginModal}
-                            style={{
-                                height: '50px',
-                                padding: '0 40px',
-                                fontSize: '16px',
-                                fontWeight: '600'
-                            }}
-                        >
-                            Acceder al Portal
-                        </Button>
-                        <Button 
-                            size="large"
-                            onClick={showPricingModal}
-                            style={{
-                                height: '50px',
-                                padding: '0 40px',
-                                fontSize: '16px',
-                                borderColor: 'white',
-                                color: 'white',
-                                background: 'transparent'
-                            }}
-                        >
-                            Ver Planes y Precios
-                        </Button>
-                    </Space>
+                    <Row justify="center">
+                        <Col xs={24} md={18} lg={14}>
+                            <Tag color={colors.accent} style={{ color: '#000', fontWeight: 'bold', marginBottom: '20px' }}>NUEVO CICLO 2025</Tag>
+                            <Title level={1} style={{ color: 'white', fontSize: '3.5rem', fontWeight: 700, marginBottom: '24px' }}>Excelencia Tecnológica para la Educación Superior</Title>
+                            <Paragraph style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.9)', marginBottom: '40px' }}>Plataforma integral de gestión escolar diseñada para universidades tecnológicas.</Paragraph>
+                            <Space size="middle" wrap>
+                                <Button type="primary" size="large" onClick={showLoginModal} style={{ background: colors.accent, borderColor: colors.accent, color: '#000', fontWeight: 'bold', height: '50px', padding: '0 40px' }}>Acceso Institucional</Button>
+                                <Button ghost size="large" onClick={showPricingModal} style={{ height: '50px', padding: '0 40px' }}>Solicitar Demo</Button>
+                            </Space>
+                        </Col>
+                    </Row>
                 </section>
 
+                {/* Barra de Aliados */}
+                <div style={{ background: '#f5f5f5', padding: '30px 0', borderBottom: '1px solid #e8e8e8' }}>
+                    <Row justify="center" align="middle" gutter={[48, 24]} style={{ opacity: 0.6, filter: 'grayscale(100%)' }}>
+                        <Col><Title level={4} style={{ margin: 0, color: '#666' }}>U.T.M.</Title></Col>
+                        <Col><Title level={4} style={{ margin: 0, color: '#666' }}>TECNOLÓGICO NACIONAL</Title></Col>
+                        <Col><Title level={4} style={{ margin: 0, color: '#666' }}>UNAM</Title></Col>
+                        <Col><Title level={4} style={{ margin: 0, color: '#666' }}>POLITÉCNICO</Title></Col>
+                    </Row>
+                </div>
+
                 {/* Estadísticas */}
-                <section style={{ padding: '80px 50px', background: '#fafafa' }}>
+                <section style={{ padding: '80px 50px', background: '#fff' }}>
                     <Row gutter={[32, 32]} justify="center">
                         {statistics.map((stat, index) => (
-                            <Col xs={12} sm={12} md={6} key={index}>
-                                <Statistic
-                                    title={stat.title}
-                                    value={stat.value}
-                                    suffix={stat.suffix}
-                                    valueStyle={{ color: '#1890ff' }}
-                                />
+                            <Col xs={12} sm={6} key={index} style={{ textAlign: 'center' }}>
+                                <Statistic title={stat.title} value={stat.value} suffix={stat.suffix} valueStyle={{ color: colors.primary, fontSize: '42px', fontWeight: '700' }} />
                             </Col>
                         ))}
                     </Row>
                 </section>
 
-                {/* Caracter├¡sticas Principales */}
-                <section style={{ padding: '80px 50px' }}>
-                    <Title level={2} style={{ textAlign: 'center', marginBottom: '60px' }}>
-                        ¿Por qué elegir EduConnect?
-                    </Title>
-                    <Row gutter={[32, 32]}>
+                {/* Features */}
+                <section style={{ padding: '100px 50px', background: colors.bgLight }}>
+                    <Title level={2} style={{ textAlign: 'center', color: colors.textHeading, marginBottom: '60px' }}>Ecosistema Educativo Integral</Title>
+                    <Row gutter={[24, 24]}>
                         {features.map((feature, index) => (
-                            <Col xs={24} md={12} lg={6} key={index}>
-                                <Card 
-                                    hoverable
-                                    style={{ 
-                                        textAlign: 'center',
-                                        height: '300px',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        justifyContent: 'center'
-                                    }}
-                                    bodyStyle={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
-                                >
-                                    <div style={{ marginBottom: '24px' }}>
-                                        {feature.icon}
-                                    </div>
-                                    <Title level={4}>{feature.title}</Title>
-                                    <Paragraph type="secondary">
-                                        {feature.description}
-                                    </Paragraph>
+                            <Col xs={24} sm={12} lg={6} key={index}>
+                                <Card hoverable bordered={false} style={{ height: '100%', borderRadius: '8px' }}>
+                                    <div style={{ marginBottom: '20px' }}>{feature.icon}</div>
+                                    <Title level={4} style={{ fontSize: '18px' }}>{feature.title}</Title>
+                                    <Paragraph type="secondary" style={{ fontSize: '14px' }}>{feature.description}</Paragraph>
                                 </Card>
                             </Col>
                         ))}
                     </Row>
                 </section>
 
-                {/* Demo Section */}
-                <section style={{ padding: '80px 50px', background: '#f0f2f5' }}>
-                    <Row gutter={[48, 48]} align="middle">
+                {/* Demo Visual */}
+                <section style={{ padding: '100px 50px' }}>
+                    <Row gutter={[64, 48]} align="middle">
                         <Col xs={24} lg={12}>
-                            <Title level={2}>Experiencia de Usuario Optimizada</Title>
-                            <Paragraph style={{ fontSize: '16px', lineHeight: '1.8' }}>
-                                EduConnect está diseñado pensando en la facilidad de uso y la eficiencia. 
-                                Con una interfaz intuitiva y herramientas poderosas, transformamos la experiencia 
-                                educativa digital.
+                            <Title level={2} style={{ color: colors.textHeading }}>Innovación en el Aprendizaje</Title>
+                            <Paragraph style={{ fontSize: '16px', lineHeight: '1.8', color: '#555' }}>
+                                EduConnect transforma la experiencia educativa mediante interfaces intuitivas y análisis de datos en tiempo real, permitiendo a instituciones como la <b>UTM</b> mantenerse a la vanguardia tecnológica.
                             </Paragraph>
-                            <List
-                                size="large"
-                                dataSource={[
-                                    'Interfaz moderna y responsive',
-                                    'Acceso desde cualquier dispositivo',
-                                    'Navegación intuitiva',
-                                    'Tiempos de carga optimizados'
-                                ]}
-                                renderItem={item => (
-                                    <List.Item>
-                                        <Space>
-                                            <StarOutlined style={{ color: '#52c41a' }} />
-                                            <Text>{item}</Text>
-                                        </Space>
-                                    </List.Item>
-                                )}
-                            />
-                            <Button type="primary" size="large" style={{ marginTop: '24px' }} onClick={showPricingModal}>
-                                Ver Planes <RightOutlined />
-                            </Button>
+                            <List dataSource={['Control de asistencia biométrico', 'Gestión de laboratorios y talleres', 'Biblioteca digital integrada', 'Vinculación con el sector productivo']} renderItem={item => <List.Item style={{ border: 'none', padding: '8px 0' }}><Space><CheckOutlined style={{ color: colors.primary }} /> {item}</Space></List.Item>} />
                         </Col>
                         <Col xs={24} lg={12}>
-                            <Card>
-                                <div style={{ 
-                                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                                    height: '300px',
-                                    borderRadius: '8px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: 'white'
-                                }}>
-                                    <Title level={3} style={{ color: 'white' }}>
-                                        Vista Previa de EduConnect
-                                    </Title>
+                            <Card hoverable style={{ padding: 0, overflow: 'hidden', borderRadius: '12px', border: `1px solid #d9d9d9` }} bodyStyle={{ padding: 0 }}>
+                                <img alt="Laboratorio" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" style={{ width: '100%', display: 'block' }} />
+                                <div style={{ padding: '20px', background: '#fff' }}>
+                                    <Text strong style={{ color: colors.primary, fontSize: '16px' }}>Módulo de Laboratorios de Cómputo</Text>
+                                    <Paragraph type="secondary" style={{ margin: 0, fontSize: '13px' }}>Gestión de equipos en tiempo real.</Paragraph>
                                 </div>
                             </Card>
                         </Col>
@@ -437,380 +271,171 @@ const LandingPageEscolar = () => {
                 </section>
 
                 {/* Testimonios */}
-                <section style={{ padding: '80px 50px' }}>
-                    <Title level={2} style={{ textAlign: 'center', marginBottom: '60px' }}>
-                        Lo que dicen nuestras instituciones
-                    </Title>
+                <section style={{ padding: '80px 50px', background: '#001529' }}>
+                    <Title level={2} style={{ textAlign: 'center', color: 'white', marginBottom: '60px' }}>Voces de la Academia</Title>
                     <Row gutter={[32, 32]}>
-                        {testimonials.map((testimonial, index) => (
-                            <Col xs={24} md={8} key={index}>
-                                <Card>
-                                    <Meta
-                                        avatar={
-                                            <Avatar 
-                                                size={64} 
-                                                style={{ 
-                                                    fontSize: '24px',
-                                                    backgroundColor: '#f0f2f5'
-                                                }}
-                                            >
-                                                {testimonial.avatar}
-                                            </Avatar>
-                                        }
-                                        title={testimonial.name}
-                                        description={
-                                            <>
-                                                <Tag color="blue">{testimonial.role}</Tag>
-                                                <Paragraph style={{ marginTop: '16px' }}>
-                                                    "{testimonial.content}"
-                                                </Paragraph>
-                                            </>
-                                        }
-                                    />
+                        {testimonials.map((t, i) => (
+                            <Col xs={24} md={8} key={i}>
+                                <Card bordered={false} style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
+                                    <Meta avatar={<Avatar src={t.avatar} size="large" style={{ border: `2px solid ${colors.accent}` }} />} title={<Text style={{ color: 'white' }}>{t.name}</Text>} description={<Text style={{ color: '#rgba(255,255,255,0.5)', fontSize: '12px' }}>{t.role}</Text>} />
+                                    <Paragraph style={{ color: 'rgba(255,255,255,0.8)', marginTop: '20px', fontStyle: 'italic' }}>"{t.content}"</Paragraph>
                                 </Card>
                             </Col>
                         ))}
                     </Row>
                 </section>
 
-                {/* CTA Final */}
-                <section style={{
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    color: 'white',
-                    padding: '80px 50px',
-                    textAlign: 'center',
-                    borderRadius: '16px',
-                    margin: '0 50px 80px 50px'
-                }}>
-                    <Title level={2} style={{ color: 'white', marginBottom: '24px' }}>
-                        ¿Listo para transformar tu institución?
-                    </Title>
-                    <Paragraph style={{ 
-                        fontSize: '1.2rem', 
-                        marginBottom: '40px',
-                        opacity: 0.9
-                    }}>
-                        Únete a las más de 100 instituciones que ya usan EduConnect.
-                    </Paragraph>
-                    <Space size="large">
-                        <Button 
-                            type="primary" 
-                            size="large"
-                            onClick={showLoginModal}
-                            style={{
-                                height: '50px',
-                                padding: '0 40px',
-                                fontSize: '16px',
-                                fontWeight: '600',
-                                background: 'white',
-                                color: '#667eea',
-                                border: 'none'
-                            }}
-                        >
-                            Comenzar Ahora
-                        </Button>
-                        <Button 
-                            size="large"
-                            onClick={showPricingModal}
-                            style={{
-                                height: '50px',
-                                padding: '0 40px',
-                                fontSize: '16px',
-                                borderColor: 'white',
-                                color: 'white',
-                                background: 'transparent'
-                            }}
-                        >
-                            Ver Precios
-                        </Button>
-                    </Space>
+                {/* CTA */}
+                <section style={{ padding: '100px 20px', textAlign: 'center', background: '#fff' }}>
+                    <Title level={2}>Lleve su institución al siguiente nivel</Title>
+                    <Button type="primary" size="large" style={{ height: '50px', padding: '0 50px', background: colors.primary }} onClick={showLoginModal}>Comenzar Ahora</Button>
                 </section>
             </Content>
 
-            {/* Footer */}
-            <Footer style={{ 
-                background: '#001529', 
-                color: 'white',
-                padding: '50px'
-            }}>
-                <Row gutter={[32, 32]}>
+            <Footer style={{ background: '#000b14', color: '#8c8c8c', padding: '60px 50px' }}>
+                <Row gutter={[64, 32]}>
                     <Col xs={24} md={8}>
-                        <Space direction="vertical">
-                            <Title level={4} style={{ color: 'white' }}>
-                                <div style={{
-                                    width: '32px',
-                                    height: '32px',
-                                    background: 'white',
-                                    borderRadius: '6px',
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontWeight: 'bold',
-                                    color: '#667eea',
-                                    marginRight: '8px'
-                                }}>
-                                    PE
-                                </div>
-                                EduConnect
-                            </Title>
-                            <Paragraph type="secondary" style={{ color: 'rgba(255,255,255,0.7)' }}>
-                                La plataforma educativa líder en gestión escolar integral.
-                            </Paragraph>
+                        <Space align="center" style={{ marginBottom: '20px' }}>
+                            <BankOutlined style={{ fontSize: '24px', color: '#fff' }} />
+                            <Text strong style={{ color: '#fff', fontSize: '18px' }}>EDUCONNECT</Text>
                         </Space>
+                        <Paragraph style={{ color: '#8c8c8c' }}>Soluciones tecnológicas integrales para la educación superior.</Paragraph>
                     </Col>
                     <Col xs={24} md={8}>
-                        <Title level={5} style={{ color: 'white' }}>Contacto</Title>
+                        <Title level={5} style={{ color: '#fff' }}>Contacto</Title>
                         <Space direction="vertical">
-                            <Text style={{ color: 'rgba(255,255,255,0.7)' }}>
-                                <PhoneOutlined /> +1 (555) 123-4567
-                            </Text>
-                            <Text style={{ color: 'rgba(255,255,255,0.7)' }}>
-                                <MailOutlined /> info@portalescolarpro.com
-                            </Text>
-                            <Text style={{ color: 'rgba(255,255,255,0.7)' }}>
-                                <EnvironmentOutlined /> Ciudad Educativa, CP 12345
-                            </Text>
-                        </Space>
-                    </Col>
-                    <Col xs={24} md={8}>
-                        <Title level={5} style={{ color: 'white' }}>Enlaces Rápidos</Title>
-                        <Space direction="vertical">
-                            <Button type="link" style={{ color: 'rgba(255,255,255,0.7)', padding: 0 }}>
-                                Acerca de Nosotros
-                            </Button>
-                            <Button type="link" style={{ color: 'rgba(255,255,255,0.7)', padding: 0 }} onClick={showPricingModal}>
-                                Planes y Precios
-                            </Button>
-                            <Button type="link" style={{ color: 'rgba(255,255,255,0.7)', padding: 0 }} onClick={showChatModal}>
-                                Soporte en Vivo
-                            </Button>
+                            <Text style={{ color: '#8c8c8c' }}><EnvironmentOutlined /> Ciudad Universitaria, Edificio B</Text>
+                            <Text style={{ color: '#8c8c8c' }}><PhoneOutlined /> (953) 555-0000</Text>
                         </Space>
                     </Col>
                 </Row>
-                <Divider style={{ borderColor: 'rgba(255,255,255,0.1)' }} />
-                <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)' }}>
-                    ® 2024 EduConnect. Todos los derechos reservados.
-                </div>
+                <Divider style={{ borderColor: '#333' }} />
+                <div style={{ textAlign: 'center', fontSize: '12px' }}>© {new Date().getFullYear()} EduConnect Systems.</div>
             </Footer>
 
-            {/* Bot├│n flotante del chat */}
+            {/* --- WIDGET DE CHATBOT --- */}
+
+            {/* Ventana del Chat (Solo visible si chatOpen es true) */}
+            {chatOpen && (
+                <div style={{
+                    position: 'fixed',
+                    bottom: '100px',
+                    right: '24px',
+                    width: '350px',
+                    height: '500px',
+                    backgroundColor: '#fff',
+                    borderRadius: '16px',
+                    boxShadow: '0 5px 20px rgba(0,0,0,0.15)',
+                    zIndex: 1001,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    overflow: 'hidden',
+                    border: '1px solid #f0f0f0'
+                }}>
+                    {/* Header del Chat */}
+                    <div style={{ background: colors.primary, padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#fff' }}>
+                        <Space>
+                            <Avatar icon={<RobotOutlined />} style={{ backgroundColor: '#fff', color: colors.primary }} />
+                            <div>
+                                <div style={{ fontWeight: 'bold', fontSize: '14px' }}>Asistente EduConnect</div>
+                                <div style={{ fontSize: '11px', opacity: 0.8 }}>● En línea</div>
+                            </div>
+                        </Space>
+                        <Button type="text" icon={<CloseOutlined style={{ color: '#fff' }} />} onClick={() => setChatOpen(false)} />
+                    </div>
+
+                    {/* Área de Mensajes */}
+                    <div style={{ flex: 1, padding: '16px', overflowY: 'auto', background: '#fafafa' }}>
+                        {chatMessages.map((msg) => (
+                            <div key={msg.id} style={{ display: 'flex', justifyContent: msg.sender === 'user' ? 'flex-end' : 'flex-start', marginBottom: '12px' }}>
+                                <div style={{
+                                    maxWidth: '80%',
+                                    padding: '10px 14px',
+                                    borderRadius: '12px',
+                                    backgroundColor: msg.sender === 'user' ? colors.primary : '#fff',
+                                    color: msg.sender === 'user' ? '#fff' : '#333',
+                                    boxShadow: msg.sender === 'bot' ? '0 2px 5px rgba(0,0,0,0.05)' : 'none',
+                                    fontSize: '14px',
+                                    borderBottomRightRadius: msg.sender === 'user' ? '2px' : '12px',
+                                    borderTopLeftRadius: msg.sender === 'bot' ? '2px' : '12px'
+                                }}>
+                                    {msg.text}
+                                </div>
+                            </div>
+                        ))}
+
+                        {/* Indicador de "Escribiendo..." */}
+                        {isTyping && (
+                            <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '12px' }}>
+                                <div style={{ padding: '8px 12px', backgroundColor: '#fff', borderRadius: '12px', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' }}>
+                                    <Spin size="small" /> <span style={{ fontSize: '12px', color: '#999', marginLeft: '8px' }}>Escribiendo...</span>
+                                </div>
+                            </div>
+                        )}
+                        <div ref={messagesEndRef} />
+                    </div>
+
+                    {/* Opciones Rápidas (Si es el inicio) */}
+                    {chatMessages.length < 3 && (
+                        <div style={{ padding: '0 16px 8px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                            {quickOptions.map((opt, i) => (
+                                <Tag key={i} color="blue" style={{ cursor: 'pointer', borderRadius: '12px' }} onClick={() => handleSendMessage(opt)}>
+                                    {opt}
+                                </Tag>
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Input Area */}
+                    <div style={{ padding: '12px', borderTop: '1px solid #f0f0f0', background: '#fff' }}>
+                        <Space.Compact style={{ width: '100%' }}>
+                            <Input
+                                value={inputValue}
+                                onChange={(e) => setInputValue(e.target.value)}
+                                onPressEnter={() => handleSendMessage()}
+                                placeholder="Escriba su consulta..."
+                                style={{ borderRadius: '20px 0 0 20px' }}
+                            />
+                            <Button type="primary" icon={<SendOutlined />} onClick={() => handleSendMessage()} style={{ background: colors.primary, borderRadius: '0 20px 20px 0' }} />
+                        </Space.Compact>
+                    </div>
+                </div>
+            )}
+
+            {/* Botón Flotante para abrir/cerrar Chat */}
             <FloatButton
-                icon={<MessageOutlined />}
+                icon={chatOpen ? <CloseOutlined /> : <MessageOutlined />}
                 type="primary"
-                style={{ right: 24, bottom: 24 }}
-                onClick={showChatModal}
-                badge={{ count: messages.length > 0 ? messages.length : 0 }}
+                onClick={() => setChatOpen(!chatOpen)}
+                style={{ right: 24, bottom: 24, width: '60px', height: '60px' }}
+                tooltip={chatOpen ? "Cerrar Chat" : "Ayuda en línea"}
+                badge={{ count: 1, color: 'red' }}
             />
 
-            {/* Modal de Login */}
-            <Modal
-                title="Iniciar Sesi├│n - EduConnect"
-                open={loginVisible}
-                onCancel={handleLoginCancel}
-                footer={null}
-                width={400}
-            >
-                <Form
-                    name="login"
-                    onFinish={onLoginFinish}
-                    layout="vertical"
-                    size="large"
-                >
-                    <Form.Item
-                        label="Usuario"
-                        name="username"
-                        rules={[{ required: true, message: 'Por favor ingresa tu usuario' }]}
-                    >
-                        <Input 
-                            prefix={<UserOutlined />} 
-                            placeholder="Usuario o email" 
-                        />
-                    </Form.Item>
-
-                    <Form.Item
-                        label="Contraseña"
-                        name="password"
-                        rules={[{ required: true, message: 'Por favor ingresa tu contraseña' }]}
-                    >
-                        <Input.Password 
-                            prefix={<LockOutlined />} 
-                            placeholder="Contraseña" 
-                        />
-                    </Form.Item>
-
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" block>
-                            Ingresar al Portal
-                        </Button>
-                    </Form.Item>
-
-                    <div style={{ textAlign: 'center' }}>
-                        <Text type="secondary">
-                            ¿Problemas para acceder?{' '}
-                            <Button type="link" style={{ padding: 0 }} onClick={showChatModal}>
-                                Contactar soporte
-                            </Button>
-                        </Text>
-                    </div>
+            {/* --- OTROS MODALES --- */}
+            {/* Login Modal */}
+            <Modal open={loginVisible} onCancel={handleLoginCancel} footer={null} title="Acceso al Portal" centered width={400}>
+                <Form layout="vertical" onFinish={onLoginFinish} size="large">
+                    <Form.Item name="user" rules={[{ required: true, message: 'Requerido' }]}><Input prefix={<UserOutlined />} placeholder="Matrícula o ID" /></Form.Item>
+                    <Form.Item name="pass" rules={[{ required: true, message: 'Requerido' }]}><Input.Password prefix={<LockOutlined />} placeholder="Contraseña" /></Form.Item>
+                    <Button type="primary" htmlType="submit" block style={{ background: colors.primary }}>Entrar</Button>
                 </Form>
             </Modal>
 
-            {/* Modal del Chat */}
-            <Modal
-                title={
-                    <Space>
-                        <MessageOutlined />
-                        Chat de Soporte
-                        <Badge status="processing" text="En línea" />
-                    </Space>
-                }
-                open={chatVisible}
-                onCancel={handleChatCancel}
-                footer={null}
-                width={500}
-                style={{ height: '600px' }}
-            >
-                <div style={{ 
-                    height: '400px', 
-                    border: '1px solid #d9d9d9',
-                    borderRadius: '8px',
-                    padding: '16px',
-                    marginBottom: '16px',
-                    overflowY: 'auto',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '12px'
-                }}>
-                    {messages.length === 0 ? (
-                        <div style={{ 
-                            textAlign: 'center', 
-                            color: '#999',
-                            marginTop: '50%',
-                            transform: 'translateY(-50%)'
-                        }}>
-                            <MessageOutlined style={{ fontSize: '32px', marginBottom: '8px' }} />
-                            <div>Inicia una conversación con nuestro equipo de soporte</div>
-                        </div>
-                    ) : (
-                        messages.map(message => (
-                            <div
-                                key={message.id}
-                                style={{
-                                    alignSelf: message.sender === 'user' ? 'flex-end' : 'flex-start',
-                                    background: message.sender === 'user' ? '#1890ff' : '#f0f0f0',
-                                    color: message.sender === 'user' ? 'white' : 'black',
-                                    padding: '8px 12px',
-                                    borderRadius: '12px',
-                                    maxWidth: '80%'
-                                }}
-                            >
-                                <div>{message.text}</div>
-                                <div style={{ 
-                                    fontSize: '10px', 
-                                    opacity: 0.7,
-                                    textAlign: message.sender === 'user' ? 'right' : 'left',
-                                    marginTop: '4px'
-                                }}>
-                                    {message.timestamp}
-                                </div>
-                            </div>
-                        ))
-                    )}
-                </div>
-                
-                <Space.Compact style={{ width: '100%' }}>
-                    <Input
-                        placeholder="Escribe tu mensaje..."
-                        value={newMessage}
-                        onChange={(e) => setNewMessage(e.target.value)}
-                        onPressEnter={handleSendMessage}
-                    />
-                    <Button 
-                        type="primary" 
-                        icon={<SendOutlined />}
-                        onClick={handleSendMessage}
-                        disabled={!newMessage.trim()}
-                    >
-                        Enviar
-                    </Button>
-                </Space.Compact>
-            </Modal>
-
-            {/* Modal de Precios */}
-            <Modal
-                title="Planes y Precios - EduConnect"
-                open={pricingVisible}
-                onCancel={handlePricingCancel}
-                footer={null}
-                width={1000}
-            >
+            {/* Pricing Modal */}
+            <Modal open={pricingVisible} onCancel={handlePricingCancel} footer={null} width={1000} centered title="Oferta Académica">
                 <Row gutter={[24, 24]}>
-                    {pricingPlans.map((plan, index) => (
-                        <Col xs={24} md={8} key={index}>
-                            <Card
-                                style={{
-                                    border: plan.recommended ? '2px solid #1890ff' : '1px solid #d9d9d9',
-                                    position: 'relative'
-                                }}
-                                hoverable
-                            >
-                                {plan.recommended && (
-                                    <Tag color="blue" style={{ 
-                                        position: 'absolute', 
-                                        top: '-10px', 
-                                        left: '50%', 
-                                        transform: 'translateX(-50%)',
-                                        fontWeight: 'bold'
-                                    }}>
-                                        MÁS POPULAR
-                                    </Tag>
-                                )}
-                                <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-                                    <Title level={3}>{plan.name}</Title>
-                                    <div style={{ marginBottom: '8px' }}>
-                                        <span style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#1890ff' }}>
-                                            {plan.price}
-                                        </span>
-                                        <span style={{ color: '#666' }}>/{plan.period}</span>
-                                    </div>
-                                    <Text type="secondary">{plan.description}</Text>
-                                </div>
-                                
-                                <List
-                                    size="small"
-                                    dataSource={plan.features}
-                                    renderItem={feature => (
-                                        <List.Item>
-                                            <StarOutlined style={{ color: '#52c41a', marginRight: '8px' }} />
-                                            {feature}
-                                        </List.Item>
-                                    )}
-                                />
-                                
-                                <Button 
-                                    type={plan.recommended ? 'primary' : 'default'}
-                                    block 
-                                    size="large"
-                                    style={{ marginTop: '24px' }}
-                                    onClick={() => handlePlanSelect(plan.name)}
-                                >
-                                    {plan.recommended ? 'Seleccionar Plan' : 'Más Información'}
-                                </Button>
+                    {pricingPlans.map((plan, i) => (
+                        <Col xs={24} md={8} key={i}>
+                            <Card hoverable style={{ border: plan.recommended ? `2px solid ${colors.primary}` : '1px solid #f0f0f0', textAlign: 'center' }}>
+                                {plan.recommended && <Tag color={colors.accent} style={{ marginBottom: '15px' }}>RECOMENDADO</Tag>}
+                                <Title level={4}>{plan.name}</Title>
+                                <Title level={2} style={{ color: colors.primary }}>{plan.price}</Title>
+                                <List dataSource={plan.features} renderItem={item => <List.Item><CheckOutlined style={{ color: 'green', marginRight: '5px' }} /> {item}</List.Item>} />
                             </Card>
                         </Col>
                     ))}
                 </Row>
-                
-                <Divider />
-                
-                <div style={{ textAlign: 'center' }}>
-                    <Text type="secondary">
-                        ¿Necesitas un plan personalizado?{' '}
-                        <Button type="link" onClick={showChatModal}>
-                            Contáctanos
-                        </Button>
-                    </Text>
-                </div>
             </Modal>
         </Layout>
     );
