@@ -10,7 +10,8 @@ import LoadingLogo from '../Components/Utilities/LoadingLogo';
 
 // Este componente protege rutas que REQUIEREN inicio de sesión (cualquier rol)
 const ProtectedRoute = () => {
-
+    
+    useAuthStore.getState().checkExpiration();
     const [isHydrated, setIsHydrated] = useState(false);
     const user = useAuthStore(state => state.user);
 

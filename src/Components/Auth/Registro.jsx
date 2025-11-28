@@ -7,11 +7,12 @@ import UserRegisterForm from "./UserRegisterForm";
 import InfoPersonalForm from './InfoPersonalForm';
 import SummaryForm from "../Utilities/SummaryForm";
 
+//* Hooks
+import { useRegisterFormData } from "../../Hooks/Fetching/usePublicData";
+
 //* Stores
 import { useFormStore } from "../../stores/formStore";
 
-//* Hooks 
-import { useAuth } from '../../Hooks/useAuth';
 
 import { registerLabelMap } from "../../Js/Utilities/LabelMap";
 
@@ -24,6 +25,7 @@ export default function Registro({ className = css['register-form-container'], f
     const [currentDataForm, setCurrentDataForm] = useState({});
     const { validateAllForms, getFormValues } = useFormStore();
     const [formAutenticacion] = Form.useForm();
+    const formPersonalData = useRegisterFormData();
     const nameForm = name ?? 'Form-Registro';
     const currentForm = form ?? formAutenticacion;
 
@@ -57,7 +59,7 @@ export default function Registro({ className = css['register-form-container'], f
             content: <UserRegisterForm name={nameForm} parentForm={currentForm} processForm={next} btnSubmitContent={'Siguiente'}/>,
         },
         {
-            content: <InfoPersonalForm name={nameForm} parentForm={currentForm} processForm={goToResume} btnSubmitContent={'Finalizar'}/>,
+            content: <InfoPersonalForm name={nameForm} parentForm={currentForm} processForm={goToResume} btnSubmitContent={'Finalizar'} formData={formPersonalData}/>,
         },
         {
             content: <SummaryForm data={currentDataForm} map={ registerLabelMap } submitButton={finalSubmitButton}/>

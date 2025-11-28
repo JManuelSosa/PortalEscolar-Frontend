@@ -1,7 +1,7 @@
 
 
 export const routes = {
-
+    
     // Publicas
     landing: '/',
     login: '/login',
@@ -14,6 +14,10 @@ export const routes = {
 
     // Admin 
     adminHome: '/admin',
+
+    
+    empleados: '/empleados',
+
 
     // División
     divisiones: '/divisiones',

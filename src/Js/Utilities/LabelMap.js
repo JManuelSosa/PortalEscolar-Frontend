@@ -1,13 +1,27 @@
+const dataPersonMap = {
+    nombre: "Nombre",
+    primer_apellido: "Primer apellido",
+    segundo_apellido: "Segundo apellido",
+    curp: "Curp",
+    fecha_nacimiento: "Fecha de Nacimiento",
+    genero_label: "Género",
+    direccion: "Dirección",
+    numero_telefonico: "Teléfono",
+    estado_label: "Estado", 
+    ciudad_label: "Ciudad"
+}
+
 export const registerLabelMap = {
     email: "Correo",
-    name: "Nombre",
-    first_last_name: "Primer apellido",
-    second_last_name: "Segundo apellido",
-    curp: "Curp",
-    birth_date: "Fecha de Nacimiento",
-    gender_label: "Género",
-    address: "Dirección",
-    phone_number: "Teléfono",
-    state_label: "Estado", 
-    city_label: "Ciudad"
+    nombre: "Nombre",
+    ...dataPersonMap
+}
+
+export const onBoardEmployeeLabelMap = {
+    ...dataPersonMap,
+    fecha_entrada: "Fecha de entrada" ,
+    comentarios: "Comentarios",
+    rol_label: "Rol",
+    carrera: "Carrera",
+    grado_academico_label: "Grado Académico"
 }

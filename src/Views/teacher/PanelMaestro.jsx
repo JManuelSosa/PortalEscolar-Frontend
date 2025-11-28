@@ -1,263 +1,232 @@
-//React
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-
-//AntDesign
-import { Card, Row, Col, Button, Tag, Statistic, List, Avatar, Badge } from 'antd';
+import React, { useState } from 'react';
 import {
-    TeamOutlined,
-    BookOutlined,
-    CheckCircleOutlined,
-    FileTextOutlined,
-    ClockCircleOutlined,
-    UserOutlined,
-    CalendarOutlined
+  Layout,
+  Button,
+  Card,
+  Row,
+  Col,
+  Typography,
+  Tag,
+  Form,
+  Input,
+  Select,
+  Modal,
+  message,
+  Badge,
+  Avatar,
+  Dropdown,
+  Space
+} from 'antd';
+import {
+  PlusOutlined,
+  SearchOutlined,
+  MoreOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  BookOutlined,
+  ReadOutlined,
+  ApartmentOutlined
 } from '@ant-design/icons';
 
-//Css - Ruta corregida
-import PanelMaestroStyle from '@css/Components/PanelMaestro.module.css';
+const { Content } = Layout;
+const { Title, Text, Paragraph } = Typography;
+const { Option } = Select;
 
-import { routes } from '../../Js/Utilities/Routes';
+const GestionMateriasCards = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [form] = Form.useForm();
 
-const { Meta } = Card;
+  // Datos simulados con colores asignados por carrera
+  const [materias, setMaterias] = useState([
+    { id: 1, nombre: 'Matemáticas Discretas', grado: '1° Cuatrimestre', carrera: 'Ing. Software', color: '#1890ff' }, // Azul
+    { id: 2, nombre: 'Derecho Romano I', grado: '1° Cuatrimestre', carrera: 'Lic. Derecho', color: '#ff4d4f' }, // Rojo
+    { id: 3, nombre: 'Programación Web', grado: '4° Cuatrimestre', carrera: 'Ing. Software', color: '#1890ff' },
+    { id: 4, nombre: 'Contabilidad de Costos', grado: '3° Cuatrimestre', carrera: 'Lic. Administración', color: '#52c41a' }, // Verde
+    { id: 5, nombre: 'Base de Datos Avanzada', grado: '5° Cuatrimestre', carrera: 'Ing. Software', color: '#1890ff' },
+    { id: 6, nombre: 'Mercadotecnia Digital', grado: '2° Cuatrimestre', carrera: 'Lic. Administración', color: '#52c41a' },
+  ]);
 
-export default function PanelMaestro() {
+  // Manejo del Formulario
+  const handleAddMateria = (values) => {
+    // Asignar color según carrera (Simulación)
+    let colorCarrera = '#8c8c8c';
+    if (values.carrera.includes('Software')) colorCarrera = '#1890ff';
+    if (values.carrera.includes('Derecho')) colorCarrera = '#ff4d4f';
+    if (values.carrera.includes('Administración')) colorCarrera = '#52c41a';
 
-    const navigate = useNavigate();
+    const nuevaMateria = {
+      id: Date.now(),
+      nombre: values.nombre,
+      grado: values.grado,
+      carrera: values.carrera,
+      color: colorCarrera
+    };
 
-    const goToAssistances = () => {
-        navigate(routes.asistenciaMaestro);
-    }
+    setMaterias([...materias, nuevaMateria]);
+    message.success('Materia creada exitosamente');
+    setIsModalOpen(false);
+    form.resetFields();
+  };
 
+  // Filtrado
+  const materiasFiltradas = materias.filter(m =>
+    m.nombre.toLowerCase().includes(searchText.toLowerCase()) ||
+    m.carrera.toLowerCase().includes(searchText.toLowerCase())
+  );
 
-    // Datos de ejemplo
-    const [materiasAsignadas] = useState([
-        {
-            id: 1,
-            nombre: 'Matemáticas Avanzadas',
-            grupo: 'Grupo A',
-            periodo: '2024-1',
-            estudiantes: 25,
-            actividadesPendientes: 3
-        },
-        {
-            id: 2,
-            nombre: 'Física General',
-            grupo: 'Grupo B',
-            periodo: '2024-1',
-            estudiantes: 30,
-            actividadesPendientes: 1
-        }
-    ]);
+  return (
+    <Layout style={{ minHeight: '100vh', background: '#f0f2f5', padding: '30px' }}>
+      <Content>
 
-    const [justificacionesPendientes] = useState([
-        {
-            id: 1,
-            estudiante: 'Juan Pérez',
-            materia: 'Matemáticas Avanzadas',
-            fecha: '2024-01-15',
-            estado: 'pendiente'
-        },
-        {
-            id: 2,
-            estudiante: 'María García',
-            materia: 'Física General',
-            fecha: '2024-01-14',
-            estado: 'pendiente'
-        }
-    ]);
+        {/* --- HEADER --- */}
+        <div style={{ marginBottom: '40px', textAlign: 'center' }}>
+          <Title level={2} style={{ color: '#002766', marginBottom: '10px' }}>Catálogo de Asignaturas</Title>
+          <Text type="secondary" style={{ fontSize: '16px' }}>Gestión del plan de estudios escolar</Text>
 
-    const cardsFunciones = [
-        {
-            title: 'Pase de Lista',
-            description: 'Registro de asistencia diaria de estudiantes',
-            icon: <TeamOutlined style={{ fontSize: '24px', color: '#1890ff' }} />,
-            path: '/maestros/asistencia',
-            color: '#1890ff'
-        },
-        {
-            title: 'Actividades Escolares',
-            description: 'Crear y calificar tareas y exámenes',
-            icon: <FileTextOutlined style={{ fontSize: '24px', color: '#52c41a' }} />,
-            path: '/maestros/actividades',
-            color: '#52c41a'
-        },
-        {
-            title: 'Justificaciones',
-            description: 'Aprobar o rechazar justificaciones de inasistencia',
-            icon: <CheckCircleOutlined style={{ fontSize: '24px', color: '#faad14' }} />,
-            path: '/maestros/justificaciones',
-            color: '#faad14'
-        },
-        {
-            title: 'Grupos y Materias',
-            description: 'Ver grupos asignados y materias por periodo',
-            icon: <BookOutlined style={{ fontSize: '24px', color: '#722ed1' }} />,
-            path: '/maestros/grupos',
-            color: '#722ed1'
-        }
-    ];
-
-    return (
-        <div className={PanelMaestroStyle.panelMaestro}>
-            {/* Header del Panel */}
-            <div className={PanelMaestroStyle.panelHeader}>
-                <h1>Panel del Maestro</h1>
-                <p>Bienvenido al sistema de gestión académica</p>
-            </div>
-
-            {/* Estadísticas rápidas*/}
-            <Row gutter={[16, 16]} className={PanelMaestroStyle.statsRow}>
-                <Col xs={24} sm={12} lg={6}>
-                    <Card>
-                        <Statistic
-                            title="Total de Materias"
-                            value={materiasAsignadas.length}
-                            prefix={<BookOutlined />}
-                        />
-                    </Card>
-                </Col>
-                <Col xs={24} sm={12} lg={6}>
-                    <Card>
-                        <Statistic
-                            title="Estudiantes Totales"
-                            value={55}
-                            prefix={<TeamOutlined />}
-                        />
-                    </Card>
-                </Col>
-                <Col xs={24} sm={12} lg={6}>
-                    <Card>
-                        <Statistic
-                            title="Actividades Pendientes"
-                            value={4}
-                            prefix={<FileTextOutlined />}
-                        />
-                    </Card>
-                </Col>
-                <Col xs={24} sm={12} lg={6}>
-                    <Card>
-                        <Statistic
-                            title="Justificaciones por Revisar"
-                            value={justificacionesPendientes.length}
-                            prefix={<ClockCircleOutlined />}
-                        />
-                    </Card>
-                </Col>
-            </Row>
-
-            {/* Cards de Funciones Principales*/}
-            <Row gutter={[16, 16]} className={PanelMaestroStyle.cardsRow}>
-                {cardsFunciones.map((card, index) => (
-                    <Col xs={24} sm={12} lg={6} key={index}>
-                            <Card
-                                hoverable
-                                className={PanelMaestroStyle.functionCard}
-                                actions={[
-                                    <Button type="link" onClick={() => { goToAssistances() }}  style={{ color: card.color }}>
-                                        Acceder
-                                    </Button>
-                                ]}
-                            >
-                                <Meta
-                                    avatar={card.icon}
-                                    title={card.title}
-                                    description={card.description}
-                                />
-                            </Card>
-                    </Col>
-                ))}
-            </Row>
-
-            {/* Materias Asignadas */}
-            <Row gutter={[16, 16]} className={PanelMaestroStyle.contentRow}>
-                <Col xs={24} lg={12}>
-                    <Card
-                        title="Materias y Grupos Asignados"
-                        extra={<Button type="link">Ver Todos</Button>}
-                        className={PanelMaestroStyle.materiasCard}
-                    >
-                        <List
-                            itemLayout="horizontal"
-                            dataSource={materiasAsignadas}
-                            renderItem={(materia) => (
-                                <List.Item
-                                    actions={[
-                                        <Button type="link" size="small">
-                                            Pase de Lista
-                                        </Button>,
-                                        <Button type="link" size="small">
-                                            Actividades
-                                        </Button>
-                                    ]}
-                                >
-                                    <List.Item.Meta
-                                        avatar={<BookOutlined style={{ fontSize: '20px', color: '#1890ff' }} />}
-                                        title={materia.nombre}
-                                        description={
-                                            <div>
-                                                <Tag color="blue">{materia.grupo}</Tag>
-                                                <Tag color="green">Periodo: {materia.periodo}</Tag>
-                                                <br />
-                                                <span>Estudiantes: {materia.estudiantes}</span>
-                                                {materia.actividadesPendientes > 0 && (
-                                                    <Badge
-                                                        count={`${materia.actividadesPendientes} pendientes`}
-                                                        style={{ backgroundColor: '#ff4d4f', marginLeft: '10px' }}
-                                                    />
-                                                )}
-                                            </div>
-                                        }
-                                    />
-                                </List.Item>
-                            )}
-                        />
-                    </Card>
-                </Col>
-
-                {/* Justificaciones Pendientes */}
-                <Col xs={24} lg={12}>
-                    <Card
-                        title="Justificaciones por Revisar"
-                        extra={<Button type="link">Ver Todas</Button>}
-                        className={PanelMaestroStyle.justificacionesCard}
-                    >
-                        <List
-                            itemLayout="horizontal"
-                            dataSource={justificacionesPendientes}
-                            renderItem={(justificacion) => (
-                                <List.Item
-                                    actions={[
-                                        <Button type="primary" size="small" ghost>
-                                            Aprobar
-                                        </Button>,
-                                        <Button type="primary" danger size="small" ghost>
-                                            Rechazar
-                                        </Button>
-                                    ]}
-                                >
-                                    <List.Item.Meta
-                                        avatar={<Avatar icon={<UserOutlined />} />}
-                                        title={justificacion.estudiante}
-                                        description={
-                                            <div>
-                                                <div>{justificacion.materia}</div>
-                                                <div>
-                                                    <CalendarOutlined /> {justificacion.fecha}
-                                                    <Tag color="orange" style={{ marginLeft: '8px' }}>
-                                                        Pendiente
-                                                    </Tag>
-                                                </div>
-                                            </div>
-                                        }
-                                    />
-                                </List.Item>
-                            )}
-                        />
-                    </Card>
-                </Col>
-            </Row>
+          <div style={{ marginTop: '30px', display: 'flex', justifyContent: 'center', gap: '15px' }}>
+            <Input
+              size="large"
+              placeholder="Buscar materia o carrera..."
+              prefix={<SearchOutlined style={{ color: '#bfbfbf' }} />}
+              onChange={e => setSearchText(e.target.value)}
+              style={{ maxWidth: '500px', borderRadius: '50px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}
+            />
+            <Button
+              type="primary"
+              size="large"
+              icon={<PlusOutlined />}
+              onClick={() => setIsModalOpen(true)}
+              style={{ borderRadius: '50px', background: '#002766', borderColor: '#002766' }}
+            >
+              Nueva Materia
+            </Button>
+          </div>
         </div>
-    );
-} 
+
+        {/* --- GRID DE TARJETAS --- */}
+        <Row gutter={[24, 24]}>
+          {materiasFiltradas.map((materia) => (
+            <Col xs={24} sm={12} md={8} lg={6} key={materia.id}>
+              {/* Badge.Ribbon crea el listón con el grado */}
+              <Badge.Ribbon text={materia.grado} color={materia.color}>
+                <Card
+                  hoverable
+                  style={{
+                    borderRadius: '16px',
+                    // Borde izquierdo de color para identificar carrera visualmente
+                    borderLeft: `6px solid ${materia.color}`,
+                    height: '100%'
+                  }}
+                  actions={[
+                    <EditOutlined key="edit" style={{ color: '#666' }} />,
+                    <DeleteOutlined key="delete" style={{ color: '#ff4d4f' }} />,
+                    <Dropdown
+                      menu={{ items: [{ key: '1', label: 'Ver detalles' }, { key: '2', label: 'Asignar Profesor' }] }}
+                      placement="bottomRight"
+                    >
+                      <MoreOutlined key="more" style={{ fontSize: '18px' }} />
+                    </Dropdown>
+                  ]}
+                >
+                  <div style={{ display: 'flex', alignItems: 'start', marginBottom: '15px', marginTop: '10px' }}>
+                    <Avatar
+                      shape="square"
+                      size={48}
+                      icon={<BookOutlined />}
+                      style={{ backgroundColor: '#f0f5ff', color: materia.color, borderRadius: '10px', marginRight: '15px' }}
+                    />
+                    <div>
+                      <Text type="secondary" style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                        {materia.carrera}
+                      </Text>
+                      <Title level={5} style={{ margin: '4px 0 0 0', lineHeight: '1.2' }}>
+                        {materia.nombre}
+                      </Title>
+                    </div>
+                  </div>
+
+                  {/* Pequeña info extra visual */}
+                  <div style={{ background: '#fafafa', padding: '8px', borderRadius: '8px', display: 'flex', gap: '8px', alignItems: 'center' }}>
+                    <ApartmentOutlined style={{ color: '#bfbfbf' }} />
+                    <Text style={{ fontSize: '12px', color: '#888' }}>ID: MAT-{materia.id.toString().slice(-4)}</Text>
+                  </div>
+
+                </Card>
+              </Badge.Ribbon>
+            </Col>
+          ))}
+        </Row>
+
+        {/* --- MODAL FORMULARIO --- */}
+        <Modal
+          title={
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div style={{ width: '40px', height: '40px', background: '#e6f7ff', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <ReadOutlined style={{ fontSize: '20px', color: '#1890ff' }} />
+              </div>
+              <span style={{ fontSize: '18px' }}>Nueva Asignatura</span>
+            </div>
+          }
+          open={isModalOpen}
+          onCancel={() => setIsModalOpen(false)}
+          footer={null}
+          centered
+          width={500}
+        >
+          <Form
+            form={form}
+            layout="vertical"
+            onFinish={handleAddMateria}
+            style={{ marginTop: '25px' }}
+          >
+            {/* Input Nombre */}
+            <Form.Item
+              label="Nombre de la Materia"
+              name="nombre"
+              rules={[{ required: true, message: 'Requerido' }]}
+            >
+              <Input placeholder="Ej. Introducción al Derecho" size="large" />
+            </Form.Item>
+
+            {/* Select Grado */}
+            <Form.Item
+              label="Grado Académico"
+              name="grado"
+              rules={[{ required: true, message: 'Seleccione el grado' }]}
+            >
+              <Select placeholder="Seleccionar cuatrimestre" size="large">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
+                  <Option key={num} value={`${num}° Cuatrimestre`}>{num}° Cuatrimestre</Option>
+                ))}
+              </Select>
+            </Form.Item>
+
+            {/* Select Carrera */}
+            <Form.Item
+              label="Programa Educativo (Carrera)"
+              name="carrera"
+              rules={[{ required: true, message: 'Seleccione la carrera' }]}
+            >
+              <Select placeholder="Seleccionar carrera" size="large">
+                <Option value="Ing. Software">Ingeniería de Software</Option>
+                <Option value="Lic. Derecho">Licenciatura en Derecho</Option>
+                <Option value="Lic. Administración">Licenciatura en Administración</Option>
+                <Option value="Ing. Industrial">Ingeniería Industrial</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item style={{ marginBottom: 0, marginTop: 30 }}>
+              <Button type="primary" htmlType="submit" block size="large" style={{ background: '#002766', fontWeight: 'bold' }}>
+                Registrar Materia
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
+
+      </Content>
+    </Layout>
+  );
+};
+
+export default GestionMateriasCards;

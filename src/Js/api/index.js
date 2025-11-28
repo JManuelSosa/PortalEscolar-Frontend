@@ -21,7 +21,7 @@ api.interceptors.request.use(
 
         const authStore = useAuthStore.getState();
         const schoolStore = useSchoolStore.getState();
-        authStore.checkExpiration(); //* Verificar si el token todavía le queda tiempo en cada petición.
+        // authStore.checkExpiration(); //* Verificar si el token todavía le queda tiempo en cada petición.
 
         const token = authStore.token; //? Token global guardado en la sesión
         const schoolId = schoolStore.currentSchoolId;
@@ -30,8 +30,10 @@ api.interceptors.request.use(
             config.headers.Authorization = `Bearer ${token}`;
         }
 
-        if(schoolId && !config.url.startsWith(`/${schoolId}`)) {
-            config.url = `${schoolId}${config.url}`;
+        if(schoolId && !config.global) {
+
+            const endpoint = config.url.startsWith('/') ? config.url.substring(1) : config.url;
+            config.url = `${schoolId}/${endpoint}`;
         }
 
         return config;
@@ -45,7 +47,7 @@ api.interceptors.response.use(
 
     (error) => {
         const status = error.response?.status;
-        const data = error.response?.data;
+        const config = error.config;
         const store = useAuthStore.getState();
 
         // Manejar errores de conexión
@@ -55,9 +57,9 @@ api.interceptors.response.use(
         }
 
         //~ Si el token expira o no es válido
-        if (status === 401 && !requestUrl.endsWith('/login')) {
+        if (status === 401 && !config.url.endsWith('/login')) {
             message.error("Tu sesión ha expirado. Por favor inicia sesión nuevamente.");
-            store.logout();
+            store.logoutStore();
         }
 
         return Promise.reject(error);

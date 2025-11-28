@@ -1,0 +1,155 @@
+/* AttendanceView.module.css */
+.attendanceView {
+    padding: 20px;
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.classHeader {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.classHeader :global(.ant-card-body) {
+    padding: 24px;
+}
+
+.classTitle {
+    color: white;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.classInfo {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+}
+
+.dateDisplay {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.statsRow {
+    margin-bottom: 20px;
+}
+
+.statCard {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.statCard:hover {
+    transform: translateY(-2px);
+}
+
+.sectionDivider {
+    margin: 30px 0;
+}
+
+.tabActions {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.changesIndicator {
+    color: #faad14;
+    font-weight: 500;
+}
+
+.attendanceTable :global(.ant-table-thead > tr > th) {
+    background: #fafafa;
+    font-weight: 600;
+}
+
+.attendanceTable :global(.ant-table-tbody > tr:hover > td) {
+    background: #f0f7ff;
+}
+
+/* Radio buttons personalizados */
+.radioSuccess :global(.ant-radio-button-wrapper-checked) {
+    background: #52c41a;
+    border-color: #52c41a;
+    color: white;
+}
+
+.radioDanger :global(.ant-radio-button-wrapper-checked) {
+    background: #ff4d4f;
+    border-color: #ff4d4f;
+    color: white;
+}
+
+.radioWarning :global(.ant-radio-button-wrapper-checked) {
+    background: #faad14;
+    border-color: #faad14;
+    color: white;
+}
+
+/* Historial */
+.historyDay {
+    margin-bottom: 24px;
+}
+
+.historyDate {
+    color: #1890ff;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.statItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.statItem:last-child {
+    border-bottom: none;
+}
+
+.loadingContainer,
+.errorContainer {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .attendanceView {
+        padding: 10px;
+    }
+
+    .classTitle {
+        font-size: 20px;
+    }
+
+    .classInfo {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .tabActions {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+}

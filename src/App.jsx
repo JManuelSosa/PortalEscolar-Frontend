@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 //Layout
 import AdminLayout from './Layout/AdminLayout';
+import UserLayout from './Layout/UserLayout';
 
 //Views
 import UserHomeView from './Views/user/UserHomeView';
@@ -23,6 +24,7 @@ import { routes } from './Js/Utilities/Routes';
 //Test
 import AuthView from './Views/public/AuthView';
 import LandingPageEscolar from './Views/public/LandingPageEscolar';
+import EmpleadosView from './Views/admin/EmpleadosView';
 
 import { BibliotecaView } from './Views/student/BibliotecaAlumno';
 import ActividadesAlumno from './Views/student/ListaTarea';
@@ -57,19 +59,30 @@ function App() {
       colorText: 'var(--text)'
     },
     components: {
-      Form: {
-        labelFontSize: 14,
-        itemLabelFontWeight: 400,
-      },
-      Input: {
-        activeBorderColor: 'var(--primary-active)',
-        hoverBorderColor: 'var(--accent-hover)',
-        colorTextPlaceholder: 'var(--text-placeholder)',
-      },
-      Select: {
-        activeBorderColor: 'var(--primary-active)',
-        hoverBorderColor: 'var(--accent-hover)',
-      }
+        Form: {
+          labelFontSize: 14,
+          itemLabelFontWeight: 400,
+        },
+        Input: {
+          activeBorderColor: 'var(--primary-active)',
+          hoverBorderColor: 'var(--accent-hover)',
+          colorTextPlaceholder: 'var(--text-placeholder)',
+        },
+        Select: {
+          activeBorderColor: 'var(--primary-active)',
+          hoverBorderColor: 'var(--accent-hover)',
+        },
+        Drawer: {
+          footerPaddingBlock: 0
+        },
+        Button: {
+          // Para botones primarios
+          colorPrimary: 'var(--primary)',
+          colorPrimaryHover: 'var(--primary-hover)',
+          colorPrimaryActive: 'var(--primary-active)',
+          colorPrimaryBorder: 'var(--primary)',
+        }
+      
     }
   }
 
@@ -79,6 +92,7 @@ function App() {
       <ConfigProvider theme={configProvider} locale={esES}>
         {contextHolder}
         <AntApp>
+          
           <Routes>
 
             {/* Rutas sin inicio de sesión */}
@@ -86,35 +100,34 @@ function App() {
             <Route path={routes.login} element={<AuthView />}></Route>
             <Route path={routes.pricing} element={<PlanEscolar />} />
 
-
-            {/* Rutas que requieren inicio de sesión */}
-            <Route element={<ProtectedRoute />}>
-
-              <Route path={routes.userHome} element={<UserHomeView />} />
-              <Route path={routes.unauthorized} element={<UnauthorizedView />} />
-
-              {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
-              <Route element={<RoleGuard allowedRoles={['admin']} />}>
-                <Route element={<AdminLayout />}>
-                  <Route path={routes.adminHome} element={<HomeView />} />
-                  <Route path={routes.divisiones} element={<DivisionView />} />
-                  <Route path={routes.carreras.path} element={<CarrerasView />}></Route>
-                  <Route path={routes.grupos.path} element={<GruposView />}></Route>
-                  <Route path={routes.detalleGrupo.path} element={<DetalleGruposView />} />
-                </Route>
-              </Route>
-
+            {/* Zona para testear rutas */ }
+            <Route element={ <UserLayout/> }>
+              <Route path={ routes.userHome } element={<UserHomeView/>}/>
             </Route>
 
+
+            {/* Rutas que requieren inicio de sesión */}
+            <Route element={<ProtectedRoute/>}>
+              <Route path={ routes.unauthorized } element={ <UnauthorizedView/> }/>
+
+              {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
+              <Route element={<RoleGuard allowedRoles={['Administrador']}/>}>
+                <Route element={<AdminLayout/>}>
+                  <Route path={ routes.adminHome } element={ <HomeView/> }/>
+                  <Route path={ routes.empleados } element={<EmpleadosView/>}/>
+                  <Route path={ routes.divisiones } element={<DivisionView/>}/>
+                  <Route path={ routes.carreras.path } element={<CarrerasView/>}></Route>
+                  <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
+                  <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>
+                </Route>
+              </Route>                  
+            </Route>
+              
             {/* Alumnos*/}
             <Route path='/biblioteca' element={<BibliotecaView />}></Route>
             <Route path='/bibliotecaAdmin' element={<BibliotecaAdminView />}></Route>
             <Route path='/PanelAlumno' element={< PanelAlumno />}></Route>
             <Route path='/ActividadesAlumno' element={<ActividadesAlumno />}></Route>
-
-
-
-
 
             {/* Maestros */}
             <Route path='/panelMaestro' element={<PanelMaestro />}></Route>
@@ -122,18 +135,6 @@ function App() {
             <Route path='/JustificacionesAlumno' element={<JustificacionesAlumno />}></Route>
             <Route path={routes.asistenciaMaestro} element={<AsistenciaMaestro />} />
             <Route path='/ActividadesMaestro' element={<ActividadesMaestro />}></Route>
-
-
-
-
-
-
-
-
-
-
-
-
 
             {
               /* Nuevas Rutas para el Panel de Maestros  __eliminar de las  rutas.
@@ -143,6 +144,7 @@ function App() {
               <Route path='/maestros/justificaciones' element={<AdminLayout> <JustificacionesMaestro /> </AdminLayout>} />
               <Route path='/maestros/grupos' element={<AdminLayout> <GruposMaestro /> </AdminLayout>} />*/
             }
+            
           </Routes>
         </AntApp>
       </ConfigProvider>

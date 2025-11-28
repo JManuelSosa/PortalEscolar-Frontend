@@ -1,452 +1,367 @@
-// ActividadesAlumnoView.js
-import React, { useState, useEffect } from 'react';
-import { 
-  Row, 
-  Col, 
-  Card, 
-  Button, 
-  Tag, 
-  Space, 
-  Divider, 
-  List,
-  Badge,
-  Descriptions,
+import { useState } from 'react';
+import {
+  Layout,
+  Button,
+  Card,
+  Row,
+  Col,
+  Typography,
+  Space,
+  Tag,
+  Form,
+  Input,
+  Select,
   Modal,
-  Upload,
   message,
-  Progress,
-  Timeline
+  Tooltip,
+  Table,
+  Empty,
+  InputNumber
 } from 'antd';
-import { 
-  FileTextOutlined,
-  CalendarOutlined,
-  ClockCircleOutlined,
-  UploadOutlined,
+import {
+  PlusOutlined,
+  AppstoreOutlined,
+  BarsOutlined,
+  SearchOutlined,
   CheckCircleOutlined,
-  ExclamationCircleOutlined,
-  DownloadOutlined,
-  EyeOutlined
+  CloseCircleOutlined,
+  LaptopOutlined,
+  ReadOutlined,
+  ExperimentOutlined,
+  TeamOutlined,
+  BankOutlined,
+  EditOutlined,
+  DeleteOutlined
 } from '@ant-design/icons';
 
-const { Meta } = Card;
+const { Title, Text, Paragraph } = Typography;
+const { Option } = Select;
 
-const ActividadesAlumnoView = () => {
-  const [actividades, setActividades] = useState([]);
-  const [actividadSeleccionada, setActividadSeleccionada] = useState(null);
-  const [isDetalleModalVisible, setIsDetalleModalVisible] = useState(false);
-  const [isEntregaModalVisible, setIsEntregaModalVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
+const ClassroomManager = () => {
+  // --- ESTADOS ---
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' o 'list'
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [form] = Form.useForm();
+  const [searchText, setSearchText] = useState('');
 
-  // Datos falsos de actividades para el alumno
-  const actividadesAlumnoEjemplo = [
+  // --- COLORES CORPORATIVOS ---
+  const colors = {
+    primary: '#002766',
+    accent: '#faad14',
+    success: '#52c41a',
+    error: '#ff4d4f',
+    bg: '#f0f2f5'
+  };
+
+  // --- DATOS INICIALES (Simulados) ---
+  const [classrooms, setClassrooms] = useState([
+    { id: 1, name: 'Aula Magna A', type: 'auditorio', available: true, capacity: 120 },
+    { id: 2, name: 'Laboratorio de Redes', type: 'laboratorio', available: false, capacity: 25 },
+    { id: 3, name: 'Salón 101 - Edificio B', type: 'teoria', available: true, capacity: 30 },
+    { id: 4, name: 'Laboratorio de Química', type: 'taller', available: true, capacity: 20 },
+    { id: 5, name: 'Sala de Juntas Rectoría', type: 'admin', available: true, capacity: 12 },
+  ]);
+
+  // --- LÓGICA DEL FORMULARIO ---
+  const handleAddClassroom = (values) => {
+    const newClassroom = {
+      id: Date.now(),
+      name: values.name,
+      available: values.available === 'true', // Convertir string a boolean
+      type: values.type,
+      capacity: values.capacity || 0 // Campo opcional extra para realismo
+    };
+
+    setClassrooms([...classrooms, newClassroom]);
+    message.success('Aula agregada correctamente');
+    setIsModalOpen(false);
+    form.resetFields();
+  };
+
+  // --- HELPER PARA ICONOS SEGÚN TIPO ---
+  const getTypeIcon = (type) => {
+    switch (type) {
+      case 'laboratorio': return <LaptopOutlined style={{ fontSize: '24px', color: '#1890ff' }} />;
+      case 'auditorio': return <BankOutlined style={{ fontSize: '24px', color: '#722ed1' }} />;
+      case 'taller': return <ExperimentOutlined style={{ fontSize: '24px', color: '#fa8c16' }} />;
+      case 'admin': return <TeamOutlined style={{ fontSize: '24px', color: '#52c41a' }} />;
+      default: return <ReadOutlined style={{ fontSize: '24px', color: colors.primary }} />; // Teoría
+    }
+  };
+
+  const getTypeLabel = (type) => {
+    const types = {
+      laboratorio: 'Laboratorio de Cómputo',
+      auditorio: 'Auditorio / Aula Magna',
+      taller: 'Taller / Experimental',
+      admin: 'Administrativo',
+      teoria: 'Aula Teórica'
+    };
+    return types[type] || 'General';
+  };
+
+  // --- FILTRADO DE BÚSQUEDA ---
+  const filteredClassrooms = classrooms.filter(c =>
+    c.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  // --- CONFIGURACIÓN DE COLUMNAS (VISTA TABLA) ---
+  const columns = [
     {
-      id: 1,
-      titulo: 'Proyecto Final - Sistema de Gestión',
-      descripcion: 'Desarrollar un sistema de gestión completo utilizando los patrones de diseño vistos en clase.',
-      materia: 'Programación Avanzada',
-      profesor: 'Dr. Carlos Rodríguez',
-      valor: 30,
-      fechaCreacion: '2024-10-15',
-      fechaEntrega: '2024-11-20',
-      estado: 'pendiente',
-      tipo: 'proyecto',
-      tiempoRestante: '35 días',
-      archivos: ['requisitos.pdf', 'plantilla.zip'],
-      entregaAlumno: null
+      title: 'Nombre del Espacio',
+      dataIndex: 'name',
+      key: 'name',
+      render: (text, record) => (
+        <Space>
+          {getTypeIcon(record.type)}
+          <Text strong>{text}</Text>
+        </Space>
+      )
     },
     {
-      id: 2,
-      titulo: 'Examen Parcial - Unidades 1-3',
-      descripcion: 'Examen que cubre los temas de las primeras tres unidades del curso.',
-      materia: 'Programación Avanzada',
-      profesor: 'Dr. Carlos Rodríguez',
-      valor: 25,
-      fechaCreacion: '2024-10-10',
-      fechaEntrega: '2024-10-25',
-      estado: 'pendiente',
-      tipo: 'examen',
-      tiempoRestante: '10 días',
-      archivos: ['guia_estudio.pdf'],
-      entregaAlumno: null
+      title: 'Tipo',
+      dataIndex: 'type',
+      key: 'type',
+      render: (type) => <Tag color="blue">{getTypeLabel(type)}</Tag>
     },
     {
-      id: 3,
-      titulo: 'Tarea - Análisis de Algoritmos',
-      descripcion: 'Resolver los problemas de análisis de complejidad algorítmica.',
-      materia: 'Matemáticas Financieras',
-      profesor: 'Mtro. Javier López',
-      valor: 15,
-      fechaCreacion: '2024-10-12',
-      fechaEntrega: '2024-10-19',
-      estado: 'entregada',
-      tipo: 'tarea',
-      tiempoRestante: '4 días',
-      archivos: ['problemas.pdf'],
-      entregaAlumno: {
-        fecha: '2024-10-18',
-        archivos: ['solucion.pdf'],
-        calificacion: 14,
-        comentarios: 'Buen trabajo, solo falta detallar el análisis de complejidad.'
-      }
+      title: 'Capacidad',
+      dataIndex: 'capacity',
+      key: 'capacity',
+      render: (cap) => `${cap} personas`
     },
     {
-      id: 4,
-      titulo: 'Práctica de Laboratorio - Bases de Datos',
-      descripcion: 'Creación y manipulación de bases de datos relacionales.',
-      materia: 'Desarrollo Web Avanzado',
-      profesor: 'Ing. Ana Martínez',
-      valor: 20,
-      fechaCreacion: '2024-10-08',
-      fechaEntrega: '2024-10-22',
-      estado: 'pendiente',
-      tipo: 'laboratorio',
-      tiempoRestante: '7 días',
-      archivos: ['script_bd.sql', 'manual.pdf'],
-      entregaAlumno: null
+      title: 'Disponibilidad',
+      dataIndex: 'available',
+      key: 'available',
+      render: (available) => (
+        <Tag icon={available ? <CheckCircleOutlined /> : <CloseCircleOutlined />} color={available ? 'success' : 'error'}>
+          {available ? 'DISPONIBLE' : 'OCUPADO / MANTENIMIENTO'}
+        </Tag>
+      )
     },
     {
-      id: 5,
-      titulo: 'Investigación - Frameworks Modernos',
-      descripcion: 'Investigación sobre frameworks de desarrollo web modernos.',
-      materia: 'Desarrollo Web Avanzado',
-      profesor: 'Ing. Ana Martínez',
-      valor: 10,
-      fechaCreacion: '2024-09-28',
-      fechaEntrega: '2024-10-05',
-      estado: 'vencida',
-      tipo: 'investigacion',
-      tiempoRestante: 'Vencida',
-      archivos: ['instrucciones.pdf'],
-      entregaAlumno: null
+      title: 'Acciones',
+      key: 'actions',
+      render: () => (
+        <Space>
+          <Button type="text" icon={<EditOutlined />} />
+          <Button type="text" danger icon={<DeleteOutlined />} />
+        </Space>
+      )
     }
   ];
 
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setActividades(actividadesAlumnoEjemplo);
-      setLoading(false);
-    }, 1000);
-  }, []);
-
-  const handleVerDetalles = (actividad) => {
-    setActividadSeleccionada(actividad);
-    setIsDetalleModalVisible(true);
-  };
-
-  const handleEntregar = (actividad) => {
-    setActividadSeleccionada(actividad);
-    setIsEntregaModalVisible(true);
-  };
-
-  const getEstadoColor = (estado) => {
-    const colores = {
-      pendiente: 'blue',
-      entregada: 'green',
-      vencida: 'red',
-      calificada: 'gold'
-    };
-    return colores[estado] || 'default';
-  };
-
-  const getTipoColor = (tipo) => {
-    const colores = {
-      proyecto: 'purple',
-      examen: 'red',
-      tarea: 'blue',
-      laboratorio: 'green',
-      investigacion: 'orange'
-    };
-    return colores[tipo] || 'default';
-  };
-
-  const getEstadoIcon = (estado) => {
-    const iconos = {
-      pendiente: <ExclamationCircleOutlined />,
-      entregada: <CheckCircleOutlined />,
-      vencida: <ExclamationCircleOutlined />,
-      calificada: <CheckCircleOutlined />
-    };
-    return iconos[estado] || <FileTextOutlined />;
-  };
-
   return (
-    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
-      {/* Header */}
-      <div style={{ textAlign: 'center', marginBottom: 32 }}>
-        <h1 style={{ color: '#1890ff', marginBottom: 8 }}>
-          <FileTextOutlined /> Mis Actividades
-        </h1>
-        <p style={{ fontSize: '16px', color: '#666' }}>
-          Revisa y entrega tus actividades asignadas
-        </p>
+    <Layout style={{ minHeight: '100vh', background: '#f0f2f5', padding: '40px' }}>
+
+      {/* Header de la Sección */}
+      <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
+        <div>
+          <Title level={2} style={{ color: colors.primary, margin: 0 }}>Gestión de Espacios Educativos</Title>
+          <Text type="secondary">Administración de aulas, laboratorios y áreas comunes.</Text>
+        </div>
+        <Space>
+          <Input
+            placeholder="Buscar aula..."
+            prefix={<SearchOutlined style={{ color: '#bfbfbf' }} />}
+            onChange={e => setSearchText(e.target.value)}
+            style={{ width: 250 }}
+          />
+
+          {/* Toggle de Vistas */}
+          <div style={{ background: '#fff', padding: '4px', borderRadius: '6px', border: '1px solid #d9d9d9' }}>
+            <Tooltip title="Vista de Tarjetas">
+              <Button
+                type={viewMode === 'grid' ? 'primary' : 'text'}
+                icon={<AppstoreOutlined />}
+                onClick={() => setViewMode('grid')}
+                style={{ background: viewMode === 'grid' ? colors.primary : 'transparent' }}
+              />
+            </Tooltip>
+            <Tooltip title="Vista de Lista">
+              <Button
+                type={viewMode === 'list' ? 'primary' : 'text'}
+                icon={<BarsOutlined />}
+                onClick={() => setViewMode('list')}
+                style={{ background: viewMode === 'list' ? colors.primary : 'transparent' }}
+              />
+            </Tooltip>
+          </div>
+
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            size="large"
+            onClick={() => setIsModalOpen(true)}
+            style={{ background: colors.accent, borderColor: colors.accent, color: '#000', fontWeight: 'bold' }}
+          >
+            Nueva Aula
+          </Button>
+        </Space>
       </div>
 
-      {/* Filtros Rápidos */}
-      <Card style={{ marginBottom: 24 }}>
-        <Space>
-          <Tag color="blue" style={{ cursor: 'pointer' }}>Todas ({actividades.length})</Tag>
-          <Tag color="orange" style={{ cursor: 'pointer' }}>
-            Pendientes ({actividades.filter(a => a.estado === 'pendiente').length})
-          </Tag>
-          <Tag color="green" style={{ cursor: 'pointer' }}>
-            Entregadas ({actividades.filter(a => a.estado === 'entregada').length})
-          </Tag>
-          <Tag color="red" style={{ cursor: 'pointer' }}>
-            Vencidas ({actividades.filter(a => a.estado === 'vencida').length})
-          </Tag>
-        </Space>
-      </Card>
+      {/* --- CONTENIDO PRINCIPAL --- */}
 
-      {/* Lista de Actividades */}
-      <Row gutter={[16, 16]}>
-        {actividades.map(actividad => (
-          <Col key={actividad.id} xs={24} lg={12}>
-            <Card
-              loading={loading}
-              actions={[
-                <Button 
-                  type="link" 
-                  icon={<EyeOutlined />}
-                  onClick={() => handleVerDetalles(actividad)}
-                >
-                  Ver Detalles
-                </Button>,
-                <Button 
-                  type={actividad.estado === 'pendiente' ? 'primary' : 'default'}
-                  icon={<UploadOutlined />}
-                  onClick={() => handleEntregar(actividad)}
-                  disabled={actividad.estado === 'vencida'}
-                >
-                  {actividad.estado === 'entregada' ? 'Reentregar' : 'Entregar'}
-                </Button>
-              ]}
-            >
-              <Meta
-                avatar={
-                  <Badge 
-                    count={getEstadoIcon(actividad.estado)} 
-                    style={{ 
-                      backgroundColor: getEstadoColor(actividad.estado),
-                      fontSize: '16px'
-                    }}
-                  >
-                    <FileTextOutlined style={{ fontSize: '24px', color: '#1890ff' }} />
-                  </Badge>
-                }
-                title={
-                  <Space direction="vertical" size="small" style={{ width: '100%' }}>
-                    <div>{actividad.titulo}</div>
-                    <Space>
-                      <Tag color={getTipoColor(actividad.tipo)}>{actividad.tipo}</Tag>
-                      <Tag color={getEstadoColor(actividad.estado)}>{actividad.estado}</Tag>
-                      <Tag color="gold">{actividad.valor} pts</Tag>
-                    </Space>
-                  </Space>
-                }
-                description={
-                  <div>
-                    <p style={{ marginBottom: 8 }}>{actividad.descripcion}</p>
-                    
-                    <Divider style={{ margin: '12px 0' }} />
-                    
-                    <Space direction="vertical" size="small" style={{ width: '100%' }}>
-                      <div>
-                        <strong>Materia:</strong> {actividad.materia}
-                      </div>
-                      <div>
-                        <strong>Profesor:</strong> {actividad.profesor}
-                      </div>
-                      <div>
-                        <CalendarOutlined /> Creada: {actividad.fechaCreacion}
-                      </div>
-                      <div>
-                        <ClockCircleOutlined /> Entrega: {actividad.fechaEntrega}
-                      </div>
-                      <div>
-                        <strong>Tiempo restante:</strong> {actividad.tiempoRestante}
-                      </div>
-                      
-                      {actividad.entregaAlumno && (
-                        <div style={{ marginTop: 8 }}>
-                          <Progress 
-                            percent={(actividad.entregaAlumno.calificacion / actividad.valor) * 100}
-                            format={percent => `${actividad.entregaAlumno.calificacion}/${actividad.valor}`}
-                            status="active"
-                          />
-                        </div>
-                      )}
-                    </Space>
-                  </div>
-                }
-              />
-            </Card>
-          </Col>
-        ))}
-      </Row>
-
-      {/* Modal de Detalles */}
-      <Modal
-        title={actividadSeleccionada?.titulo}
-        open={isDetalleModalVisible}
-        onCancel={() => setIsDetalleModalVisible(false)}
-        footer={[
-          <Button key="close" onClick={() => setIsDetalleModalVisible(false)}>
-            Cerrar
-          </Button>,
-          <Button 
-            key="entrega" 
-            type="primary"
-            disabled={actividadSeleccionada?.estado === 'vencida'}
-            onClick={() => {
-              setIsDetalleModalVisible(false);
-              handleEntregar(actividadSeleccionada);
-            }}
-          >
-            {actividadSeleccionada?.estado === 'entregada' ? 'Reentregar' : 'Entregar'}
-          </Button>
-        ]}
-        width={700}
-      >
-        {actividadSeleccionada && (
-          <div>
-            <Descriptions column={1} bordered size="small">
-              <Descriptions.Item label="Descripción">
-                {actividadSeleccionada.descripcion}
-              </Descriptions.Item>
-              <Descriptions.Item label="Materia">
-                {actividadSeleccionada.materia}
-              </Descriptions.Item>
-              <Descriptions.Item label="Profesor">
-                {actividadSeleccionada.profesor}
-              </Descriptions.Item>
-              <Descriptions.Item label="Valor">
-                {actividadSeleccionada.valor} puntos
-              </Descriptions.Item>
-              <Descriptions.Item label="Fecha de Creación">
-                {actividadSeleccionada.fechaCreacion}
-              </Descriptions.Item>
-              <Descriptions.Item label="Fecha de Entrega">
-                {actividadSeleccionada.fechaEntrega}
-              </Descriptions.Item>
-              <Descriptions.Item label="Estado">
-                <Tag color={getEstadoColor(actividadSeleccionada.estado)}>
-                  {actividadSeleccionada.estado}
-                </Tag>
-              </Descriptions.Item>
-              <Descriptions.Item label="Tipo">
-                <Tag color={getTipoColor(actividadSeleccionada.tipo)}>
-                  {actividadSeleccionada.tipo}
-                </Tag>
-              </Descriptions.Item>
-            </Descriptions>
-            
-            {actividadSeleccionada.archivos && actividadSeleccionada.archivos.length > 0 && (
-              <div style={{ marginTop: 16 }}>
-                <h4>Archivos de la actividad:</h4>
-                <List
-                  size="small"
-                  dataSource={actividadSeleccionada.archivos}
-                  renderItem={archivo => (
-                    <List.Item
-                      actions={[
-                        <Button type="link" icon={<DownloadOutlined />} size="small">
-                          Descargar
-                        </Button>
-                      ]}
-                    >
-                      <FileTextOutlined /> {archivo}
-                    </List.Item>
-                  )}
-                />
-              </div>
-            )}
-
-            {actividadSeleccionada.entregaAlumno && (
-              <div style={{ marginTop: 16 }}>
-                <h4>Tu entrega:</h4>
-                <Descriptions column={1} size="small">
-                  <Descriptions.Item label="Fecha de entrega">
-                    {actividadSeleccionada.entregaAlumno.fecha}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Calificación">
-                    <strong>{actividadSeleccionada.entregaAlumno.calificacion}/{actividadSeleccionada.valor}</strong>
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Comentarios">
-                    {actividadSeleccionada.entregaAlumno.comentarios}
-                  </Descriptions.Item>
-                </Descriptions>
-                
-                <h5 style={{ marginTop: 8 }}>Archivos entregados:</h5>
-                <List
-                  size="small"
-                  dataSource={actividadSeleccionada.entregaAlumno.archivos}
-                  renderItem={archivo => (
-                    <List.Item>
-                      <FileTextOutlined /> {archivo}
-                    </List.Item>
-                  )}
-                />
-              </div>
-            )}
-          </div>
-        )}
-      </Modal>
-
-      {/* Modal de Entrega */}
-      <Modal
-        title={`Entregar: ${actividadSeleccionada?.titulo}`}
-        open={isEntregaModalVisible}
-        onCancel={() => setIsEntregaModalVisible(false)}
-        footer={[
-          <Button key="cancel" onClick={() => setIsEntregaModalVisible(false)}>
-            Cancelar
-          </Button>,
-          <Button key="submit" type="primary" loading={loading}>
-            Enviar Entrega
-          </Button>
-        ]}
-        width={600}
-      >
-        {actividadSeleccionada && (
-          <div>
-            <p><strong>Actividad:</strong> {actividadSeleccionada.titulo}</p>
-            <p><strong>Valor:</strong> {actividadSeleccionada.valor} puntos</p>
-            <p><strong>Fecha límite:</strong> {actividadSeleccionada.fechaEntrega}</p>
-            
-            <Divider />
-            
-            <div style={{ marginBottom: 16 }}>
-              <h4>Subir archivos de entrega:</h4>
-              <Upload.Dragger 
-                multiple
-                beforeUpload={() => false} // Prevenir subida automática
-                style={{ padding: '20px' }}
+      {filteredClassrooms.length === 0 ? (
+        <Empty description="No se encontraron aulas" style={{ marginTop: '100px' }} />
+      ) : viewMode === 'grid' ? (
+        /* VISTA GRID (BENTO STYLE) */
+        <Row gutter={[24, 24]}>
+          {filteredClassrooms.map((room) => (
+            <Col xs={24} sm={12} md={8} lg={6} key={room.id}>
+              <Card
+                hoverable
+                style={{
+                  borderRadius: '12px',
+                  borderTop: `4px solid ${room.available ? colors.success : colors.error}`,
+                  height: '100%'
+                }}
+                actions={[
+                  <Tooltip title="Editar"><EditOutlined key="edit" /></Tooltip>,
+                  <Tooltip title="Ver Horario"><CalendarOutlined key="calendar" /></Tooltip>,
+                  <Tooltip title="Eliminar"><DeleteOutlined key="delete" style={{ color: colors.error }} /></Tooltip>
+                ]}
               >
-                <p className="ant-upload-drag-icon">
-                  <UploadOutlined />
-                </p>
-                <p className="ant-upload-text">
-                  Haz clic o arrastra archivos para subirlos
-                </p>
-                <p className="ant-upload-hint">
-                  Puedes subir múltiples archivos para esta entrega
-                </p>
-              </Upload.Dragger>
-            </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '15px' }}>
+                  <div style={{
+                    width: '48px', height: '48px',
+                    background: '#f0f5ff', borderRadius: '50%',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
+                  }}>
+                    {getTypeIcon(room.type)}
+                  </div>
+                  <Tag color={room.available ? 'success' : 'error'} style={{ margin: 0 }}>
+                    {room.available ? 'DISPONIBLE' : 'OCUPADO'}
+                  </Tag>
+                </div>
 
-            <div>
-              <h4>Comentarios (opcional):</h4>
-              <Input.TextArea 
-                rows={3}
-                placeholder="Agrega cualquier comentario adicional sobre tu entrega..."
-              />
-            </div>
+                <Title level={4} style={{ margin: '0 0 5px 0' }}>{room.name}</Title>
+                <Text type="secondary" style={{ display: 'block', marginBottom: '15px' }}>{getTypeLabel(room.type)}</Text>
+
+                <div style={{ background: '#fafafa', padding: '10px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between' }}>
+                  <Text style={{ fontSize: '12px', color: '#888' }}>CAPACIDAD</Text>
+                  <Text strong>{room.capacity} Personas</Text>
+                </div>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        /* VISTA LISTA (TABLA) */
+        <Card style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
+          <Table
+            columns={columns}
+            dataSource={filteredClassrooms}
+            rowKey="id"
+            pagination={{ pageSize: 6 }}
+          />
+        </Card>
+      )}
+
+      {/* --- MODAL FORMULARIO --- */}
+      <Modal
+        title={
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ background: colors.primary, width: '4px', height: '20px', borderRadius: '2px' }}></div>
+            <span style={{ fontSize: '20px' }}>Registrar Nuevo Espacio</span>
           </div>
-        )}
+        }
+        open={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+        footer={null}
+        centered
+      >
+        <div style={{ background: '#e6f7ff', padding: '10px 15px', borderRadius: '6px', marginBottom: '20px', border: '1px solid #91d5ff' }}>
+          <Text type="secondary" style={{ fontSize: '12px' }}>
+            <span style={{ color: '#1890ff', fontWeight: 'bold' }}>Nota:</span> Asegúrese de verificar el tipo de aula para la correcta asignación de inventario.
+          </Text>
+        </div>
+
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={handleAddClassroom}
+          initialValues={{ available: 'true', type: 'teoria' }}
+        >
+          {/* Campo NOMBRE (Input Texto Normal) */}
+          <Form.Item
+            label="Nombre del Salón / Aula"
+            name="name"
+            rules={[{ required: true, message: 'Por favor ingrese el nombre del salón' }]}
+          >
+            <Input
+              placeholder="Ej. Edificio A - Aula 102"
+              size="large"
+              prefix={<BankOutlined style={{ color: '#bfbfbf' }} />}
+            />
+          </Form.Item>
+
+          <Row gutter={16}>
+            {/* Campo DISPONIBLE (Select Booleano) */}
+            <Col span={12}>
+              <Form.Item
+                label="Estado Actual"
+                name="available"
+                rules={[{ required: true, message: 'Seleccione la disponibilidad' }]}
+              >
+                <Select size="large">
+                  <Option value="true">
+                    <Space><CheckCircleOutlined style={{ color: colors.success }} /> Disponible</Space>
+                  </Option>
+                  <Option value="false">
+                    <Space><CloseCircleOutlined style={{ color: colors.error }} /> No Disponible</Space>
+                  </Option>
+                </Select>
+              </Form.Item>
+            </Col>
+
+            {/* Campo TIPO (Select) */}
+            <Col span={12}>
+              <Form.Item
+                label="Tipo de Espacio"
+                name="type"
+                rules={[{ required: true, message: 'Seleccione el tipo' }]}
+              >
+                <Select size="large" placeholder="Seleccione tipo">
+                  <Option value="teoria">Aula Teórica</Option>
+                  <Option value="laboratorio">Laboratorio de Cómputo</Option>
+                  <Option value="taller">Taller / Laboratorio</Option>
+                  <Option value="auditorio">Auditorio</Option>
+                  <Option value="admin">Oficina Administrativa</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          {/* Campo Extra Opcional para realismo */}
+          <Form.Item
+            label="Capacidad (Personas)"
+            name="capacity"
+            rules={[{ required: true, message: 'Ingrese capacidad' }]}
+          >
+            <InputNumber style={{ width: '100%' }} size="large" min={1} max={500} placeholder="Ej. 30" />
+          </Form.Item>
+
+          <Divider />
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+            <Button size="large" onClick={() => setIsModalOpen(false)}>
+              Cancelar
+            </Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              size="large"
+              style={{ background: colors.primary }}
+            >
+              Guardar Aula
+            </Button>
+          </div>
+        </Form>
       </Modal>
-    </div>
+    </Layout>
   );
 };
 
-export default ActividadesAlumnoView;
+export default ClassroomManager;

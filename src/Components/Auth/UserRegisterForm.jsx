@@ -18,7 +18,7 @@ const onFinish = (values) => {
 
 export default function UserRegisterForm({ name = null, parentForm = null, processForm, btnSubmitContent }){
     const nameForm = name ?? 'auth-form';
-    const form = useAutoForm(nameForm, parentForm);
+    const { form } = useAutoForm(nameForm, parentForm, { standalone: false, debounceMs: 700});
     const onReset = () => form.resetFields();
 
     return (

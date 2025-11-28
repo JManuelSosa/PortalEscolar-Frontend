@@ -5,16 +5,21 @@ import { useCollapsed } from "../../../Context/CollapseContext";
 import { Layout } from "antd";
 const { Sider } = Layout;
 
-
 //Componentes
 import NavbarComponent from './NavbarComponent';
+
 //CSS
 import SiderStyle from '@css/Layout/Sider.module.css';
 
+// Utilidades
+import { getMenu } from "../../../Js/Utilities/menuDefinitions";
 
-export default function SiderNav(){
+export default function SiderNav({ typeMenu }){
 
     const { collapsed } = useCollapsed();
+
+    const itemsMenu = getMenu(typeMenu);
+
     const siderStyle = {
         position: 'sticky',
         insetInlineStart: 0,
@@ -38,7 +43,7 @@ export default function SiderNav(){
             width={250}
             style={siderStyle}
         >
-            <NavbarComponent/>
+            <NavbarComponent items={ itemsMenu }/>
         </Sider>
     )
 }

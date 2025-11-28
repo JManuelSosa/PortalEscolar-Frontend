@@ -1,7 +1,7 @@
-import { Col, Row, Card } from "antd";
+import { Flex, Card } from "antd";
 
 //Icons
-import { IconSchool, IconFileCertificate, IconSpeakerphone } from '@tabler/icons-react';
+import { IconBackpack, IconUsersGroup, IconBallpen, IconBook2, IconSchool } from '@tabler/icons-react';
 
 //Css
 import HomeCss from '@css/Views/HomeView.module.css';
@@ -9,55 +9,82 @@ import HomeCss from '@css/Views/HomeView.module.css';
 import { useNavigate } from "react-router-dom";
 
 
+import { routes } from '@js/Utilities/Routes.js';
+
+const cardClassNames = {
+    body: HomeCss.cardBody
+}
+
+const sections = [
+    {
+        title: 'Estudiantes',
+        description: 'Gestiona operaciones de los estudiantes',
+        icon: <IconBackpack></IconBackpack>,
+        key: 'estudiantes'
+    },
+    {
+        title: 'Empleados',
+        description: 'Administra a los empleados de la institución',
+        icon: <IconUsersGroup></IconUsersGroup>,
+        key: 'empleados',
+        path: routes.empleados
+    },
+    {
+        title: 'Biblioteca',
+        description: 'Organiza categorías, libros y préstamos de tu biblioteca',
+        icon: <IconBook2></IconBook2>,
+        key: 'biblioteca'
+    },
+    {
+        title: 'Profesores',
+        description: 'Coordina materias y grupos asignados a tus docentes',
+        icon: <IconBallpen></IconBallpen>,
+        key: 'maestros'
+    },
+    {
+        title: 'Divisiones',
+        description: 'Gestiona tus divisiones escolares',
+        icon: <IconSchool></IconSchool>,
+        key: 'divisiones',
+        path: routes.divisiones
+    }
+];
+
 export default function HomeView(){
 
-    const Usuario = 'Universidad Iberoamericana';
     const navigate = useNavigate();
+
     return(
         <>
-            <h1 className={ HomeCss.homeTittle }>Bienvenido {Usuario} </h1>
-            <Row className={ HomeCss.mainOpcion } gutter={[16, 16]}>
-                <Col xs={24} sm={12} lg={8}>
-                    <Card className={ HomeCss.cardMenu } hoverable>
-                        <Row className={ HomeCss.headerCard } onClick={() => { navigate('/Divisiones')}}>
-                            <IconSchool color={"rgb(var(--conifer-700))"} stroke={2} size={200}></IconSchool>
-                        </Row>
-                        <Row className={ HomeCss.bodyCard }>
-                            <h2 className={ HomeCss.titleHomeOptions }>
-                                Divisiones
-                            </h2>
-                        </Row>
-                    </Card>
-                </Col>
+            <Flex wrap justify="space-between" align="center" className={ HomeCss.head }>
+                <h1 className={ HomeCss.homeTittle }> Panel Administrativo </h1>
+                <div className={ HomeCss.imageContainer }>
+                    <img className={ HomeCss.logoSchool } src="/img/EduConnectColor.png" alt="Logo de la escuela"/>
+                </div>
+            </Flex>
+            
+    
+            <Flex wrap gap={24} justify="space-evenly" align="center">
+                {
+                    sections.map((section) => {
+                        return(
+                            <Card key={ section.key } className={ HomeCss.card} classNames={cardClassNames} onClick={ () => { navigate(section.path ?? routes.userHome) }}>
+                                <div className={ HomeCss.cardInfo}>
+                                    <span>{ section.title }</span>
+                                    <span>{ section.description }</span>
+                                </div>
+                                <div className={ HomeCss.cardIcon}>
+                                    <div className={ HomeCss.iconBg }>
+                                        { section.icon }
+                                    </div>
+                                </div>
+                            </Card>
+                        );
+                    })
+                }
+            </Flex>
 
-                <Col xs={24} sm={12} lg={8}>
-                    <Card className={ HomeCss.cardMenu } hoverable>
-                        <Row className={ HomeCss.headerCard }>
-                            <IconSpeakerphone color={"rgb(var(--conifer-700))"} stroke={2} size={200}></IconSpeakerphone>
-                        </Row>
-                        <Row className={ HomeCss.bodyCard }>
-                            <h2 className={ HomeCss.titleHomeOptions }>
-                                Avisos
-                            </h2>
-                        </Row>
-                    </Card>
-                </Col>
 
-                <Col xs={24} sm={12} lg={8}>
-                    <Card className={ HomeCss.cardMenu } hoverable>
-                        
-                            <Row className={ HomeCss.headerCard }>
-                                <IconFileCertificate color={"rgb(var(--conifer-700))"} stroke={2} size={200}></IconFileCertificate>
-                            </Row>
-                            <Row className={ HomeCss.bodyCard }>
-                                <h2 className={ HomeCss.titleHomeOptions }>
-                                    Documentos
-                                </h2>
-                            </Row>
-                        
-                    </Card>
-                </Col>
-            </Row>
         </>
     );
     
