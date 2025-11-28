@@ -1,7 +1,7 @@
 import { Flex, Card } from "antd";
 
 //Icons
-import { IconBackpack, IconUsersGroup, IconBallpen, IconBook2 } from '@tabler/icons-react';
+import { IconBackpack, IconUsersGroup, IconBallpen, IconBook2, IconSchool } from '@tabler/icons-react';
 
 //Css
 import HomeCss from '@css/Views/HomeView.module.css';
@@ -41,6 +41,13 @@ const sections = [
         icon: <IconBallpen></IconBallpen>,
         key: 'maestros'
     },
+    {
+        title: 'Divisiones',
+        description: 'Gestiona tus divisiones escolares',
+        icon: <IconSchool></IconSchool>,
+        key: 'divisiones',
+        path: routes.divisiones
+    }
 ];
 
 export default function HomeView(){

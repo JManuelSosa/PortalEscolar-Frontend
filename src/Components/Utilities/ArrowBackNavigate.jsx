@@ -22,7 +22,8 @@ export default function ArrowBackNavigate(){
     // 2. Mapa de Excepciones: Define manualmente los padres lógicos de rutas planas.
     const manualParents = {
         [routes.adminHome]: routes.userHome,  // '/adminHome' regresa a '/userHome'
-        [routes.divisiones]: routes.userHome, // '/divisiones' regresa a '/adminHome'
+        [routes.divisiones]: routes.adminHome, // '/divisiones' regresa a '/adminHome'
+        [routes.empleados]: routes.adminHome
         // Futuros ejemplos:
         // '/teacherHome': ROUTES.USER_HOME,
         // '/maestro/grupos': '/teacherHome',
