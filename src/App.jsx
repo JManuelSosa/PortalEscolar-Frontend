@@ -23,6 +23,7 @@ import { routes } from './Js/Utilities/Routes';
 //Test
 import AuthView from './Views/public/AuthView';
 import LandingPageEscolar from './Views/public/LandingPageEscolar';
+//import PuntoVentaColegiaturas from './Views/public/PuntoVentaColegiaturas.jxs';
 
 import { BibliotecaView } from './Views/student/BibliotecaAlumno';
 import BibliotecaAdminView from './Views/admin/BibliotecaAdministracion';
