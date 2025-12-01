@@ -14,7 +14,12 @@ import DivisionView from './Views/admin/DivisionView';
 import CarrerasView from './Views/admin/CarrerasView';
 import GruposView from './Views/admin/GruposView';
 import DetalleGruposView from './Views/admin/DetalleGruposView';
-
+// nuevas vistas
+import GestionAulas from './Views/admin/AulasView';
+import ClassroomManager from './Views/teacher/MateriaView';
+import MaestroHome from './Views/teacher/MaestroHome';
+import ListaMaestros from './Views/admin/MaestrosView';
+import SubscriptionPlans from './Views/public/Suscripcion';
 //Utilidades
 import { ConfigProvider, notification, App as AntApp } from 'antd';
 import esES from 'antd/locale/es_ES';
@@ -22,6 +27,7 @@ import { useNotificationStore } from './stores/notificationStore';
 import { routes } from './Js/Utilities/Routes';
 
 //Test
+import PaseDeListaView from './Views/teacher/Asistencia';
 import AuthView from './Views/public/AuthView';
 import LandingPageEscolar from './Views/public/LandingPageEscolar';
 import EmpleadosView from './Views/admin/EmpleadosView';
@@ -59,30 +65,30 @@ function App() {
       colorText: 'var(--text)'
     },
     components: {
-        Form: {
-          labelFontSize: 14,
-          itemLabelFontWeight: 400,
-        },
-        Input: {
-          activeBorderColor: 'var(--primary-active)',
-          hoverBorderColor: 'var(--accent-hover)',
-          colorTextPlaceholder: 'var(--text-placeholder)',
-        },
-        Select: {
-          activeBorderColor: 'var(--primary-active)',
-          hoverBorderColor: 'var(--accent-hover)',
-        },
-        Drawer: {
-          footerPaddingBlock: 0
-        },
-        Button: {
-          // Para botones primarios
-          colorPrimary: 'var(--primary)',
-          colorPrimaryHover: 'var(--primary-hover)',
-          colorPrimaryActive: 'var(--primary-active)',
-          colorPrimaryBorder: 'var(--primary)',
-        }
-      
+      Form: {
+        labelFontSize: 14,
+        itemLabelFontWeight: 400,
+      },
+      Input: {
+        activeBorderColor: 'var(--primary-active)',
+        hoverBorderColor: 'var(--accent-hover)',
+        colorTextPlaceholder: 'var(--text-placeholder)',
+      },
+      Select: {
+        activeBorderColor: 'var(--primary-active)',
+        hoverBorderColor: 'var(--accent-hover)',
+      },
+      Drawer: {
+        footerPaddingBlock: 0
+      },
+      Button: {
+        // Para botones primarios
+        colorPrimary: 'var(--primary)',
+        colorPrimaryHover: 'var(--primary-hover)',
+        colorPrimaryActive: 'var(--primary-active)',
+        colorPrimaryBorder: 'var(--primary)',
+      }
+
     }
   }
 
@@ -92,37 +98,42 @@ function App() {
       <ConfigProvider theme={configProvider} locale={esES}>
         {contextHolder}
         <AntApp>
-          
+
           <Routes>
 
             {/* Rutas sin inicio de sesión */}
             <Route path={routes.landing} element={<LandingPageEscolar />} />
             <Route path={routes.login} element={<AuthView />}></Route>
             <Route path={routes.pricing} element={<PlanEscolar />} />
+            <Route path='suscripcion' element={<SubscriptionPlans/>}/>
 
-            {/* Zona para testear rutas */ }
-            <Route element={ <UserLayout/> }>
-              <Route path={ routes.userHome } element={<UserHomeView/>}/>
+            {/* Zona para testear rutas */}
+            <Route element={<UserLayout />}>
+              <Route path={routes.userHome} element={<UserHomeView />} />
             </Route>
 
 
             {/* Rutas que requieren inicio de sesión */}
-            <Route element={<ProtectedRoute/>}>
-              <Route path={ routes.unauthorized } element={ <UnauthorizedView/> }/>
+            <Route element={<ProtectedRoute />}>
+              <Route path={routes.unauthorized} element={<UnauthorizedView />} />
 
               {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
-              <Route element={<RoleGuard allowedRoles={['Administrador']}/>}>
-                <Route element={<AdminLayout/>}>
-                  <Route path={ routes.adminHome } element={ <HomeView/> }/>
-                  <Route path={ routes.empleados } element={<EmpleadosView/>}/>
-                  <Route path={ routes.divisiones } element={<DivisionView/>}/>
-                  <Route path={ routes.carreras.path } element={<CarrerasView/>}></Route>
-                  <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
-                  <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>
+              <Route element={<RoleGuard allowedRoles={['Administrador']} />}>
+                <Route element={<AdminLayout />}>
+                  <Route path={routes.adminHome} element={<HomeView />} />
+                  <Route path={routes.empleados} element={<EmpleadosView />} />
+                  <Route path={routes.divisiones} element={<DivisionView />} />
+                  <Route path={routes.carreras.path} element={<CarrerasView />}></Route>
+                  <Route path={routes.grupos.path} element={<GruposView />}></Route>
+                  <Route path={routes.detalleGrupo.path} element={<DetalleGruposView />} />
                 </Route>
-              </Route>                  
+              </Route>
             </Route>
-              
+            {/* Administrador*/}
+            <Route path='Maestros' element={<ListaMaestros />} />
+            <Route path='/aulas' element={<GestionAulas />} />
+            <Route path='/materias' element={<ClassroomManager />} />
+
             {/* Alumnos*/}
             <Route path='/biblioteca' element={<BibliotecaView />}></Route>
             <Route path='/bibliotecaAdmin' element={<BibliotecaAdminView />}></Route>
@@ -130,6 +141,8 @@ function App() {
             <Route path='/ActividadesAlumno' element={<ActividadesAlumno />}></Route>
 
             {/* Maestros */}
+            <Route path='maestrohome' element={<MaestroHome />} />
+            <Route path='/asistencia' element={<PaseDeListaView />} />
             <Route path='/panelMaestro' element={<PanelMaestro />}></Route>
             <Route path='/gruposMaestro' element={<GruposMaestro />}></Route>
             <Route path='/JustificacionesAlumno' element={<JustificacionesAlumno />}></Route>
@@ -144,7 +157,7 @@ function App() {
               <Route path='/maestros/justificaciones' element={<AdminLayout> <JustificacionesMaestro /> </AdminLayout>} />
               <Route path='/maestros/grupos' element={<AdminLayout> <GruposMaestro /> </AdminLayout>} />*/
             }
-            
+
           </Routes>
         </AntApp>
       </ConfigProvider>
