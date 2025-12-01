@@ -113,9 +113,9 @@ function App() {
               {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
               <Route element={<RoleGuard allowedRoles={['Administrador']}/>}>
                 <Route element={<AdminLayout/>}>
-                  <Route path={ routes.adminHome } element={ <HomeView/> }/>
-                  <Route path={ routes.empleados } element={<EmpleadosView/>}/>
-                  <Route path={ routes.divisiones } element={<DivisionView/>}/>
+                  <Route path={ routes.adminHome.path } element={ <HomeView/> }/>
+                  <Route path={ routes.empleados.path } element={<EmpleadosView/>}/>
+                  <Route path={ routes.divisiones.path } element={<DivisionView/>}/>
                   <Route path={ routes.carreras.path } element={<CarrerasView/>}></Route>
                   <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
                   <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>

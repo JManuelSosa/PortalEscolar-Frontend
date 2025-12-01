@@ -1,26 +1,3 @@
-.head{
-    margin-bottom: 1.25rem;
-}
-
-.homeTittle{
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-size: 2.5rem;
-    font-weight: 600;
-}
-
-.imageContainer{
-    height: 100px;
-    display: flex;
-    justify-content: center;
-
-    & img.logoSchool {
-        height: 100%;
-        width: auto;
-        display: block;
-    }
-}
-
 .card{
     width: 22rem;
     background-color: var(--color-surface);
@@ -66,25 +43,12 @@
     align-items: center;
 
     & .iconBg {
-        background-color: rgb(var(--cyan-100));
+        background-color: aliceblue;
         display: flex;
         justify-content: center;
         align-items: center;
         scale: 2.25;
         border-radius: 25%;
         padding: 5px;
-    }
-}
-
-@media(max-width: 768px){
-    .homeTittle{
-        text-align: center;
-    }
-}
-
-@media(max-width: 576px){
-    .imageContainer{
-        height: 80px;
-        width: 100%;
     }
 }

@@ -29,7 +29,7 @@ const menus = {
             key: 'admin0',
             icon: <IconHomeMove {...IconProps} />,
             label: 'Ir al panel',
-            path: routes.adminHome
+            path: routes.adminHome.path
         },
         {
             key: 'admin1',

@@ -1,99 +1,77 @@
 //React
-import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
-//Ant
-import { Result, Button, Divider, Row, Col, Card } from "antd";
-
-//Faker Api
-import FakeAPI from "../../Js/FakeApi";
-
-
-//Icons
-import { IconBrandVscode, IconAutomation, IconTruckLoading } from '@tabler/icons-react';
+// Utilidades
+import { useCareerByDivision } from "../../Hooks/Fetching/useCareersByDivision";
+import { useCareerMutations } from "../../Hooks/Fetching/useCareersMutations";
+import ListaCarreras from "../../Components/Layout/Admin/ListaCarreras";
+import NewCareerForm from "../../Components/Forms/NewCareerForm";
 
 //Css
-import StyleCarreras from '@css/Views/CarrerasView.module.css';
+import css from '@css/Views/CarrerasView.module.css';
+
+// Ant Desing
+import { Tooltip, Button, Drawer, Form } from "antd";
+
+// Iconos 
+import { IconPlus } from "@tabler/icons-react";
 
 export default function CarrerasView(){
 
-    const fakeAPI = new FakeAPI();
+    const [open, setOpen] = useState(false);
+    const { divisionID } = useParams();
+    const location = useLocation();
+    const { divisionName } = location.state || {};
+
+    const { data, isLoading, isError } = useCareerByDivision(divisionID);
+    const { newCareer, isPending, isSuccess } = useCareerMutations(divisionID);
+    const [form] = Form.useForm();
 
     const navigate = useNavigate();
-    const currentLocation = useLocation();
 
-    const { divisionID, divisionName } = currentLocation.state || {};
-
-    const [carreras, setCarreras] = useState([]);
-
-    useEffect(() => {
-        if (divisionID) {
-            const carrerasData = fakeAPI.getCarrerasByDivision(divisionID);
-            setCarreras(carrerasData);
-        }
-    }, [divisionID]);
-
-
-    if (!divisionID) {
-        return (
-            <Result
-                status="404"
-                title="Acceso no válido"
-                subTitle="Debes acceder a esta página desde el listado de divisiones"
-                extra={<Button type="primary" onClick={() => navigate('/')}>Volver al inicio</Button>}
-            />
-        );
+    const openDrawer = () => {
+        setOpen(true);
     }
 
-    function verGrupos(idCarrera, nameCarrera){
-        navigate("/Grupos", { state: { carreraID: idCarrera, carreraName: nameCarrera, divisionID: divisionID, divisionName: divisionName } });
+    const closeDrawer = () => {
+        form.resetFields();
+        setOpen(false);
     }
 
-    function obtenerIcono(divisionID){
-    
-            switch(divisionID){
-                case 1: 
-                return <IconBrandVscode color={"rgb(var(--conifer-700))"} stroke={1.5} size={180}/>
-    
-                case 2: 
-                return <IconAutomation color={"rgb(var(--conifer-700))"} strokeWidth={1.8} size={180}/>
-    
-                case 3: 
-                return <IconTruckLoading color={"rgb(var(--conifer-700))"} strokeWidth={1.8} size={180}/>
+    const onFinish = (values) => {
+        newCareer(values, {
+            onSuccess: () => {
+                closeDrawer()
             }
-    
+        });
     }
 
     return(
 
-                <>
-                <section className="Divisiones">
-        
-                    <Divider>
-                        <h1>Carreras en { name }</h1>
-                    </Divider>
-        
-                    <Row gutter={[16, 16]} className={StyleCarreras.RowContenido}>
-                        
-                        {carreras.map((carrera) => (
-                            <Col key={carrera.id} xs={24} md={12} lg={8} onClick={() => { verGrupos(carrera.id, carrera.name )}}>
-                                <Card className={StyleCarreras.CardGrupos} hoverable>
-                                    <Row className={StyleCarreras.HeaderCard}>
-                                        { obtenerIcono(divisionID) }
-                                    </Row>
-                                    <Row className={StyleCarreras.BodyCard}>
-                                        <h2 className={StyleCarreras.TitleHomeOptions}>
-                                            {carrera.name} {/* Renderiza el nombre de la división */}
-                                        </h2>
-                                    </Row>
-                                </Card>
-                            </Col>
-                        ))}
-        
-        
-                    </Row>
-                </section>
-                </>
+        <>
+            <section className="Divisiones">
+                <span className={css.titleView}>
+                    <h1>Carreras en: { divisionName }</h1>
+                </span>
+
+                <div className={css.containerButtons}>
+                    <Tooltip title={"Añadir Carrera"}>
+                        <Button type="primary" shape="circle" className={css.controlButton} onClick={openDrawer}>
+                            <IconPlus size={28}/>
+                        </Button>
+                    </Tooltip>
+                </div>
+
+                <ListaCarreras carreras={data} isError={isError} isLoading={isLoading}/>
+
+                <Drawer open={open} onClose={closeDrawer} title="Agregar carrera">
+                    <NewCareerForm form={form} onFinish={onFinish} isPending={isPending}/>
+                </Drawer>
+
+            </section>
+        </>
 
     );
 }

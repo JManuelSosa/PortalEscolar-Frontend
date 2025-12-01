@@ -2,22 +2,24 @@
     display: flex;
     justify-content: center;
     text-align: center;
+    height: 80px;
+    align-items: center;
     
     & h1 {
         font-weight: 600;
     }
 }
 
-
 .containerButtons {
+    width: 100%;
+    margin-bottom: 2.5rem;
     display: flex;
     justify-content: end;
     padding-left: 1rem;
     padding-right: 1rem;
-
-    & .controlButton {
-        height: 3.3rem;
-        width: 3.3rem;
-    }
 }
 
+.controlButton {
+    height: 3.3rem;
+    width: 3.3rem;
+}

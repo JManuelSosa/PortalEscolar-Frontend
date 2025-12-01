@@ -174,3 +174,15 @@ export const onBoardEmployeeFormRules = {
         }
     ]
 }
+
+export const newDivisionFormRules = {
+    nombre: [
+        {  required: true, message: "El nombre de la división es requerido"}
+    ]
+}
+
+export const newCareerFormRules = {
+    nombre: [
+        {  required: true, message: "El nombre de la carrera es requerido"}
+    ]
+}

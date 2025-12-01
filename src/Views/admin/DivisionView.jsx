@@ -1,74 +1,70 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import FakeAPI from "../../Js/FakeApi";
+// React
+import { useState } from "react";
 
-import { VsCodeIcon } from "../../Js/Icons";
-import { IndustrialIcon } from "../../Js/Icons";
-import { AdministracionIcon } from "../../Js/Icons";
+import { useDivisions } from "../../Hooks/Fetching/useDivisions";
+
+// Formularios
+import NewDivisionForm from "../../Components/Forms/NewDivisionForm";
+
+// Utilidades
+import ListaDivisiones from "../../Components/Layout/Admin/ListaDivisiones";
+import { useDivisionMutations } from "../../Hooks/Fetching/useDivisionMutations";
 
 //AntDesign
-import { Col, Row, Divider, Card } from "antd";
+import { Divider, Button, Tooltip, Drawer, Form } from "antd";
 
-//Css
-import StyleDivision from '@css/Views/DivisionView.module.css';
+// Css
+import css from '@css/Views/admin/DivisionesView.module.css';
+
+// Iconos
+import { IconPlus } from "@tabler/icons-react";
+
 
 export default function DivisionView(){
 
-    const [divisiones, setDivisiones] = useState([]);
-    const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+    const { addNewDivision, isPending } = useDivisionMutations();
+    const [form] = Form.useForm();
 
-    useEffect(() => {
-        // Simula la llamada a la API
-        const api = new FakeAPI();
-        setDivisiones(api.getAllDivisiones());
-    }, []);
+    const { data: divisiones = [], isLoading, isError } = useDivisions();
 
-    function verCarreras(idDivision, nameDivision){
-        navigate("/Carreras", { state: { divisionID: idDivision, divisionName: nameDivision } });
-    }
+    const showDrawer = () => {
+        setOpen(true);
+    };
 
-    function obtenerIcono(divisionID){
+    const onClose = () => {
+        form.resetFields();
+        setOpen(false);
+    };
 
-        switch(divisionID){
-            case 1: 
-            return <VsCodeIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
-
-            case 2: 
-            return <IndustrialIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
-
-            case 3: 
-            return <AdministracionIcon strokeColor={"rgb(var(--conifer-700))"} strokeWidth={2} size={180}/>
-        }
-
+    const onFinish = (values) => {
+        addNewDivision(values, {
+            onSuccess: () => {
+                onClose()
+            }
+        });
     }
 
     return(
         <>
-        <section className="Divisiones">
-
-            <Divider>
+        <section className={ css.container }>
+            <span className={css.titleView}>
                 <h1>Divisiones de la escuela</h1>
-            </Divider>
+            </span>
 
-            <Row gutter={[16, 16]} className={StyleDivision.RowContenido}>
-                
-                {divisiones.map((division) => (
-                    <Col key={division.id} xs={24} md={12} lg={8} onClick={() => { verCarreras(division.id, division.name) }}>
-                        <Card className={StyleDivision.CardDivisiones} hoverable>
-                            <Row className={StyleDivision.HeaderCard}>
-                                { obtenerIcono(division.id) }
-                            </Row>
-                            <Row className={StyleDivision.BodyCard}>
-                                <h2 className={StyleDivision.TitleHomeOptions}>
-                                    {division.name} {/* Renderiza el nombre de la división */}
-                                </h2>
-                            </Row>
-                        </Card>
-                    </Col>
-                ))}
+            <div className={css.containerButtons}>
+                <Tooltip title={"Añadir División"}>
+                    <Button type="primary" shape="circle" onClick={showDrawer} className={css.controlButton}>
+                        <IconPlus size={28}/>
+                    </Button>
+                </Tooltip>
+            </div>
 
+            <ListaDivisiones divisiones={divisiones} isLoading={isLoading} isError={isError}/>
 
-            </Row>
+            <Drawer onClose={onClose} open={open} title="Agregar división">
+                <NewDivisionForm form={form} isPending={isPending} onFinish={onFinish}/>
+            </Drawer>
         </section>
         </>
     );

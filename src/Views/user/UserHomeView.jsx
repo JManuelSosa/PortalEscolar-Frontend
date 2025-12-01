@@ -33,7 +33,7 @@ export default function UserHomeView(){
         let panel = null;
         switch(school.role){
             case 'Administrador':
-                panel = routes.adminHome;
+                panel = routes.adminHome.path;
             break;
         }
 

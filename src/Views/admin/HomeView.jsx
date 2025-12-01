@@ -27,7 +27,7 @@ const sections = [
         description: 'Administra a los empleados de la institución',
         icon: <IconUsersGroup></IconUsersGroup>,
         key: 'empleados',
-        path: routes.empleados
+        path: routes.empleados.path
     },
     {
         title: 'Biblioteca',
@@ -46,7 +46,7 @@ const sections = [
         description: 'Gestiona tus divisiones escolares',
         icon: <IconSchool></IconSchool>,
         key: 'divisiones',
-        path: routes.divisiones
+        path: routes.divisiones.path
     }
 ];
 

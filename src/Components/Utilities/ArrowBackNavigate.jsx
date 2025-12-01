@@ -1,5 +1,5 @@
 // React
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, matchPath } from "react-router-dom";
 
 // Iconos
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
@@ -19,17 +19,22 @@ export default function ArrowBackNavigate(){
         return null;
     }
 
-    // 2. Mapa de Excepciones: Define manualmente los padres lógicos de rutas planas.
-    const manualParents = {
-        [routes.adminHome]: routes.userHome,  // '/adminHome' regresa a '/userHome'
-        [routes.divisiones]: routes.adminHome, // '/divisiones' regresa a '/adminHome'
-        [routes.empleados]: routes.adminHome
-        // Futuros ejemplos:
-        // '/teacherHome': ROUTES.USER_HOME,
-        // '/maestro/grupos': '/teacherHome',
-    };
-
     const handleBackNavigation = () => {
+
+        const currentRouteConfig = Object.values(routes).find(route => {
+            // Solo nos interesan los objetos complejos que tienen 'path'
+            if (typeof route === 'object' && route.path) {
+                // matchPath verifica si la URL actual coincide con el patrón (ej: /divisiones/1/carreras coincide con /divisiones/:id/carreras)
+                return matchPath(route.path, location.pathname);
+            }
+            return false;
+        });
+
+        // Si encontramos la configuración de la ruta actual y tiene un padre forzado:
+        if (currentRouteConfig && currentRouteConfig.backRoute) {
+            navigate(currentRouteConfig.backRoute);
+            return;
+        }
 
         if (manualParents[location.pathname]) {
             navigate(manualParents[location.pathname]);
