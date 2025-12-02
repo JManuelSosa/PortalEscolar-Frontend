@@ -1,3 +1,5 @@
+import dayjs from "dayjs"
+
 
 export const personalFormRules = {
     nombre: [
@@ -186,3 +188,78 @@ export const newCareerFormRules = {
         {  required: true, message: "El nombre de la carrera es requerido"}
     ]
 }
+
+export const schoolPeriodFormRules = {
+    periodoEscolar: {
+        nombre: [
+            { required: true, message: "El nombre del periodo es obligatorio" },
+            { max: 100, message: "El nombre es muy largo" }
+        ],
+        fechaInicio: [
+            { required: true, message: "Selecciona la fecha de inicio" },
+            {   
+                type: "date",
+                message: "La fecha de inicio debe ser fecha"
+            },
+        ],
+        fechaFin: [
+            { required: true, message: "Selecciona la fecha de fin" },
+            {   
+                type: "date",
+                message: "La fecha de fin debe ser fecha"
+            },
+        ],
+        numeroOrdinal: [
+            {required: true, message: "El orden del periodo es requerido"},
+            { type: "number", message: "Debe ser un número"}
+        ],
+
+    },
+
+    // SECCIÓN 2: Reglas para los hijos de la lista (subperiodosEscolares)
+    subperiodosEscolares: {
+        nombre: [
+            { required: true, message: "Nombre del parcial requerido" }
+        ],
+        tipo: [
+            { required:true, message: "Seleccione un tipo de subperiodo" }
+        ],
+        fechas: [
+            { required: true, message: "Campo de fecha requerido" }
+        ]
+    }
+};
+
+
+
+
+/**
+ * Validador personalizado para rangos de fechas
+ * @param {function} getFieldValue - Función para obtener valores del form
+ * @param {array} compareFieldPath - Ruta del campo contra el cual comparar (ej: ['padre', 'inicio'])
+ * @param {string} type - 'after' (debe ser después) o 'before' (debe ser antes)
+ */
+export const dateRangeValidator = (getFieldValue, compareFieldPath, type = 'after') => ({
+    validator(_, value) {
+        // 1. Si no hay valor actual o no hay valor de comparación, pasamos (dejamos que la regla 'required' se encargue)
+        const compareValue = getFieldValue(compareFieldPath);
+        if (!value || !compareValue) {
+            return Promise.resolve();
+        }
+
+        // 2. Comparamos usando Day.js
+        if (type === 'after') {
+            // Validar que 'value' (Fin) sea DESPUÉS de 'compareValue' (Inicio)
+            if (value.isBefore(compareValue) || value.isSame(compareValue)) {
+                return Promise.reject(new Error('La fecha fin debe ser posterior a la de inicio'));
+            }
+        } else {
+            // Validar que 'value' (Inicio) sea ANTES de 'compareValue' (Fin)
+            if (value.isAfter(compareValue) || value.isSame(compareValue)) {
+                return Promise.reject(new Error('La fecha inicio debe ser anterior a la de fin'));
+            }
+        }
+
+        return Promise.resolve();
+    },
+});

@@ -14,7 +14,11 @@ const queryGetService = {
 
     getCareersByDivision: async (divisionId) => {
         const response = await api.get(`/divisions/${divisionId}/careers`);
-        console.log(response.data.data);
+        return response.data.data;
+    },
+
+    getSchoolPeriodTemplates: async() => {
+        const response = await api.get('/schoolPeriods');
         return response.data.data;
     }
 }

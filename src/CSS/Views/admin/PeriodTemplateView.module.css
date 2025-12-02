@@ -1,0 +1,24 @@
+.title-view {
+    font-weight: 500;
+    text-align: center;
+}
+
+.controls-button {
+    display: flex;
+    justify-content: end;
+    padding-right: 1rem;
+
+    .btn-control {
+        height: 3.3rem;
+        width: 3.3rem;
+    }
+}
+
+
+.custom-tabs :global(.ant-tabs-tab-btn) {
+    font-weight: 300;
+}
+
+.custom-tabs :global(.ant-tabs-tab-active .ant-tabs-tab-btn) {
+    font-weight: 400;
+}

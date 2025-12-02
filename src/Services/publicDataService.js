@@ -15,7 +15,14 @@ const publicDataService = {
     getSystemEmployees: async () => {
         const response = await api.get('/allemployees', { global: true });
         return response.data.data;
+    },
+
+    getPeriodTemplateFormData: async () => {
+        const response = await api.get('/dataNewPeriodTemplate', { global: true });
+        return response.data.data;
     }
+
+
 
 }
 

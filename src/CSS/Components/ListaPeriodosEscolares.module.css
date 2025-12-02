@@ -1,0 +1,152 @@
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid rgb(var(--cyan-600));
+    margin-bottom: 10px;
+
+    & span {
+        font-weight: 500;
+        color: rgb(var(--cyan-700));
+        font-size: 1.2rem;
+        
+    }
+
+    & span:first-child {
+        flex: 7;
+    }
+
+    & span:last-child {
+        text-align: center;
+        flex:1;
+    }
+}
+
+.list-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+
+.list-element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 1rem;
+
+    & .content {
+        flex: 7;
+        display: flex;
+        gap: 1.8rem; 
+
+        & .info-list {
+            display:flex;
+            flex-direction: column;
+            font-size: 1.15rem;
+
+            & .ciclo-escolar {
+                font-weight: 500;
+            }
+
+            & .info-details {
+                display: flex;
+                gap: 1.2rem;
+                font-size: 1rem;
+                flex-wrap: wrap;
+
+                & .item-details > span {
+                    display: block;
+                }
+
+                & .item-details > span:last-child {
+                    font-weight: 300;
+                }
+
+                & .item-details > .item-detail-title {
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+
+    & .actions {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+    }
+}
+
+.icon-calendar  {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.info-dates {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    align-items: flex-start;
+
+    & .info-dates-details {
+        display: flex;
+        flex-direction: column;
+
+        & span:first-child {
+            font-size: 1.15rem;
+            font-weight: 500;
+        }
+
+        & span:last-child {
+            font-size: 1rem;
+            font-weight: 300;
+        }
+    }
+}
+
+
+
+.icon-action {
+    cursor: pointer;
+}
+
+
+@media screen and (width < 968px){
+
+    .info-dates {
+        flex-direction: column;
+        align-items: center;
+        padding-right: 2rem;
+
+        .info-dates-details > span:last-child {
+            font-size: 0.75rem;
+        }
+    }
+
+    
+}
+
+@media screen and (width < 520px){
+
+    .content{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .info-details {
+        flex-direction: column;
+    }
+
+    .info-dates {
+        flex-direction: row;
+        padding-right: 0px;
+    }
+}

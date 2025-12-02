@@ -9,8 +9,10 @@ import UserLayout from './Layout/UserLayout';
 //Views
 import UserHomeView from './Views/user/UserHomeView';
 import HomeView from './Views/admin/HomeView';
-import DivisionView from './Views/admin/DivisionView';
+import PeriodTemplateView from './Views/admin/PeriodTemplateView';
 
+
+import DivisionView from './Views/admin/DivisionView';
 import CarrerasView from './Views/admin/CarrerasView';
 import GruposView from './Views/admin/GruposView';
 import DetalleGruposView from './Views/admin/DetalleGruposView';
@@ -81,7 +83,14 @@ function App() {
           colorPrimaryHover: 'var(--primary-hover)',
           colorPrimaryActive: 'var(--primary-active)',
           colorPrimaryBorder: 'var(--primary)',
-        }
+        },
+        Tabs: {
+          colorText: 'rgb(var(--cyan-700))',
+          itemSelectedColor: 'rgb(var(--cyan-800))',
+          itemHoverColor: 'rgb(var(--cyan-600))',  
+          inkBarColor: 'rgb(var(--cyan-800))', 
+          fontSize: 18    
+        },
       
     }
   }
@@ -115,6 +124,8 @@ function App() {
                 <Route element={<AdminLayout/>}>
                   <Route path={ routes.adminHome.path } element={ <HomeView/> }/>
                   <Route path={ routes.empleados.path } element={<EmpleadosView/>}/>
+                  <Route path={ routes.periodosEscolares.path } element={<PeriodTemplateView/>} />
+
                   <Route path={ routes.divisiones.path } element={<DivisionView/>}/>
                   <Route path={ routes.carreras.path } element={<CarrerasView/>}></Route>
                   <Route path={ routes.grupos.path } element={<GruposView/>}></Route>

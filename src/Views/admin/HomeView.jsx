@@ -1,7 +1,7 @@
 import { Flex, Card } from "antd";
 
 //Icons
-import { IconBackpack, IconUsersGroup, IconBallpen, IconBook2, IconSchool } from '@tabler/icons-react';
+import { IconBackpack, IconUsersGroup, IconBallpen, IconBook2, IconSchool, IconCalendarTime } from '@tabler/icons-react';
 
 //Css
 import HomeCss from '@css/Views/HomeView.module.css';
@@ -30,10 +30,11 @@ const sections = [
         path: routes.empleados.path
     },
     {
-        title: 'Biblioteca',
-        description: 'Organiza categorías, libros y préstamos de tu biblioteca',
-        icon: <IconBook2></IconBook2>,
-        key: 'biblioteca'
+        title: 'Periodos Escolares',
+        description: 'Establece y gestiona los periodos temporales de la institución',
+        icon: <IconCalendarTime></IconCalendarTime>,
+        key: 'periodosEscolares',
+        path: routes.periodosEscolares.path
     },
     {
         title: 'Profesores',

@@ -1,0 +1,102 @@
+.card-padre {
+    margin-bottom: 2.5rem;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+
+    & .fechas-periodoPadre {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    & .datos-periodoPadre {
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
+
+
+.subperiodos {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+
+    & .nombre-subperiodo {
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        & .input-nombre {
+            flex:1;
+            padding-right: 2rem;
+        }
+    }
+
+
+    & .data-subperiodo {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
+
+.button-submit {
+    background-color: rgb(var(--cyan-300));
+    color: white;
+    margin-top: 2rem;
+    border-color: unset;
+
+    & span {
+        font-weight: 600 !important;
+    }
+}
+
+.button-submit:hover {
+    background-color: rgb(var(--cyan-500)) !important;
+    color: white !important;
+    margin-top: 2rem !important;
+    border-color: unset !important;
+
+    & span {
+        font-weight: 600 !important;
+    }
+}
+
+.icon-trash {
+    color: rgb(197, 0, 0);
+    cursor: pointer;
+}
+
+.select-tipo {
+    width: 80%;
+}
+
+
+@media screen and (width <= 720px) {
+
+    .card-body {
+        & .datos-periodoPadre {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }   
+
+
+    .subperiodos {
+        & .data-subperiodo {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+
+
+
+}
+

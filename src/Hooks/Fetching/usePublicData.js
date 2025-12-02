@@ -7,6 +7,7 @@ import { queryKeys } from "../../Js/Utilities/QueryKeys";
 import { transformRegisterFormData } from "../../Js/AnticorruptionLayer/registerFormData";
 import { transformOnBoardEmployeeFormData } from "../../Js/AnticorruptionLayer/onBoardEmployeeFormData";
 import { transformSystemEmployees } from "../../Js/AnticorruptionLayer/SystemEmployees";
+import { periodTemplateFormData } from "../../Js/AnticorruptionLayer/periodTemplateFormData";
 
 
 export const useRegisterFormData =  () => {
@@ -72,6 +73,30 @@ export const useSystemEmployees = () => {
         isLoading, 
         isError 
     }), [data, isLoading, isError]);
+}
+
+export const usePeriodTemplateFormData = () => {
+
+    const selectData = useCallback(periodTemplateFormData, []);
+    const minutosStale = 120;
+    const minutosFresh = 130;
+
+    const { data, isLoading, isError } = useQuery({
+        queryKey: queryKeys.newTemplateFormData,
+        queryFn: publicDataService.getPeriodTemplateFormData,
+        staleTime: minutosStale * (60 * 1000),
+        gcTime: minutosFresh * ( 60 * 1000),
+        select: selectData
+    });
+
+    return useMemo( () => ({ 
+        cycleForSelect: data?.cycleForSelect ?? [], 
+        periodosForSelect: data?.periodosForSelect ?? [],
+        subperiodosForSelect: data?.subperiodosForSelect ?? [],
+        isLoading, 
+        isError 
+    }), [data, isLoading, isError]);
+
 }
 
 

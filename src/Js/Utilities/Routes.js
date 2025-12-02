@@ -22,6 +22,10 @@ export const routes = {
         path: '/empleados',
         backRoute: ADMIN_PATH
     },
+    periodosEscolares: {
+        path: '/periodos',
+        backRoute: ADMIN_PATH
+    },
     divisiones: {
         path: '/divisiones',
         backRoute: ADMIN_PATH
