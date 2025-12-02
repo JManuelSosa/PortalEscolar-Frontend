@@ -15,6 +15,9 @@ import CarrerasView from './Views/admin/CarrerasView';
 import GruposView from './Views/admin/GruposView';
 import DetalleGruposView from './Views/admin/DetalleGruposView';
 // nuevas vistas
+import AsentarCalificaciones from './Views/teacher/Calificacines';
+import GestorTareasGrupal from './Views/teacher/Actividades';
+import GestionGrupos from './Views/admin/GestionGrupos';
 import GestionAulas from './Views/admin/AulasView';
 import ClassroomManager from './Views/teacher/MateriaView';
 import MaestroHome from './Views/teacher/MaestroHome';
@@ -105,7 +108,7 @@ function App() {
             <Route path={routes.landing} element={<LandingPageEscolar />} />
             <Route path={routes.login} element={<AuthView />}></Route>
             <Route path={routes.pricing} element={<PlanEscolar />} />
-            <Route path='suscripcion' element={<SubscriptionPlans/>}/>
+            <Route path='suscripcion' element={<SubscriptionPlans />} />
 
             {/* Zona para testear rutas */}
             <Route element={<UserLayout />}>
@@ -129,6 +132,10 @@ function App() {
                 </Route>
               </Route>
             </Route>
+            {/*  nuevas rutas */}
+            <Route path='calificaciones' element={< AsentarCalificaciones />} />
+            <Route path='tareas' element={<GestorTareasGrupal />} />
+            <Route path='homegrupos' element={<GestionGrupos />} />
             {/* Administrador*/}
             <Route path='Maestros' element={<ListaMaestros />} />
             <Route path='/aulas' element={<GestionAulas />} />
