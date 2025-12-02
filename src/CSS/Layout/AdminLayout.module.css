@@ -15,16 +15,8 @@
 
 .adminLayoutContent{
     padding-inline: 1rem;
-    background-color: rgb(var(--base-50));
+    background-color: var(--bg-body);
     padding: 24px;
     flex-shrink: 0;
     overflow-x: auto;
-}
-
-.footer{
-    text-align: center;
-    color: #ffffff;
-    background-color: #4096ff;
-    height: 1rem;
-    flex-shrink: 0;
 }

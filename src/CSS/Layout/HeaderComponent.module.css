@@ -3,7 +3,7 @@
     text-align: center;
     color: rgb(0,0,0);
     align-items: center;
-    height: 4.2rem;
+    height: 3rem;
     background-color: rgb(var(--base-300));
 }
 
@@ -18,15 +18,19 @@
 }
 
 .headerBtnUser{
-    background-color: rgb(var(--base-800));
-    color: rgb(255,255,255);
-    height: 4rem;
-    width: 4rem;
+    color: var(--accent-active);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.headerBtnUser:hover{
+    color: rgb(250,250,250);
 }
 
 .headerColButtonUser{
     display: flex;
     flex-direction: row-reverse;
+    align-items: center;
 }
 
 .headerColBackArrow{

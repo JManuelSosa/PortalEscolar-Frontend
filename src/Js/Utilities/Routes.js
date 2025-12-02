@@ -1,17 +1,24 @@
-export const routes = {
 
+
+export const routes = {
+    
     // Publicas
     landing: '/',
     login: '/login',
     pricing: '/pricing',
     unauthorized: '/unauthorized',
+    asistenciaMaestro: '/asistencias',
 
     // Con login
     userHome: '/home',
-    
+
     // Admin 
     adminHome: '/admin',
+
     
+    empleados: '/empleados',
+
+
     // División
     divisiones: '/divisiones',
     carreras: {

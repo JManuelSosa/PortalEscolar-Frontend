@@ -1,10 +1,10 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 //* Ant
 import { Form, Input, DatePicker, Select, Spin, Alert, Button } from "antd";
 //* Hooks
 import { useAutoForm } from "../../Hooks/useAutoForm";
-import { useRegisterFormData } from "../../Hooks/Fetching/usePublicData";
+
 //* Componentes
 import SubmitButton from "../Utilities/SubmitButton";
 import LoadingLogo from "../Utilities/LoadingLogo";
@@ -16,25 +16,26 @@ import dayjs from "dayjs";
 import { personalFormRules } from "../../Js/Utilities/FormRules";
 
 
+
+
 const dateFormat = 'DD/MM/YYYY';
-const onFinish = (values) => {
-    console.log(values)
-}
+const onFinish = (values) => {}
 
 const searchCity = (optionA, optionB) => (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase());
 
 const loadIndicator = <LoadingLogo size="160px"/>
 
 
-export default function InfoPersonalForm({ name = null, parentForm = null, processForm, btnSubmitContent }){
+export default function InfoPersonalForm({ name = null, parentForm = null, processForm, btnSubmitContent, formData, dataEmployeeSelected = null }){
 
     const nameForm = name ?? 'personal-Info-Form';
-    const form = useAutoForm(nameForm, parentForm);
+    const { form, validateForm } = useAutoForm(nameForm, parentForm, { standalone: false, debounceMs: 700});
     const [current, setCurrent] = useState(0);
 
-    const { statesForSelect, gendersForSelect, statesById, isLoading, isError } = useRegisterFormData();
 
-    const selectedStateId = Form.useWatch('state', form);
+    const { statesForSelect = [], gendersForSelect = [], statesById = {}, isLoading, isError } = formData || {};
+
+    const selectedStateId = Form.useWatch('estado', form);
 
     const selectCities = useMemo(() => {
         if (!selectedStateId || !statesById) {
@@ -51,6 +52,65 @@ export default function InfoPersonalForm({ name = null, parentForm = null, proce
             value: city.id
         }));
     }, [selectedStateId, statesById]);
+
+    useEffect(() => {
+        // Si no hay un empleado seleccionado (es null), salimos.
+        // (Opcional: podrías llamar a form.resetFields() aquí si quieres que el form se limpie)
+        if (!dataEmployeeSelected) {
+            return;
+        }
+
+        // 2. Como dijiste, 'dataEmployeeSelected' ES el objeto personalData
+        const personData = dataEmployeeSelected; 
+
+        // 3. Usamos la función de búsqueda para encontrar el 'state'
+        const matchingStateId = findStateIdByCityId(personData.city, statesById);
+        
+        // 4. Preparamos el objeto de datos para el formulario
+        const formDataToSet = {
+            nombre: personData.name,
+            primer_apellido: personData.first_last_name,
+            segundo_apellido: personData.second_last_name,
+            curp: personData.curp,
+            genero: personData.gender,
+            direccion: personData.address,
+            numero_telefonico: personData.phone_number,
+            
+            // IMPORTANTE: El DatePicker de AntD necesita un objeto dayjs,
+            // no un string "YYYY-MM-DD".
+            fecha_nacimiento: dayjs(personData.birth_date),
+            
+            // Asignamos el estado que encontramos y la ciudad
+            estado: matchingStateId,
+            ciudad: personData.city, // 'city' en el form es 'city_id'
+        };
+
+        // 5. Llenamos el formulario con los datos
+        form.setFieldsValue(formDataToSet);
+
+    }, [dataEmployeeSelected, form, statesById, validateForm]);
+
+    function findStateIdByCityId(cityId, statesMap) {
+        // Si no tenemos el mapa o el ID, no podemos buscar
+        if (!statesMap || !cityId) {
+            return null;
+        }
+        
+        for (const stateId in statesMap) {
+            const stateData = statesMap[stateId];
+            
+            // Verificamos si el array 'cities' de este estado
+            // contiene el 'cityId' que buscamos
+            if (stateData.cities?.some(city => city.id === cityId)) {
+                // ¡Encontrado! Devolvemos el ID del estado
+                // (lo convertimos a número por si acaso)
+                return parseInt(stateId, 10);
+            }
+        }
+        
+        // Si no se encuentra en ningún estado, devolvemos null
+        return null;
+    }
     
     if (isLoading){ 
         return (
@@ -65,8 +125,8 @@ export default function InfoPersonalForm({ name = null, parentForm = null, proce
     
     const handleState = () => {
         form.setFieldsValue({
-            city: null,
-            label_city: null
+            ciudad: null,
+            ciudad_label: null
         });
     }
 
@@ -81,37 +141,36 @@ export default function InfoPersonalForm({ name = null, parentForm = null, proce
         // 3. Actualiza el valor en el formulario de AntD
         // Esto fuerza al <Input> a mostrar solo el valor filtrado
         form.setFieldsValue({
-            'phone_number': filteredValue,
+            'numero_telefonico': filteredValue,
         });
     };
     
     const steps = [
         {
-            title: 'First',
             content: (<fieldset className={ css['fieldset'] }>
                         <legend className={css['legend']}>Información Personal</legend>
                         
                             <div className="form-item">
-                                <Form.Item name="name" label="Nombre" rules={personalFormRules.name}>
+                                <Form.Item name="nombre" label="Nombre" rules={personalFormRules.nombre}>
                                     <Input placeholder="Nombre"/>
                                 </Form.Item>
                             </div>
 
                             <div className="form-item">
-                                <Form.Item name="first_last_name" label="Primer apellido" rules={personalFormRules['first_last_name']}>
+                                <Form.Item name="primer_apellido" label="Primer apellido" rules={personalFormRules['primer_apellido']}>
                                     <Input placeholder="Primer Apellido"/>
                                 </Form.Item>
                             </div>
             
                             <div className="form-item">
-                                <Form.Item name="second_last_name" label="Segundo apellido" rules={personalFormRules['second_last_name']}>
+                                <Form.Item name="segundo_apellido" label="Segundo apellido" rules={personalFormRules['segundo_apellido']}>
                                     <Input placeholder="Segundo Apellido"/>
                                 </Form.Item>
                             </div>
                     
                     
                             <div className="form-item">
-                                <Form.Item name="birth_date" label="Fecha de Nacimiento" rules={personalFormRules['birth_date']}>
+                                <Form.Item name="fecha_nacimiento" label="Fecha de Nacimiento" rules={personalFormRules['fecha_nacimiento']}>
                                     <DatePicker className={css['datePicker']} format={dateFormat} minDate={dayjs('1970-01-01')} maxDate={dayjs()}></DatePicker>
                                 </Form.Item>
                             </div>
@@ -123,15 +182,15 @@ export default function InfoPersonalForm({ name = null, parentForm = null, proce
                             </div>
 
                             <div className="form-item">
-                                <Form.Item name="gender" label="Género" rules={personalFormRules['gender']}>
+                                <Form.Item name="genero" label="Género" rules={personalFormRules['genero']}>
                                     <Select 
                                         options={gendersForSelect} 
                                         placeholder="Genero" 
                                         classNames={{ popup:{ root:css['custom-dropdown-options']} }}
                                         onChange={(value, option) => { 
                                             form.setFieldsValue({
-                                                gender: value,
-                                                gender_label: option.label
+                                                genero: value,
+                                                genero_label: option.label
                                             }); 
                                         }}
                                     ></Select>
@@ -141,33 +200,32 @@ export default function InfoPersonalForm({ name = null, parentForm = null, proce
                     </fieldset>),
         },
         {
-            title: 'First',
             content: (<fieldset className={css['fieldset']}>
 
                         <legend className={css['legend']}>Información Contacto</legend>
                 
                         <div className="form-item">
-                            <Form.Item name="address" label="Dirección" rules={personalFormRules['address']}>
+                            <Form.Item name="direccion" label="Dirección" rules={personalFormRules['direccion']}>
                                 <Input placeholder="Dirección"></Input>
                             </Form.Item>
                         </div>
 
                         <div className="form-item">
-                            <Form.Item name="phone_number" label="Número telefónico" labelAlign="Center" rules={personalFormRules['phone_number']}>
+                            <Form.Item name="numero_telefonico" label="Número telefónico" labelAlign="Center" rules={personalFormRules['numero_telefonico']}>
                                 <Input type="tel" placeholder="Numero" maxLength={10} onChange={handlePhoneChange}></Input>
                             </Form.Item>
                         </div>
 
                         <div className="form-item">
-                            <Form.Item name="state" label="Estado" rules={personalFormRules['state']}>
+                            <Form.Item name="estado" label="Estado" rules={personalFormRules['estado']}>
                                 <Select 
                                     options={statesForSelect} 
                                     placeholder="Seleccione su estado" 
                                     onChange={(value, option) => { 
                                         handleState(); 
                                         form.setFieldsValue({
-                                            state: value,
-                                            state_label: option.label
+                                            estado: value,
+                                            estado_label: option.label
                                         });
                                     }} 
                                     classNames={ { popup:{ root:css['custom-dropdown-options']} } }
@@ -176,7 +234,7 @@ export default function InfoPersonalForm({ name = null, parentForm = null, proce
                         </div>
 
                         <div className="form-item">
-                            <Form.Item name="city" label="Ciudad" rules={personalFormRules['city']}>
+                            <Form.Item name="ciudad" label="Ciudad" rules={personalFormRules['ciudad']}>
                                 <Select 
                                     options={selectCities} 
                                     placeholder="Seleccione su ciudad" 
@@ -187,8 +245,8 @@ export default function InfoPersonalForm({ name = null, parentForm = null, proce
                                     classNames={ { popup:{ root:css['custom-dropdown-options']} } }
                                     onChange={(value, option) => { 
                                         form.setFieldsValue({
-                                            city: value,
-                                            city_label: option.label
+                                            ciudad: value,
+                                            ciudad_label: option.label
                                         });
                                     }}
                                 ></Select>
@@ -254,6 +312,4 @@ export default function InfoPersonalForm({ name = null, parentForm = null, proce
         
         </>
     )
-
-
 }

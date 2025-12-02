@@ -1,5 +1,6 @@
 import { Input, Button } from "antd";
 import dayjs from "dayjs";
+import dateKeys from "../../Js/Utilities/dateKeys";
 
 
 import css from '@css/Components/SummaryForm.module.css';
@@ -10,7 +11,7 @@ import css from '@css/Components/SummaryForm.module.css';
         if (!value) return '';
 
         // Si es la fecha (Day.js object), formatéala
-        if (key === 'birth_date') {
+        if (dateKeys.includes(key)) {
             if (dayjs.isDayjs(value)) {
                 return value.format('DD/MM/YYYY');
             }
@@ -21,9 +22,10 @@ import css from '@css/Components/SummaryForm.module.css';
     };
 
 
-export default function SummaryForm({ data, map, submitButton = null }){
+export default function SummaryForm({ data, map, submitButton = null, buttonPrev = null }){
 
-
+    console.log(data);
+    
     const renderSubmitButton = () => {
 
         if(!submitButton) return null;
@@ -66,10 +68,14 @@ export default function SummaryForm({ data, map, submitButton = null }){
 
                 })
             }
-            {
-                renderSubmitButton()
-            }
-            
+            <div className={css['buttons-nav']}>
+                {
+                    buttonPrev
+                }
+                {
+                    renderSubmitButton()
+                }
+            </div>
         </div>
 
     );

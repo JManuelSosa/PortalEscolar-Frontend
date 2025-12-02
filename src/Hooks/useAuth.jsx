@@ -8,8 +8,6 @@ import NotificationContentError from "../Components/Utilities/NotificationConten
 //* Componentes
 import ButtonCloseNotification from "../Components/Utilities/ButtonCloseNotification";
 
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
 export function useAuth() {
 
     const { loginStore, logoutStore, token } = useAuthStore();
@@ -51,8 +49,8 @@ export function useAuth() {
             
             const data = {...formData};
             
-            if (data.birth_date) {
-                data.birth_date = data.birth_date.format('YYYY-MM-DD');
+            if (data.fecha_nacimiento) {
+                data.fecha_nacimiento = data.fecha_nacimiento.format('YYYY-MM-DD');
             }
             
             const formatData = {
@@ -61,16 +59,16 @@ export function useAuth() {
                     password: data.password
                 },
                 person: {
-                    name: data.name,
-                    first_last_name: data.first_last_name,
-                    second_last_name: data.second_last_name,
+                    name: data.nombre,
+                    first_last_name: data.primer_apellido,
+                    second_last_name: data.segundo_apellido,
                     curp: data.curp,
-                    gender: data.gender,
-                    phone_number: data.phone_number,
-                    birth_date: data.birth_date,
-                    address: data.address,
-                    state: data.state,
-                    city_id: data.city
+                    gender: data.genero,
+                    phone_number: data.numero_telefonico,
+                    birth_date: data.fecha_nacimiento,
+                    address: data.direccion,
+                    state: data.estado,
+                    city_id: data.ciudad
                 }
             }
             

@@ -13,13 +13,15 @@ const { Content } = Layout;
 //Css
 import AdminLayoutStyle from '@css/Layout/AdminLayout.module.css';
 
+import { mapMenus } from "../Js/Utilities/menuDefinitions";
+
 export default function AdminLayout(){
 
     return(
         <>
             <Layout className={ AdminLayoutStyle.adminLayoutAnt }>
                 <CollapsedProvider>
-                    <SiderNav/>
+                    <SiderNav typeMenu={ mapMenus.admin }/>
                 </CollapsedProvider>
 
                 <Layout className={AdminLayoutStyle.appLayout}>

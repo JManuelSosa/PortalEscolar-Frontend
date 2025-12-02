@@ -1,6 +1,6 @@
 
 export const personalFormRules = {
-    name: [
+    nombre: [
         { 
             required: true, 
             message: 'El nombre es requerido' 
@@ -19,7 +19,7 @@ export const personalFormRules = {
         }
     ],
 
-    first_last_name: [
+    primer_apellido: [
         { 
         required: true, 
         message: 'El primer apellido es requerido' 
@@ -38,7 +38,7 @@ export const personalFormRules = {
         }
     ],
 
-    second_last_name: [
+    segundo_apellido: [
         { 
             required: false 
         },
@@ -71,12 +71,12 @@ export const personalFormRules = {
     // }
     ],
 
-    gender: [{ 
+    genero: [{ 
             required: true, 
             message: 'Por favor selecciona tu género' 
     }],
 
-    address: [
+    direccion: [
         { 
             required: true, 
             message: 'Por favor ingresa tu dirección' 
@@ -91,7 +91,7 @@ export const personalFormRules = {
         }
     ],
 
-    phone_number: [
+    numero_telefonico: [
         { 
             required: true, 
             message: 'Teléfono obligatorio' 
@@ -102,21 +102,21 @@ export const personalFormRules = {
         }
     ],
 
-    state: [
+    estado: [
         {
             required: true,
             message: 'El estado es requerido'
         }
     ],
 
-    city: [
+    ciudad: [
         { 
             required: true, 
             message: 'Por favor selecciona una ciudad' 
         }
     ],
 
-    birth_date: [
+    fecha_nacimiento: [
         { 
             required: true, 
             message: 'Por favor ingresa tu fecha de nacimiento' 
@@ -147,6 +147,30 @@ export const loginFormRules = {
         {
             min: 8,
             message: "Mínimo 8 caracteres"
+        }
+    ]
+}
+
+export const onBoardEmployeeFormRules = {
+    fecha_entrada: [
+        {
+            required: true,
+            message: "Fecha de entrada requerida"
+        }
+    ],
+    rol: [
+        {
+            required: true,
+            message: "Rol de empleado requerido"
+        }
+    ],
+    carrera: [
+        { required: true, message: "Carrera requerida" }
+    ],
+    grado_academico: [
+        {
+            required: true,
+            message: "Seleccione un grado académico"
         }
     ]
 }

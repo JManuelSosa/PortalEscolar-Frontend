@@ -1,6 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+import { useSchoolStore } from "./schoolStore";
+import { message } from "antd";
+
+
 export const useAuthStore = create(
     persist(
         (set, get) => ({
@@ -11,22 +15,28 @@ export const useAuthStore = create(
             loginStore: (userData) => {
                 set({
                     user: userData.user,
-                    token: userData.token,
+                    token: userData.access_token,
                     expiration: userData.expiration,
-                    schools: userData.schools
+                    schools: userData.schools,
+                    userData: userData.personalData
                 })
             },
-            logoutStore: () => set({
-                user: null,
-                token: null,
-                expiration: null,
-                schools: []
-            }),
+            logoutStore: () => { 
+                set({
+                    user: null,
+                    token: null,
+                    expiration: null,
+                    schools: [],
+                    userData: null
+                });
+
+                useSchoolStore.getState().clearSchool();
+            },
 
             checkExpiration: () => {
-                const { expiration, logout } = get();
+                const { expiration, logoutStore } = get();
                 if (expiration && Date.now() > expiration) {
-                    logout();
+                    logoutStore();
                     message.info('Sesión expirada por inactividad');
                 }
             },

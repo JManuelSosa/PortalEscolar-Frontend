@@ -13,7 +13,7 @@ import { routes } from "../../Js/Utilities/Routes";
 import LoadingLogo from "../../Components/Utilities/LoadingLogo";
 import { useFormStore } from "../../stores/formStore";
 
-export default function AuthView(){
+export default function AuthView() {
     const navigate = useNavigate();
     const { login, inLoginProcess, isLoginSuccess, register, isRegistering, isRegisterSuccess } = useAuth();
     const { getFormValues } = useFormStore();
@@ -27,7 +27,7 @@ export default function AuthView(){
         if (isLoginSuccess || isRegisterSuccess) {
             navigate(routes.userHome);
         }
-        
+
     }, [isLoginSuccess, navigate, isRegisterSuccess]);
 
     const handleToggle = () => {
@@ -43,34 +43,34 @@ export default function AuthView(){
         register(allValues);
     }
 
-    return(
+    return (
         <>
 
             {
                 (inLoginProcess || isRegistering) && (
-                    <Spin indicator={ <LoadingLogo/> } fullscreen tip="Por favor espere..."/>
+                    <Spin indicator={<LoadingLogo />} fullscreen tip="Por favor espere..." />
                 )
             }
-            <div className={ css["default-container"] }>
-                <div className={ css["login-form-wrapper"] }>
-                    
-                    <div className={ css["form-sign-in"] }>
-                        <section className={`${css['loginForm']} ${css['sign-in']} ${ (isSignUpActive) ? css['toggle-form'] : ''}`}>
+            <div className={css["default-container"]}>
+                <div className={css["login-form-wrapper"]}>
+
+                    <div className={css["form-sign-in"]}>
+                        <section className={`${css['loginForm']} ${css['sign-in']} ${(isSignUpActive) ? css['toggle-form'] : ''}`}>
                             <h2>Inicio de sesión</h2>
-                            <Login onFinish={singIn} isPending={inLoginProcess}/>
+                            <Login onFinish={singIn} isPending={inLoginProcess} />
                         </section>
                     </div>
 
-                    <div className={ css["form-sign-in"] }>
-                        <section className={`${css['loginForm']} ${css['sign-up']} ${ (isSignUpActive) ? css['toggle-form'] : ''}`}>
-                            <Registro className={ css['register-form']} form={formRegister} onFinish={singUp} name={nameRegister} isStop={isStop}></Registro>
+                    <div className={css["form-sign-in"]}>
+                        <section className={`${css['loginForm']} ${css['sign-up']} ${(isSignUpActive) ? css['toggle-form'] : ''}`}>
+                            <Registro className={css['register-form']} form={formRegister} onFinish={singUp} name={nameRegister} isStop={isStop}></Registro>
                         </section>
                     </div>
 
-                    <div className={` ${css['welcome-container']} ${ (isSignUpActive) ? css['toggle-form'] : ''}`}>
+                    <div className={` ${css['welcome-container']} ${(isSignUpActive) ? css['toggle-form'] : ''}`}>
                         <div className={css["relative"]}>
 
-                            <div className={`${css['welcome-sign']} ${css['in']} ${ (isSignUpActive) ? css['toggle-form'] : ''}`}>
+                            <div className={`${css['welcome-sign']} ${css['in']} ${(isSignUpActive) ? css['toggle-form'] : ''}`}>
                                 <div className={css["logo"]}>
                                     <IconMainLogo className={css["svgLogo"]}></IconMainLogo>
                                     <span className={css["brand"]}>EduConnect</span>
@@ -87,7 +87,7 @@ export default function AuthView(){
                                 </div>
                             </div>
 
-                            <div className={`${css['welcome-sign']} ${css['up']} ${ (isSignUpActive) ? css['toggle-form'] : ''}`}>
+                            <div className={`${css['welcome-sign']} ${css['up']} ${(isSignUpActive) ? css['toggle-form'] : ''}`}>
                                 <div className={css["logo"]}>
                                     <IconMainLogo className={css["svgLogo"]}></IconMainLogo>
                                     <span className={`${css["brand"]} ${css["register"]}`}>EduConnect</span>
@@ -108,10 +108,10 @@ export default function AuthView(){
                     </div>
                 </div>
 
-                
+
             </div>
-        
-        
+
+
         </>
     );
 }

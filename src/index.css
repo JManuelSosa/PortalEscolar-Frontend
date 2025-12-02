@@ -179,7 +179,8 @@
     --color-border: rgba(var(--conifer-950), 0.15);
     --color-shadow: rgba(var(--conifer-950), 0.1);
 
-
+    /* Sombras */
+    --card-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 
     --base-50:  var(--cyan-50);
     --base-100: var(--cyan-100);

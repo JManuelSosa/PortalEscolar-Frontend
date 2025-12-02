@@ -1,0 +1,19 @@
+.custom-footer{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.buttons{
+    display: flex;
+    justify-content: end;
+    width: 56%;
+}
+
+
+
+@media(max-width: 576px){
+    .buttons{
+        width: 60%;
+    }
+}
