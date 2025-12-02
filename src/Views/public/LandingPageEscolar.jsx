@@ -181,8 +181,8 @@ const LandingPageEscolar = () => {
                     </Col>
                     <Col>
                         <Space size="large">
-                            <Button type="text" className="hidden-mobile">Soluciones</Button>
-                            <Button type="text" className="hidden-mobile">Instituciones</Button>
+                            {/*    <Button type="text" className="hidden-mobile">Soluciones</Button>
+                            <Button type="text" className="hidden-mobile">Instituciones</Button>*/}
                             <Button type="primary" onClick={showLoginModal} style={{ background: colors.primary, borderColor: colors.primary, fontWeight: '600', padding: '0 25px' }}>
                                 Portal Académico
                             </Button>
@@ -205,7 +205,7 @@ const LandingPageEscolar = () => {
                             <Paragraph style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.9)', marginBottom: '40px' }}>Plataforma integral de gestión escolar diseñada para universidades tecnológicas.</Paragraph>
                             <Space size="middle" wrap>
                                 <Button type="primary" size="large" onClick={showLoginModal} style={{ background: colors.accent, borderColor: colors.accent, color: '#000', fontWeight: 'bold', height: '50px', padding: '0 40px' }}>Acceso Institucional</Button>
-                                <Button ghost size="large" onClick={showPricingModal} style={{ height: '50px', padding: '0 40px' }}>Solicitar Demo</Button>
+                                <Button ghost size="large" onClick={showPricingModal} style={{ height: '50px', padding: '0 40px' }}>Solicitar suscripción</Button>
                             </Space>
                         </Col>
                     </Row>
@@ -332,7 +332,7 @@ const LandingPageEscolar = () => {
                     overflow: 'hidden',
                     border: '1px solid #f0f0f0'
                 }}>
-                    {/* Header del Chat */}
+                    {/* Header del Chat 
                     <div style={{ background: colors.primary, padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#fff' }}>
                         <Space>
                             <Avatar icon={<RobotOutlined />} style={{ backgroundColor: '#fff', color: colors.primary }} />
@@ -342,7 +342,7 @@ const LandingPageEscolar = () => {
                             </div>
                         </Space>
                         <Button type="text" icon={<CloseOutlined style={{ color: '#fff' }} />} onClick={() => setChatOpen(false)} />
-                    </div>
+                    </div>*/}
 
                     {/* Área de Mensajes */}
                     <div style={{ flex: 1, padding: '16px', overflowY: 'auto', background: '#fafafa' }}>
@@ -402,15 +402,15 @@ const LandingPageEscolar = () => {
                 </div>
             )}
 
-            {/* Botón Flotante para abrir/cerrar Chat */}
+            {/* Botón Flotante para abrir/cerrar Chat *
             <FloatButton
                 icon={chatOpen ? <CloseOutlined /> : <MessageOutlined />}
                 type="primary"
                 onClick={() => setChatOpen(!chatOpen)}
                 style={{ right: 24, bottom: 24, width: '60px', height: '60px' }}
                 tooltip={chatOpen ? "Cerrar Chat" : "Ayuda en línea"}
-                badge={{ count: 1, color: 'red' }}
-            />
+                badge={{ count: 1, color: 'red' }} 
+            />*/}
 
             {/* --- OTROS MODALES --- */}
             {/* Login Modal */}
