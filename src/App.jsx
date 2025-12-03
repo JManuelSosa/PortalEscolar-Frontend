@@ -17,6 +17,8 @@ import CarrerasView from './Views/admin/CarrerasView';
 import GruposView from './Views/admin/GruposView';
 import DetalleGruposView from './Views/admin/DetalleGruposView';
 // nuevas vistas
+import GestionHorarios from './Views/admin/GestionHorario';
+import HorarioA from './Views/student/HorarioAlumno';
 import AsentarCalificaciones from './Views/teacher/Calificacines';
 import GestorTareasGrupal from './Views/teacher/Actividades';
 import GestionGrupos from './Views/admin/GestionGrupos';
@@ -70,36 +72,36 @@ function App() {
       colorText: 'var(--text)'
     },
     components: {
-        Form: {
-          labelFontSize: 14,
-          itemLabelFontWeight: 400,
-        },
-        Input: {
-          activeBorderColor: 'var(--primary-active)',
-          hoverBorderColor: 'var(--accent-hover)',
-          colorTextPlaceholder: 'var(--text-placeholder)',
-        },
-        Select: {
-          activeBorderColor: 'var(--primary-active)',
-          hoverBorderColor: 'var(--accent-hover)',
-        },
-        Drawer: {
-          footerPaddingBlock: 0
-        },
-        Button: {
-          // Para botones primarios
-          colorPrimary: 'var(--primary)',
-          colorPrimaryHover: 'var(--primary-hover)',
-          colorPrimaryActive: 'var(--primary-active)',
-          colorPrimaryBorder: 'var(--primary)',
-        },
-        Tabs: {
-          colorText: 'rgb(var(--cyan-700))',
-          itemSelectedColor: 'rgb(var(--cyan-800))',
-          itemHoverColor: 'rgb(var(--cyan-600))',  
-          inkBarColor: 'rgb(var(--cyan-800))', 
-          fontSize: 18    
-        },
+      Form: {
+        labelFontSize: 14,
+        itemLabelFontWeight: 400,
+      },
+      Input: {
+        activeBorderColor: 'var(--primary-active)',
+        hoverBorderColor: 'var(--accent-hover)',
+        colorTextPlaceholder: 'var(--text-placeholder)',
+      },
+      Select: {
+        activeBorderColor: 'var(--primary-active)',
+        hoverBorderColor: 'var(--accent-hover)',
+      },
+      Drawer: {
+        footerPaddingBlock: 0
+      },
+      Button: {
+        // Para botones primarios
+        colorPrimary: 'var(--primary)',
+        colorPrimaryHover: 'var(--primary-hover)',
+        colorPrimaryActive: 'var(--primary-active)',
+        colorPrimaryBorder: 'var(--primary)',
+      },
+      Tabs: {
+        colorText: 'rgb(var(--cyan-700))',
+        itemSelectedColor: 'rgb(var(--cyan-800))',
+        itemHoverColor: 'rgb(var(--cyan-600))',
+        inkBarColor: 'rgb(var(--cyan-800))',
+        fontSize: 18
+      },
     }
   }
 
@@ -129,21 +131,23 @@ function App() {
               <Route path={routes.unauthorized} element={<UnauthorizedView />} />
 
               {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
-              <Route element={<RoleGuard allowedRoles={['Administrador']}/>}>
-                <Route element={<AdminLayout/>}>
-                  <Route path={ routes.adminHome.path } element={ <HomeView/> }/>
-                  <Route path={ routes.empleados.path } element={<EmpleadosView/>}/>
-                  <Route path={ routes.periodosEscolares.path } element={<PeriodTemplateView/>} />
+              <Route element={<RoleGuard allowedRoles={['Administrador']} />}>
+                <Route element={<AdminLayout />}>
+                  <Route path={routes.adminHome.path} element={<HomeView />} />
+                  <Route path={routes.empleados.path} element={<EmpleadosView />} />
+                  <Route path={routes.periodosEscolares.path} element={<PeriodTemplateView />} />
 
-                  <Route path={ routes.divisiones.path } element={<DivisionView/>}/>
-                  <Route path={ routes.carreras.path } element={<CarrerasView/>}></Route>
-                  <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
-                  <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>
+                  <Route path={routes.divisiones.path} element={<DivisionView />} />
+                  <Route path={routes.carreras.path} element={<CarrerasView />}></Route>
+                  <Route path={routes.grupos.path} element={<GruposView />}></Route>
+                  <Route path={routes.detalleGrupo.path} element={<DetalleGruposView />} />
 
                 </Route>
               </Route>
             </Route>
+            <Route path='GestionHorarios' element={<GestionHorarios />} />
             {/*  nuevas rutas */}
+            <Route path='horario' element={<HorarioA />} />
             <Route path='calificaciones' element={< AsentarCalificaciones />} />
             <Route path='tareas' element={<GestorTareasGrupal />} />
             <Route path='homegrupos' element={<GestionGrupos />} />
