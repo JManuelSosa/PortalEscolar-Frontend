@@ -17,6 +17,7 @@ import CarrerasView from './Views/admin/CarrerasView';
 import GruposView from './Views/admin/GruposView';
 import DetalleGruposView from './Views/admin/DetalleGruposView';
 // nuevas vistas
+import Perfil from './Views/student/PerfilView';
 import GestionHorarios from './Views/admin/GestionHorario';
 import HorarioA from './Views/student/HorarioAlumno';
 import AsentarCalificaciones from './Views/teacher/Calificacines';
@@ -147,6 +148,7 @@ function App() {
             </Route>
             <Route path='GestionHorarios' element={<GestionHorarios />} />
             {/*  nuevas rutas */}
+            <Route path='PefilAlumno'element={<Perfil />}/>
             <Route path='horario' element={<HorarioA />} />
             <Route path='calificaciones' element={< AsentarCalificaciones />} />
             <Route path='tareas' element={<GestorTareasGrupal />} />
