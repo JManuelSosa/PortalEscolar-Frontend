@@ -9,7 +9,9 @@ import CardGrupo from "./CardGrupo";
 
 export default function TabsGrupos({ dataTabs }) {
 
-    const entries = Object.entries(dataTabs);
+    const safeData = dataTabs || {};
+
+    const entries = Object.entries(safeData);
 
     const items = entries.map(([key, careers]) => ({
         key,

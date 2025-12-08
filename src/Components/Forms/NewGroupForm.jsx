@@ -1,3 +1,6 @@
+// React
+import { useEffect } from "react";
+
 // Ant
 import { Form, Select, Input } from "antd";
 
@@ -5,9 +8,21 @@ import { Form, Select, Input } from "antd";
 import css from "@css/Forms/NewGroupsForm.module.css";
 
 
-export default function NewGroupForm({ form, dataSelects, onFinish }) {
+export default function NewGroupForm({ form, dataSelects, onFinish, inCareer = null }) {
 
     const { carreras, turnosEscolares, grados, grupos, periodosEscolares } = dataSelects;
+    
+    const opcionesCarrera = inCareer ? carreras.filter(c => c.value == inCareer) : carreras;
+
+    useEffect(() => {
+        if (inCareer) {
+            form.setFieldsValue({
+                carrera: inCareer 
+            });
+        } else {
+            form.resetFields(['carreraID']); 
+        }
+    }, [inCareer, form]);
 
     return (
         <>
@@ -23,7 +38,7 @@ export default function NewGroupForm({ form, dataSelects, onFinish }) {
                                 </Form.Item>
 
                                 <Form.Item className={css['item-section']} name="carrera" label="Carrera" rules={[{ required: true, message: 'Selecciona carrera' }]}>
-                                    <Select placeholder="Selecciona una carrera" options={carreras}></Select>
+                                    <Select placeholder="Selecciona una carrera" options={opcionesCarrera} disabled={!!inCareer}></Select>
                                 </Form.Item>
                             </div>
 

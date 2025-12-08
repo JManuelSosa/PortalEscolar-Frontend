@@ -30,6 +30,11 @@ export default function ArrowBackNavigate(){
             return false;
         });
 
+        if (location.state?.previousPath) {
+            navigate(location.state.previousPath);
+            return;
+        }
+
         // Si encontramos la configuración de la ruta actual y tiene un padre forzado:
         if (currentRouteConfig && currentRouteConfig.backRoute) {
             navigate(currentRouteConfig.backRoute);

@@ -35,7 +35,7 @@ export function useGroupMutations() {
             
             return api.post('/groups', formatData);
         },
-        onSuccess: (res) => {
+        onSuccess: (res, variables) => {
             messageApi.success('Grupo registrado con éxito');
 
             const divisionIdToInvalidate = res.data.meta?.division_id;
@@ -43,6 +43,8 @@ export function useGroupMutations() {
             
             if (divisionIdToInvalidate) queryClient.invalidateQueries({queryKey: queryKeys.careersByDivision(schoolId, divisionIdToInvalidate)});
 
+            if (variables.carrera) queryClient.invalidateQueries({ queryKey: queryKeys.groupsByCareer(schoolId, variables.carrera) });
+    
         },
         onError: (error) => {
             const data = error.response?.data;

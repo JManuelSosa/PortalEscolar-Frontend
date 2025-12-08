@@ -1,49 +1,78 @@
 //React
-import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
 //Ant
-import { Result, Button, Divider, Row, Col, Card } from "antd";
+import { Button, Modal, Form, Spin } from "antd";
 
-//Faker Api
-import FakeAPI from "../../Js/FakeApi";
+// Iconos
+import { IconPlus } from "@tabler/icons-react";
 
 //Css
 import StyleGrupos from '@css/Views/admin/GruposView.module.css';
 
+// Hooks
+import { useGroupsByCareer } from "../../Hooks/Fetching/useGroupsByCareer";
+import { useNewGroupFormData } from "../../Hooks/Fetching/usePublicData";
+import { useGroupMutations } from "../../Hooks/Fetching/useGroupsMutations";
+
+// Componentes
+import CardGrupo from "../../Components/Layout/Admin/CardGrupo";
+import NewGroupForm from "../../Components/Forms/NewGroupForm";
+import ButtonsCloseModal from "../../Components/Utilities/ButtonsCloseModal";
+import LoadingLogo from "../../Components/Utilities/LoadingLogo";
+
+
 export default function GruposView() {
 
-    const fakeAPI = new FakeAPI();
+    const [open, setOpen] = useState(false);
+    let { carreraID } = useParams();
+    const location = useLocation();
+    const { data:groups, isLoading, isError } = useGroupsByCareer(carreraID);
+    const { data:dataSelects, isLoading:isLoadingFormData, isError:isErrorFormData } = useNewGroupFormData();
+    const { addGroupGlobal, isPendingGlobal } = useGroupMutations();
+    
 
-    const navigate = useNavigate();
-    const currentLocation = useLocation();
+    const [form] = Form.useForm();
+    carreraID = parseInt(carreraID);
+    const { careerName } = location.state || {};
 
-    const { carreraID, carreraName } = currentLocation.state || {};
-    const { divisionID, divisionName } = currentLocation.state || {}
-
-    const [grupos, setGrupos] = useState([]);
-
-    useEffect(() => {
-        if (carreraID) {
-            const gruposData = fakeAPI.getGruposByCarrera(carreraID);
-            setGrupos(gruposData);
-        }
-    }, [carreraID]);
-
-
-    if (!carreraID) {
-        return (
-            <Result
-                status="404"
-                title="Acceso no válido"
-                subTitle="Debes acceder a esta página desde el listado de carreras"
-                extra={<Button type="primary" onClick={() => navigate('/')}>Volver</Button>}
-            />
-        );
+    const openModal = () => {
+        setOpen(true);
     }
 
-    function verDetalleGrupos(idGrupo, nameGrupo) {
-        navigate("/DetalleGrupo", { state: { grupoID: idGrupo, grupoName: nameGrupo, carreraID, carreraName, divisionID, divisionName } });
+    const closeModal = () => {
+        form.resetFields();
+        setOpen(false);
+    }
+
+    const submitForm = () => {
+        form.submit();
+    }
+
+    const onFinish = (values) => {
+        addGroupGlobal(values, {
+            onSuccess: () => {
+                closeModal();
+            }
+        });
+    }
+
+
+    const modalClassNames = {
+        header: StyleGrupos['header-modal'],
+        body: StyleGrupos['body-modal'],
+        content: StyleGrupos['content-modal'],
+        footer: StyleGrupos['footer-modal']
+    }
+    
+
+    if(isLoading && isLoadingFormData) {
+        return (
+            <div style={{height:"100%", width: "100%", display: 'flex', justifyContent:'center', alignItems:'center', overflow:'hidden'}}>
+                <Spin indicator={<LoadingLogo/>}/>
+            </div>
+        );
     }
 
     return (
@@ -51,26 +80,47 @@ export default function GruposView() {
         <>
             <section className={StyleGrupos.Divisiones}>
 
-                <Divider>
-                    <h1>Grupos en {carreraName}</h1>
-                </Divider>
+                <div className={StyleGrupos['header-view']}>
+                    <div className={StyleGrupos['labels-view']}>
+                        <h1>Grupos en {careerName}</h1>
+                        <span>Grupos específicos de esta carrera.</span>
+                    </div>
+                    <Button shape="circle" type="primary" className={StyleGrupos['control-button']}>
+                        <IconPlus size={28} onClick={openModal}/>
+                    </Button>
+                </div>
 
-                <Row gutter={[16, 16]} className={StyleGrupos.RowContenido}>
+                <div className={StyleGrupos['responsive-grid']}>
+                    {
+                        groups?.map( grupo => 
+                            <div key={grupo.groupKey}>
+                                <CardGrupo group={grupo}/>
+                            </div>
+                        )
+                    }
+                </div>
 
-                    {grupos.map((grupo) => (
-                        <Col key={grupo.id} xs={24} md={12} lg={8} onClick={() => { verDetalleGrupos(grupo.id, grupo.name) }}>
-                            <Card className={StyleGrupos.CardGrupos} hoverable>
-                                <Row className={StyleGrupos.GruposBodyCard}>
-                                    <h2 className={StyleGrupos.GruposName}>
-                                        {grupo.name} {/* Renderiza el nombre de la división */}
-                                    </h2>
-                                </Row>
-                            </Card>
-                        </Col>
-                    ))}
+                <Modal
+                    title={"Crear Nuevo Grupo"}
+                    onCancel={closeModal}
+                    centered
+                    open={open}
+                    footer={<ButtonsCloseModal onOk={submitForm} onClose={closeModal} isPending={isPendingGlobal} descriptionOk={"Agregar grupo"}/>}
+                    className={StyleGrupos['modal']}
+                    classNames={modalClassNames}
+                    width={{
+                        xs: '90%',
+                        sm: '80%',
+                        md: '70%',
+                        lg: '60%',
+                        xl: '50%',
+                        xxl: '40%',
+                    }}
+                >
+                    <NewGroupForm form={form} onFinish={onFinish} dataSelects={dataSelects} inCareer={carreraID}/>
+                </Modal>
+                
 
-
-                </Row>
             </section>
         </>
 

@@ -8,5 +8,6 @@ export const queryKeys = {
     groups: (schoolId) => ["groups", schoolId],
     periodTemplates: (schoolId) => ["subperiodTemplate", schoolId],
     careersByDivision: (schoolId, divisionId) => ["careers", schoolId, divisionId],
+    groupsByCareer: (schoolId, careerId) => ["groups", schoolId, careerId],
     systemEmployees: ["systemEmployees"]
 };

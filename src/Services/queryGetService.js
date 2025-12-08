@@ -25,6 +25,12 @@ const queryGetService = {
     getGroups: async() => {
         const response = await api.get('/groups');
         return response.data.data
+    },
+
+    getGroupsByCareer: async (careerId) => {
+        const response = await api.get(`/careers/${careerId}/groups`);
+        console.log(response.data);
+        return response.data.data;
     }
 }
 

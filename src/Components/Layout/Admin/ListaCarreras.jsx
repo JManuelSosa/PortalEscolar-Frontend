@@ -1,8 +1,12 @@
+// React
+import { useNavigate, useLocation } from 'react-router-dom';
+
 // Css
 import css from '@css/Layout/ListaCarreras.module.css';
 
 // Utilidades
 import LoadingLogo from '../../Utilities/LoadingLogo';
+import { routes } from '../../../Js/Utilities/Routes';
 
 //Icons
 import { IconHomeFilled, IconUsersGroup } from '@tabler/icons-react';
@@ -12,6 +16,18 @@ import { Alert, Spin, Empty, Card} from 'antd';
 
 
 export default function ListaCarreras({ carreras, isLoading, isError }){
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const goToGroup = (careerId, name) => {
+        navigate(routes.grupos.nav(careerId), {
+            state: {
+                careerName: name,
+                previousPath: location.pathname
+            }
+        });
+    }
 
     if (isError) {
         return (
@@ -48,7 +64,7 @@ export default function ListaCarreras({ carreras, isLoading, isError }){
 
         <section className={css.listaCarreras}>
             {carreras.map((carrera) => (
-                <Card key={carrera.key} className={css.cardCarrera} classNames={cardClassNames} hoverable>
+                <Card key={carrera.key} className={css.cardCarrera} classNames={cardClassNames} hoverable onClick={ () => {goToGroup(carrera.key, carrera.name)}}>
 
                     <div className={css.careerTitle}>
                         {carrera.name}

@@ -9,7 +9,6 @@ import { IconPlus } from '@tabler/icons-react';
 
 // Componentes
 import NewGroupForm from '../../Components/Forms/NewGroupForm';
-import CardGrupo from '../../Components/Layout/Admin/CardGrupo';
 import ButtonsCloseModal from '../../Components/Utilities/ButtonsCloseModal';
 import TabsGrupos from '../../Components/Layout/Admin/TabsGrupos';
 import LoadingLogo from '../../Components/Utilities/LoadingLogo';
@@ -60,7 +59,7 @@ const GestionGrupos = () => {
         footer: css['footer-modal']
     }
 
-    if(isLoading, isLoadingFormData) {
+    if(isLoading && isLoadingFormData) {
         return (
             <div style={{height:"100%", width: "100%", display: 'flex', justifyContent:'center', alignItems:'center', overflow:'hidden'}}>
                 <Spin indicator={<LoadingLogo/>}/>
@@ -78,7 +77,7 @@ const GestionGrupos = () => {
             [carreraKey]: [...gruposPrevios, group]
         }
 
-    }, {});
+    }, {}) || {};
 
 
     return (
@@ -102,7 +101,7 @@ const GestionGrupos = () => {
                 onCancel={closeModal}
                 centered
                 open={isModalOpen}
-                footer={<ButtonsCloseModal onOk={submitForm} onClose={closeModal} isPending={isPendingGlobal} descriptionOk={"Agregar Carrera"}/>}
+                footer={<ButtonsCloseModal onOk={submitForm} onClose={closeModal} isPending={isPendingGlobal} descriptionOk={"Agregar grupo"}/>}
                 className={css['modal']}
                 classNames={modalClassNames}
                 width={{
