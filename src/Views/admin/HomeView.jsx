@@ -1,7 +1,7 @@
 import { Flex, Card } from "antd";
 
 //Icons
-import { IconBackpack, IconUsersGroup, IconBallpen, IconBook2, IconSchool, IconCalendarTime } from '@tabler/icons-react';
+import { IconBackpack, IconUsersGroup, IconBallpen, IconCash, IconSchool, IconCalendarTime, IconBook2 } from '@tabler/icons-react';
 import { IconGroup } from "../../Js/Icons";
 
 //Css
@@ -42,7 +42,8 @@ const sections = [
         title: 'Profesores',
         description: 'Coordina materias y grupos asignados a tus docentes',
         icon: <IconBallpen></IconBallpen>,
-        key: 'maestros'
+        key: 'maestros',
+        path: routes.profesores.path
     },
     {
         title: 'Divisiones',
@@ -57,6 +58,20 @@ const sections = [
         icon: <IconGroup strokeColor={'var(--primary)'}/>,
         key: 'gruposEscolares',
         path: routes.gruposGlobal.path
+    },
+    {
+        title: 'Punto de venta',
+        description: 'Crear y procesa pagos en efectivos de servicios dentro de su institución',
+        icon: <IconCash strokeColor={'var(--primary)'}/>,
+        key: 'puntoVenta',
+        path: routes.puntoVenta.path
+    },
+    {
+        title: 'Biblioteca',
+        description: 'Gestiona la biblioteca escolar',
+        icon: <IconBook2 strokeColor={'var(--primary)'}/>,
+        key: 'biblioteca',
+        path: routes.biblioteca.path
     }
 ];
 
