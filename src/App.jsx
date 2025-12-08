@@ -40,9 +40,10 @@ import PaseDeListaView from './Views/teacher/Asistencia';
 import AuthView from './Views/public/AuthView';
 import LandingPageEscolar from './Views/public/LandingPageEscolar';
 import EmpleadosView from './Views/admin/EmpleadosView';
-
 import { BibliotecaView } from './Views/student/BibliotecaAlumno';
 import ActividadesAlumno from './Views/student/ListaTarea';
+import PuntoVentaColegiatures from './Views/public/PuntoVenta';
+
 
 import BibliotecaAdminView from './Views/admin/BibliotecaAdministracion';
 import PlanEscolar from './Views/public/PlanEscolar';
@@ -129,6 +130,7 @@ function App() {
             {/*superset */}
             <Route path="/supersetdashboard" element={<SupersetDashboard />} />
 
+
             {/* Zona para testear rutas */}
             <Route element={<UserLayout />}>
               <Route path={routes.userHome} element={<UserHomeView />} />
@@ -137,6 +139,8 @@ function App() {
 
             {/* Rutas que requieren inicio de sesión */}
             <Route element={<ProtectedRoute />}>
+
+              <Route path='/punto-venta' element={<PuntoVentaColegiatures />} />
               <Route path={routes.unauthorized} element={<UnauthorizedView />} />
 
               {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
