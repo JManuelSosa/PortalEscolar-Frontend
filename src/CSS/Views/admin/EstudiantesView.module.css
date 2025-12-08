@@ -1,0 +1,44 @@
+.header-view {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    margin-top: 1.5rem;
+}
+
+.titleView {
+    & h1 {
+        font-weight: 500;
+        font-size: 2.25rem;
+        margin-top: unset;
+        margin-bottom: unset;
+    }
+
+    & span {
+        font-weight: 300;
+        font-size: 1.25rem;
+    }
+}
+
+.containerButtons {
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.controlButton {
+    height: 3.3rem;
+    width: 3.3rem;
+}
+
+@media screen and (width < 576px) {
+    .header-view {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .titleView {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+}

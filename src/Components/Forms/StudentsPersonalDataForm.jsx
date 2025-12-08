@@ -1,13 +1,10 @@
 //* React
 import { useState } from 'react';
 
-
-import InfoPersonalForm from '../../Components/Auth/InfoPersonalForm';
+import InfoPersonalForm from '../Auth/InfoPersonalForm';
 import SearchPerson from '../Utilities/SearchPerson';
 
-
-
-export default function EmployeePersonalDataForm({ formName, formInstance, processForm, formConfigData, poolEmployees }){
+export default function StudentsPersonalDataForm({ formName, formInstance, processForm, formConfigData, poolEmployees }){
     const [employeeSelected, setEmployeeSelected] = useState(null);
 
     const selectEmployee = (employee) => {

@@ -34,6 +34,11 @@ export const routes = {
         path: '/grupos',
         backRoute: ADMIN_PATH
     },
+    estudiantes: {
+        path: '/estudiantes',
+        backRoute: ADMIN_PATH
+    },
+
     // Carreras (dependen de division)
     carreras: {
         path: '/divisiones/:divisionID/carreras',

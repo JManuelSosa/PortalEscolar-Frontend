@@ -21,7 +21,8 @@ const sections = [
         title: 'Estudiantes',
         description: 'Gestiona operaciones de los estudiantes',
         icon: <IconBackpack></IconBackpack>,
-        key: 'estudiantes'
+        key: 'estudiantes',
+        path: routes.estudiantes.path
     },
     {
         title: 'Empleados',

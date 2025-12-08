@@ -44,7 +44,6 @@ import {
     RobotOutlined
 } from '@ant-design/icons';
 import SupersetDashboard from '../../Components/SupersetDashboard';
-import { useNavigate } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph, Text } = Typography;

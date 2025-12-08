@@ -29,6 +29,8 @@ import ClassroomManager from './Views/teacher/MateriaView';
 import MaestroHome from './Views/teacher/MaestroHome';
 import ListaMaestros from './Views/admin/MaestrosView';
 import SubscriptionPlans from './Views/public/Suscripcion';
+import EstudiantesView from './Views/admin/EstudiantesView';
+
 //Utilidades
 import { ConfigProvider, notification, App as AntApp } from 'antd';
 import esES from 'antd/locale/es_ES';
@@ -152,6 +154,8 @@ function App() {
                   <Route path={routes.detalleGrupo.path} element={<DetalleGruposView />} />
 
                   <Route path={ routes.gruposGlobal.path } element={<GestionGrupos />} />
+
+                  <Route path={ routes.estudiantes.path } element={ <EstudiantesView/>} />
 
                 </Route>
               </Route>

@@ -119,6 +119,31 @@ export const useNewGroupFormData = () => {
 
 }
 
+export const useNewEnrollmentFormData = () => {
+
+    const selectData = useCallback(transformOnBoardEmployeeFormData, []);
+
+    const { data, isLoading, isError } = useQuery({
+        queryKey: queryKeys.onBoardEmployeeFormData,
+        queryFn: publicDataService.getOnBoardEmployeeFormData,
+        staleTime: 120 * (60 * 1000),
+        gcTime: 140 * (60 * 1000),
+        select: selectData
+    });
+
+    return useMemo( () => ({
+        statesForSelect: data?.statesForSelect ?? [], 
+        gendersForSelect: data?.gendersForSelect ?? [], 
+        statesById: data?.statesById ?? {}, 
+        rolesForSelect: data?.rolesForSelect ?? [], 
+        academicDegreesForSelect: data?.academicDegreesForSelect ?? [],
+        rawRoles: data?.rawRoles ?? [],
+        isLoading,
+        isError
+    }), [data, isLoading, isError]);
+
+}
+
 
 
 
