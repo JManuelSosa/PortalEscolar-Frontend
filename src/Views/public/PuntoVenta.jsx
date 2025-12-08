@@ -248,7 +248,6 @@ const PuntoVentaColegiaturas = () => {
     return (
         <Layout style={{ minHeight: '100vh', background: '#f0f2f5' }}>
             <Header style={{ 
-                background: 'linear-gradient(135deg, #1890ff 0%, #096dd9 100%)',
                 padding: '0 24px'
             }}>
                 <Space>

@@ -140,12 +140,13 @@ function App() {
             {/* Rutas que requieren inicio de sesión */}
             <Route element={<ProtectedRoute />}>
 
-              <Route path='/punto-venta' element={<PuntoVentaColegiatures />} />
+              
               <Route path={routes.unauthorized} element={<UnauthorizedView />} />
 
               {/* Rutas que ademas del inicio de sesión requieren que tengas el rol de Administrador */}
               <Route element={<RoleGuard allowedRoles={['Administrador']} />}>
                 <Route element={<AdminLayout />}>
+                  <Route path='/punto-venta' element={<PuntoVentaColegiatures />} />
                   <Route path={routes.adminHome.path} element={<HomeView />} />
                   <Route path={routes.empleados.path} element={<EmpleadosView />} />
                   <Route path={routes.periodosEscolares.path} element={<PeriodTemplateView />} />
@@ -156,6 +157,9 @@ function App() {
                   <Route path={routes.detalleGrupo.path} element={<DetalleGruposView />} />
 
                   <Route path={ routes.gruposGlobal.path } element={<GestionGrupos />} />
+
+                  <Route path={ routes.profesores.path } element={<ListaMaestros />} />
+                  <Route path={ routes.biblioteca.path } element={<BibliotecaAdminView />}></Route>
 
                 </Route>
               </Route>
@@ -169,13 +173,13 @@ function App() {
             <Route path='tareas' element={<GestorTareasGrupal />} />
             
             {/* Administrador*/}
-            <Route path='/Maestros' element={<ListaMaestros />} />
+            
             <Route path='/aulas' element={<GestionAulas />} />
             <Route path='/materias' element={<ClassroomManager />} />
 
             {/* Alumnos*/}
             <Route path='/biblioteca' element={<BibliotecaView />}></Route>
-            <Route path='/bibliotecaAdmin' element={<BibliotecaAdminView />}></Route>
+            
             <Route path='/PanelAlumno' element={< PanelAlumno />}></Route>
             <Route path='/ActividadesAlumno' element={<ActividadesAlumno />}></Route>
 

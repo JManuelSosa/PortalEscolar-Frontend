@@ -831,13 +831,6 @@ export default function BibliotecaAdminView() {
                     </Row>
 
                     <Form.Item
-                        label="URL de la Imagen"
-                        name="imagen"
-                    >
-                        <Input placeholder="https://ejemplo.com/imagen.jpg" />
-                    </Form.Item>
-
-                    <Form.Item
                         label="Descripción"
                         name="descripcion"
                     >
