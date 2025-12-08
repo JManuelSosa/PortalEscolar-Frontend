@@ -1,0 +1,81 @@
+.card {
+    border-left: 4px solid rgb(var(--cyan-200));
+}
+
+.card:hover {
+    border-left: 4px solid rgb(var(--cyan-200));
+}
+
+
+.card-body {
+    padding: 20px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+
+    & .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        & span {
+            font-weight: 400;
+            font-size: 1.65rem;
+        }
+
+        & .card-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(var(--cyan-100));
+            width: 2.8rem;
+            height: 2.8rem;
+            border-radius: 1rem;
+        }
+    }
+
+    & .card-info-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-evenly;
+
+        & .info-grado-grupo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        & .info-career-period {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            & .info-period {
+                display: flex;
+                align-items: center;
+
+                & span:last-child {
+                    font-weight: 300;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+.item-description {
+
+    & span:first-child {
+        font-weight: 500;
+        font-size: 1rem;
+    }
+
+    & span:last-child {
+        font-weight: 300;
+        font-size: 1rem;
+    }
+
+}

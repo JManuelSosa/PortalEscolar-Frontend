@@ -30,6 +30,10 @@ export const routes = {
         path: '/divisiones',
         backRoute: ADMIN_PATH
     },
+    gruposGlobal: {
+        path: '/grupos',
+        backRoute: ADMIN_PATH
+    },
     // Carreras (dependen de division)
     carreras: {
         path: '/divisiones/:divisionID/carreras',

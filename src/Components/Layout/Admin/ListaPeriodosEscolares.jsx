@@ -2,7 +2,7 @@
 import { IconCalendarCheck, IconEdit, IconEyeSearch } from "@tabler/icons-react"
 
 // Ant
-import { Divider } from "antd"
+import { Divider, Tooltip } from "antd"
 
 // Css
 import css from '@css/Components/ListaPeriodosEscolares.module.css';
@@ -77,7 +77,9 @@ export default function ListaPeriodosEscolares({ periodosData }) {
                         <div className={css['actions']}>
                             {/* <IconEdit size={32} className={css['icon-action']}/> 
                             <Divider type="vertical" /> */}
-                            <IconEyeSearch  size={32}className={css['icon-action']}/>
+                            <Tooltip title={"Ver detalles"}>
+                                <IconEyeSearch  size={32}className={css['icon-action']}/>
+                            </Tooltip>
                         </div>
 
                     </div>

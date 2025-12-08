@@ -1,26 +1,49 @@
-.custom-footer{
+.custom-footer {
     width: 100%;
-    display: flex;
-    justify-content: flex-end;
+    /* Aseguramos que el footer ocupe todo el ancho disponible */
 }
 
-.buttons{
-    display: flex;
-    justify-content: space-between;
-    width: 56%;
+.buttons {
+    width: 100%;
+    display: grid;
+    /* LA ESTRATEGIA: 3 Columnas
+       1fr: Una fracción de espacio libre (izquierda)
+       auto: El tamaño del botón central
+       1fr: Otra fracción de espacio libre (derecha)
+       
+       Al tener 1fr a ambos lados, el 'auto' del medio queda matemáticamente centrado.
+    */
+    grid-template-columns: 1fr auto 1fr; 
+    align-items: center;
 }
 
+/* Apuntamos al primer botón (Dar de alta) */
+.buttons > button:nth-child(1) {
+    grid-column: 2; /* Lo forzamos a vivir en la columna del centro */
+    justify-self: center;
+}
 
+/* Apuntamos al segundo botón (Cancelar) */
+.buttons > button:nth-child(2) {
+    grid-column: 3; /* Lo mandamos a la tercera columna */
+    justify-self: end; /* Lo empujamos al extremo derecho de esa columna */
+}
 
-@media(max-width: 576px){
-    .custom-footer{
-        width: 100%;
+/* --- MÓVIL --- */
+@media(max-width: 576px) {
+    .buttons {
+        /* En móvil, el Grid puede aplastar los botones si la pantalla es muy angosta.
+           Mejor volvemos a Flexbox simple para distribuirlos uniformemente. */
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly; /* Uno a cada extremo */
+        gap: 10px;
+        padding: 0 10px; /* Un pequeño respiro lateral */
     }
 
-    .buttons{
-        width: 60%;
-        justify-content: space-around;
+    /* Reseteamos las propiedades de Grid para que no estorben en Flex */
+    .buttons > button:nth-child(1),
+    .buttons > button:nth-child(2) {
+        grid-column: unset;
+        justify-self: unset;
     }
 }

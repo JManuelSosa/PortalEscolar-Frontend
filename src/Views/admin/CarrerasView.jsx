@@ -1,6 +1,5 @@
 //React
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useParams, useLocation } from "react-router-dom";
 
 // Utilidades
@@ -21,15 +20,14 @@ import { IconPlus } from "@tabler/icons-react";
 export default function CarrerasView(){
 
     const [open, setOpen] = useState(false);
-    const { divisionID } = useParams();
+    let { divisionID } = useParams();
+    divisionID = parseInt(divisionID);
     const location = useLocation();
     const { divisionName } = location.state || {};
 
     const { data, isLoading, isError } = useCareerByDivision(divisionID);
     const { newCareer, isPending, isSuccess } = useCareerMutations(divisionID);
     const [form] = Form.useForm();
-
-    const navigate = useNavigate();
 
     const openDrawer = () => {
         setOpen(true);
@@ -52,17 +50,27 @@ export default function CarrerasView(){
 
         <>
             <section className="Divisiones">
-                <span className={css.titleView}>
-                    <h1>Carreras en: { divisionName }</h1>
-                </span>
 
-                <div className={css.containerButtons}>
-                    <Tooltip title={"Añadir Carrera"}>
-                        <Button type="primary" shape="circle" className={css.controlButton} onClick={openDrawer}>
-                            <IconPlus size={28}/>
-                        </Button>
-                    </Tooltip>
+                <div className={css['header-view']}>
+                    
+                    <div className={css.titleView}>
+                        <h1>Carreras</h1>
+                        <span>
+                            Carreras disponibles para la división de: {divisionName}
+                        </span>
+                    </div>
+                    
+
+                    <div className={css.containerButtons}>
+                        <Tooltip title={"Añadir Carrera"}>
+                            <Button type="primary" shape="circle" className={css.controlButton} onClick={openDrawer}>
+                                <IconPlus size={28}/>
+                            </Button>
+                        </Tooltip>
+                    </div>
                 </div>
+
+                
 
                 <ListaCarreras carreras={data} isError={isError} isLoading={isLoading}/>
 

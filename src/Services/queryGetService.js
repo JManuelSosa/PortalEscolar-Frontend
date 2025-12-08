@@ -20,6 +20,11 @@ const queryGetService = {
     getSchoolPeriodTemplates: async() => {
         const response = await api.get('/schoolPeriods');
         return response.data.data;
+    },
+
+    getGroups: async() => {
+        const response = await api.get('/groups');
+        return response.data.data
     }
 }
 

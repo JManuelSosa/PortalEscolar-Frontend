@@ -20,6 +20,11 @@ const publicDataService = {
     getPeriodTemplateFormData: async () => {
         const response = await api.get('/dataNewPeriodTemplate', { global: true });
         return response.data.data;
+    },
+
+    getNewGroupFormData: async () => {
+        const response = await api.get('/dataNewGroup');
+        return response.data.data;
     }
 
 

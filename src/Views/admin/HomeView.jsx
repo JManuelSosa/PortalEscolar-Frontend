@@ -2,6 +2,7 @@ import { Flex, Card } from "antd";
 
 //Icons
 import { IconBackpack, IconUsersGroup, IconBallpen, IconBook2, IconSchool, IconCalendarTime } from '@tabler/icons-react';
+import { IconGroup } from "../../Js/Icons";
 
 //Css
 import HomeCss from '@css/Views/HomeView.module.css';
@@ -48,6 +49,13 @@ const sections = [
         icon: <IconSchool></IconSchool>,
         key: 'divisiones',
         path: routes.divisiones.path
+    },
+    {
+        title: 'Grupos',
+        description: 'Administra tus grupos escolares por periodo escolar',
+        icon: <IconGroup strokeColor={'var(--primary)'}/>,
+        key: 'gruposEscolares',
+        path: routes.gruposGlobal.path
     }
 ];
 

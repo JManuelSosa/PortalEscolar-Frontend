@@ -49,14 +49,14 @@ export default function DetalleGruposView(){
 
         return(
         
-                        <>
-                        <section className={DetalleCss.detalleGrupo}>
-                            <Divider>
-                                <h1>Detalle de { grupoName }</h1>
-                            </Divider>
-                            <ListaAlumnos/>
-                        </section>
-                        </>
+                <>
+                <section className={DetalleCss.detalleGrupo}>
+                    <Divider>
+                        <h1>Detalle de { grupoName }</h1>
+                    </Divider>
+                    <ListaAlumnos/>
+                </section>
+                </>
         
             );
     

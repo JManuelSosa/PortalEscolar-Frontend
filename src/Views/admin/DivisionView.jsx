@@ -48,16 +48,22 @@ export default function DivisionView(){
     return(
         <>
         <section className={ css.container }>
-            <span className={css.titleView}>
-                <h1>Divisiones de la escuela</h1>
-            </span>
 
-            <div className={css.containerButtons}>
-                <Tooltip title={"Añadir División"}>
-                    <Button type="primary" shape="circle" onClick={showDrawer} className={css.controlButton}>
-                        <IconPlus size={28}/>
-                    </Button>
-                </Tooltip>
+            <div className={css['header-view']}>
+                <div className={css.titleView}>
+                    <h1>Divisiones de la escuela</h1>
+                    <span>
+                        Administración de las divisiones escolares de la institución
+                    </span>
+                </div>
+
+                <div className={css.containerButtons}>
+                    <Tooltip title={"Añadir División"}>
+                        <Button type="primary" shape="circle" onClick={showDrawer} className={css.controlButton}>
+                            <IconPlus size={28}/>
+                        </Button>
+                    </Tooltip>
+                </div>
             </div>
 
             <ListaDivisiones divisiones={divisiones} isLoading={isLoading} isError={isError}/>

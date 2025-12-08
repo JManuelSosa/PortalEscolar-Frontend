@@ -87,7 +87,7 @@ export default function ListaAlumnos(){
     // 3. Memorizar componentes renderizados
     const studentComponents = useMemo(() => 
         filtrarLista.map(alumno => (
-        <AlumnoResumen key={alumno.id} alumno={alumno} />
+            <AlumnoResumen key={alumno.id} alumno={alumno} />
         )),
         [filtrarLista]
     );

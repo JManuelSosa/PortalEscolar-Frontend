@@ -35,12 +35,7 @@ export default function ArrowBackNavigate(){
             navigate(currentRouteConfig.backRoute);
             return;
         }
-
-        if (manualParents[location.pathname]) {
-            navigate(manualParents[location.pathname]);
-            return;
-        }
-
+        
         const pathSegments = location.pathname.split('/').filter(Boolean);
         // Ejemplo: pathname -> "/Divisiones/123/Carreras"
         // split('/') -> ["", "Divisiones", "123", "Carreras"]

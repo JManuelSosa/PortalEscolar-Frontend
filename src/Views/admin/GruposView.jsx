@@ -9,7 +9,7 @@ import { Result, Button, Divider, Row, Col, Card } from "antd";
 import FakeAPI from "../../Js/FakeApi";
 
 //Css
-import StyleGrupos from '@css/Views/GruposView.module.css';
+import StyleGrupos from '@css/Views/admin/GruposView.module.css';
 
 export default function GruposView() {
 

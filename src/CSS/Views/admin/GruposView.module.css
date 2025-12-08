@@ -1,0 +1,78 @@
+.header-view {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    & .labels-view {
+        & h1 {
+            margin-top: unset;
+            margin-bottom: unset;
+            font-weight: 500;
+            font-size: 2.25rem;
+        }
+
+        & span {
+            font-weight: 300;
+            font-size: 1.25rem;
+        }
+    }
+
+    & .control-button {
+        width: 3.3rem;
+        height: 3.3rem;
+    }
+}
+
+.header-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--bg-surface) !important;
+}
+
+/* .content-modal {
+    height: auto;
+    display: grid;
+    grid-template-rows: 50px 1fr 50px;
+    
+} */
+
+.content-modal {
+    /* height: auto; -> Cuidado aquí. Si quieres que ocupe el modal, usa 100% o una altura fija máxima */
+    height: auto; /* Ejemplo: Ocupa el 80% del alto de la pantalla */
+    display: grid;
+    grid-template-rows: 50px 1fr 50px; /* Cambia 50px por auto por si el header crece */
+    padding: 8px !important;
+    overflow: hidden; /* Para que el borde redondeado no se pierda */
+}
+
+/* .body-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+.body-modal {
+    display: block; /* Flex center aquí es peligroso para formularios largos */
+    overflow-y: auto; /* AQUÍ ESTÁ LA MAGIA: Habilita el scroll solo en el cuerpo */
+    padding: 10px;
+    width: 100%;
+}
+
+.responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 420px));
+    gap: 16px;
+}
+
+.footer-modal {
+    background-color: var(--bg-surface) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

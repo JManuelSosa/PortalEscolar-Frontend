@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Layout,
     Button,
@@ -56,6 +57,8 @@ const LandingPageEscolar = () => {
     const [isTyping, setIsTyping] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const messagesEndRef = useRef(null);
+
+    const navigate = useNavigate();
 
     // Mensajes iniciales del bot
     const [chatMessages, setChatMessages] = useState([
@@ -183,7 +186,7 @@ const LandingPageEscolar = () => {
                         <Space size="large">
                             {/*    <Button type="text" className="hidden-mobile">Soluciones</Button>
                             <Button type="text" className="hidden-mobile">Instituciones</Button>*/}
-                            <Button type="primary" onClick={showLoginModal} style={{ background: colors.primary, borderColor: colors.primary, fontWeight: '600', padding: '0 25px' }}>
+                            <Button type="primary" onClick={() => { navigate('/login') }} style={{ background: colors.primary, borderColor: colors.primary, fontWeight: '600', padding: '0 25px' }}>
                                 Portal Académico
                             </Button>
                         </Space>
@@ -204,7 +207,7 @@ const LandingPageEscolar = () => {
                             <Title level={1} style={{ color: 'white', fontSize: '3.5rem', fontWeight: 700, marginBottom: '24px' }}>Excelencia Tecnológica para la Educación Superior</Title>
                             <Paragraph style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.9)', marginBottom: '40px' }}>Plataforma integral de gestión escolar diseñada para universidades tecnológicas.</Paragraph>
                             <Space size="middle" wrap>
-                                <Button type="primary" size="large" onClick={showLoginModal} style={{ background: colors.accent, borderColor: colors.accent, color: '#000', fontWeight: 'bold', height: '50px', padding: '0 40px' }}>Acceso Institucional</Button>
+                                <Button type="primary" size="large" onClick={() => { navigate('/login')}} style={{ background: colors.accent, borderColor: colors.accent, color: '#000', fontWeight: 'bold', height: '50px', padding: '0 40px' }}>Acceso Institucional</Button>
                                 <Button ghost size="large" onClick={showPricingModal} style={{ height: '50px', padding: '0 40px' }}>Solicitar suscripción</Button>
                             </Space>
                         </Col>

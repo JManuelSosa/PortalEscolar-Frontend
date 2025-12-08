@@ -27,6 +27,7 @@
     cursor: pointer;
     transition: scale 0.5s ease;
     box-shadow: var(--card-shadow);
+    border-left: 4px solid rgb(var(--cyan-200));
 }
 
 .card:hover{

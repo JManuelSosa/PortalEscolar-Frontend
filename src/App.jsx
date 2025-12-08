@@ -77,11 +77,12 @@ function App() {
         Input: {
           activeBorderColor: 'var(--primary-active)',
           hoverBorderColor: 'var(--accent-hover)',
-          colorTextPlaceholder: 'var(--text-placeholder)',
+          colorTextPlaceholder: 'rgba(200, 200, 200, 1)',
         },
         Select: {
           activeBorderColor: 'var(--primary-active)',
           hoverBorderColor: 'var(--accent-hover)',
+          colorTextPlaceholder: 'rgba(200, 200, 200, 1)',
         },
         Drawer: {
           footerPaddingBlock: 0
@@ -94,10 +95,10 @@ function App() {
           colorPrimaryBorder: 'var(--primary)',
         },
         Tabs: {
-          colorText: 'rgb(var(--cyan-700))',
-          itemSelectedColor: 'rgb(var(--cyan-800))',
-          itemHoverColor: 'rgb(var(--cyan-600))',  
-          inkBarColor: 'rgb(var(--cyan-800))', 
+          colorText: 'rgb(var(--geekblue-700))',
+          itemSelectedColor: 'rgb(var(--geekblue-800))',
+          itemHoverColor: 'rgb(var(--geekblue-600))',  
+          inkBarColor: 'rgb(var(--geekblue-800))', 
           fontSize: 18    
         },
     }
@@ -140,15 +141,17 @@ function App() {
                   <Route path={ routes.grupos.path } element={<GruposView/>}></Route>
                   <Route path={ routes.detalleGrupo.path } element={<DetalleGruposView/>}/>
 
+                  <Route path={ routes.gruposGlobal.path } element={<GestionGrupos />} />
+
                 </Route>
               </Route>
             </Route>
             {/*  nuevas rutas */}
             <Route path='calificaciones' element={< AsentarCalificaciones />} />
             <Route path='tareas' element={<GestorTareasGrupal />} />
-            <Route path='homegrupos' element={<GestionGrupos />} />
+            
             {/* Administrador*/}
-            <Route path='Maestros' element={<ListaMaestros />} />
+            <Route path='/Maestros' element={<ListaMaestros />} />
             <Route path='/aulas' element={<GestionAulas />} />
             <Route path='/materias' element={<ClassroomManager />} />
 

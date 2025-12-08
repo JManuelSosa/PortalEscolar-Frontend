@@ -1,17 +1,30 @@
+.header-view {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    margin-top: 1.5rem;
+}
+
 .titleView {
     display: flex;
-    justify-content: center;
-    text-align: center;
+    flex-direction: column;
     
     & h1 {
-        font-weight: 600;
+        font-weight: 500;
+        font-size: 2.25rem;
+        margin-top: unset;
+        margin-bottom: unset;
+    }
+
+    & span {
+        font-weight: 300;
+        font-size: 1.25rem;
     }
 }
 
 
 .containerButtons {
-    display: flex;
-    justify-content: end;
     padding-left: 1rem;
     padding-right: 1rem;
 
@@ -21,3 +34,14 @@
     }
 }
 
+@media screen and (width < 576px) {
+    .header-view {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .titleView {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+}

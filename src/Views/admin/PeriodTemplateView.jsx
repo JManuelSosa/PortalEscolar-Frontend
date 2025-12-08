@@ -4,9 +4,10 @@ import { useState } from "react";
 // Componentes
 import SchoolPeriodForm from "./SchoolPeriodForm";
 import ListaPeriodosEscolares from "../../Components/Layout/Admin/ListaPeriodosEscolares";
+import LoadingLogo from '../../Components/Utilities/LoadingLogo';
 
 // Ant
-import { Drawer, Button, Form, Tooltip, Tabs, List } from "antd";
+import { Drawer, Button, Form, Tooltip, Tabs, Spin } from "antd";
 
 // Iconos
 import { IconPlus } from "@tabler/icons-react";
@@ -29,17 +30,16 @@ export default function PeriodTemplateView() {
     const { postNewSchoolPeriod, isPending, isSucess } = usePeriodTemplateMutations();
     const [form] = Form.useForm();
 
-    if(isLoadingTemplates) return <h1> Cargando ...</h1>
-
-    console.log(data);
+    if(isLoadingTemplates) return (
+        <div style={{height:"100%", width: "100%", display: 'flex', justifyContent:'center', alignItems:'center', overflow:'hidden'}}>
+                <Spin indicator={<LoadingLogo/>}/>
+        </div>
+    )
 
     const periodActive = data.filter( el => el.estado === 'activo');
     const periodInactive = data.filter( el => el.estado === 'finalizado');
     const periodFuture = data.filter( el => el.estado === 'futuro');
 
-    console.log(periodActive);
-
-    console
 
     const openDrawer = () => {
         setOpen(true);
@@ -68,8 +68,6 @@ export default function PeriodTemplateView() {
         });
     };
 
-    const dataList = [periodActive];
-
     const items = [
         {
             key: '1',
@@ -90,15 +88,25 @@ export default function PeriodTemplateView() {
 
     return (
         <>
-            <h1 className={css['title-view']}>Periodos Escolares de la escuela</h1>
+            <div className={css['header-view']}>
 
-            <div className={css['controls-button']}>
-                <Tooltip title="Añadir periodo escolar">
-                    <Button className={css['btn-control']} onClick={openDrawer} disabled={isLoadingForm} shape="circle" type="primary">
-                        <IconPlus size={28}/>
-                    </Button>
-                </Tooltip>
+                <div className={css['title-view']}>
+                    <h1>Periodos escolares</h1>
+                    <span>
+                        Gestión y control de fechas de inicio y fin de periodos escolares.
+                    </span>
+                </div>
+                
+
+                <div className={css['controls-button']}>
+                    <Tooltip title="Añadir periodo escolar">
+                        <Button className={css['btn-control']} onClick={openDrawer} disabled={isLoadingForm} shape="circle" type="primary">
+                            <IconPlus size={28}/>
+                        </Button>
+                    </Tooltip>
+                </div>
             </div>
+            
 
             <Tabs className={css['custom-tabs']} items={items}></Tabs>
 

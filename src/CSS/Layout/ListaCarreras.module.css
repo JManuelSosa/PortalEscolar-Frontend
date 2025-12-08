@@ -8,6 +8,7 @@
 }
 
 .cardCarrera {
+    border-left: 4px solid rgb(var(--cyan-200));
     background-color: var(--color-surface);
     box-shadow: var(--card-shadow);
     overflow: hidden;
@@ -16,6 +17,7 @@
 
 .cardCarrera:hover{
     scale: 1.05;
+    border-left: 4px solid rgb(var(--cyan-200));
 }
 
 .cardBody {

@@ -99,6 +99,26 @@ export const usePeriodTemplateFormData = () => {
 
 }
 
+export const useNewGroupFormData = () => {
+    
+    const minutosStale = 120;
+    const minutosFresh = 130;
+
+    const { data, isLoading, isError } = useQuery({
+        queryKey: queryKeys.newGroupFormData,
+        queryFn: publicDataService.getNewGroupFormData,
+        staleTime: minutosStale * (60 * 1000),
+        gcTime: minutosFresh * ( 60 * 1000)
+    });
+
+    return useMemo( () => ({
+        data,
+        isLoading, 
+        isError 
+    }), [data, isLoading, isError]);
+
+}
+
 
 
 
