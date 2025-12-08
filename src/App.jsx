@@ -17,6 +17,7 @@ import CarrerasView from './Views/admin/CarrerasView';
 import GruposView from './Views/admin/GruposView';
 import DetalleGruposView from './Views/admin/DetalleGruposView';
 // nuevas vistas
+import ListadoAlumno from './Views/admin/ListadoAlumno'
 import Perfil from './Views/student/PerfilView';
 import GestionHorarios from './Views/admin/GestionHorario';
 import HorarioA from './Views/student/HorarioAlumno';
@@ -55,6 +56,10 @@ import RoleGuard from './Router/RoleGuard';
 import UnauthorizedView from './Views/utilities/UnauthorizedView';
 import AsistenciaMaestro from './Views/teacher/AsistenciaMaestro';
 import PanelAlumno from './Views/student/PanelEstudiante';
+
+//superset import
+import SupersetDashboard from './Components/SupersetDashboard';
+
 
 
 function App() {
@@ -108,7 +113,6 @@ function App() {
 
   return (
     <>
-
       <ConfigProvider theme={configProvider} locale={esES}>
         {contextHolder}
         <AntApp>
@@ -120,6 +124,8 @@ function App() {
             <Route path={routes.login} element={<AuthView />}></Route>
             <Route path={routes.pricing} element={<PlanEscolar />} />
             <Route path='suscripcion' element={<SubscriptionPlans />} />
+            {/*superset */}
+            <Route path="/supersetdashboard" element={<SupersetDashboard />} />
 
             {/* Zona para testear rutas */}
             <Route element={<UserLayout />}>
@@ -148,8 +154,9 @@ function App() {
             </Route>
             <Route path='GestionHorarios' element={<GestionHorarios />} />
             {/*  nuevas rutas */}
-            <Route path='PefilAlumno'element={<Perfil />}/>
-            <Route path='horario' element={<HorarioA />} />
+            <Route path='listadoalumno' element={<ListadoAlumno />} />
+            <Route path='PefilAlumno' element={<Perfil />} />
+            <Route path='horario' element={<HorarioA />} /> 
             <Route path='calificaciones' element={< AsentarCalificaciones />} />
             <Route path='tareas' element={<GestorTareasGrupal />} />
             <Route path='homegrupos' element={<GestionGrupos />} />
@@ -173,6 +180,7 @@ function App() {
             <Route path={routes.asistenciaMaestro} element={<AsistenciaMaestro />} />
             <Route path='/ActividadesMaestro' element={<ActividadesMaestro />}></Route>
 
+
             {
               /* Nuevas Rutas para el Panel de Maestros  __eliminar de las  rutas.
               <Route path='/maestros' element={<AdminLayout> <PanelMaestro /> </AdminLayout>} />
@@ -184,6 +192,7 @@ function App() {
 
           </Routes>
         </AntApp>
+
       </ConfigProvider>
     </>
   )

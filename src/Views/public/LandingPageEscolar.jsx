@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, use } from 'react';
 import {
     Layout,
     Button,
@@ -41,6 +41,8 @@ import {
     CloseOutlined,
     RobotOutlined
 } from '@ant-design/icons';
+import SupersetDashboard from '../../Components/SupersetDashboard';
+import { useNavigate } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph, Text } = Typography;
@@ -58,6 +60,10 @@ const LandingPageEscolar = () => {
     const messagesEndRef = useRef(null);
 
     // Mensajes iniciales del bot
+    const navigate = useNavigate();
+    const goToSuperset = () => {
+        navigate("/supersetdashboard");
+    };
     const [chatMessages, setChatMessages] = useState([
         {
             id: 1,
@@ -181,8 +187,14 @@ const LandingPageEscolar = () => {
                     </Col>
                     <Col>
                         <Space size="large">
-                            {/*    <Button type="text" className="hidden-mobile">Soluciones</Button>
-                            <Button type="text" className="hidden-mobile">Instituciones</Button>*/}
+                            {/*    <Button type="text" className="hidden-mobile">Soluciones</Button>*/}
+                            <Button
+                                type="primary"
+                                onClick={goToSuperset}
+                                className="hidden-mobile"
+                            >
+                                Dashboard
+                            </Button>
                             <Button type="primary" onClick={showLoginModal} style={{ background: colors.primary, borderColor: colors.primary, fontWeight: '600', padding: '0 25px' }}>
                                 Portal Académico
                             </Button>
