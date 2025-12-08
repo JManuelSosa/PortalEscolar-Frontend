@@ -10,13 +10,12 @@ export default function Perfil() {
 
     // --- DATOS DEL ESTUDIANTE ---
     const [student] = useState({
-        "nombre": "Juan Pablo",
-        "primerApellido": "Ramírez",
-        "segundoApellido": "Torres",
-        "curp": "RATJ990520HDFRRN09",
+        "nombre": "Jose Manuel",
+        "primerApellido": "Vazquez",
+        "segundoApellido": "Sosa",
+        "curp": "VASM001229HYNZSNA1",
         "genero": "male",
-        "matricula": "21563010",
-        "turno": "Matutino"
+        
     });
 
     // --- HELPERS VISUALES ---
@@ -37,13 +36,12 @@ export default function Perfil() {
                     <div className="header-flex">
                         <Avatar
                             size={140}
-                            src="https://i.pravatar.cc/300?img=11"
                             icon={<UserOutlined />}
                             className="avatar-shadow"
                         />
 
                         <div className="student-info">
-                            <span style={{ color: '#64748b', fontWeight: 500 }}>Expediente del Alumno</span>
+                            <span style={{ color: '#64748b', fontWeight: 500 }}>Perfil personal</span>
                             <h1>{student.nombre} <br /> {student.primerApellido} {student.segundoApellido}</h1>
 
                         </div>
@@ -53,13 +51,13 @@ export default function Perfil() {
                     <div className="data-grid">
 
                         {/* Caja: Matrícula */}
-                        <div className="data-box">
+                        {/* <div className="data-box">
                             <div className="box-icon icon-purple">
                                 <QrcodeOutlined />
                             </div>
                             <span className="label">Matrícula Escolar</span>
                             <span className="value" style={{ fontSize: 20 }}>{student.matricula}</span>
-                        </div>
+                        </div> */}
 
                         {/* Caja: Turno */}
                         <div className="data-box">
@@ -91,13 +89,13 @@ export default function Perfil() {
                         </div>
 
                         {/* Caja: ID Interno / Extra */}
-                        <div className="data-box">
+                        {/* <div className="data-box">
                             <div className="box-icon icon-blue">
                                 <IdcardOutlined />
                             </div>
                             <span className="label">Tipo de Ingreso</span>
                             <span className="value">Nuevo Ingreso</span>
-                        </div>
+                        </div> */}
 
                     </div>
 

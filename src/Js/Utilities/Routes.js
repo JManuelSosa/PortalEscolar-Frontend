@@ -9,6 +9,7 @@ export const routes = {
     pricing: '/pricing',
     unauthorized: '/unauthorized',
     asistenciaMaestro: '/asistencias',
+    profile: '/profile',
 
     // Con Inicio de sesión
     userHome: USER_HOME,
@@ -48,6 +49,18 @@ export const routes = {
     },
     profesores: {
         path: '/Maestros',
+        backRoute: ADMIN_PATH
+    },
+    materias: {
+        path: '/Materias',
+        backRoute: ADMIN_PATH
+    },
+    aulas: {
+        path: '/Aulas',
+        backRoute: ADMIN_PATH
+    },
+    asistencias: {
+        path: '/asistencias',
         backRoute: ADMIN_PATH
     },
     // Carreras (dependen de division)

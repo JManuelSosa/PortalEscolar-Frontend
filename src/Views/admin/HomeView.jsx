@@ -1,7 +1,7 @@
 import { Flex, Card } from "antd";
 
 //Icons
-import { IconBackpack, IconUsersGroup, IconBallpen, IconCash, IconSchool, IconCalendarTime, IconBook2 } from '@tabler/icons-react';
+import { IconBackpack, IconUsersGroup, IconBallpen, IconCash, IconSchool, IconCalendarTime, IconBook2, IconBuildingArch, IconMath } from '@tabler/icons-react';
 import { IconGroup } from "../../Js/Icons";
 
 //Css
@@ -72,6 +72,27 @@ const sections = [
         icon: <IconBook2 strokeColor={'var(--primary)'}/>,
         key: 'biblioteca',
         path: routes.biblioteca.path
+    },
+    {
+        title: 'Aulas',
+        description: 'Coordina las aulas de tu institución educativa',
+        icon: <IconBuildingArch strokeColor={'var(--primary)'}/>,
+        key: 'aulas',
+        path: routes.aulas.path
+    },
+    {
+        title: 'Materias',
+        description: 'Revisa las materias impartidas por la institución',
+        icon: <IconMath strokeColor={'var(--primary)'}/>,
+        key: 'materias',
+        path: routes.materias.path
+    },
+    {
+        title: 'Asistencias',
+        description: 'Asistencias de grupos y alumnos',
+        icon: <IconMath strokeColor={'var(--primary)'}/>,
+        key: 'asistencias',
+        path: routes.asistencias.path
     }
 ];
 
