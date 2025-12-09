@@ -21,7 +21,7 @@ import { useOnBoardEmployeeFormData, useSystemEmployees } from '../../../Hooks/F
 import { useEmployeeMutations } from '../../../Hooks/Fetching/useEmployeeMutations';
 
 //* css
-import css from '@css/Forms/EmployeeOnboardForm.module.css';
+import css from '@css/Forms/EmployeeOnBoardForm.module.css';
 
 export default function EmployeeOnboardForm({ closeModal = null }) {
 
