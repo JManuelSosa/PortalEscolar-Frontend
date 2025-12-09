@@ -16,7 +16,6 @@ import { IconPlus } from "@tabler/icons-react";
 import { usePeriodTemplates } from "../../Hooks/Fetching/usePeriodTemplates";
 import { usePeriodTemplateFormData } from "../../Hooks/Fetching/usePublicData";
 import { usePeriodTemplateMutations } from "../../Hooks/Fetching/usePeriodTemplateMutations";
-import { useDownloadGradesReport } from "../../Hooks/Fetching/useDownloadMutations";
 
 // Css
 import css from '@css/Views/admin/PeriodTemplateView.module.css';
