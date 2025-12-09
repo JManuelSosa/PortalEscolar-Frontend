@@ -78,6 +78,9 @@ export const routes = {
     detalleGrupo: {
         path: '/grupos/:grupoID',
         nav: (grupoID) => `/grupos/${grupoID}`
+    },
+    dashboard: {
+        path: '/SupersetDashboard',
     }
 
 }

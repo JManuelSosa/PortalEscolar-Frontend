@@ -130,7 +130,7 @@ function App() {
             <Route path={routes.pricing} element={<PlanEscolar />} />
             <Route path='suscripcion' element={<SubscriptionPlans />} />
             {/*superset */}
-            <Route path="/supersetdashboard" element={<SupersetDashboard />} />
+            <Route path={ routes.dashboard.path } element={<SupersetDashboard />} />
 
 
             {/* Zona para testear rutas */}
