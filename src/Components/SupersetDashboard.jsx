@@ -19,11 +19,13 @@ const env = (keyVite, keyCRA, fallback) => {
 };
 
 // URLs
-const SUPERSET_URL = env(
-    "VITE_SUPERSET_URL",
-    "REACT_APP_SUPERSET_URL",
-    "https://vidomedi.uiacreative.xyz"
-);
+// const SUPERSET_URL = env(
+//     "VITE_SUPERSET_URL",
+//     "REACT_APP_SUPERSET_URL",
+//     "https://vidomedi.uiacreative.xyz"
+// );
+
+const SUPERSET_URL = import.meta.env.VITE_SUPERSET_URL || "https://vidomedi.uiacreative.xyz";
 
 const BACKEND_URL = env(
     "VITE_BACKEND_URL",
@@ -43,8 +45,6 @@ const SupersetDashboard = () => {
             mountPoint: containerRef.current,
 
             // ✅ AQUÍ estaba el bug (template string + URL correcta)
-
-
 
             fetchGuestToken: async () => {
                 const res = await fetch(
@@ -72,6 +72,8 @@ const SupersetDashboard = () => {
             iframeSandboxExtras: [
                 "allow-top-navigation",
                 "allow-popups-to-escape-sandbox",
+                "allow-scripts", 
+                "allow-same-origin"
             ],
 
             referrerPolicy: "strict-origin-when-cross-origin",
