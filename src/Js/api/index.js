@@ -7,8 +7,10 @@ import { useSchoolStore } from "../../stores/schoolStore";
 // UI
 import { message } from "antd";
 
+const apiRootUrl = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+
 const api = axios.create({
-    baseURL: "http://127.0.0.1:8000/api",
+    baseURL: `${apiRootUrl}/api`,
     headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
