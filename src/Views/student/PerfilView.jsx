@@ -50,15 +50,6 @@ export default function Perfil() {
                     {/* 2. GRID DE INFORMACIÓN (Cajas) */}
                     <div className="data-grid">
 
-                        {/* Caja: Matrícula */}
-                        {/* <div className="data-box">
-                            <div className="box-icon icon-purple">
-                                <QrcodeOutlined />
-                            </div>
-                            <span className="label">Matrícula Escolar</span>
-                            <span className="value" style={{ fontSize: 20 }}>{student.matricula}</span>
-                        </div> */}
-
                         {/* Caja: Turno */}
                         <div className="data-box">
                             <div className="box-icon icon-orange">
