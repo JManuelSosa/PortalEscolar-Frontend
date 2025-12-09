@@ -16,6 +16,7 @@ import { IconPlus } from "@tabler/icons-react";
 import { usePeriodTemplates } from "../../Hooks/Fetching/usePeriodTemplates";
 import { usePeriodTemplateFormData } from "../../Hooks/Fetching/usePublicData";
 import { usePeriodTemplateMutations } from "../../Hooks/Fetching/usePeriodTemplateMutations";
+import { useDownloadGradesReport } from "../../Hooks/Fetching/useDownloadMutations";
 
 // Css
 import css from '@css/Views/admin/PeriodTemplateView.module.css';
@@ -28,13 +29,15 @@ export default function PeriodTemplateView() {
     const { data, isLoading: isLoadingTemplates, isError: isErrorTemplates } = usePeriodTemplates();
     const { cycleForSelect, periodosForSelect, subperiodosForSelect, isLoading: isLoadingForm, isError: isErrorForm } = usePeriodTemplateFormData();
     const { postNewSchoolPeriod, isPending, isSucess } = usePeriodTemplateMutations();
+
+
     const [form] = Form.useForm();
 
     if(isLoadingTemplates) return (
         <div style={{height:"100%", width: "100%", display: 'flex', justifyContent:'center', alignItems:'center', overflow:'hidden'}}>
                 <Spin indicator={<LoadingLogo/>}/>
         </div>
-    )
+    );
 
     const periodActive = data.filter( el => el.estado === 'activo');
     const periodInactive = data.filter( el => el.estado === 'finalizado');
