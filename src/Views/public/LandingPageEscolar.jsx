@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { routes } from '../../Js/Utilities/Routes';
 
 import {
     Layout,
@@ -63,7 +64,7 @@ const LandingPageEscolar = () => {
     const navigate = useNavigate();
 
     const goToSuperset = () => {
-        navigate("/supersetdashboard");
+        navigate(routes.dashboard.path);
     };
     const [chatMessages, setChatMessages] = useState([
         {
